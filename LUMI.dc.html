@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>LUMI — Handcrafted beaded tanks, brooches & bag charms | Make it yours.</title>
+<meta name="description" content="LUMI makes handcrafted beaded tank tops, reusable brooches and bag charms in India. Small details that turn everyday outfits into little expressions of who you are." />
+<meta property="og:title" content="LUMI — Make it yours." />
+<meta property="og:description" content="Handcrafted beaded pieces for everyday expression. Tanks, brooches and bag charms, made by hand in India." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #FDFCF8; color: #3F4633; font-family: "DM Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #6B7258; text-decoration: none; }
+  a:hover { color: #3F4633; }
+  :focus-visible { outline: 2px solid #6B7258; outline-offset: 3px; }
+  ::selection { background: #EFCFCB; color: #3F4633; }
+  [data-reveal] { opacity: 0; transform: translateY(26px); transition: opacity 1.1s cubic-bezier(.16,.8,.3,1), transform 1.1s cubic-bezier(.16,.8,.3,1); }
+  [data-reveal].lumi-in { opacity: 1; transform: none; }
+  @keyframes lumiGlint { 0%,100% { opacity: .25; transform: scale(.8) rotate(0deg); } 50% { opacity: 1; transform: scale(1.15) rotate(45deg); } }
+  @keyframes lumiRise { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+  @keyframes lumiDrawer { from { transform: translateX(100%); } to { transform: none; } }
+  @keyframes lumiFade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes lumiToast { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @keyframes lumiFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  @media (max-width: 1024px) {
+    [data-stack] { grid-template-columns: 1fr !important; }
+    [data-sticky] { position: static !important; }
+    [data-footer] { grid-template-columns: 1fr 1fr !important; }
+  }
+  @media (max-width: 780px) {
+    [data-mob="hide"] { display: none !important; }
+    [data-mob="show"] { display: block !important; }
+    [data-cols3] { grid-template-columns: 1fr !important; }
+    [data-cols3] > * { margin-top: 0 !important; }
+    [data-cols6] { grid-template-columns: 1fr 1fr !important; }
+    [data-cols6] > * { margin-top: 0 !important; }
+    [data-featured] > article { grid-column: span 12 !important; margin-top: 0 !important; }
+    [data-footer] { grid-template-columns: 1fr !important; }
+    [data-pdp-thumbs] > span:first-child { grid-column: span 2 !important; }
+    [data-hero] { min-height: 0 !important; }
+    [data-hero-media] { min-height: 62vh !important; }
+    [data-shopgrid] { grid-template-columns: 1fr 1fr !important; gap: 22px 12px !important; }
+    [data-ugc] { grid-template-columns: 1fr 1fr !important; }
+    [data-tap] { min-height: 44px !important; display: inline-flex !important; align-items: center !important; }
+    [data-pdp-actions] > button { flex: 1 1 100% !important; }
+    [data-pdp-actions] [data-qty] { flex: 1 1 100% !important; justify-content: space-between !important; }
+    [data-stats] { grid-template-columns: repeat(3, 1fr) !important; gap: 16px !important; }
+  }
+  @media (max-width: 420px) {
+    [data-shopgrid] { grid-template-columns: 1fr !important; }
+  }
+</style>
+</helmet>
+
+<div style="min-height: 100vh; background: #FDFCF8; overflow-x: hidden;">
+
+  <header style="position: fixed; top: 0; left: 0; right: 0; z-index: 60; background: rgba(253,252,248,0.86); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(197,183,171,0.4);">
+    <div style="max-width: 1560px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px); height: clamp(58px, 7vw, 74px); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px;">
+      <nav style="display: flex; align-items: center; gap: clamp(14px, 2vw, 30px);">
+        <button onClick="{{ toggleMenu }}" aria-label="Open menu" data-mob="show" style="display: none; background: none; border: 0; cursor: pointer; padding: 10px 10px 10px 0;">
+          <span style="display: block; width: 22px; height: 1px; background: #3F4633;"></span>
+          <span style="display: block; width: 22px; height: 1px; background: #3F4633; margin-top: 6px;"></span>
+        </button>
+        <button onClick="{{ goShop }}" data-mob="hide" style="background: none; border: 0; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: #3F4633; padding: 6px 0;" style-hover="color: #6B7258;">Shop</button>
+        <button onClick="{{ goStory }}" style="background: none; border: 0; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: #3F4633; padding: 6px 0;" style-hover="color: #6B7258;" data-mob="hide">The Making</button>
+      </nav>
+
+      <button onClick="{{ goHome }}" aria-label="LUMI home" style="background: none; border: 0; cursor: pointer; display: flex; align-items: center; gap: 7px; padding: 4px 6px;">
+        <span style="font-family: 'Bodoni Moda', serif; font-weight: 500; font-size: clamp(20px, 2.4vw, 27px); letter-spacing: .34em; text-indent: .34em; color: #3F4633; line-height: 1;">LUMI</span>
+        <span aria-hidden="true" style="width: 7px; height: 7px; background: #D4A7A5; transform: rotate(45deg); animation: lumiGlint 4.5s ease-in-out infinite;"></span>
+      </button>
+
+      <div style="display: flex; align-items: center; justify-content: flex-end; gap: clamp(12px, 2vw, 26px);">
+        <button onClick="{{ toggleSearch }}" style="background: none; border: 0; cursor: pointer; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: #3F4633; font-family: 'DM Sans', sans-serif; padding: 6px 0;" style-hover="color: #6B7258;">Search</button>
+        <a href="#" data-mob="hide" style="font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: #6B7258;" style-hover="color: #3F4633;">Account</a>
+        <button onClick="{{ openCart }}" style="background: none; border: 0; cursor: pointer; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: #3F4633; font-family: 'DM Sans', sans-serif; display: flex; align-items: center; gap: 7px; padding: 6px 0;" style-hover="color: #6B7258;">
+          Bag
+          <span style="min-width: 20px; height: 20px; border-radius: 999px; background: {{ bagBg }}; color: #FDFCF8; font-size: 10px; display: inline-flex; align-items: center; justify-content: center; padding: 0 6px; transform: {{ bagPulse }}; transition: transform .45s cubic-bezier(.2,1.4,.4,1);">{{ cartCount }}</span>
+        </button>
+      </div>
+    </div>
+
+    <sc-if value="{{ searchOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="border-top: 1px solid rgba(197,183,171,0.4); background: #FDFCF8; animation: lumiFade .3s ease;">
+        <div style="max-width: 1560px; margin: 0 auto; padding: 18px clamp(16px, 4vw, 48px) 22px;">
+          <input value="{{ query }}" onChange="{{ onQuery }}" placeholder="Search beaded tanks, brooches, charms…" aria-label="Search products" style="width: 100%; border: 0; border-bottom: 1px solid #C5B7AB; background: none; padding: 10px 0; font-family: 'Bodoni Moda', serif; font-size: clamp(20px, 3vw, 32px); color: #3F4633;" />
+          <div style="margin-top: 12px; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #6B7258;">{{ searchHint }}</div>
+          <sc-for list="{{ searchResults }}" as="hit" hint-placeholder-count="0">
+            <button onClick="{{ hit.onOpen }}" style="display: flex; width: 100%; align-items: center; gap: 16px; background: none; border: 0; border-top: 1px solid rgba(197,183,171,0.35); padding: 12px 0; cursor: pointer; text-align: left;" style-hover="background: rgba(232,221,212,0.35);">
+              <span style="width: 46px; height: 56px; background: {{ hit.tint }}; display: block;"></span>
+              <span style="font-family: 'Bodoni Moda', serif; font-size: 18px; color: #3F4633;">{{ hit.name }}</span>
+              <span style="margin-left: auto; font-size: 13px; color: #6B7258;">{{ hit.price }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+  </header>
+
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 70; background: #FDFCF8; animation: lumiFade .25s ease; padding: 26px clamp(18px, 6vw, 48px);">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-family: 'Bodoni Moda', serif; font-size: 22px; letter-spacing: .34em; text-indent: .34em;">LUMI</span>
+        <button onClick="{{ toggleMenu }}" style="background: none; border: 0; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; cursor: pointer; color: #3F4633; padding: 10px;">Close</button>
+      </div>
+      <nav style="display: flex; flex-direction: column; gap: 4px; margin-top: 48px;">
+        <button onClick="{{ goShop }}" style="background: none; border: 0; text-align: left; font-family: 'Bodoni Moda', serif; font-size: clamp(38px, 12vw, 62px); color: #3F4633; cursor: pointer; padding: 6px 0;">Shop</button>
+        <button onClick="{{ goTanks }}" style="background: none; border: 0; text-align: left; font-family: 'Bodoni Moda', serif; font-size: clamp(38px, 12vw, 62px); color: #3F4633; cursor: pointer; padding: 6px 0;">Tanks</button>
+        <button onClick="{{ goBrooches }}" style="background: none; border: 0; text-align: left; font-family: 'Bodoni Moda', serif; font-size: clamp(38px, 12vw, 62px); color: #3F4633; cursor: pointer; padding: 6px 0;">Brooches</button>
+        <button onClick="{{ goCharms }}" style="background: none; border: 0; text-align: left; font-family: 'Bodoni Moda', serif; font-size: clamp(38px, 12vw, 62px); color: #3F4633; cursor: pointer; padding: 6px 0;">Charms</button>
+        <button onClick="{{ goStory }}" style="background: none; border: 0; text-align: left; font-family: 'Bodoni Moda', serif; font-size: clamp(38px, 12vw, 62px); color: #6B7258; cursor: pointer; padding: 6px 0;" data-mob="hide">The Making</button>
+      </nav>
+      <p style="margin-top: 56px; font-family: 'Instrument Serif', serif; font-style: italic; font-size: 24px; color: #D4A7A5;">Take something ordinary. Add a little LUMI.</p>
+    </div>
+  </sc-if>
+
+  <main style="padding-top: clamp(58px, 7vw, 74px);">
+
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+      <div>
+        <section data-stack data-hero style="position: relative; display: grid; grid-template-columns: 1.02fr 0.98fr; min-height: min(88vh, 860px); border-bottom: 1px solid rgba(197,183,171,0.45);">
+          <div style="display: flex; flex-direction: column; justify-content: center; padding: clamp(40px, 6vw, 96px) clamp(18px, 5vw, 88px); animation: lumiRise 1s cubic-bezier(.16,.8,.3,1) both;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 26px;">
+              <span aria-hidden="true" style="width: 6px; height: 6px; background: #D4A7A5; transform: rotate(45deg); animation: lumiGlint 4s ease-in-out infinite;"></span>
+              <span style="font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: #6B7258;">Handmade in India</span>
+            </div>
+            <h1 style="font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: clamp(52px, 9vw, 132px); line-height: .88; letter-spacing: -0.02em; margin: 0; color: #3F4633; text-wrap: balance;">MAKE<br />IT <span style="font-family: 'Instrument Serif', serif; font-style: italic; color: #D4A7A5; letter-spacing: 0;">yours.</span></h1>
+            <p style="margin: 30px 0 0; max-width: 38ch; font-size: clamp(14px, 1.1vw, 16px); line-height: 1.7; color: #6B7258;">Handcrafted beaded pieces for everyday expression — tanks, brooches and bag charms, strung one bead at a time.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 38px;">
+              <button onClick="{{ goShop }}" style="background: #3F4633; color: #FDFCF8; border: 1px solid #3F4633; padding: 17px 34px; font-family: 'DM Sans', sans-serif; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; transition: transform .35s cubic-bezier(.16,.8,.3,1), background .35s ease;" style-hover="background: #6B7258; border-color: #6B7258; transform: translateY(-3px);">Shop LUMI</button>
+              <a href="#world" style="border: 1px solid #C5B7AB; padding: 17px 34px; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: #3F4633; transition: transform .35s cubic-bezier(.16,.8,.3,1), border-color .35s ease;" style-hover="border-color: #6B7258; transform: translateY(-3px); color: #3F4633;">Explore the world of LUMI</a>
+            </div>
+          </div>
+          <div data-hero-media style="position: relative; overflow: hidden; background: #E8DDD4; min-height: 420px;">
+            <div style="position: absolute; inset: -8% 0 -8% 0; transform: translateY({{ heroShift }}); background: repeating-linear-gradient(135deg, rgba(197,183,171,0.34) 0 2px, transparent 2px 12px), linear-gradient(180deg, #EFCFCB 0%, #E8DDD4 55%, #C5B7AB 100%); display: flex; align-items: flex-end; padding: 26px;">
+              <span style="font-family: ui-monospace, monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: #6B7258; background: rgba(253,252,248,0.85); padding: 7px 10px;">Hero image — model in beaded tank, warm daylight, street-style</span>
+            </div>
+            <div aria-hidden="true" style="position: absolute; top: 14%; left: -14px; width: 26px; height: 26px; background: #FDFCF8; transform: rotate(45deg); animation: lumiFloat 7s ease-in-out infinite;"></div>
+          </div>
+        </section>
+
+        <section id="world" data-reveal data-stack style="padding: clamp(80px, 13vw, 190px) clamp(18px, 5vw, 88px); display: grid; grid-template-columns: 1.35fr 1fr; gap: clamp(30px, 6vw, 90px); align-items: end;">
+          <h2 style="font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: clamp(40px, 7.2vw, 108px); line-height: .92; margin: 0; color: #3F4633; letter-spacing: -0.02em;">EVERYDAY<br />BUT MAKE IT<br /><span style="font-family: 'Instrument Serif', serif; font-style: italic; color: #6B7258;">yours.</span></h2>
+          <p style="margin: 0 0 14px; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.85; color: #6B7258; max-width: 44ch;">LUMI creates handcrafted beaded pieces that turn everyday outfits into little expressions of who you are. A brooch changes a plain jacket. A charm transforms a bag. A beaded tank becomes the whole outfit.</p>
+        </section>
+
+        <section data-reveal style="padding: 0 clamp(18px, 5vw, 88px) clamp(70px, 11vw, 150px);">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 20px; border-bottom: 1px solid rgba(197,183,171,0.5); padding-bottom: 20px; margin-bottom: 34px;">
+            <h2 style="font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: clamp(28px, 4vw, 56px); margin: 0; color: #3F4633;">FIND YOUR LUMI</h2>
+            <span style="font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: #6B7258;">Three ways in</span>
+          </div>
+          <div data-cols3 style="display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 2vw, 26px);">
+            <button onClick="{{ goTanks }}" style="text-align: left; background: none; border: 0; padding: 0; cursor: pointer; display: block;">
+              <span style="display: block; aspect-ratio: 3/4; background: repeating-linear-gradient(135deg, rgba(107,114,88,0.22) 0 2px, transparent 2px 12px), #E8DDD4; position: relative; overflow: hidden; transition: transform .8s cubic-bezier(.16,.8,.3,1), filter .8s ease;" style-hover="transform: scale(1.02); filter: saturate(1.12);">
+                <span style="position: absolute; left: 16px; bottom: 16px; font-family: ui-monospace, monospace; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: #6B7258; background: rgba(253,252,248,0.85); padding: 6px 8px;">Tank on model, cropped</span>
+              </span>
+              <span style="display: flex; align-items: baseline; gap: 12px; margin-top: 16px;">
+                <span style="font-family: 'Bodoni Moda', serif; font-size: clamp(22px, 2.6vw, 34px); color: #3F4633;">WEAR IT</span>
+                <span style="font-size: 12px; color: #6B7258;">Beaded tank tops</span>
+              </span>
+            </button>
+            <button onClick="{{ goBrooches }}" style="text-align: left; background: none; border: 0; padding: 0; cursor: pointer; display: block; margin-top: clamp(20px, 5vw, 64px);">
+              <span style="display: block; aspect-ratio: 3/4; background: repeating-linear-gradient(135deg, rgba(212,167,165,0.34) 0 2px, transparent 2px 12px), #EFCFCB; position: relative; overflow: hidden; transition: transform .8s cubic-bezier(.16,.8,.3,1), filter .8s ease;" style-hover="transform: scale(1.02); filter: saturate(1.12);">
+                <span style="position: absolute; left: 16px; bottom: 16px; font-family: ui-monospace, monospace; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: #6B7258; background: rgba(253,252,248,0.85); padding: 6px 8px;">Brooch pinned to denim jacket</span>
+              </span>
+              <span style="display: flex; align-items: baseline; gap: 12px; margin-top: 16px;">
+                <span style="font-family: 'Bodoni Moda', serif; font-size: clamp(22px, 2.6vw, 34px); color: #3F4633;">PIN IT</span>
+                <span style="font-size: 12px; color: #6B7258;">Reusable brooches</span>
+              </span>
+            </button>
+            <button onClick="{{ goCharms }}" style="text-align: left; background: none; border: 0; padding: 0; cursor: pointer; display: block;">
+              <span style="display: block; aspect-ratio: 3/4; background: repeating-linear-gradient(135deg, rgba(63,70,51,0.2) 0 2px, transparent 2px 12px), #C5B7AB; position: relative; overflow: hidden; transition: transform .8s cubic-bezier(.16,.8,.3,1), filter .8s ease;" style-hover="transform: scale(1.02); filter: saturate(1.12);">
+                <span style="position: absolute; left: 16px; bottom: 16px; font-family: ui-monospace, monospace; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: #3F4633; background: rgba(253,252,248,0.85); padding: 6px 8px;">Charm clipped to shoulder bag</span>
+              </span>
+              <span style="display: flex; align-items: baseline; gap: 12px; margin-top: 16px;">
+                <span style="font-family: 'Bodoni Moda', serif; font-size: clamp(22px, 2.6vw, 34px); color: #3F4633;">CHARM IT</span>
+                <span style="font-size: 12px; color: #6B7258;">Beaded bag charms</span>
+              </span>
+            </button>
+          </div>
+        </section>
+
+        <section data-reveal style="background: #F6F2EA; padding: clamp(70px, 11vw, 150px) clamp(18px, 5vw, 88px); border-top: 1px solid rgba(197,183,171,0.45); border-bottom: 1px solid rgba(197,183,171,0.45);">
+          <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: clamp(30px, 5vw, 60px);">
+            <h2 style="font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: clamp(40px, 7vw, 104px); line-height: .9; margin: 0; color: #3F4633;">A LITTLE<br />EXTRA</h2>
+            <button onClick="{{ goShop }}" style="background: none; border: 0; border-bottom: 1px solid #6B7258; padding: 6px 0; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: #6B7258; cursor: pointer;" style-hover="color: #3F4633; border-color: #3F4633;">View all pieces</button>
+          </div>
+          <div data-featured style="display: grid; grid-template-columns: repeat(12, 1fr); gap: clamp(14px, 2.4vw, 34px); align-items: start;">
+            <sc-for list="{{ featured }}" as="p" hint-placeholder-count="4">
+              <article style="grid-column: {{ p.span }}; margin-top: {{ p.offset }};">
+                <div style="position: relative;">
+                  <button onClick="{{ p.onOpen }}" aria-label="{{ p.aria }}" style="display: block; width: 100%; padding: 0; border: 0; cursor: pointer; overflow: hidden; background: {{ p.tint }}; aspect-ratio: 4/5;" style-hover="filter: saturate(1.1);">
+                    <span style="display: block; width: 100%; height: 100%; background: repeating-linear-gradient(135deg, rgba(63,70,51,0.16) 0 2px, transparent 2px 12px); transition: transform 1.1s cubic-bezier(.16,.8,.3,1); position: relative;" style-hover="transform: scale(1.06);">
+                      <span style="position: absolute; left: 14px; bottom: 14px; font-family: ui-monospace, monospace; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: #3F4633; background: rgba(253,252,248,0.86); padding: 5px 8px;">{{ p.shot }}</span>
+                    </span>
+                  </button>
+                  <button onClick="{{ p.onWish }}" aria-label="Add to wishlist" style="position: absolute; top: 12px; right: 12px; width: 34px; height: 34px; border-radius: 999px; border: 1px solid rgba(253,252,248,0.9); background: rgba(253,252,248,0.82); cursor: pointer; color: {{ p.wishColor }}; font-size: 13px; line-height: 1; display: flex; align-items: center; justify-content: center;" style-hover="background: #FDFCF8;">{{ p.wishMark }}</button>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-top: 14px;">
+                  <button onClick="{{ p.onOpen }}" style="background: none; border: 0; padding: 0; cursor: pointer; text-align: left; font-family: 'Bodoni Moda', serif; font-size: clamp(17px, 1.5vw, 22px); color: #3F4633; transition: transform .4s cubic-bezier(.16,.8,.3,1);" style-hover="transform: translateX(4px); color: #6B7258;">{{ p.name }}</button>
+                  <span style="font-size: 13px; color: #6B7258; white-space: nowrap;">{{ p.price }}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 6px;">
+                  <span style="font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #6B7258;">{{ p.catLabel }}</span>
+                  <button onClick="{{ p.onAdd }}" style="background: none; border: 0; border-bottom: 1px solid #C5B7AB; padding: 3px 0; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #6B7258; cursor: pointer; transition: border-color .3s ease, color .3s ease;" style-hover="color: #3F4633; border-color: #3F4633;" data-tap>Quick add</button>
+                </div>
+              </article>
+            </sc-for>
+          </div>
+        </section>
+
+        <section id="making" data-reveal data-stack style="padding: clamp(80px, 12vw, 170px) clamp(18px, 5vw, 88px); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 78px); align-items: center;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: clamp(10px, 1.6vw, 20px);">
+            <span style="display: block; aspect-ratio: 3/4; background: repeating-linear-gradient(135deg, rgba(107,114,88,0.24) 0 2px, transparent 2px 11px), #E8DDD4; position: relative;">
+              <span style="position: absolute; left: 12px; bottom: 12px; font-family: ui-monospace, monospace; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: #6B7258;">Hands stringing beads</span>
+            </span>
+            <span style="display: block; aspect-ratio: 3/4; background: repeating-linear-gradient(135deg, rgba(212,167,165,0.34) 0 2px, transparent 2px 11px), #EFCFCB; margin-top: clamp(20px, 5vw, 60px); position: relative;">
+              <span style="position: absolute; left: 12px; bottom: 12px; font-family: ui-monospace, monospace; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: #6B7258;">Bead trays macro</span>
+            </span>
+            <span style="display: block; aspect-ratio: 1/1; background: repeating-linear-gradient(135deg, rgba(63,70,51,0.18) 0 2px, transparent 2px 11px), #C5B7AB; grid-column: span 2; position: relative;">
+              <span style="position: absolute; left: 12px; bottom: 12px; font-family: ui-monospace, monospace; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: #3F4633;">Thread, needle, unfinished piece on cloth</span>
+            </span>
+          </div>
+          <div>
+            <span style="font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: #D4A7A5;">The making</span>
+            <h2 style="font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: clamp(34px, 5.4vw, 76px); line-height: .95; margin: 18px 0 0; color: #3F4633;">MADE BY HAND.<br />MADE TO BE YOURS.</h2>
+            <p style="margin: 26px 0 0; font-size: clamp(15px, 1.1vw, 17px); line-height: 1.85; color: #6B7258; max-width: 46ch;">Every LUMI piece is strung bead by bead in a small studio in Bengaluru. Which means no two are identical — a slightly different curve here, a bead that catches the light there. We think that's the point.</p>
+            <div data-stats style="display: grid; grid-template-columns: repeat(3, auto); gap: 26px; margin-top: 34px; justify-content: start;">
+              <span style="display: block;"><strong style="display: block; font-family: 'Bodoni Moda', serif; font-size: 30px; font-weight: 400; color: #3F4633;">6h</strong><span style="font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #6B7258;">Per tank</span></span>
+              <span style="display: block;"><strong style="display: block; font-family: 'Bodoni Moda', serif; font-size: 30px; font-weight: 400; color: #3F4633;">1 of 1</strong><span style="font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #6B7258;">Every piece</span></span>
+              <span style="display: block;"><strong style="display: block; font-family: 'Bodoni Moda', serif; font-size: 30px; font-weight: 400; color: #3F4633;">100%</strong><span style="font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #6B7258;">Hand-strung</span></span>
+            </div>
+          </div>
+        </section>
+
+        <section data-reveal style="background: #3F4633; color: #FDFCF8; padding: clamp(70px, 11vw, 150px) clamp(18px, 5vw, 88px);">
+          <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap;">
+            <h2 style="font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: clamp(34px, 6vw, 88px); line-height: .92; margin: 0; color: #FDFCF8;">ONE PIECE.<br />SO MANY <span style="font-family: 'Instrument Serif', serif; font-style: italic; color: #EFCFCB;">personalities.</span></h2>
+            <p style="margin: 0; max-width: 34ch; font-size: 15px; line-height: 1.8; color: #C5B7AB;">Six ways our customers wear the same three pieces. Steal any of them.</p>
+          </div>
+          <div data-cols6 style="display: grid; grid-template-columns: repeat(6, 1fr); gap: clamp(10px, 1.4vw, 18px); margin-top: clamp(34px, 5vw, 62px);">
+            <sc-for list="{{ styling }}" as="s" hint-placeholder-count="6">
+              <figure style="margin: 0; margin-top: {{ s.offset }};">
+                <span style="display: block; aspect-ratio: 3/4; background: repeating-linear-gradient(135deg, rgba(253,252,248,0.16) 0 2px, transparent 2px 11px), {{ s.tint }}; position: relative; overflow: hidden;">
+                  <span style="display: block; width: 100%; height: 100%; transition: transform 1s cubic-bezier(.16,.8,.3,1);" style-hover="transform: scale(1.07);"></span>
+                </span>
+                <figcaption style="margin-top: 10px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #C5B7AB; line-height: 1.5;">{{ s.label }}</figcaption>
+              </figure>
+            </sc-for>
+          </div>
+        </section>
+
+        <section data-reveal style="padding: clamp(70px, 11vw, 150px) clamp(18px, 5vw, 88px);">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 30px;">
+            <h2 style="font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: clamp(30px, 4.6vw, 62px); margin: 0; color: #3F4633;">SPOTTED IN THE WILD</h2>
+            <a href="#" style="font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: #D4A7A5; border-bottom: 1px solid #EFCFCB; padding-bottom: 3px;">@wearelumi</a>
+          </div>
+          <div data-ugc style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: clamp(8px, 1.2vw, 14px);">
+            <sc-for list="{{ ugc }}" as="u" hint-placeholder-count="8">
+              <a href="#" style="display: block; position: relative; aspect-ratio: {{ u.ratio }}; background: repeating-linear-gradient(135deg, rgba(63,70,51,0.14) 0 2px, transparent 2px 11px), {{ u.tint }}; overflow: hidden;" style-hover="filter: saturate(1.15);">
+                <span style="position: absolute; left: 10px; bottom: 10px; font-size: 11px; color: #3F4633; background: rgba(253,252,248,0.86); padding: 4px 8px;">{{ u.handle }}</span>
+              </a>
+            </sc-for>
+          </div>
+        </section>
+
+        <section data-reveal style="background: #EFCFCB; padding: clamp(80px, 13vw, 180px) clamp(18px, 5vw, 88px); text-align: center;">
+          <h2 style="font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: clamp(38px, 8vw, 128px); line-height: .9; margin: 0; color: #3F4633; letter-spacing: -0.02em;">STYLE DOESN'T HAVE TO<br />BE <span style="font-family: 'Instrument Serif', serif; font-style: italic;">serious.</span></h2>
+          <p style="margin: 36px auto 0; max-width: 30ch; font-family: 'Instrument Serif', serif; font-size: clamp(19px, 2vw, 26px); line-height: 1.6; color: #6B7258;">Wear what makes you smile. Add the charm. Change the detail. Make it yours.</p>
+        </section>
+
+        <section data-reveal data-stack style="padding: clamp(70px, 11vw, 150px) clamp(18px, 5vw, 88px); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 80px); align-items: center; border-bottom: 1px solid rgba(197,183,171,0.5);">
+          <div>
+            <h2 style="font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: clamp(34px, 5.6vw, 78px); line-height: .95; margin: 0; color: #3F4633;">STAY IN<br />THE LIGHT</h2>
+            <p style="margin: 22px 0 0; font-size: 15px; line-height: 1.8; color: #6B7258; max-width: 40ch;">New drops, styling ideas, little surprises and everything LUMI — straight to your inbox.</p>
+          </div>
+          <form onSubmit="{{ onSubscribe }}" style="display: flex; flex-direction: column; gap: 14px;">
+            <label for="lumi-email" style="font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #6B7258;">Email address</label>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: stretch;">
+              <input id="lumi-email" type="email" required="true" value="{{ email }}" onChange="{{ onEmail }}" placeholder="you@lumi.world" style="flex: 1 1 220px; min-width: 0; border: 0; border-bottom: 1px solid #C5B7AB; background: none; padding: 14px 0; font-family: 'DM Sans', sans-serif; font-size: 16px; color: #3F4633;" />
+              <button type="submit" style="background: #6B7258; color: #FDFCF8; border: 1px solid #6B7258; padding: 15px 32px; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; transition: transform .35s cubic-bezier(.16,.8,.3,1), background .3s ease;" style-hover="background: #3F4633; border-color: #3F4633; transform: translateY(-3px);">Join LUMI</button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isShop }}" hint-placeholder-val="{{ false }}">
+      <div style="padding: clamp(34px, 5vw, 64px) clamp(18px, 5vw, 88px) clamp(70px, 10vw, 130px);">
+        <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+          <h1 style="font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: clamp(38px, 6.5vw, 92px); line-height: .95; margin: 0; color: #3F4633;">{{ shopTitle }}</h1>
+          <span style="font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: #6B7258;">{{ resultCount }}</span>
+        </div>
+        <p style="margin: 18px 0 0; max-width: 46ch; font-family: 'Instrument Serif', serif; font-size: 20px; color: #6B7258;">{{ shopBlurb }}</p>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 10px 26px; align-items: center; justify-content: space-between; margin: clamp(28px, 4vw, 48px) 0 30px; padding-bottom: 16px; border-bottom: 1px solid rgba(197,183,171,0.5);">
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <sc-for list="{{ filters }}" as="f" hint-placeholder-count="4">
+              <button onClick="{{ f.onSelect }}" style="border: 1px solid {{ f.border }}; background: {{ f.bg }}; color: {{ f.color }}; padding: 9px 18px; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; cursor: pointer; border-radius: 999px; transition: all .3s ease;" style-hover="border-color: #6B7258;">{{ f.label }}</button>
+            </sc-for>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <label for="lumi-sort" style="font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #6B7258;">Sort</label>
+            <select id="lumi-sort" value="{{ sort }}" onChange="{{ onSort }}" style="border: 0; border-bottom: 1px solid #C5B7AB; background: none; font-family: 'DM Sans', sans-serif; font-size: 13px; color: #3F4633; padding: 7px 4px; cursor: pointer;">
+              <option value="Featured">Featured</option>
+              <option value="Price low">Price: low to high</option>
+              <option value="Price high">Price: high to low</option>
+              <option value="Newest">Newest</option>
+            </select>
+          </div>
+        </div>
+
+        <div data-shopgrid style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: clamp(18px, 2.6vw, 40px) clamp(14px, 2vw, 30px);">
+          <sc-for list="{{ shopList }}" as="p" hint-placeholder-count="9">
+            <article>
+              <div style="position: relative;">
+                <button onClick="{{ p.onOpen }}" aria-label="{{ p.aria }}" style="display: block; width: 100%; padding: 0; border: 0; cursor: pointer; overflow: hidden; background: {{ p.tint }}; aspect-ratio: 4/5;">
+                  <span style="display: block; width: 100%; height: 100%; background: repeating-linear-gradient(135deg, rgba(63,70,51,0.16) 0 2px, transparent 2px 12px); transition: transform 1.1s cubic-bezier(.16,.8,.3,1); position: relative;" style-hover="transform: scale(1.06);">
+                    <span style="position: absolute; left: 12px; bottom: 12px; font-family: ui-monospace, monospace; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: #3F4633; background: rgba(253,252,248,0.86); padding: 5px 8px;">{{ p.shot }}</span>
+                  </span>
+                </button>
+                <button onClick="{{ p.onWish }}" aria-label="Add to wishlist" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 999px; border: 1px solid rgba(253,252,248,0.9); background: rgba(253,252,248,0.82); cursor: pointer; color: {{ p.wishColor }}; font-size: 12px; display: flex; align-items: center; justify-content: center;" style-hover="background: #FDFCF8;">{{ p.wishMark }}</button>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-top: 13px;">
+                <button onClick="{{ p.onOpen }}" style="background: none; border: 0; padding: 0; cursor: pointer; text-align: left; font-family: 'Bodoni Moda', serif; font-size: 19px; color: #3F4633; transition: transform .4s cubic-bezier(.16,.8,.3,1);" style-hover="transform: translateX(4px); color: #6B7258;">{{ p.name }}</button>
+                <span style="font-size: 13px; color: #6B7258; white-space: nowrap;">{{ p.price }}</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 5px;">
+                <span style="font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #6B7258;">{{ p.catLabel }}</span>
+                <button onClick="{{ p.onAdd }}" style="background: none; border: 0; border-bottom: 1px solid #C5B7AB; padding: 3px 0; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #6B7258; cursor: pointer;" data-tap style-hover="color: #3F4633; border-color: #3F4633;" data-tap>Quick add</button>
+              </div>
+            </article>
+          </sc-for>
+        </div>
+
+        <sc-if value="{{ shopEmpty }}" hint-placeholder-val="{{ false }}">
+          <p style="font-family: 'Instrument Serif', serif; font-size: 24px; color: #6B7258; padding: 60px 0;">Nothing here yet — try another mood.</p>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isProduct }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <div style="padding: 20px clamp(18px, 5vw, 88px) 0; display: flex; gap: 8px; align-items: center; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #6B7258;">
+          <button onClick="{{ goShop }}" style="background: none; border: 0; padding: 0; cursor: pointer; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #6B7258; font-family: 'DM Sans', sans-serif;">Shop</button>
+          <span>/</span>
+          <span>{{ pdpCat }}</span>
+        </div>
+
+        <section data-stack style="display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(24px, 4vw, 70px); padding: clamp(20px, 3vw, 40px) clamp(18px, 5vw, 88px) clamp(60px, 9vw, 120px); align-items: start;">
+          <div data-pdp-thumbs style="display: grid; grid-template-columns: 1fr 1fr; gap: clamp(10px, 1.4vw, 16px);">
+            <span style="grid-column: span 2; display: block; aspect-ratio: 4/5; background: repeating-linear-gradient(135deg, rgba(63,70,51,0.16) 0 2px, transparent 2px 12px), {{ pdpTint }}; position: relative;">
+              <span style="position: absolute; left: 14px; bottom: 14px; font-family: ui-monospace, monospace; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: #3F4633; background: rgba(253,252,248,0.86); padding: 5px 8px;">{{ pdpShot }}</span>
+            </span>
+            <span style="display: block; aspect-ratio: 1/1; background: repeating-linear-gradient(135deg, rgba(107,114,88,0.22) 0 2px, transparent 2px 11px), #E8DDD4; position: relative;">
+              <span style="position: absolute; left: 12px; bottom: 12px; font-family: ui-monospace, monospace; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: #6B7258;">Bead detail macro</span>
+            </span>
+            <span style="display: block; aspect-ratio: 1/1; background: repeating-linear-gradient(135deg, rgba(212,167,165,0.32) 0 2px, transparent 2px 11px), #EFCFCB; position: relative;">
+              <span style="position: absolute; left: 12px; bottom: 12px; font-family: ui-monospace, monospace; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: #6B7258;">Styled on model</span>
+            </span>
+          </div>
+
+          <div data-sticky style="position: sticky; top: 100px;">
+            <span style="font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: #D4A7A5;">{{ pdpBadge }}</span>
+            <h1 style="font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: clamp(32px, 4.4vw, 58px); line-height: 1; margin: 14px 0 0; color: #3F4633;">{{ pdpName }}</h1>
+            <p style="margin: 14px 0 0; font-size: 20px; color: #6B7258;">{{ pdpPrice }}</p>
+            <p style="margin: 22px 0 0; font-size: 15px; line-height: 1.8; color: #6B7258; max-width: 42ch;">{{ pdpDesc }}</p>
+
+            <div style="margin-top: 30px;">
+              <span style="display: block; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #6B7258; margin-bottom: 10px;">{{ pdpVariantLabel }}</span>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                <sc-for list="{{ pdpVariants }}" as="v" hint-placeholder-count="3">
+                  <button onClick="{{ v.onSelect }}" style="border: 1px solid {{ v.border }}; background: {{ v.bg }}; color: {{ v.color }}; padding: 11px 20px; font-size: 12px; letter-spacing: .1em; cursor: pointer; transition: all .3s ease;" style-hover="border-color: #6B7258;">{{ v.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+
+            <div data-pdp-actions style="display: flex; flex-wrap: wrap; gap: 12px; align-items: stretch; margin-top: 28px;">
+              <div data-qty style="display: flex; align-items: center; border: 1px solid #C5B7AB;">
+                <button onClick="{{ decQty }}" aria-label="Decrease quantity" style="background: none; border: 0; width: 44px; height: 100%; min-height: 50px; cursor: pointer; font-size: 16px; color: #6B7258;">−</button>
+                <span style="min-width: 30px; text-align: center; font-size: 14px; color: #3F4633;">{{ qty }}</span>
+                <button onClick="{{ incQty }}" aria-label="Increase quantity" style="background: none; border: 0; width: 44px; height: 100%; min-height: 50px; cursor: pointer; font-size: 16px; color: #6B7258;">+</button>
+              </div>
+              <button onClick="{{ addCurrent }}" style="flex: 1 1 200px; background: #3F4633; color: #FDFCF8; border: 1px solid #3F4633; padding: 17px 28px; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; transition: background .3s ease;" style-hover="background: #6B7258; border-color: #6B7258;">Add to bag</button>
+              <button onClick="{{ buyNow }}" style="flex: 1 1 160px; background: none; color: #3F4633; border: 1px solid #C5B7AB; padding: 17px 28px; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer;" style-hover="border-color: #6B7258;">Buy now</button>
+              <button onClick="{{ wishCurrent }}" aria-label="Save to wishlist" style="width: 52px; border: 1px solid #C5B7AB; background: none; cursor: pointer; color: {{ pdpWishColor }}; font-size: 14px;" style-hover="border-color: #D4A7A5;">{{ pdpWishMark }}</button>
+            </div>
+
+            <p style="margin: 20px 0 0; font-size: 12px; color: #6B7258; line-height: 1.7;">Handmade to order · Ships in 3–5 days · Free shipping over ₹1,500</p>
+
+            <div style="margin-top: 40px; border-top: 1px solid rgba(197,183,171,0.5); padding-top: 26px;">
+              <h2 style="font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: 22px; margin: 0 0 12px; color: #3F4633;">WHY YOU'LL LOVE IT</h2>
+              <p style="margin: 0; font-size: 15px; line-height: 1.85; color: #6B7258;">{{ pdpWhy }}</p>
+            </div>
+            <div style="margin-top: 26px; border-top: 1px solid rgba(197,183,171,0.5); padding-top: 26px;">
+              <h2 style="font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: 22px; margin: 0 0 14px; color: #3F4633;">DETAILS</h2>
+              <dl style="margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 10px 22px; font-size: 14px; color: #6B7258;">
+                <dt style="font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #6B7258;">Materials</dt><dd style="margin: 0;">{{ pdpMaterials }}</dd>
+                <dt style="font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #6B7258;">Size</dt><dd style="margin: 0;">{{ pdpSize }}</dd>
+                <dt style="font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #6B7258;">Care</dt><dd style="margin: 0;">{{ pdpCare }}</dd>
+                <dt style="font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #6B7258;">Handmade</dt><dd style="margin: 0;">Slight variation in bead placement is part of the piece.</dd>
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        <section style="background: #F6F2EA; border-top: 1px solid rgba(197,183,171,0.45); padding: clamp(56px, 8vw, 110px) clamp(18px, 5vw, 88px);">
+          <h2 style="font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: clamp(28px, 4vw, 52px); margin: 0 0 32px; color: #3F4633;">STYLE IT WITH</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: clamp(14px, 2vw, 28px);">
+            <sc-for list="{{ related }}" as="p" hint-placeholder-count="3">
+              <article>
+                <button onClick="{{ p.onOpen }}" aria-label="{{ p.aria }}" style="display: block; width: 100%; padding: 0; border: 0; cursor: pointer; overflow: hidden; background: {{ p.tint }}; aspect-ratio: 4/5;">
+                  <span style="display: block; width: 100%; height: 100%; background: repeating-linear-gradient(135deg, rgba(63,70,51,0.16) 0 2px, transparent 2px 12px); transition: transform 1s cubic-bezier(.16,.8,.3,1);" style-hover="transform: scale(1.05);"></span>
+                </button>
+                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 12px; gap: 10px;">
+                  <span style="font-family: 'Bodoni Moda', serif; font-size: 18px; color: #3F4633;">{{ p.name }}</span>
+                  <span style="font-size: 13px; color: #6B7258;">{{ p.price }}</span>
+                </div>
+              </article>
+            </sc-for>
+          </div>
+        </section>
+
+        <section style="padding: clamp(56px, 8vw, 110px) clamp(18px, 5vw, 88px);">
+          <h2 style="font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: clamp(28px, 4vw, 52px); margin: 0 0 28px; color: #3F4633;">SEE IT ON YOU</h2>
+          <div data-ugc style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: clamp(8px, 1.2vw, 14px);">
+            <sc-for list="{{ ugc }}" as="u" hint-placeholder-count="6">
+              <a href="#" style="display: block; position: relative; aspect-ratio: 1/1; background: repeating-linear-gradient(135deg, rgba(63,70,51,0.14) 0 2px, transparent 2px 11px), {{ u.tint }};" style-hover="filter: saturate(1.15);">
+                <span style="position: absolute; left: 10px; bottom: 10px; font-size: 11px; color: #3F4633; background: rgba(253,252,248,0.86); padding: 4px 8px;">{{ u.handle }}</span>
+              </a>
+            </sc-for>
+          </div>
+        </section>
+      </div>
+    </sc-if>
+
+  </main>
+
+  <footer style="background: #3F4633; color: #FDFCF8; padding: clamp(56px, 9vw, 110px) clamp(18px, 5vw, 88px) 34px;">
+    <div data-footer style="display: grid; grid-template-columns: 1.4fr repeat(4, auto); gap: clamp(28px, 4vw, 60px); align-items: start;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-family: 'Bodoni Moda', serif; font-size: clamp(34px, 5vw, 58px); letter-spacing: .3em; text-indent: .3em; color: #FDFCF8;">LUMI</span>
+          <span aria-hidden="true" style="width: 10px; height: 10px; background: #D4A7A5; transform: rotate(45deg); animation: lumiGlint 5s ease-in-out infinite;"></span>
+        </div>
+        <p style="margin: 20px 0 0; font-family: 'Instrument Serif', serif; font-style: italic; font-size: 26px; color: #EFCFCB;">Make it yours.</p>
+        <p style="margin: 16px 0 0; font-size: 13px; line-height: 1.8; color: #C5B7AB; max-width: 32ch;">Handcrafted beaded tanks, brooches and bag charms. Made in Bengaluru, worn everywhere.</p>
+      </div>
+      <nav>
+        <h3 style="font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #C5B7AB; margin: 6px 0 16px; font-weight: 400;">Shop</h3>
+        <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
+          <li><button onClick="{{ goShop }}" style="background: none; border: 0; padding: 0; cursor: pointer; color: #FDFCF8; font-family: 'DM Sans', sans-serif; font-size: 14px;" style-hover="color: #EFCFCB;">All Products</button></li>
+          <li><button onClick="{{ goTanks }}" style="background: none; border: 0; padding: 0; cursor: pointer; color: #FDFCF8; font-family: 'DM Sans', sans-serif; font-size: 14px;" style-hover="color: #EFCFCB;">Tank Tops</button></li>
+          <li><button onClick="{{ goBrooches }}" style="background: none; border: 0; padding: 0; cursor: pointer; color: #FDFCF8; font-family: 'DM Sans', sans-serif; font-size: 14px;" style-hover="color: #EFCFCB;">Brooches</button></li>
+          <li><button onClick="{{ goCharms }}" style="background: none; border: 0; padding: 0; cursor: pointer; color: #FDFCF8; font-family: 'DM Sans', sans-serif; font-size: 14px;" style-hover="color: #EFCFCB;">Bag Charms</button></li>
+          <li><button onClick="{{ goShop }}" style="background: none; border: 0; padding: 0; cursor: pointer; color: #FDFCF8; font-family: 'DM Sans', sans-serif; font-size: 14px;" style-hover="color: #EFCFCB;">New Drops</button></li>
+        </ul>
+      </nav>
+      <nav>
+        <h3 style="font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #C5B7AB; margin: 6px 0 16px; font-weight: 400;">About</h3>
+        <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
+          <li><a href="#world" style="color: #FDFCF8;">Our Story</a></li>
+          <li><a href="#world" style="color: #FDFCF8;">Why LUMI</a></li>
+          <li><a href="#making" style="color: #FDFCF8;">The Making</a></li>
+        </ul>
+      </nav>
+      <nav>
+        <h3 style="font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #C5B7AB; margin: 6px 0 16px; font-weight: 400;">Help</h3>
+        <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
+          <li><a href="#" style="color: #FDFCF8;">Contact</a></li>
+          <li><a href="#" style="color: #FDFCF8;">Shipping</a></li>
+          <li><a href="#" style="color: #FDFCF8;">Returns</a></li>
+          <li><a href="#" style="color: #FDFCF8;">FAQs</a></li>
+        </ul>
+      </nav>
+      <nav>
+        <h3 style="font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #C5B7AB; margin: 6px 0 16px; font-weight: 400;">Social</h3>
+        <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
+          <li><a href="#" style="color: #FDFCF8;">Instagram</a></li>
+          <li><a href="#" style="color: #FDFCF8;">Pinterest</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div style="margin-top: clamp(40px, 6vw, 72px); padding-top: 20px; border-top: 1px solid rgba(197,183,171,0.3); display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #C5B7AB;">
+      <span>© 2026 LUMI</span>
+      <span>Bengaluru · Mumbai · Delhi · Hyderabad</span>
+    </div>
+  </footer>
+
+  <sc-if value="{{ cartOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 80;">
+      <div onClick="{{ closeCart }}" style="position: absolute; inset: 0; background: rgba(63,70,51,0.34); animation: lumiFade .3s ease;"></div>
+      <aside aria-label="Shopping bag" style="position: absolute; top: 0; right: 0; bottom: 0; width: min(440px, 100%); background: #FDFCF8; display: flex; flex-direction: column; animation: lumiDrawer .45s cubic-bezier(.16,.8,.3,1); box-shadow: -20px 0 60px rgba(63,70,51,0.14);">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 24px 26px; border-bottom: 1px solid rgba(197,183,171,0.5);">
+          <span style="font-family: 'Bodoni Moda', serif; font-size: 24px; color: #3F4633;">Your bag</span>
+          <button onClick="{{ closeCart }}" style="background: none; border: 0; cursor: pointer; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #6B7258; padding: 8px;">Close</button>
+        </div>
+        <div style="flex: 1; overflow-y: auto; padding: 8px 26px;">
+          <sc-for list="{{ cartLines }}" as="l" hint-placeholder-count="0">
+            <div style="display: grid; grid-template-columns: 72px 1fr; gap: 16px; padding: 20px 0; border-bottom: 1px solid rgba(197,183,171,0.35);">
+              <span style="display: block; aspect-ratio: 4/5; background: repeating-linear-gradient(135deg, rgba(63,70,51,0.16) 0 2px, transparent 2px 10px), {{ l.tint }};"></span>
+              <div>
+                <div style="display: flex; justify-content: space-between; gap: 10px; align-items: baseline;">
+                  <span style="font-family: 'Bodoni Moda', serif; font-size: 17px; color: #3F4633;">{{ l.name }}</span>
+                  <span style="font-size: 13px; color: #6B7258; white-space: nowrap;">{{ l.lineTotal }}</span>
+                </div>
+                <span style="display: block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #6B7258; margin-top: 5px;">{{ l.variant }}</span>
+                <div style="display: flex; align-items: center; gap: 14px; margin-top: 12px;">
+                  <div style="display: flex; align-items: center; border: 1px solid #E8DDD4;">
+                    <button onClick="{{ l.onDec }}" aria-label="Decrease" style="background: none; border: 0; width: 32px; height: 32px; cursor: pointer; color: #6B7258;">−</button>
+                    <span style="min-width: 22px; text-align: center; font-size: 13px;">{{ l.qty }}</span>
+                    <button onClick="{{ l.onInc }}" aria-label="Increase" style="background: none; border: 0; width: 32px; height: 32px; cursor: pointer; color: #6B7258;">+</button>
+                  </div>
+                  <button onClick="{{ l.onRemove }}" style="background: none; border: 0; padding: 0; cursor: pointer; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #6B7258;" data-tap style-hover="color: #D4A7A5;" data-tap>Remove</button>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+          <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ false }}">
+            <div style="padding: 60px 0; text-align: center;">
+              <p style="font-family: 'Instrument Serif', serif; font-size: 24px; color: #6B7258; margin: 0 0 22px;">Nothing in here yet.</p>
+              <button onClick="{{ goShopFromCart }}" style="background: #3F4633; color: #FDFCF8; border: 0; padding: 15px 30px; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer;">Start shopping</button>
+            </div>
+          </sc-if>
+        </div>
+        <div style="border-top: 1px solid rgba(197,183,171,0.5); padding: 22px 26px 26px;">
+          <div style="display: flex; justify-content: space-between; font-size: 14px; color: #6B7258;">
+            <span>Subtotal</span>
+            <span style="color: #3F4633;">{{ subtotal }}</span>
+          </div>
+          <p style="margin: 8px 0 18px; font-size: 11px; color: #6B7258; letter-spacing: .1em;">{{ shippingNote }}</p>
+          <button onClick="{{ checkout }}" style="width: 100%; background: #3F4633; color: #FDFCF8; border: 0; padding: 17px; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; transition: background .3s ease;" style-hover="background: #6B7258;">Checkout</button>
+        </div>
+      </aside>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div role="status" style="position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); z-index: 90; background: #3F4633; color: #FDFCF8; padding: 14px 24px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; animation: lumiToast .4s cubic-bezier(.16,.8,.3,1); display: flex; align-items: center; gap: 10px;">
+      <span aria-hidden="true" style="width: 6px; height: 6px; background: #EFCFCB; transform: rotate(45deg);"></span>
+      {{ toast }}
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900}}">
+const CATS = { tank: "Tank tops", brooch: "Brooches", charm: "Bag charms" };
+const PRODUCTS = [
+  { id: "bindi-bloom", name: "Bindi Bloom Tank", price: 2400, cat: "tank", tint: "#E8DDD4", shot: "Beaded tank, front", badge: "Handmade to order", new: 4,
+    desc: "A cropped ribbed tank hand-strung with a bloom of matte and glass beads across the neckline. Not your basic tank.",
+    why: "It does the work of a necklace, a top and a conversation starter at once. Wear it with the oldest jeans you own.",
+    materials: "Cotton rib, glass and resin beads, cotton thread", size: "XS–L, cropped fit", care: "Hand wash cold, dry flat",
+    variantLabel: "Size", variants: ["XS", "S", "M", "L"] },
+  { id: "gulmohar", name: "Gulmohar Tank", price: 2650, cat: "tank", tint: "#EFCFCB", shot: "Beaded tank, back detail", badge: "New drop", new: 1,
+    desc: "Red-orange beadwork scattered like gulmohar petals over an ivory tank. Six hours of beading, one very good top.",
+    why: "The colour hits differently in daylight — it's the piece people stop you about on the street.",
+    materials: "Organic cotton, glass seed beads", size: "XS–L, regular fit", care: "Hand wash cold, dry flat",
+    variantLabel: "Size", variants: ["XS", "S", "M", "L"] },
+  { id: "monsoon", name: "Monsoon Mesh Tank", price: 2900, cat: "tank", tint: "#C5B7AB", shot: "Mesh tank layered over tee", badge: "Layering piece", new: 2,
+    desc: "A sheer beaded mesh tank made to layer over tees, shirts and slip dresses. Silver-grey beads that catch light like rain.",
+    why: "One tank, four outfits. Layer it and your whole wardrobe reads new.",
+    materials: "Nylon mesh, glass beads, silver-tone findings", size: "One size, relaxed", care: "Hand wash cold, dry flat",
+    variantLabel: "Colour", variants: ["Rain", "Ivory"] },
+  { id: "cherry-chaos", name: "Cherry Chaos Brooch", price: 690, cat: "brooch", tint: "#EFCFCB", shot: "Brooch on denim jacket", badge: "Bestseller", new: 3,
+    desc: "A cluster of tiny beaded cherries on a secure pin back. Move it from jacket to bag to hair in seconds.",
+    why: "Small detail, big difference. It makes a plain jacket look styled with zero effort.",
+    materials: "Glass beads, brass pin back", size: "4.5 × 3 cm", care: "Wipe with dry cloth",
+    variantLabel: "Colourway", variants: ["Cherry", "Sour cherry"] },
+  { id: "evil-eye", name: "Evil Eye Brooch", price: 640, cat: "brooch", tint: "#E8DDD4", shot: "Brooch on tote strap", badge: "Reusable", new: 5,
+    desc: "A hand-beaded eye in sage and ivory. Half charm, half accessory, fully reusable.",
+    why: "Pin it, play with it. It looks intentional on literally everything.",
+    materials: "Glass beads, brass pin back", size: "3.5 × 3.5 cm", care: "Wipe with dry cloth",
+    variantLabel: "Colourway", variants: ["Sage", "Blush"] },
+  { id: "butter-daisy", name: "Butter Daisy Brooch", price: 590, cat: "brooch", tint: "#E5E0CF", shot: "Brooch on knit collar", badge: "Under ₹600", new: 7,
+    desc: "Five beaded petals, a butter-yellow centre, one very cheerful pin.",
+    why: "The easiest way to make a boring knit feel like yours.",
+    materials: "Glass beads, brass pin back", size: "3 × 3 cm", care: "Wipe with dry cloth",
+    variantLabel: "Colourway", variants: ["Butter", "Ivory"] },
+  { id: "disco-ladoo", name: "Disco Ladoo Charm", price: 850, cat: "charm", tint: "#D9C9BC", shot: "Charm on shoulder bag", badge: "Bestseller", new: 6,
+    desc: "A round, densely beaded charm on a brass clasp. Catches every bit of light it passes.",
+    why: "Your bag, but better. Clip it on and never take it off.",
+    materials: "Glass beads, brass lobster clasp", size: "6 cm drop", care: "Wipe with dry cloth",
+    variantLabel: "Colourway", variants: ["Rose", "Sage", "Sand"] },
+  { id: "auto-rickshaw", name: "Auto Rickshaw Charm", price: 920, cat: "charm", tint: "#C9CDBA", shot: "Charm on backpack", badge: "Made in Bengaluru", new: 8,
+    desc: "A tiny beaded auto, yellow-and-green, exactly like the one that got you home last Friday.",
+    why: "Pure hometown joy. People always ask where it's from.",
+    materials: "Glass beads, brass clasp", size: "5.5 cm drop", care: "Wipe with dry cloth",
+    variantLabel: "Colourway", variants: ["Classic", "Night"] },
+  { id: "pearl-puddle", name: "Pearl Puddle Charm", price: 780, cat: "charm", tint: "#E8DDD4", shot: "Charm on leather bag", badge: "Quiet one", new: 9,
+    desc: "Freshwater-look pearls pooled into a soft cluster. The subtle one in the family.",
+    why: "For days you want a little light and nothing louder.",
+    materials: "Glass pearls, brass clasp", size: "5 cm drop", care: "Wipe with dry cloth",
+    variantLabel: "Colourway", variants: ["Ivory", "Blush"] }
+];
+const money = n => "₹" + n.toLocaleString("en-IN");
+
+class Component extends DCLogic {
+  state = { view: "home", pid: null, cat: "All", sort: "Featured", query: "", searchOpen: false,
+    menuOpen: false, cartOpen: false, cart: [], wish: [], qty: 1, variant: null, toast: "", email: "", heroShift: 0, bump: 0 };
+
+  componentDidMount() {
+    this._onScroll = () => {
+      const y = window.scrollY || 0;
+      if (this.state.view === "home") this.setState({ heroShift: Math.min(y * 0.12, 70) });
+    };
+    window.addEventListener("scroll", this._onScroll, { passive: true });
+    this._io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("lumi-in"); this._io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
+    this._scan = () => document.querySelectorAll("[data-reveal]:not(.lumi-in)").forEach(el => this._io.observe(el));
+    this._scan();
+    this._timer = setInterval(this._scan, 700);
+  }
+  componentDidUpdate() { if (this._scan) this._scan(); }
+  componentWillUnmount() { window.removeEventListener("scroll", this._onScroll); clearInterval(this._timer); if (this._io) this._io.disconnect(); }
+
+  top() { window.scrollTo({ top: 0, behavior: "auto" }); }
+  flash(msg) { clearTimeout(this._t); this.setState({ toast: msg }); this._t = setTimeout(() => this.setState({ toast: "" }), 2400); }
+  nav(patch) { this.setState(Object.assign({ menuOpen: false, searchOpen: false }, patch)); requestAnimationFrame(() => this.top()); }
+  open(p) { this.nav({ view: "product", pid: p.id, qty: 1, variant: p.variants[0] }); }
+
+  add(p, variant, qty) {
+    const v = variant || p.variants[0], n = qty || 1;
+    this.setState(s => {
+      const cart = s.cart.slice();
+      const i = cart.findIndex(l => l.id === p.id && l.variant === v);
+      if (i > -1) cart[i] = Object.assign({}, cart[i], { qty: cart[i].qty + n });
+      else cart.push({ id: p.id, variant: v, qty: n });
+      return { cart, bump: s.bump + 1 };
+    });
+    this.flash(p.name + " added to bag");
+  }
+  toggleWish(p) {
+    this.setState(s => ({ wish: s.wish.includes(p.id) ? s.wish.filter(x => x !== p.id) : s.wish.concat(p.id) }));
+  }
+
+  card(p) {
+    const wished = this.state.wish.includes(p.id);
+    return {
+      id: p.id, name: p.name, price: money(p.price), tint: p.tint, shot: p.shot,
+      catLabel: CATS[p.cat], aria: "View " + p.name,
+      wishMark: wished ? "◆" : "◇", wishColor: wished ? "#D4A7A5" : "#6B7258",
+      onOpen: () => this.open(p),
+      onAdd: e => { e.stopPropagation(); this.add(p); },
+      onWish: e => { e.stopPropagation(); this.toggleWish(p); }
+    };
+  }
+
+  renderVals() {
+    const s = this.state;
+    const cur = PRODUCTS.find(p => p.id === s.pid) || PRODUCTS[0];
+    const count = s.cart.reduce((a, l) => a + l.qty, 0);
+    const subtotal = s.cart.reduce((a, l) => { const p = PRODUCTS.find(x => x.id === l.id); return a + p.price * l.qty; }, 0);
+
+    let list = PRODUCTS.filter(p => s.cat === "All" || p.cat === s.cat);
+    if (s.sort === "Price low") list = list.slice().sort((a, b) => a.price - b.price);
+    if (s.sort === "Price high") list = list.slice().sort((a, b) => b.price - a.price);
+    if (s.sort === "Newest") list = list.slice().sort((a, b) => a.new - b.new);
+
+    const spans = ["span 5", "span 4", "span 3", "span 4", "span 4", "span 4"];
+    const offsets = ["0px", "70px", "20px", "0px", "60px", "30px"];
+    const featured = [PRODUCTS[0], PRODUCTS[3], PRODUCTS[6], PRODUCTS[1], PRODUCTS[4], PRODUCTS[8]].map((p, i) =>
+      Object.assign(this.card(p), { span: spans[i], offset: offsets[i] }));
+
+    const chip = (label, val) => ({
+      label, border: s.cat === val ? "#3F4633" : "#C5B7AB",
+      bg: s.cat === val ? "#3F4633" : "transparent",
+      color: s.cat === val ? "#FDFCF8" : "#6B7258",
+      onSelect: () => this.setState({ cat: val })
+    });
+
+    const q = s.query.trim().toLowerCase();
+    const hits = q ? PRODUCTS.filter(p => (p.name + " " + CATS[p.cat] + " " + p.desc).toLowerCase().includes(q)).slice(0, 5) : [];
+
+    const shopTitles = { All: "ALL PIECES", tank: "WEAR IT", brooch: "PIN IT", charm: "CHARM IT" };
+    const shopBlurbs = {
+      All: "Everything we make, strung one bead at a time.",
+      tank: "Beaded tanks that do the talking. Not your basic tank.",
+      brooch: "Pin it. Play with it. Move it tomorrow.",
+      charm: "Your bag, but better."
+    };
+
+    const catWish = this.state.wish.includes(cur.id);
+
+    return {
+      isHome: s.view === "home", isShop: s.view === "shop", isProduct: s.view === "product",
+      cartCount: count, bagBg: count ? "#D4A7A5" : "#C5B7AB",
+      bagPulse: "scale(" + (s.bump ? 1 : 1) + ")",
+      heroShift: s.heroShift + "px",
+      searchOpen: s.searchOpen, menuOpen: s.menuOpen, cartOpen: s.cartOpen, toast: s.toast,
+      query: s.query, email: s.email, sort: s.sort, qty: s.qty,
+      searchHint: q ? hits.length + " result" + (hits.length === 1 ? "" : "s") : "Try “cherry”, “charm” or “tank”",
+      searchResults: hits.map(p => ({ name: p.name, price: money(p.price), tint: p.tint, onOpen: () => this.open(p) })),
+
+      goHome: () => this.nav({ view: "home" }),
+      goShop: () => this.nav({ view: "shop", cat: "All" }),
+      goTanks: () => this.nav({ view: "shop", cat: "tank" }),
+      goBrooches: () => this.nav({ view: "shop", cat: "brooch" }),
+      goCharms: () => this.nav({ view: "shop", cat: "charm" }),
+      goStory: () => { this.setState({ view: "home", menuOpen: false, searchOpen: false }); setTimeout(() => { const el = document.getElementById("making"); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: "smooth" }); }, 60); },
+      toggleMenu: () => this.setState(st => ({ menuOpen: !st.menuOpen })),
+      toggleSearch: () => this.setState(st => ({ searchOpen: !st.searchOpen })),
+      onQuery: e => this.setState({ query: e.target.value }),
+      onSort: e => this.setState({ sort: e.target.value }),
+      openCart: () => this.setState({ cartOpen: true, menuOpen: false }),
+      closeCart: () => this.setState({ cartOpen: false }),
+      goShopFromCart: () => { this.setState({ cartOpen: false }); this.nav({ view: "shop", cat: "All" }); },
+      onEmail: e => this.setState({ email: e.target.value }),
+      onSubscribe: e => { e.preventDefault(); this.setState({ email: "" }); this.flash("You're in. Welcome to LUMI"); },
+
+      featured, styling: [
+        { label: "Tank, worn alone", tint: "#6B7258", offset: "0px" },
+        { label: "Tank over a white tee", tint: "#C5B7AB", offset: "26px" },
+        { label: "Brooch on a denim jacket", tint: "#D4A7A5", offset: "0px" },
+        { label: "Brooch on a tote", tint: "#8A8F76", offset: "34px" },
+        { label: "Charm on a shoulder bag", tint: "#EFCFCB", offset: "0px" },
+        { label: "Charm on a backpack", tint: "#A9AE95", offset: "20px" }
+      ],
+      ugc: [
+        { handle: "@ananya.wears", tint: "#E8DDD4", ratio: "3/4" },
+        { handle: "@riyaaa", tint: "#EFCFCB", ratio: "1/1" },
+        { handle: "@thrifted.by.z", tint: "#C5B7AB", ratio: "3/4" },
+        { handle: "@meher.styles", tint: "#D9C9BC", ratio: "1/1" },
+        { handle: "@kavyaonrepeat", tint: "#E5E0CF", ratio: "3/4" },
+        { handle: "@notyourmuse", tint: "#C9CDBA", ratio: "1/1" },
+        { handle: "@saha.na", tint: "#EFCFCB", ratio: "3/4" },
+        { handle: "@blr.girl", tint: "#E8DDD4", ratio: "1/1" }
+      ],
+
+      shopTitle: shopTitles[s.cat], shopBlurb: shopBlurbs[s.cat],
+      resultCount: list.length + " pieces",
+      shopEmpty: list.length === 0,
+      shopList: list.map(p => this.card(p)),
+      filters: [chip("All", "All"), chip("Tanks", "tank"), chip("Brooches", "brooch"), chip("Charms", "charm")],
+
+      pdpName: cur.name, pdpPrice: money(cur.price), pdpDesc: cur.desc, pdpWhy: cur.why,
+      pdpMaterials: cur.materials, pdpSize: cur.size, pdpCare: cur.care, pdpCat: CATS[cur.cat],
+      pdpBadge: cur.badge, pdpTint: cur.tint, pdpShot: cur.shot, pdpVariantLabel: cur.variantLabel,
+      pdpWishMark: catWish ? "◆" : "◇", pdpWishColor: catWish ? "#D4A7A5" : "#6B7258",
+      pdpVariants: cur.variants.map(v => {
+        const on = (s.variant || cur.variants[0]) === v;
+        return { label: v, border: on ? "#3F4633" : "#C5B7AB", bg: on ? "#3F4633" : "transparent", color: on ? "#FDFCF8" : "#6B7258", onSelect: () => this.setState({ variant: v }) };
+      }),
+      incQty: () => this.setState(st => ({ qty: st.qty + 1 })),
+      decQty: () => this.setState(st => ({ qty: Math.max(1, st.qty - 1) })),
+      addCurrent: () => this.add(cur, s.variant, s.qty),
+      buyNow: () => { this.add(cur, s.variant, s.qty); this.setState({ cartOpen: true }); },
+      wishCurrent: () => this.toggleWish(cur),
+      related: PRODUCTS.filter(p => p.id !== cur.id).slice(0, 3).map(p => this.card(p)),
+
+      cartLines: s.cart.map((l, i) => {
+        const p = PRODUCTS.find(x => x.id === l.id);
+        return {
+          name: p.name, variant: l.variant, qty: l.qty, tint: p.tint, lineTotal: money(p.price * l.qty),
+          onInc: () => this.setState(st => { const c = st.cart.slice(); c[i] = Object.assign({}, c[i], { qty: c[i].qty + 1 }); return { cart: c }; }),
+          onDec: () => this.setState(st => { const c = st.cart.slice(); if (c[i].qty <= 1) return { cart: c.filter((_, j) => j !== i) }; c[i] = Object.assign({}, c[i], { qty: c[i].qty - 1 }); return { cart: c }; }),
+          onRemove: () => this.setState(st => ({ cart: st.cart.filter((_, j) => j !== i) }))
+        };
+      }),
+      cartEmpty: s.cart.length === 0,
+      subtotal: money(subtotal),
+      shippingNote: subtotal >= 1500 ? "Free shipping unlocked" : "Free shipping over ₹1,500",
+      checkout: () => this.flash("Checkout — demo only")
+    };
+  }
+}
+</script>
+</body>
+</html>

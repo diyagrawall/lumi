@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,600&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&amp;display=swap" rel="stylesheet" />
+<style>
+  @media (max-width: 760px) { footer a { min-height: 44px !important; display: inline-flex; align-items: center; } }
+  @media (max-width: 760px) {
+    [data-ftop] { grid-template-columns: 1fr !important; }
+    [data-fnav] { grid-template-columns: 1fr !important; gap: 0 !important; }
+    [data-fcol] { border-top: 1px solid rgba(253,252,248,0.18); }
+    [data-fcol] [data-fh] { display: none !important; }
+    [data-fcol] [data-ftog] { display: flex !important; }
+    [data-fcol][data-open="false"] [data-flist] { display: none !important; }
+    [data-fcol] [data-flist] { padding-bottom: 18px !important; }
+    [data-fbottom] { flex-direction: column !important; align-items: flex-start !important; }
+  }
+</style>
+</helmet>
+<footer aria-label="LUMI site footer" style="background: #3F4633; color: #FDFCF8; font-family: 'DM Sans', system-ui, sans-serif; padding: clamp(48px, 6vw, 88px) clamp(16px, 3vw, 44px) 28px;">
+  <div data-ftop="" style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px 60px; align-items: end; padding-bottom: clamp(32px, 4vw, 52px); border-bottom: 1px solid rgba(253,252,248,0.18);">
+    <div>
+      <a href="{{ home }}" onPointerEnter="{{ logoOn }}" onPointerLeave="{{ logoOff }}" aria-label="LUMI home" style="display: inline-flex; align-items: flex-start; gap: 10px; color: #FDFCF8; text-decoration: none;">
+        <img src="assets/lumi-logo-ivory.png" alt="LUMI" width="1141" height="365" style="display: block; height: clamp(46px, 5.6vw, 86px); width: auto;" />
+        <span aria-hidden="true" style="margin-top: 10px; width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #fff 0 12%, #EFCFCB 48%, #9C6F6D 125%); transform: {{ logoBead }}; transition: transform .7s cubic-bezier(.34,1.8,.5,1);"></span>
+      </a>
+      <p style="margin: 12px 0 0; font-family: 'Fraunces', serif; font-weight: 600; font-style: italic; font-size: 20px; color: #EFCFCB;">Make it yours.</p>
+    </div>
+    <form onSubmit="{{ join }}" aria-labelledby="f-news" style="display: flex; flex-direction: column; gap: 10px; max-width: 460px; justify-self: end; width: 100%;">
+      <h2 id="f-news" style="margin: 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(24px, 2.2vw, 32px); line-height: 1;">STAY IN THE LIGHT.</h2>
+      <p style="margin: 0; font-size: 15px; line-height: 1.45; color: #E8DDD4;">New drops, styling ideas and little LUMI things.</p>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px;">
+        <label for="f-email" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);">Your email</label>
+        <input id="f-email" type="email" required="true" placeholder="Your email" style="flex: 1 1 200px; min-width: 0; min-height: 48px; padding: 0 14px; background: transparent; border: 1.5px solid rgba(253,252,248,0.5); color: #FDFCF8; font: inherit; font-size: 15px;" />
+        <button type="submit" style="min-height: 48px; padding: 0 20px; background: #EFCFCB; color: #3F4633; border: 0; cursor: pointer; font-size: 12px; font-weight: 700; letter-spacing: .14em;" style-hover="background: #FDFCF8;">JOIN LUMI →</button>
+      </div>
+      <sc-if value="{{ joined }}" hint-placeholder-val="{{ false }}">
+        <p role="status" style="margin: 0; font-size: 14px; color: #EFCFCB;">Thanks! Email sign-ups open soon — follow @getlumi.in on Instagram for now.</p>
+      </sc-if>
+    </form>
+  </div>
+
+  <nav data-fnav="" aria-label="Footer" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; padding: clamp(32px, 4vw, 52px) 0;">
+    <sc-for list="{{ cols }}" as="c" hint-placeholder-count="3">
+      <div data-fcol="" data-open="{{ c.open }}">
+        <h2 data-fh="" style="margin: 0 0 16px; font-size: 12px; font-weight: 700; letter-spacing: .18em; color: #EFCFCB;">{{ c.title }}</h2>
+        <button data-ftog="" type="button" onClick="{{ c.toggle }}" aria-expanded="{{ c.open }}" style="display: none; width: 100%; justify-content: space-between; align-items: center; min-height: 56px; background: none; border: 0; padding: 0; cursor: pointer; color: #FDFCF8; font-size: 13px; font-weight: 700; letter-spacing: .18em;"><span>{{ c.title }}</span><span aria-hidden="true" style="font-size: 20px; font-weight: 400;">{{ c.sign }}</span></button>
+        <ul data-flist="" style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px;">
+          <sc-for list="{{ c.links }}" as="l" hint-placeholder-count="4">
+            <li>
+              <a href="{{ l.href }}" onPointerEnter="{{ l.on }}" onPointerLeave="{{ l.off }}" style="position: relative; display: inline-flex; align-items: center; min-height: 36px; color: #FDFCF8; text-decoration: none; font-size: 15px; transform: {{ l.t }}; transition: transform .35s cubic-bezier(.16,.8,.3,1);">
+                <span aria-hidden="true" style="position: absolute; left: -14px; top: 50%; margin-top: -3.5px; width: 7px; height: 7px; border-radius: 50%; background: #EFCFCB; opacity: {{ l.bead }}; transform: scale({{ l.bead }}); transition: opacity .3s ease, transform .4s cubic-bezier(.34,1.8,.5,1);"></span>
+                <span style="border-bottom: 1px solid {{ l.line }}; transition: border-color .3s ease;">{{ l.label }}</span>
+              </a>
+            </li>
+          </sc-for>
+        </ul>
+      </div>
+    </sc-for>
+
+    <div data-fcol="" data-open="{{ connectOpen }}">
+      <h2 data-fh="" style="margin: 0 0 16px; font-size: 12px; font-weight: 700; letter-spacing: .18em; color: #EFCFCB;">CONNECT</h2>
+      <button data-ftog="" type="button" onClick="{{ connectToggle }}" aria-expanded="{{ connectOpen }}" style="display: none; width: 100%; justify-content: space-between; align-items: center; min-height: 56px; background: none; border: 0; padding: 0; cursor: pointer; color: #FDFCF8; font-size: 13px; font-weight: 700; letter-spacing: .18em;"><span>CONNECT</span><span aria-hidden="true" style="font-size: 20px; font-weight: 400;">{{ connectSign }}</span></button>
+      <div data-flist="" style="display: flex; flex-direction: column; gap: 14px;">
+        <a href="https://instagram.com/getlumi.in" target="_blank" rel="noopener" onPointerEnter="{{ igOn }}" onPointerLeave="{{ igOff }}" style="position: relative; display: flex; align-items: center; min-height: 44px; color: #FDFCF8; text-decoration: none;">
+          <span aria-hidden="true" style="position: absolute; left: -32px; top: 50%; margin-top: -11px; width: 22px; height: 22px; border: 1.8px solid #EFCFCB; border-radius: 7px; opacity: {{ igIcon }}; transform: {{ igIconT }}; transition: opacity .3s ease, transform .4s cubic-bezier(.34,1.6,.5,1);"><span style="position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; margin: -4px 0 0 -4px; border: 1.8px solid #EFCFCB; border-radius: 50%;"></span></span>
+          <span style="display: flex; flex-direction: column;"><span style="font-size: 11px; font-weight: 700; letter-spacing: .16em; color: #EFCFCB;">INSTAGRAM</span><span style="font-size: 17px; font-weight: 700;">@getlumi.in</span></span>
+        </a>
+        <div>
+          <span style="display: block; font-size: 11px; font-weight: 700; letter-spacing: .16em; color: #EFCFCB;">PHONE</span>
+          <div style="display: flex; flex-direction: column;"><a href="tel:+918698412340" style="display: inline-flex; min-height: 26px; line-height: 1.3; align-items: center; color: #FDFCF8; font-size: 15px;">+91 86984 12340</a><a href="tel:+919304420626" style="display: inline-flex; min-height: 26px; line-height: 1.3; align-items: center; color: #FDFCF8; font-size: 15px;">+91 93044 20626</a></div>
+        </div>
+        <div>
+          <span style="display: block; font-size: 11px; font-weight: 700; letter-spacing: .16em; color: #EFCFCB;">EMAIL</span>
+          <a href="mailto:getluminow@gmail.com" style="display: inline-flex; min-height: 36px; align-items: center; color: #FDFCF8; font-size: 15px; overflow-wrap: anywhere;">getluminow@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div data-fbottom="" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 24px; padding-top: 20px; border-top: 1px solid rgba(253,252,248,0.18);">
+    <nav aria-label="Legal" style="display: flex; flex-wrap: wrap; gap: 4px 22px;">
+      <sc-for list="{{ legal }}" as="l" hint-placeholder-count="3">
+        <a href="{{ l.href }}" style="display: inline-flex; align-items: center; min-height: 36px; color: #E8DDD4; font-size: 13px; text-decoration: none;" style-hover="color: #FDFCF8; text-decoration: underline;">{{ l.label }}</a>
+      </sc-for>
+    </nav>
+    <span style="font-size: 13px; color: #E8DDD4;">© LUMI 2026</span>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:640},&quot;base&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;LUMI-Pages.dc.html#/&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;home&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;LUMI Hero v2.dc.html&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;phone&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact&quot;},&quot;email&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact&quot;}}">
+class Component extends DCLogic {
+  state = { open: {}, hot: null, logo: false, ig: false, joined: false };
+  renderVals() {
+    const s = this.state, base = this.props.base ?? "LUMI-Pages.dc.html#/", phone = (this.props.phone ?? "").trim(), email = (this.props.email ?? "").trim();
+    const L = (label, route) => ({ label, href: base + route });
+    const COLS = [
+      { key: "shop", title: "SHOP", bead: true, links: [L("All Products", "shop"), L("Tank Tops", "tank-tops"), L("Brooches", "brooches"), L("Bag Charms", "bag-charms")] },
+      { key: "help", title: "HELP", links: [L("FAQs", "faq"), L("Contact Us", "contact"), L("Shipping & Delivery", "shipping"), L("Returns & Refunds", "returns")] },
+      { key: "lumi", title: "LUMI", links: (() => { const h = this.props.home ?? "LUMI Hero v2.dc.html", pre = h.startsWith("#") ? "" : h, H = (label, id) => ({ label, href: pre + "#" + id });
+        return [H("About LUMI", "top"), H("Our Story", "shop"), H("Our Craft", "closer"), H("LUMI IRL", "irl")]; })() }
+    ];
+    const tog = k => () => this.setState(st => ({ open: Object.assign({}, st.open, { [k]: !st.open[k] }) }));
+    return {
+      home: this.props.home ?? "LUMI Hero v2.dc.html",
+      logoOn: () => this.setState({ logo: true }), logoOff: () => this.setState({ logo: false }),
+      logoBead: s.logo ? "translate(4px, -6px) scale(1.25)" : "translate(0px, 0px) scale(1)",
+      join: e => { e.preventDefault(); this.setState({ joined: true }); },
+      joined: s.joined,
+      cols: COLS.map(c => ({ title: c.title, open: !!s.open[c.key], sign: s.open[c.key] ? "−" : "+", toggle: tog(c.key),
+        links: c.links.map((l, i) => { const id = c.key + i, h = s.hot === id; return { label: l.label, href: l.href,
+          t: h ? "translateX(4px)" : "translateX(0px)", line: h ? "#EFCFCB" : "transparent", bead: c.bead && h ? "1" : "0", beadM: c.bead ? "0px" : "-15px",
+          on: () => this.setState({ hot: id }), off: () => this.state.hot === id && this.setState({ hot: null }) }; }) })),
+      connectOpen: !!s.open.connect, connectSign: s.open.connect ? "−" : "+", connectToggle: tog("connect"),
+      igOn: () => this.setState({ ig: true }), igOff: () => this.setState({ ig: false }),
+      igIcon: s.ig ? "1" : "0", igIconT: s.ig ? "scale(1) rotate(0deg)" : "scale(.6) rotate(-20deg)",
+      phone, hasPhone: !!phone, noPhone: !phone, telHref: "tel:" + phone.replace(/[^+\d]/g, ""),
+      email, hasEmail: !!email, noEmail: !email, mailHref: "mailto:" + email,
+      legal: [L("Privacy Policy", "privacy-policy"), L("Terms & Conditions", "terms-and-conditions"), L("Cookie Policy", "cookie-policy")]
+    };
+  }
+}
+</script>
+</body>
+</html>

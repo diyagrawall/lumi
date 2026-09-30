@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    { "source": "/LUMI Hero v2.dc.html", "destination": "/", "permanent": true },
+    { "source": "/LUMI-Cart.dc.html", "destination": "/bag", "permanent": true },
+    { "source": "/LUMI-Checkout.dc.html", "destination": "/checkout", "permanent": true },
+    { "source": "/LUMI-Pages.dc.html", "destination": "/pages", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/", "destination": "/LUMI Hero v2.dc.html" },
+    { "source": "/bag", "destination": "/LUMI-Cart.dc.html" },
+    { "source": "/checkout", "destination": "/LUMI-Checkout.dc.html" },
+    { "source": "/pages", "destination": "/LUMI-Pages.dc.html" }
+  ]
+}
