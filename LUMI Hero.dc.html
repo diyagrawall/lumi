@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>LUMI — Make it yours. Handmade beaded tanks, brooches & bag charms</title>
+<meta name="description" content="LUMI makes handmade beaded tank tops, brooches and bag charms in India. Handmade pieces for whatever mood you're in." />
+<meta property="og:title" content="LUMI — Make it yours." />
+<meta property="og:description" content="Handmade pieces for whatever mood you're in." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet" />
+<script src="./image-slot.js"></script>
+<style>
+  body { margin: 0; background: #FDFCF8; color: #3F4633; font-family: "DM Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #3F4633; text-decoration: none; }
+  a:hover { color: #A5676A; }
+  button { font-family: inherit; }
+  :focus-visible { outline: 2px solid #3F4633; outline-offset: 4px; }
+  ::selection { background: #EFCFCB; color: #3F4633; }
+  @keyframes lumiUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+  @keyframes lumiIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes lumiGem { 0%,100% { transform: rotate(45deg) scale(.85); } 50% { transform: rotate(45deg) scale(1.15); } }
+  @media (max-width: 760px) {
+    [data-m="hide"] { display: none !important; }
+    [data-model] { left: 0 !important; right: 0 !important; width: auto !important; top: 64px !important; bottom: 36% !important; }
+    [data-blush] { left: 12% !important; right: -4% !important; width: auto !important; top: 30% !important; bottom: 30% !important; }
+    [data-detail] { right: 16px !important; top: auto !important; bottom: 39% !important; width: 26vw !important; min-width: 0 !important; }
+    [data-copy] { left: 18px !important; right: 18px !important; bottom: 22px !important; max-width: none !important; }
+    [data-h1] { font-size: 13vw !important; }
+    [data-ctas] { flex-direction: column !important; align-items: stretch !important; gap: 6px !important; }
+    [data-ctas] > * { justify-content: center !important; }
+    [data-corner] { display: none !important; }
+  }
+</style>
+</helmet>
+
+<section data-lumi="hero" aria-label="LUMI — make it yours" style="position: relative; height: 100svh; min-height: 620px; overflow: hidden; background: radial-gradient(60% 55% at 18% 22%, rgba(239,207,203,0.55), rgba(239,207,203,0) 70%), radial-gradient(55% 50% at 86% 82%, rgba(163,168,143,0.30), rgba(163,168,143,0) 70%), #FDFCF8; touch-action: pan-y;">
+
+  <canvas data-lumi="far" aria-hidden="true" style="position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; pointer-events: none; will-change: transform;"></canvas>
+
+  <div data-blush aria-hidden="true" style="position: absolute; z-index: 2; left: 29vw; top: 150px; bottom: 48px; width: 34vw; background: linear-gradient(170deg, #EFCFCB, #D4A7A5);"></div>
+
+  <div data-lumi="model" data-model style="position: absolute; z-index: 3; left: 33vw; top: 76px; bottom: 0; width: 34vw; will-change: transform; animation: lumiIn 1.4s ease both;">
+    <image-slot id="lumi-hero-model" shape="rect" placeholder="Model in a LUMI beaded tank — warm daylight, candid, editorial crop" style="background: linear-gradient(180deg, #E8DDD4, #D8C3BC);"></image-slot>
+  </div>
+
+  <div data-detail style="position: absolute; z-index: 3; right: 7vw; top: 21vh; width: 11vw; min-width: 120px; aspect-ratio: 3/4; animation: lumiIn 1.6s .3s ease both; box-shadow: 0 24px 50px rgba(63,70,51,0.16);">
+    <image-slot id="lumi-hero-detail" shape="rect" placeholder="Beadwork close-up" style="background: #E3E5D8;"></image-slot>
+  </div>
+
+  <canvas data-lumi="mid" aria-hidden="true" style="position: absolute; z-index: 4; inset: 0; width: 100%; height: 100%; pointer-events: none; will-change: transform;"></canvas>
+
+  <header style="position: absolute; z-index: 7; top: 0; left: 0; right: 0; height: 76px; padding: 0 clamp(18px, 3.6vw, 52px); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; animation: lumiIn 1s .2s ease both;">
+    <nav aria-label="Primary" style="display: flex; gap: 28px;">
+      <a href="#shop" style="font-size: 13px; font-weight: 500; letter-spacing: .16em; padding: 10px 0;">SHOP</a>
+    </nav>
+    <button data-lumi="logo" aria-label="LUMI — replay the bead intro" style="background: none; border: 0; cursor: pointer; display: flex; align-items: center; gap: 10px; padding: 8px;">
+      <span style="font-family: 'Bodoni Moda', serif; font-weight: 500; font-size: clamp(24px, 2.4vw, 32px); letter-spacing: .34em; text-indent: .34em; color: #3F4633; line-height: 1;">LUMI</span>
+      <span aria-hidden="true" style="width: 7px; height: 7px; background: #D4A7A5; animation: lumiGem 4s ease-in-out infinite;"></span>
+    </button>
+    <div style="display: flex; justify-content: flex-end; align-items: center; gap: clamp(18px, 2.6vw, 34px);">
+      <button data-m="hide" style="background: none; border: 0; cursor: pointer; font-size: 13px; font-weight: 500; letter-spacing: .16em; color: #3F4633; padding: 10px 0;" style-hover="color: #A5676A;">SEARCH</button>
+      <button aria-label="Bag, 0 items" style="background: none; border: 0; cursor: pointer; font-size: 13px; font-weight: 500; letter-spacing: .16em; color: #3F4633; padding: 10px 0; display: flex; gap: 6px;" style-hover="color: #A5676A;">BAG <span style="color: #A5676A;">(0)</span></button>
+    </div>
+  </header>
+
+  <div data-copy style="position: absolute; z-index: 6; left: clamp(18px, 3.6vw, 52px); bottom: clamp(26px, 5vh, 52px); max-width: 30vw; min-width: 320px; display: flex; flex-direction: column; gap: 16px; animation: lumiUp 1.2s .6s cubic-bezier(.16,.8,.3,1) both;">
+    <h1 data-h1 style="margin: 0; font-family: 'Bodoni Moda', serif; font-weight: 500; font-size: clamp(44px, 5.4vw, 88px); line-height: .94; letter-spacing: -0.02em; color: #3F4633;">MAKE IT <span style="font-style: italic; color: #A5676A;">yours.</span></h1>
+    <p style="margin: 0; font-size: clamp(16px, 1.2vw, 18px); font-weight: 500; line-height: 1.45; color: #3F4633;">Handmade pieces for whatever mood you're in.</p>
+    <div data-ctas style="display: flex; flex-wrap: wrap; align-items: center; gap: 22px; margin-top: 6px;">
+      <a href="#shop" data-lumi="cta" style="display: inline-flex; align-items: center; gap: 12px; background: #3F4633; color: #FDFCF8; padding: 18px 30px; min-height: 56px; font-size: 13px; font-weight: 700; letter-spacing: .16em; border-radius: 2px; transition: background .35s ease, transform .5s cubic-bezier(.34,1.7,.5,1);" style-hover="background: #6B7258; color: #FDFCF8; transform: translateY(-3px);">SHOP LUMI →</a>
+      <a href="#world" data-lumi="cta" style="display: inline-flex; align-items: center; min-height: 48px; font-size: 13px; font-weight: 700; letter-spacing: .14em; color: #3F4633; border-bottom: 2px solid #D4A7A5; transition: border-color .3s ease;" style-hover="border-color: #3F4633; color: #3F4633;">ENTER THE WORLD OF LUMI →</a>
+    </div>
+  </div>
+
+  <div data-corner style="position: absolute; z-index: 6; right: clamp(18px, 3.6vw, 52px); bottom: clamp(26px, 5vh, 52px); text-align: right; display: flex; flex-direction: column; gap: 10px; align-items: flex-end; animation: lumiIn 1.2s 1s ease both;">
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: .2em; color: #3F4633;">DROP 01</span>
+    <span style="font-size: 14px; font-weight: 500; line-height: 1.5; color: #3F4633; max-width: 22ch;">Beaded tanks, brooches &amp; bag charms — hand-strung in Bengaluru.</span>
+    <span style="display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 500; letter-spacing: .14em; color: #6B7258;">
+      <span aria-hidden="true" style="width: 22px; height: 1px; background: #6B7258;"></span>{{ hint }}
+    </span>
+  </div>
+
+  <canvas data-lumi="near" aria-hidden="true" style="position: absolute; z-index: 8; inset: 0; width: 100%; height: 100%; pointer-events: none; will-change: transform;"></canvas>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;beadDensity&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0.5,&quot;max&quot;:1.6,&quot;step&quot;:0.1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Beads&quot;},&quot;formDelay&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:4.2,&quot;min&quot;:1.5,&quot;max&quot;:9,&quot;step&quot;:0.5,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Beads&quot;},&quot;ghostWordmark&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Beads&quot;}}">
+const C = { forest: "#3F4633", sage: "#6B7258", paleSage: "#A3A88F", mist: "#CDD1BF", rose: "#D4A7A5", deepRose: "#A5676A", dusty: "#BF8C8A", blush: "#EFCFCB", ivory: "#FDFCF8" };
+const LETTER_MIX = [[C.forest, 24], [C.sage, 18], [C.deepRose, 22], [C.dusty, 14], [C.rose, 12], [C.paleSage, 6], [C.blush, 4]];
+const FREE_MIX = [[C.rose, 20], [C.blush, 18], [C.sage, 16], [C.paleSage, 14], [C.forest, 10], [C.ivory, 10], [C.deepRose, 8], [C.mist, 6]];
+const FAR_MIX = [[C.blush, 30], [C.rose, 20], [C.mist, 22], [C.paleSage, 18], [C.ivory, 10]];
+const pick = mix => { const t = mix.reduce((a, m) => a + m[1], 0); let r = Math.random() * t; for (const m of mix) { r -= m[1]; if (r <= 0) return m[0]; } return mix[0][0]; };
+const hex = h => { const n = parseInt(h.slice(1), 16); return [n >> 16, (n >> 8) & 255, n & 255]; };
+const mixC = (h, t, p) => { const a = hex(h), b = t === "w" ? [255, 255, 255] : [20, 22, 16]; return "rgb(" + a.map((v, i) => Math.round(v + (b[i] - v) * p)).join(",") + ")"; };
+const ease = t => t < 0 ? 0 : t > 1 ? 1 : t * t * (3 - 2 * t);
+
+class Sprites {
+  constructor() { this.cache = new Map(); }
+  get(color, blur) {
+    const k = color + blur; if (this.cache.has(k)) return this.cache.get(k);
+    const S = 64, pad = blur ? 12 : 2, c = document.createElement("canvas"); c.width = c.height = S + pad * 2;
+    const x = c.getContext("2d"), cx = S / 2 + pad, r = S / 2 - 1;
+    if (blur) x.filter = "blur(" + blur + "px)";
+    const g = x.createRadialGradient(cx - r * .38, cy(cx) - r * .42, r * .05, cx, cx, r);
+    g.addColorStop(0, mixC(color, "w", .7)); g.addColorStop(.28, mixC(color, "w", .18)); g.addColorStop(.7, color); g.addColorStop(1, mixC(color, "k", .32));
+    x.fillStyle = g; x.beginPath(); x.arc(cx, cx, r, 0, 6.2832); x.fill();
+    x.fillStyle = "rgba(255,255,255,.9)"; x.beginPath(); x.ellipse(cx - r * .36, cx - r * .42, r * .16, r * .11, -0.6, 0, 6.2832); x.fill();
+    x.strokeStyle = "rgba(255,255,255,.28)"; x.lineWidth = r * .08; x.beginPath(); x.arc(cx, cx, r * .82, 0.4, 1.5); x.stroke();
+    const o = { c, pad, S, hole: mixC(color, "k", .45) }; this.cache.set(k, o); return o;
+    function cy(v) { return v; }
+  }
+}
+
+class LumiField {
+  constructor(opts) {
+    this.o = Object.assign({ density: 1, formAt: 4.2, ghost: true }, opts);
+    this.sp = new Sprites(); this.t = 0; this.px = -9999; this.py = -9999; this.pvx = 0; this.pvy = 0; this.inside = false;
+    this.far = []; this.mid = []; this.near = []; this.running = false; this.ghostA = 0;
+    this.reduced = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    this.loop = this.loop.bind(this);
+  }
+  mount(host, far, mid, near) {
+    this.host = host; this.cv = { far, mid, near };
+    this.resize(true);
+    this.ro = new ResizeObserver(() => this.resize(false)); this.ro.observe(host);
+    this.io = new IntersectionObserver(([e]) => { this.vis = e.isIntersecting; this.vis ? this.start() : this.stop(); }); this.io.observe(host);
+  }
+  destroy() { this.stop(); this.ro && this.ro.disconnect(); this.io && this.io.disconnect(); }
+  resize(first) {
+    const r = this.host.getBoundingClientRect(), d = Math.min(window.devicePixelRatio || 1, 2);
+    const changed = !this.w || Math.abs(r.width - this.w) > 60 || Math.abs(r.height - this.h) > 120;
+    this.w = r.width; this.h = r.height; this.small = this.w < 760; this.dpr = d;
+    Object.values(this.cv).forEach(c => { c.width = Math.round(this.w * d); c.height = Math.round(this.h * d); c.getContext("2d").setTransform(d, 0, 0, d, 0, 0); });
+    if (first || changed) this.build();
+  }
+  layout() {
+    const w = this.w, h = this.h, s = this.small;
+    const fs0 = 100, spacing = .1;
+    const ctx = document.createElement("canvas").getContext("2d");
+    ctx.font = "500 " + fs0 + "px 'Bodoni Moda', serif";
+    const letters = ["L", "U", "M", "I"], ws = letters.map(l => ctx.measureText(l).width);
+    const total0 = ws.reduce((a, b) => a + b, 0) + fs0 * spacing * 3;
+    let fs = (s ? w * .88 : w * .64) / total0 * fs0;
+    const cr = this.copyRect ? this.copyRect() : null, top = 84, bottom = cr ? cr.top - (s ? 18 : 28) : h * .7;
+    fs = Math.min(fs, h * (s ? .26 : .36), Math.max(60, (bottom - top) / .78));
+    const cy = Math.min(s ? h * .36 : h * .47, bottom - fs * .42);
+    return { fs, spacing, letters, ws: ws.map(v => v * fs / fs0), total: total0 * fs / fs0, cy };
+  }
+  sample(L) {
+    const w = Math.ceil(this.w), h = Math.ceil(this.h), c = document.createElement("canvas"); c.width = w; c.height = h;
+    const x = c.getContext("2d");
+    x.font = "500 " + L.fs + "px 'Bodoni Moda', serif"; x.textBaseline = "alphabetic"; x.fillStyle = "#000"; x.strokeStyle = "#000";
+    const step = Math.max(this.small ? 6.5 : 7.5, L.fs * (this.small ? .052 : .034) / Math.sqrt(this.o.density));
+    x.lineWidth = step * 1.35; x.lineJoin = "round";
+    let cx = (this.w - L.total) / 2; const base = L.cy + L.fs * .34; const boxes = [];
+    this.ghost = { font: x.font, items: [] };
+    L.letters.forEach((ch, i) => { x.fillText(ch, cx, base); x.strokeText(ch, cx, base); this.ghost.items.push([ch, cx, base]); boxes.push([cx, cx + L.ws[i]]); cx += L.ws[i] + L.fs * L.spacing; });
+    const data = x.getImageData(0, 0, w, h).data, pts = [];
+    const rowH = step * .866;
+    for (let yy = 0, row = 0; yy < h; yy += rowH, row++) {
+      for (let xx = (row % 2) * step / 2; xx < w; xx += step) {
+        const X = Math.round(xx), Y = Math.round(yy);
+        if (data[(Y * w + X) * 4 + 3] > 128) {
+          let li = boxes.findIndex(b => X >= b[0] - step && X <= b[1] + step); if (li < 0) li = 0;
+          pts.push({ x: xx + (Math.random() - .5) * step * .18, y: yy + (Math.random() - .5) * step * .18, li });
+        }
+      }
+    }
+    this.step = step; return pts;
+  }
+  bead(o) {
+    return Object.assign({ x: 0, y: 0, vx: 0, vy: 0, r: 4, ph: Math.random() * 6.28, rot: Math.random() * 6.28, a: 1, spark: Math.random() < .05, mode: "float", attract: Math.random() < .16 }, o);
+  }
+  build() {
+    const w = this.w, h = this.h, s = this.small, D = this.o.density * (s ? .5 : 1);
+    this.L = this.layout();
+    const pts = this.sample(this.L);
+    const rnd = (a, b) => a + Math.random() * (b - a);
+    const scatterPos = () => {
+      let x, y, tries = 0;
+      const cr = this.copyRect ? this.copyRect() : null;
+      do { x = rnd(0, w); y = rnd(70, h - 10); tries++; } while (tries < 8 && cr && x > cr.left - 20 && x < cr.right + 20 && y > cr.top - 20);
+      return [x, y];
+    };
+    this.mid = pts.map(p => { const [x, y] = scatterPos(); const r = this.step * rnd(.4, .52); const col = pick(LETTER_MIX);
+      return this.bead({ x, y, tx: p.x, ty: p.y, li: p.li, r, m: r * r, col, form: true, delay: this.o.formAt + p.li * .32 + Math.random() * 1.1 + (p.x / w) * .25 }); });
+    const nFree = Math.round(150 * D);
+    for (let i = 0; i < nFree; i++) { const [x, y] = scatterPos(); const r = rnd(2.5, s ? 7 : 9.5); this.mid.push(this.bead({ x, y, r, m: r * r, col: pick(FREE_MIX), form: false })); }
+    this.far = []; for (let i = 0; i < Math.round(130 * D); i++) { const z = rnd(.15, .5); this.far.push(this.bead({ x: rnd(0, w), y: rnd(0, h), r: rnd(1.4, 4) * (s ? .8 : 1), z, a: rnd(.35, .75), col: pick(FAR_MIX), blur: Math.random() < .5 ? 2 : 0 })); }
+    this.near = []; for (let i = 0; i < Math.round((s ? 6 : 11) * this.o.density); i++) {
+      const cr = this.copyRect ? this.copyRect() : { top: h * .6 }; const right = Math.random() < .65;
+      const x = right ? rnd(w * .82, w + 20) : rnd(-20, w * .3), y = right ? rnd(90, h * .62) : rnd(80, Math.max(100, cr.top - 60));
+      this.near.push(this.bead({ x, y, r: rnd(12, s ? 18 : 26), z: rnd(1.4, 2), a: rnd(.7, .92), col: pick([[C.rose, 3], [C.blush, 2], [C.sage, 2], [C.forest, 1], [C.deepRose, 2]]), blur: 5 }));
+    }
+    this.t = 0; this.drops = []; let tt = 1.3, gap = 1.0;
+    for (let i = 0; i < 46; i++) { this.drops.push(tt); tt += gap; gap = Math.max(.12, gap * .8); }
+    this.nextDrop = 0; this.ghostA = 0; this.recycleT = 0;
+    if (this.reduced) { this.mid.forEach(b => { if (b.form) { b.x = b.tx; b.y = b.ty; b.mode = "home"; } }); this.ghostA = this.o.ghost ? .1 : 0; this.draw(); }
+    else if (!this.running) this.draw();
+  }
+  replay() { if (!this.w) return; this.build(); this.start(); }
+  pointer(x, y) {
+    if (this.inside) { this.pvx = this.pvx * .6 + (x - this.px) * .4; this.pvy = this.pvy * .6 + (y - this.py) * .4; } else { this.pvx = this.pvy = 0; }
+    this.px = x; this.py = y; this.inside = true; this.nx = x / this.w - .5; this.ny = y / this.h - .5;
+  }
+  leave() { this.inside = false; this.nx = 0; this.ny = 0; }
+  burst(x, y, power) {
+    this.mid.forEach(b => { const dx = b.x - x, dy = b.y - y, d = Math.hypot(dx, dy) || 1; if (d < 260) { const f = (1 - d / 260) * (power || 700); b.vx += dx / d * f; b.vy += dy / d * f; if (b.mode === "float" && !b.form && Math.random() < .3) b.mode = "fall"; } });
+    this.start();
+  }
+  start() { if (this.running || this.reduced || this.vis === false) return; this.running = true; this.last = performance.now(); requestAnimationFrame(this.loop); }
+  stop() { this.running = false; }
+  loop(now) {
+    if (!this.running) return;
+    const dt = Math.min((now - this.last) / 1000, 1 / 30); this.last = now;
+    this.step_(dt); this.draw(); requestAnimationFrame(this.loop);
+  }
+  step_(dt) {
+    const w = this.w, h = this.h, t = (this.t += dt), M = this.mid;
+    while (this.nextDrop < this.drops.length && t >= this.drops[this.nextDrop]) {
+      this.nextDrop++;
+      const cand = M.filter(b => !b.form && b.mode === "float" && b.y < h * .6);
+      if (cand.length) {
+        let b = cand[Math.floor(Math.random() * cand.length)];
+        if (this.nextDrop === 1) { b = cand.reduce((a, c) => (Math.abs(c.x - w * .5) + c.y * .5 < Math.abs(a.x - w * .5) + a.y * .5 ? c : a)); b.r = Math.max(b.r, 8); b.m = b.r * b.r; }
+        b.mode = "fall";
+      }
+    }
+    this.recycleT += dt;
+    if (this.recycleT > 1.6 && this.nextDrop >= this.drops.length) {
+      this.recycleT = 0;
+      const rest = M.filter(b => b.mode === "fall" && b.rest);
+      if (rest.length > 34) { const b = rest[0]; b.mode = "float"; b.x = Math.random() * w; b.y = 80 + Math.random() * h * .4; b.vx = b.vy = 0; b.a = 0; }
+      const fl = M.filter(b => b.mode === "float" && !b.form && b.y < h * .5); if (fl.length) fl[Math.floor(Math.random() * fl.length)].mode = "fall";
+    }
+    const R = this.small ? 90 : 130, g = this.small ? 520 : 620;
+    for (const b of M) {
+      if (b.a < 1) b.a = Math.min(1, b.a + dt * .8);
+      if (b.form && b.mode === "float" && t >= b.delay) { b.mode = "home"; b.t0 = t; }
+      if (b.mode === "float") {
+        b.ph += dt * .5; b.vx += Math.cos(b.ph) * 5 * dt; b.vy += Math.sin(b.ph * 1.3) * 5 * dt; b.vx *= .96; b.vy *= .96;
+      } else if (b.mode === "fall") {
+        b.vy += g * dt; b.vx *= .995;
+      } else {
+        const k = 16 * ease((t - b.t0) / 1.6), c = 2 * Math.sqrt(k || .01) * .62;
+        const tx = b.tx + Math.sin(t * .9 + b.ph) * .5, ty = b.ty + Math.cos(t * .7 + b.ph) * .5;
+        b.vx += ((tx - b.x) * k - b.vx * c) * dt; b.vy += ((ty - b.y) * k - b.vy * c) * dt;
+        if (k < 2) { b.vx *= .985; b.vy *= .985; }
+      }
+      if (this.inside) {
+        const dx = b.x - this.px, dy = b.y - this.py, d2 = dx * dx + dy * dy;
+        if (d2 < 90000) {
+          const d = Math.sqrt(d2) || 1, rr = R + b.r;
+          if (b.attract && d > 50 && d < 300) { const f = (1 - d / 300) * 260; b.vx -= dx / d * f * dt; b.vy -= dy / d * f * dt; }
+          if (d < rr) {
+            const q = 1 - d / rr, f = q * q * (b.mode === "home" ? 5200 : 3400);
+            b.vx += dx / d * f * dt + this.pvx * q * 9 * dt * 8; b.vy += dy / d * f * dt + this.pvy * q * 9 * dt * 8;
+            if (b.mode === "float" && !b.form && q > .55 && Math.random() < .03) b.mode = "fall";
+          }
+        }
+      }
+      const sp = b.vx * b.vx + b.vy * b.vy; if (sp > 1.44e6) { const k = 1200 / Math.sqrt(sp); b.vx *= k; b.vy *= k; }
+      b.x += b.vx * dt; b.y += b.vy * dt; b.rot += b.vx * dt / b.r;
+      b.rest = false;
+      if (b.x < b.r) { b.x = b.r; b.vx = Math.abs(b.vx) * .5; }
+      if (b.x > w - b.r) { b.x = w - b.r; b.vx = -Math.abs(b.vx) * .5; }
+      if (b.y > h - b.r) { b.y = h - b.r; if (b.mode !== "home") { b.vy = -Math.abs(b.vy) * .42; if (Math.abs(b.vy) < 26) b.vy = 0; b.vx *= .985; b.rest = Math.abs(b.vy) < 1; } }
+      if (b.mode === "float" && b.y < 70) { b.y = 70; b.vy = Math.abs(b.vy); }
+    }
+    this.collide(M);
+    this.pvx *= .9; this.pvy *= .9;
+    const formed = t > this.o.formAt + 3.2;
+    if (formed && this.o.ghost) this.ghostA = Math.min(.11, this.ghostA + dt * .05); else if (!this.o.ghost) this.ghostA = 0;
+    for (const b of this.far) { b.ph += dt * .3; b.x += Math.cos(b.ph) * 4 * dt; b.y += (Math.sin(b.ph * 1.2) * 3 - 1.5) * dt; if (b.y < -10) b.y = h + 10; }
+    for (const b of this.near) { b.ph += dt * .25; b.x += Math.cos(b.ph) * 3 * dt; b.y += Math.sin(b.ph * 1.1) * 2.5 * dt; }
+    this.cx = (this.cx || 0) + ((this.nx || 0) - (this.cx || 0)) * .05; this.cy = (this.cy || 0) + ((this.ny || 0) - (this.cy || 0)) * .05;
+  }
+  collide(M) {
+    const cs = 22, grid = new Map();
+    for (let i = 0; i < M.length; i++) { const b = M[i]; if (b.mode === "float" && !b.form) continue; const k = ((b.x / cs) | 0) + "," + ((b.y / cs) | 0); let a = grid.get(k); if (!a) grid.set(k, a = []); a.push(i); }
+    for (let i = 0; i < M.length; i++) {
+      const a = M[i]; if (a.mode === "float" && !a.form) continue;
+      const gx = (a.x / cs) | 0, gy = (a.y / cs) | 0;
+      for (let ox = -1; ox <= 1; ox++) for (let oy = -1; oy <= 1; oy++) {
+        const cell = grid.get((gx + ox) + "," + (gy + oy)); if (!cell) continue;
+        for (const j of cell) {
+          if (j <= i) continue; const c = M[j];
+          if (a.form && c.form && a.mode === "home" && c.mode === "home") continue;
+          if (a.mode !== "fall" && c.mode !== "fall") continue;
+          const dx = c.x - a.x, dy = c.y - a.y, min = a.r + c.r, d2 = dx * dx + dy * dy;
+          if (d2 >= min * min) continue;
+          const d = Math.sqrt(d2) || .01, nx = dx / d, ny = dy / d, ov = min - d;
+          const ma = a.mode === "home" ? a.m * 3 : a.m, mc = c.mode === "home" ? c.m * 3 : c.m, tm = ma + mc;
+          a.x -= nx * ov * mc / tm; a.y -= ny * ov * mc / tm; c.x += nx * ov * ma / tm; c.y += ny * ov * ma / tm;
+          const vn = (c.vx - a.vx) * nx + (c.vy - a.vy) * ny;
+          if (vn < 0) { const jj = -(1.45) * vn / tm; a.vx -= jj * mc * nx; a.vy -= jj * mc * ny; c.vx += jj * ma * nx; c.vy += jj * ma * ny; }
+        }
+      }
+    }
+  }
+  drawB(ctx, b, ox, oy) {
+    const s = this.sp.get(b.col, b.blur || 0), k = (b.r * 2) / s.S, size = s.c.width * k, x = b.x + ox, y = b.y + oy;
+    ctx.globalAlpha = b.a;
+    ctx.drawImage(s.c, x - size / 2, y - size / 2, size, size);
+    if (b.r > 3.2 && !b.blur) {
+      ctx.fillStyle = s.hole; ctx.globalAlpha = b.a * .5;
+      const c = Math.cos(b.rot); ctx.beginPath(); ctx.ellipse(x + c * b.r * .34, y + b.r * .08, b.r * .17 * (0.4 + Math.abs(Math.sin(b.rot)) * .6), b.r * .2, 0, 0, 6.2832); ctx.fill();
+    }
+    if (b.spark) {
+      const q = (Math.sin(this.t * 1.7 + b.ph * 3) + 1) / 2;
+      if (q > .8) { const z = (q - .8) / .2, L = b.r * 1.6 * z + 1, sx = x - b.r * .36, sy = y - b.r * .42; ctx.globalAlpha = z; ctx.fillStyle = "#FFFFFF"; ctx.beginPath(); ctx.moveTo(sx, sy - L); ctx.lineTo(sx + L * .14, sy); ctx.lineTo(sx, sy + L); ctx.lineTo(sx - L * .14, sy); ctx.closePath(); ctx.moveTo(sx - L, sy); ctx.lineTo(sx, sy + L * .14); ctx.lineTo(sx + L, sy); ctx.lineTo(sx, sy - L * .14); ctx.closePath(); ctx.fill(); }
+    }
+  }
+  draw() {
+    const w = this.w, h = this.h, sy = this.scrollY || 0, cx = (this.cx || 0), cy = (this.cy || 0);
+    const F = this.cv.far.getContext("2d"), Mi = this.cv.mid.getContext("2d"), N = this.cv.near.getContext("2d");
+    F.clearRect(0, 0, w, h); Mi.clearRect(0, 0, w, h); N.clearRect(0, 0, w, h);
+    if (this.inside) { const g = F.createRadialGradient(this.px, this.py, 0, this.px, this.py, 260); g.addColorStop(0, "rgba(239,207,203,.55)"); g.addColorStop(1, "rgba(239,207,203,0)"); F.fillStyle = g; F.fillRect(this.px - 260, this.py - 260, 520, 520); }
+    for (const b of this.far) this.drawB(F, b, -cx * 18 * b.z, -cy * 12 * b.z + sy * .08);
+    if (this.ghostA > 0 && this.ghost) { Mi.globalAlpha = this.ghostA; Mi.fillStyle = C.forest; Mi.font = this.ghost.font; for (const [ch, x, y] of this.ghost.items) Mi.fillText(ch, x, y); }
+    for (const b of this.mid) this.drawB(Mi, b, 0, 0);
+    for (const b of this.near) this.drawB(N, b, -cx * 40 * b.z, -cy * 26 * b.z - sy * .12);
+    F.globalAlpha = Mi.globalAlpha = N.globalAlpha = 1;
+  }
+}
+
+class Component extends DCLogic {
+  state = { formed: false, touch: false };
+  q(n) { return document.querySelector('[data-lumi="' + n + '"]'); }
+  componentDidMount() { this.tryInit(0); }
+  tryInit(n) {
+    if (this.f) return;
+    const host = this.q("hero"), far = this.q("far"), mid = this.q("mid"), near = this.q("near");
+    if (!host || !far || !mid || !near) { if (n < 50) this.it = setTimeout(() => this.tryInit(n + 1), 80); return; }
+    const go = () => { try { this.init(host, far, mid, near); } catch (e) { console.warn("LUMI hero init failed:", e && e.message); } };
+    const fontP = document.fonts && document.fonts.load ? document.fonts.load("500 120px 'Bodoni Moda'") : Promise.resolve();
+    Promise.race([fontP, new Promise(r => setTimeout(r, 1500))]).then(go, go);
+  }
+  init(host, far, mid, near) {
+    const touch = window.matchMedia && matchMedia("(hover: none)").matches;
+    this.setState({ touch });
+    this.f = new LumiField({ density: this.props.beadDensity ?? 1, formAt: this.props.formDelay ?? 4.2, ghost: this.props.ghostWordmark ?? true });
+    const copy = document.querySelector("[data-copy]");
+    this.f.copyRect = () => { if (!copy) return null; const a = copy.getBoundingClientRect(), b = host.getBoundingClientRect(); return { left: a.left - b.left, right: a.right - b.left, top: a.top - b.top }; };
+    this.f.mount(host, far, mid, near); this.f.vis = true; this.f.start();
+    const loc = e => { const r = host.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+    this.h = {
+      move: e => { const [x, y] = loc(e); this.f.pointer(x, y); },
+      leave: () => this.f.leave(),
+      down: e => { const [x, y] = loc(e); if (e.target.closest("a,button,image-slot")) { if (e.target.closest('[data-lumi="cta"]')) this.f.burst(x, y, 900); return; } this.f.pointer(x, y); this.f.burst(x, y, e.pointerType === "mouse" ? 520 : 760); },
+      up: e => { if (e.pointerType !== "mouse") setTimeout(() => this.f.leave(), 350); },
+      scroll: () => { const y = window.scrollY; this.f.scrollY = y; const m = this.q("model"); if (m) m.style.transform = "translate3d(0," + (y * .12).toFixed(1) + "px,0)"; const mc = this.q("mid"); if (mc) mc.style.transform = "translate3d(0," + (y * .2).toFixed(1) + "px,0)"; },
+      replay: () => { this.setState({ formed: false }); this.f.replay(); this.formTimer(); }
+    };
+    host.addEventListener("pointermove", this.h.move, { passive: true });
+    host.addEventListener("pointerleave", this.h.leave);
+    host.addEventListener("pointerdown", this.h.down);
+    host.addEventListener("pointerup", this.h.up);
+    window.addEventListener("scroll", this.h.scroll, { passive: true });
+    const logo = this.q("logo"); if (logo) logo.addEventListener("click", this.h.replay);
+    this.formTimer();
+  }
+  formTimer() { clearTimeout(this.ft); this.ft = setTimeout(() => this.setState({ formed: true }), ((this.props.formDelay ?? 4.2) + 3.4) * 1000); }
+  componentDidUpdate() {
+    if (!this.f) return;
+    const d = this.props.beadDensity ?? 1, fa = this.props.formDelay ?? 4.2, g = this.props.ghostWordmark ?? true;
+    this.f.o.ghost = g;
+    if (d !== this.f.o.density || fa !== this.f.o.formAt) { this.f.o.density = d; this.f.o.formAt = fa; this.f.replay(); this.formTimer(); }
+  }
+  componentWillUnmount() {
+    clearTimeout(this.it); clearTimeout(this.ft);
+    if (!this.f) return; this.f.destroy();
+    const host = this.q("hero");
+    if (host && this.h) { host.removeEventListener("pointermove", this.h.move); host.removeEventListener("pointerleave", this.h.leave); host.removeEventListener("pointerdown", this.h.down); host.removeEventListener("pointerup", this.h.up); }
+    window.removeEventListener("scroll", this.h && this.h.scroll);
+  }
+  renderVals() {
+    const s = this.state;
+    return {
+      hint: s.formed ? (s.touch ? "TAP OR DRAG THE LETTERS" : "RUN YOUR CURSOR THROUGH THE LETTERS") : (s.touch ? "TAP TO PLAY" : "MOVE TO PLAY")
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>The LUMI Bag &amp; Checkout — LUMI</title>
+<meta name="description" content="Review your LUMI bag and check out — beaded tanks, brooches and bag charms." />
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,600&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&amp;display=swap" rel="stylesheet" />
+<script src="./lumi-cart.js"></script>
+<style>
+  @media (max-width: 760px) { [data-bagline] a, header a[aria-label="LUMI home"] { min-height: 44px; display: inline-flex; align-items: center; } }
+  select { -webkit-appearance: none; -moz-appearance: none; appearance: none; padding-right: 44px !important; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%233F4633' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important; background-repeat: no-repeat !important; background-position: right 16px center !important; background-size: 12px 8px !important; cursor: pointer; }
+  select::-ms-expand { display: none; }
+  body { margin: 0; background: #FDFCF8; color: #3F4633; font-family: 'DM Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #3F4633; } a:hover { color: #6B7258; }
+  *:focus-visible { outline: 2px solid #3F4633; outline-offset: 3px; }
+  input, select, button { font-family: inherit; }
+  @keyframes lumiFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  @keyframes lumiGather { from { opacity: 0; transform: translate(var(--fx), var(--fy)) scale(.4); } to { opacity: 1; transform: translate(0, 0) scale(1); } }
+  @media (max-width: 900px) {
+    [data-two] { grid-template-columns: 1fr !important; }
+    [data-sum] { position: static !important; }
+    [data-sumbody] { display: var(--sumdisp, none); }
+    [data-sumtoggle] { display: flex !important; }
+    [data-mbar] { display: flex !important; }
+    [data-ckmain] { padding-bottom: 110px !important; }
+  }
+  @media (max-width: 760px) {
+    [data-ckmain] [data-two] { display: flex !important; flex-direction: column; align-items: stretch !important; gap: 30px !important; }
+    [data-ckform] { display: contents !important; }
+    [data-ckform] > * { order: 1; }
+    [data-cksum] { order: 2; margin: 0 -16px; padding: 18px 16px 20px !important; }
+    [data-ckplace] { order: 3; }
+    [data-cksum] [data-sumtoggle] { min-height: 48px; align-items: center; font-size: 12px; font-weight: 700; letter-spacing: .14em; }
+    [data-cksum] [data-sumbody] { display: block !important; margin-top: 14px; }
+    [data-cksum] #ck-sum { display: none; }
+    [data-cksum] [data-sumbody] > ul { margin-bottom: 0 !important; }
+    [data-cksum][data-open="0"] [data-sumbody] > :not(ul) { display: none !important; }
+    [data-cksum][data-open="1"] [data-sumbody] > ul { margin-bottom: 18px !important; }
+    [data-cksum] [data-sumbody] li span span:nth-child(2) { font-weight: 700 !important; color: #3F4633 !important; }
+    [data-ckmain] { padding-bottom: 120px !important; }
+    [data-mbar] { padding-bottom: calc(12px + env(safe-area-inset-bottom)) !important; }
+    [data-bagsum] { margin: 0 -16px; padding: 22px 16px 26px !important; }
+    [data-bagsum] [data-taxrow] { display: flex !important; }
+    [data-bagsum] a[aria-disabled] { min-height: 56px !important; font-size: 14px !important; }
+    [data-bagtwo] { display: flex !important; flex-direction: column; align-items: stretch !important; }
+    [data-bagtwo] > div:first-child { display: contents; }
+    [data-baglist] { order: 1; }
+    [data-bagsum] { order: 2; }
+    [data-cont] { order: 3; }
+    [data-bagrecs] { order: 4; margin-top: 12px !important; }
+    [data-two] [data-bagline] { grid-template-columns: 96px minmax(0, 1fr) !important; gap: 14px !important; padding: 18px 0 !important; }
+    [data-bagline] label { font-weight: 700; }
+    [data-bagline] select { min-height: 44px !important; font-size: 15px !important; }
+    [data-bagline] > div > div:first-child { flex-direction: column; gap: 4px !important; }
+    [data-cont] { width: 100%; justify-content: center; margin: 18px 0 0 !important; border: 1.5px solid #3F4633; min-height: 50px !important; font-size: 13px; }
+    [data-two] { gap: 28px !important; }
+    [data-recs] { gap: 14px !important; }
+  }
+  @media (max-width: 560px) {
+    [data-pair] { grid-template-columns: 1fr !important; }
+    [data-trio] { grid-template-columns: 1fr 1fr !important; }
+    [data-trio] > :first-child { grid-column: 1 / 3; }
+    [data-line]:not([data-bagline]) { grid-template-columns: 84px minmax(0, 1fr) !important; }
+    [data-recs] { grid-template-columns: 1fr 1fr !important; }
+  }
+</style>
+</helmet>
+
+<sc-if value="{{ isBag }}" hint-placeholder-val="{{ true }}">
+<header style="position: sticky; top: 0; z-index: 20; background: rgba(253,252,248,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid #E8DDD4;">
+  <div style="height: 68px; padding: 0 clamp(16px, 3vw, 44px); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;">
+    <a href="LUMI-Pages.dc.html#/shop" style="display: inline-flex; align-items: center; min-height: 44px; font-size: 13px; font-weight: 500; letter-spacing: .16em; text-decoration: none;">← SHOP</a>
+    <a href="LUMI%20Hero%20v2.dc.html" aria-label="LUMI home" style="display: block; text-decoration: none;"><img src="assets/lumi-logo.png" alt="LUMI" width="1141" height="365" style="display: block; height: 28px; width: auto;" /></a>
+    <span style="justify-self: end; white-space: nowrap; font-size: 13px; font-weight: 500; letter-spacing: .16em;">BAG ({{ count }})</span>
+  </div>
+</header>
+
+<main style="max-width: 1320px; margin: 0 auto; padding: clamp(32px, 4.5vw, 64px) clamp(16px, 3vw, 44px) clamp(56px, 6vw, 96px);">
+  <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+    <section aria-labelledby="empty-title" style="position: relative; text-align: center; padding: clamp(56px, 9vw, 130px) 0;">
+      {{ emptyBeads }}
+      <h1 id="empty-title" style="position: relative; margin: 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(40px, 6vw, 88px); line-height: .95; letter-spacing: -0.02em;">Nothing in the bag yet.</h1>
+      <p style="position: relative; margin: 16px 0 30px; font-size: 18px;">There's always room for a little LUMI.</p>
+      <a href="LUMI-Pages.dc.html#/shop" style="position: relative; display: inline-flex; align-items: center; min-height: 54px; padding: 0 30px; background: #3F4633; color: #FDFCF8; text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: .16em;" style-hover="background: #6B7258; color: #FDFCF8;">SHOP LUMI →</a>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ hasItems }}" hint-placeholder-val="{{ true }}">
+    <div style="margin-bottom: clamp(24px, 3vw, 40px);">
+      <h1 style="margin: 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(44px, 6vw, 92px); line-height: .92; letter-spacing: -0.025em;">The LUMI Bag</h1>
+      <p style="margin: 10px 0 0; font-size: 18px;">A few good choices.</p>
+    </div>
+    <div data-two="" data-bagtwo="" style="display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(300px, 1fr); gap: clamp(28px, 4vw, 72px); align-items: start;">
+      <div>
+        <ul data-baglist="" aria-label="Items in your bag" style="list-style: none; margin: 0; padding: 0; border-top: 1px solid #E8DDD4;">
+          <sc-for list="{{ lines }}" as="l" hint-placeholder-count="2">
+            <li data-line="" data-bagline="" style="display: grid; grid-template-columns: 128px minmax(0, 1fr); gap: clamp(14px, 2vw, 26px); padding: 22px 0; border-bottom: 1px solid #E8DDD4;">
+              <a href="{{ l.href }}" aria-label="{{ l.viewAria }}" style="display: block; aspect-ratio: 4 / 5; background-color: {{ l.field }}; background-image: url('assets/lumi-hero-campaign.png'); background-size: {{ l.size }}; background-position: {{ l.pos }}; background-repeat: no-repeat;"></a>
+              <div style="min-width: 0; display: flex; flex-direction: column; gap: 10px;">
+                <div style="display: flex; justify-content: space-between; gap: 14px; align-items: baseline;">
+                  <a href="{{ l.href }}" style="font-size: 15px; font-weight: 700; letter-spacing: .06em; text-decoration: none;" style-hover="text-decoration: underline;">{{ l.name }}</a>
+                  <span style="font-size: 16px; font-weight: 500; white-space: nowrap;">{{ l.total }}</span>
+                </div>
+                <sc-if value="{{ l.sized }}" hint-placeholder-val="{{ false }}">
+                  <label style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700;">
+                    <span>Size:</span>
+                    <select value="{{ l.sizeVal }}" onChange="{{ l.setSize }}" aria-label="{{ l.sizeAria }}" style="min-height: 40px; padding: 0 10px; border: 1.5px solid {{ l.sizeBorder }}; background: {{ l.sizeBg }}; color: #3F4633; font-size: 15px; font-weight: 700;">
+                      <sc-for list="{{ l.opts }}" as="o" hint-placeholder-count="4"><option value="{{ o.v }}" disabled="{{ o.dis }}">{{ o.t }}</option></sc-for>
+                    </select>
+                  </label>
+                  <sc-if value="{{ l.warn }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px; font-weight: 700; color: #8E4F4C;">{{ l.warn }}</span></sc-if>
+                </sc-if>
+                <span style="font-size: 13px; color: #6B7258;"><s style="opacity: .72; margin-right: 6px;">{{ l.unitMrp }}</s>{{ l.unit }} each</span>
+                <div style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
+                  <div role="group" aria-label="{{ l.qtyAria }}" style="display: flex; align-items: center; border: 1px solid #C5B7AB;">
+                    <button onClick="{{ l.dec }}" aria-label="Decrease quantity" style="width: 44px; height: 44px; background: none; border: 0; cursor: pointer; font-size: 18px; color: #3F4633;">−</button>
+                    <span aria-live="polite" style="min-width: 28px; text-align: center; font-size: 15px; font-weight: 700;">{{ l.qty }}</span>
+                    <button onClick="{{ l.inc }}" aria-label="Increase quantity" style="width: 44px; height: 44px; background: none; border: 0; cursor: pointer; font-size: 18px; color: #3F4633;">+</button>
+                  </div>
+                  <button onClick="{{ l.remove }}" style="min-height: 44px; background: none; border: 0; padding: 0; cursor: pointer; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: #6B7258; text-decoration: underline; text-underline-offset: 4px;">REMOVE</button>
+                </div>
+              </div>
+            </li>
+          </sc-for>
+        </ul>
+        <a data-cont="" href="LUMI-Pages.dc.html#/shop" style="display: inline-flex; align-items: center; min-height: 44px; margin-top: 16px; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-decoration: none;" style-hover="color: #6B7258;">CONTINUE SHOPPING →</a>
+
+        <section data-bagrecs="" aria-labelledby="recs-title" style="margin-top: clamp(40px, 5vw, 72px);">
+          <h2 id="recs-title" style="margin: 0 0 18px; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(26px, 2.6vw, 36px); line-height: 1;">Add a little extra?</h2>
+          <div data-recs="" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px;">
+            <sc-for list="{{ recs }}" as="r" hint-placeholder-count="3">
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <a href="{{ r.href }}" aria-label="{{ r.viewAria }}" style="display: block; aspect-ratio: 4 / 5; background-color: {{ r.field }}; background-image: url('assets/lumi-hero-campaign.png'); background-size: {{ r.size }}; background-position: {{ r.pos }}; background-repeat: no-repeat;"></a>
+                <span style="font-size: 13px; font-weight: 700; letter-spacing: .05em;">{{ r.name }}</span>
+                <span style="display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 3px 7px;"><s style="font-size: .84em; font-weight: 400; opacity: .72;">{{ r.priceMrp }}</s><span style="font-size: 14px;">{{ r.price }}</span><span style="font-size: .7em; font-weight: 700; letter-spacing: .08em; line-height: 1; padding: 3px 5px; background: #EFCFCB; color: #3F4633; align-self: center;">{{ r.priceOff }}</span></span>
+                <button onClick="{{ r.add }}" style="min-height: 44px; background: #FDFCF8; color: #3F4633; border: 1.5px solid #3F4633; cursor: pointer; font-size: 12px; font-weight: 700; letter-spacing: .14em; transition: background .2s ease, color .2s ease;" style-hover="background: #6B7258; border-color: #6B7258; color: #FDFCF8;">{{ r.cta }}</button>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+      </div>
+
+      <aside data-sum="" data-bagsum="" aria-labelledby="sum-title" style="position: sticky; top: 92px; background: #F6F2EA; padding: clamp(20px, 2.4vw, 32px);">
+        <h2 id="sum-title" style="margin: 0 0 18px; font-size: 13px; font-weight: 700; letter-spacing: .2em;">ORDER SUMMARY</h2>
+        <sc-if value="{{ hasBundles }}" hint-placeholder-val="{{ false }}"><div role="status" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px;"><sc-for list="{{ bundles }}" as="bn" hint-placeholder-count="1"><div style="padding: 12px 14px; background: #EFCFCB; color: #3F4633;"><div style="display: flex; justify-content: space-between; gap: 10px; font-size: 12px; font-weight: 700; letter-spacing: .14em;"><span>✦ {{ bn.label }} APPLIED</span><span>{{ bn.priceText }}</span></div><p style="margin: 6px 0 0; font-size: 13px; line-height: 1.45;">{{ bn.namesText }}</p><p style="margin: 4px 0 0; font-size: 13px;">Regular <s>{{ bn.regularText }}</s> · <strong>You save {{ bn.saveText }}</strong></p></div></sc-for></div></sc-if><sc-if value="{{ promoNudge }}" hint-placeholder-val="{{ false }}"><p style="margin: 0 0 16px; padding: 10px 12px; border: 1.5px dashed #D4A7A5; font-size: 13px; font-weight: 700;">{{ promoNudge }}</p></sc-if>
+        <form onSubmit="{{ applyCode }}" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 22px;">
+          <label for="promo" style="font-size: 12px; font-weight: 700; letter-spacing: .16em;">HAVE A CODE?</label>
+          <sc-if value="{{ noCoupon }}" hint-placeholder-val="{{ true }}">
+            <div style="display: flex; gap: 8px;">
+              <input id="promo" value="{{ code }}" onChange="{{ onCode }}" placeholder="Enter promo code" autocomplete="off" aria-describedby="promo-msg" aria-invalid="{{ codeBad }}" style="flex: 1; min-width: 0; min-height: 48px; padding: 0 14px; border: 1.5px solid {{ codeBorder }}; background: #FDFCF8; color: #3F4633; font-size: 15px; text-transform: uppercase;" />
+              <button type="submit" style="min-height: 48px; padding: 0 20px; background: #3F4633; color: #FDFCF8; border: 0; cursor: pointer; font-size: 12px; font-weight: 700; letter-spacing: .14em;" style-hover="background: #6B7258;">APPLY</button>
+            </div>
+          </sc-if>
+          <sc-if value="{{ hasCoupon }}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; justify-content: space-between; align-items: center; min-height: 48px; padding: 0 14px; background: #FDFCF8; border: 1.5px solid #6B7258;">
+              <span style="font-size: 14px; font-weight: 700;">✓ {{ couponCode }} applied</span>
+              <button type="button" onClick="{{ removeCode }}" style="min-height: 40px; background: none; border: 0; cursor: pointer; font-size: 12px; font-weight: 700; letter-spacing: .12em; color: #6B7258; text-decoration: underline;">REMOVE</button>
+            </div>
+          </sc-if>
+          <p id="promo-msg" role="status" style="margin: 0; min-height: 18px; font-size: 13px; font-weight: 700; color: {{ codeMsgInk }};">{{ codeMsg }}</p>
+        </form>
+        <dl style="margin: 0; display: grid; gap: 12px; font-size: 15px;">
+          <div style="display: flex; justify-content: space-between;"><dt>Subtotal</dt><dd style="margin: 0;">{{ subtotal }}</dd></div>
+          <sc-for list="{{ promoRows }}" as="pr" hint-placeholder-count="0"><div style="display: flex; justify-content: space-between; gap: 12px; color: #3F4633; font-weight: 700;"><dt>{{ pr.label }}</dt><dd style="margin: 0; white-space: nowrap;">{{ pr.text }}</dd></div></sc-for>
+          <sc-if value="{{ noPromo }}" hint-placeholder-val="{{ true }}"><div data-taxrow="" style="display: none; justify-content: space-between; color: #6B7258;"><dt>Discount</dt><dd style="margin: 0;">—</dd></div></sc-if>
+          <div style="display: flex; justify-content: space-between; gap: 12px;"><dt>Shipping</dt><dd style="margin: 0; text-align: right; font-weight: {{ shipWeight }}; color: {{ shipInk }};">{{ shipText }}</dd></div>
+          <div data-taxrow="" style="display: none; justify-content: space-between;"><dt>Taxes</dt><dd style="margin: 0;">₹0</dd></div>
+        </dl>
+        <div role="status" style="margin-top: 16px;">
+          <p style="margin: 0 0 8px; font-size: 13px; font-weight: 700;">{{ freeMsg }}</p>
+          <div aria-hidden="true" style="height: 4px; background: #E8DDD4;"><div style="height: 100%; width: {{ freePct }}; background: #6B7258; transition: width .5s ease;"></div></div>
+        </div>
+        <sc-if value="{{ thMsg }}" hint-placeholder-val="{{ false }}"><p style="margin: 10px 0 0; font-size: 13px; font-weight: 700; color: {{ thInk }};">{{ thMsg }}</p></sc-if>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 18px; padding-top: 18px; border-top: 1.5px solid #3F4633;">
+          <span style="font-size: 14px; font-weight: 700; letter-spacing: .16em;">TOTAL</span>
+          <span style="font-family: 'Fraunces', serif; font-weight: 600; font-size: 34px; line-height: 1;">{{ ckTotal }}</span>
+        </div>
+        <sc-if value="{{ blocked }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin: 14px 0 0; font-size: 14px; font-weight: 700; color: #8E4F4C;">Select a size for every tank to continue.</p></sc-if>
+        <a href="{{ checkoutHref }}" onClick="{{ goCheckout }}" aria-disabled="{{ blocked }}" style="margin-top: 18px; display: flex; align-items: center; justify-content: center; min-height: 58px; background: {{ ctaBg }}; color: #FDFCF8; text-decoration: none; font-size: 14px; font-weight: 700; letter-spacing: .16em; cursor: {{ ctaCursor }};" style-hover="color: #FDFCF8;">CHECKOUT →</a>
+      </aside>
+    </div>
+  </sc-if>
+</main>
+</sc-if>
+
+<sc-if value="{{ isCheckout }}" hint-placeholder-val="{{ false }}">
+<header style="border-bottom: 1px solid #E8DDD4; background: #FDFCF8;">
+  <div style="height: 68px; padding: 0 clamp(16px, 3vw, 44px); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;">
+    <a href="#/bag" style="display: inline-flex; align-items: center; min-height: 44px; white-space: nowrap; font-size: 13px; font-weight: 500; letter-spacing: .14em; text-decoration: none;">← BACK TO BAG</a>
+    <img src="assets/lumi-logo.png" alt="LUMI" width="1141" height="365" style="display: block; height: 28px; width: auto;" />
+    <span style="justify-self: end; white-space: nowrap; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: #6B7258;">CHECKOUT</span>
+  </div>
+</header>
+<main data-ckmain="" style="max-width: 1240px; margin: 0 auto; padding: clamp(24px, 3.5vw, 52px) clamp(16px, 3vw, 44px) clamp(56px, 6vw, 96px);">
+  <sc-if value="{{ ckEmpty }}" hint-placeholder-val="{{ false }}">
+    <div role="alert" style="padding: 48px 0; text-align: center;">
+      <h1 style="margin: 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(30px, 3.4vw, 44px);">Your checkout session has expired.</h1>
+      <p style="margin: 12px 0 24px; font-size: 17px;">Please review your bag again.</p>
+      <a href="#/bag" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 26px; background: #3F4633; color: #FDFCF8; text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: .14em;">BACK TO THE LUMI BAG →</a>
+    </div>
+  </sc-if>
+  <sc-if value="{{ ckReady }}" hint-placeholder-val="{{ true }}">
+  <div data-two="" style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(300px, 1fr); gap: clamp(28px, 4vw, 72px); align-items: start;">
+    <aside data-sum="" data-cksum="" data-open="{{ sumOpenS }}" aria-labelledby="ck-sum" style="order: 2; position: sticky; top: 24px; background: #F6F2EA; padding: clamp(20px, 2.4vw, 30px);">
+      <button data-sumtoggle="" onClick="{{ toggleSum }}" aria-expanded="{{ sumOpen }}" style="display: none; width: 100%; justify-content: space-between; align-items: center; min-height: 48px; background: none; border: 0; padding: 0; cursor: pointer; color: #3F4633; font-size: 13px; font-weight: 700; letter-spacing: .14em;"><span>{{ sumToggleLabel }}</span><span style="font-family: 'Fraunces', serif; font-size: 22px; letter-spacing: 0;">{{ ckTotal }}</span></button>
+      <div data-sumbody="" style="--sumdisp: {{ sumDisp }};">
+        <h2 id="ck-sum" style="margin: 0 0 16px; font-size: 13px; font-weight: 700; letter-spacing: .2em;">YOUR LUMI BAG</h2>
+        <ul style="list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 14px;">
+          <sc-for list="{{ lines }}" as="l" hint-placeholder-count="2">
+            <li style="display: grid; grid-template-columns: 60px minmax(0, 1fr) auto; gap: 12px; align-items: center;">
+              <span aria-hidden="true" style="display: block; aspect-ratio: 4 / 5; background-color: {{ l.field }}; background-image: url('assets/lumi-hero-campaign.png'); background-size: {{ l.size }}; background-position: {{ l.pos }}; background-repeat: no-repeat;"></span>
+              <span style="min-width: 0;"><span style="display: block; font-size: 13px; font-weight: 700; letter-spacing: .05em;">{{ l.name }}</span><span style="display: block; margin-top: 3px; font-size: 13px; font-weight: {{ l.metaWeight }}; color: {{ l.metaInk }};">{{ l.meta }}</span></span>
+              <span style="font-size: 14px;">{{ l.total }}</span>
+            </li>
+          </sc-for>
+        </ul>
+        <sc-if value="{{ hasBundles }}" hint-placeholder-val="{{ false }}"><div role="status" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px;"><sc-for list="{{ bundles }}" as="bn" hint-placeholder-count="1"><div style="padding: 12px 14px; background: #EFCFCB; color: #3F4633;"><div style="display: flex; justify-content: space-between; gap: 10px; font-size: 12px; font-weight: 700; letter-spacing: .14em;"><span>✦ {{ bn.label }} APPLIED</span><span>{{ bn.priceText }}</span></div><p style="margin: 6px 0 0; font-size: 13px; line-height: 1.45;">{{ bn.namesText }}</p><p style="margin: 4px 0 0; font-size: 13px;">Regular <s>{{ bn.regularText }}</s> · <strong>You save {{ bn.saveText }}</strong></p></div></sc-for></div></sc-if><dl style="margin: 0; display: grid; gap: 10px; font-size: 14px;">
+          <div style="display: flex; justify-content: space-between;"><dt>Subtotal</dt><dd style="margin: 0;">{{ subtotal }}</dd></div>
+          <sc-for list="{{ promoRowsNoCoupon }}" as="pr" hint-placeholder-count="0"><div style="display: flex; justify-content: space-between; gap: 12px; color: #3F4633; font-weight: 700;"><dt>{{ pr.label }}</dt><dd style="margin: 0; white-space: nowrap;">{{ pr.text }}</dd></div></sc-for><sc-if value="{{ hasCoupon }}" hint-placeholder-val="{{ false }}"><div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; color: #6B7258; font-weight: 700;"><dt>Promo: {{ couponCode }} <button type="button" onClick="{{ removeCode }}" style="margin-left: 6px; min-height: 32px; background: none; border: 0; padding: 0; cursor: pointer; color: #6B7258; font-size: 12px; text-decoration: underline;">Remove</button></dt><dd style="margin: 0;">−{{ discount }}</dd></div></sc-if>
+          <div style="display: flex; justify-content: space-between; gap: 12px;"><dt>Shipping</dt><dd style="margin: 0; text-align: right; color: #6B7258;">{{ shipText }}</dd></div>
+        </dl>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 16px; padding-top: 16px; border-top: 1.5px solid #3F4633;">
+          <span style="font-size: 13px; font-weight: 700; letter-spacing: .16em;">TOTAL</span>
+          <span style="font-family: 'Fraunces', serif; font-weight: 600; font-size: 30px; line-height: 1;">{{ ckTotal }}</span>
+        </div>
+        <sc-if value="{{ totalNote }}" hint-placeholder-val="{{ false }}"><p style="margin: 8px 0 0; font-size: 12px; color: #6B7258;">{{ totalNote }}</p></sc-if>
+      </div>
+    </aside>
+
+    <form data-ckform="" onSubmit="{{ placeOrder }}" noValidate="{{ true }}" aria-label="Checkout" style="order: 1; display: flex; flex-direction: column; gap: clamp(30px, 3.4vw, 44px);">
+      <div>
+        <h1 style="margin: 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(34px, 4vw, 54px); line-height: .95;">Checkout</h1>
+        <p style="margin: 8px 0 0; font-size: 15px; color: #6B7258;">Checking out as a guest — no account needed.</p>
+      </div>
+
+      <sc-if value="{{ topError }}" hint-placeholder-val="{{ false }}">
+        <div role="alert" style="padding: 14px 16px; background: #FBF1EF; border-left: 3px solid #8E4F4C; font-size: 15px; font-weight: 700; color: #8E4F4C;">{{ topError }}</div>
+      </sc-if>
+
+      <fieldset style="min-width: 0; margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 16px;">
+        <legend style="float: left; width: 100%; white-space: nowrap; padding: 0; margin-bottom: 16px; font-size: 13px; font-weight: 700; letter-spacing: .2em;">CONTACT</legend>
+        <div data-pair="" style="clear: both; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px 18px;">
+          <sc-for list="{{ contactFields }}" as="fd" hint-placeholder-count="2">
+            <label style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; font-weight: 700;">{{ fd.label }}
+              <input type="{{ fd.type }}" name="{{ fd.k }}" value="{{ fd.v }}" onChange="{{ fd.on }}" onBlur="{{ fd.blur }}" autocomplete="{{ fd.ac }}" inputMode="{{ fd.im }}" placeholder="{{ fd.ph }}" aria-invalid="{{ fd.bad }}" aria-describedby="{{ fd.eid }}" style="width: 100%; min-width: 0; box-sizing: border-box; min-height: 50px; padding: 0 14px; border: 1.5px solid {{ fd.border }}; background: #FDFCF8; color: #3F4633; font-size: 16px; font-weight: 400;" />
+              <span id="{{ fd.eid }}" style="min-height: 16px; font-size: 13px; color: #8E4F4C;">{{ fd.err }}</span>
+            </label>
+          </sc-for>
+        </div>
+      </fieldset>
+
+      <fieldset style="min-width: 0; margin: 0; padding: 0; border: 0;">
+        <legend style="float: left; width: 100%; white-space: nowrap; padding: 0; margin-bottom: 16px; font-size: 13px; font-weight: 700; letter-spacing: .2em;">SHIPPING ADDRESS</legend>
+        <div data-pair="" style="clear: both; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px 18px;">
+          <sc-for list="{{ addrFields }}" as="fd" hint-placeholder-count="4">
+            <label style="grid-column: {{ fd.span }}; display: flex; flex-direction: column; gap: 8px; font-size: 13px; font-weight: 700;">{{ fd.label }}
+              <input type="text" name="{{ fd.k }}" value="{{ fd.v }}" onChange="{{ fd.on }}" onBlur="{{ fd.blur }}" autocomplete="{{ fd.ac }}" placeholder="{{ fd.ph }}" aria-invalid="{{ fd.bad }}" aria-describedby="{{ fd.eid }}" style="width: 100%; min-width: 0; box-sizing: border-box; min-height: 50px; padding: 0 14px; border: 1.5px solid {{ fd.border }}; background: #FDFCF8; color: #3F4633; font-size: 16px; font-weight: 400;" />
+              <span id="{{ fd.eid }}" style="min-height: 16px; font-size: 13px; color: #8E4F4C;">{{ fd.err }}</span>
+            </label>
+          </sc-for>
+        </div>
+        <div data-trio="" style="display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.2fr) minmax(0, .8fr); gap: 16px 18px; margin-top: 16px;">
+          <label style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; font-weight: 700;">City
+            <input type="text" value="{{ city.v }}" onChange="{{ city.on }}" onBlur="{{ city.blur }}" autocomplete="address-level2" aria-invalid="{{ city.bad }}" aria-describedby="e-city" style="width: 100%; min-width: 0; box-sizing: border-box; min-height: 50px; padding: 0 14px; border: 1.5px solid {{ city.border }}; background: #FDFCF8; color: #3F4633; font-size: 16px; font-weight: 400;" />
+            <span id="e-city" style="min-height: 16px; font-size: 13px; color: #8E4F4C;">{{ city.err }}</span>
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; font-weight: 700;">State
+            <select value="{{ st.v }}" onChange="{{ st.on }}" autocomplete="address-level1" aria-invalid="{{ st.bad }}" aria-describedby="e-state" style="width: 100%; min-width: 0; box-sizing: border-box; min-height: 50px; padding: 0 10px; border: 1.5px solid {{ st.border }}; background: #FDFCF8; color: #3F4633; font-size: 16px; font-weight: 400;">
+              <option value="">Select state</option>
+              <sc-for list="{{ states }}" as="s" hint-placeholder-count="0"><option value="{{ s }}">{{ s }}</option></sc-for>
+            </select>
+            <span id="e-state" style="min-height: 16px; font-size: 13px; color: #8E4F4C;">{{ st.err }}</span>
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; font-weight: 700;">PIN code
+            <input type="text" value="{{ pin.v }}" onChange="{{ pin.on }}" onBlur="{{ pin.blur }}" autocomplete="postal-code" inputMode="numeric" maxLength="6" aria-invalid="{{ pin.bad }}" aria-describedby="e-pin" style="width: 100%; min-width: 0; box-sizing: border-box; min-height: 50px; padding: 0 14px; border: 1.5px solid {{ pin.border }}; background: #FDFCF8; color: #3F4633; font-size: 16px; font-weight: 400; letter-spacing: .08em;" />
+            <span id="e-pin" style="min-height: 16px; font-size: 13px; color: #8E4F4C;">{{ pin.err }}</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset style="min-width: 0; margin: 0; padding: 0; border: 0;">
+        <legend style="float: left; width: 100%; white-space: nowrap; padding: 0; margin-bottom: 16px; font-size: 13px; font-weight: 700; letter-spacing: .2em;">DELIVERY</legend>
+        <label style="display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 14px; align-items: center; min-height: 64px; padding: 14px 16px; border: 1.5px solid #3F4633; background: #FDFCF8; cursor: pointer;">
+          <input type="radio" name="ship" checked="{{ true }}" readOnly="{{ true }}" style="width: 20px; height: 20px; accent-color: #3F4633;" />
+          <span><span style="display: block; font-size: 14px; font-weight: 700; letter-spacing: .08em;">{{ shipName }}</span><span style="display: block; margin-top: 3px; font-size: 14px; color: #6B7258;">{{ shipEta }}</span></span>
+          <span style="font-size: 14px; font-weight: 700; text-align: right;">{{ shipText }}</span>
+        </label>
+      </fieldset>
+
+      <fieldset style="min-width: 0; margin: 0; padding: 0; border: 0;">
+        <legend style="padding: 0; margin-bottom: 6px; font-size: 13px; font-weight: 700; letter-spacing: .2em;">PAYMENT</legend>
+        <p style="margin: 0 0 14px; font-size: 14px; color: #6B7258;">Payments will be handled by LUMI's payment provider once it's connected.</p>
+        <div role="radiogroup" aria-label="Payment method" aria-describedby="e-pay" style="display: grid; gap: 10px;">
+          <sc-for list="{{ payMethods }}" as="pm" hint-placeholder-count="4">
+            <button type="button" role="radio" aria-checked="{{ pm.on }}" onClick="{{ pm.pick }}" style="display: flex; align-items: center; gap: 14px; min-height: 56px; padding: 0 16px; text-align: left; border: 1.5px solid {{ pm.border }}; background: {{ pm.bg }}; color: #3F4633; cursor: pointer; font-size: 15px; font-weight: 700;">
+              <span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid #3F4633; display: flex; align-items: center; justify-content: center;"><span style="width: 10px; height: 10px; border-radius: 50%; background: {{ pm.dot }};"></span></span>
+              <span style="flex: 1;">{{ pm.label }}</span>
+              <span style="font-size: 12px; font-weight: 500; color: #6B7258;">{{ pm.sub }}</span>
+            </button>
+          </sc-for>
+        </div>
+        <span id="e-pay" style="display: block; min-height: 16px; margin-top: 8px; font-size: 13px; color: #8E4F4C;">{{ payErr }}</span>
+      </fieldset>
+
+      <div data-ckplace="">
+        <button type="submit" style="width: 100%; min-height: 60px; background: #3F4633; color: #FDFCF8; border: 0; cursor: pointer; font-size: 14px; font-weight: 700; letter-spacing: .16em;" style-hover="background: #6B7258;">PLACE ORDER →</button>
+        <p style="margin: 12px 0 0; font-size: 13px; color: #6B7258; text-align: center;">Preview mode — payment isn't connected yet, so no money will be taken and no real order is created.</p>
+      </div>
+    </form>
+  </div>
+  </sc-if>
+</main>
+<sc-if value="{{ ckReady }}" hint-placeholder-val="{{ true }}">
+  <div data-mbar="" style="display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: #FDFCF8; border-top: 1px solid #E8DDD4; padding: 12px 16px; align-items: center; justify-content: space-between; gap: 14px; box-shadow: 0 -10px 30px rgba(22,24,18,.08);">
+    <span><span style="display: block; font-size: 11px; font-weight: 700; letter-spacing: .16em; color: #6B7258;">TOTAL</span><span style="font-family: 'Fraunces', serif; font-weight: 600; font-size: 24px;">{{ ckTotal }}</span></span>
+    <button onClick="{{ placeOrder }}" style="flex: 1; max-width: 240px; min-height: 52px; background: #3F4633; color: #FDFCF8; border: 0; cursor: pointer; font-size: 13px; font-weight: 700; letter-spacing: .14em;">PLACE ORDER →</button>
+  </div>
+</sc-if>
+</sc-if>
+
+<sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+<header style="border-bottom: 1px solid #E8DDD4;">
+  <div style="height: 68px; display: flex; align-items: center; justify-content: center;">
+    <a href="LUMI%20Hero%20v2.dc.html" aria-label="LUMI home" style="display: block; text-decoration: none;"><img src="assets/lumi-logo.png" alt="LUMI" width="1141" height="365" style="display: block; height: 28px; width: auto;" /></a>
+  </div>
+</header>
+<main style="max-width: 880px; margin: 0 auto; padding: clamp(40px, 6vw, 88px) clamp(16px, 3vw, 44px) clamp(56px, 6vw, 96px);">
+  <sc-if value="{{ noOrder }}" hint-placeholder-val="{{ false }}">
+    <div style="text-align: center; padding: 40px 0;">
+      <h1 style="margin: 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(30px, 3.4vw, 44px);">No recent order to show.</h1>
+      <a href="LUMI%20Hero%20v2.dc.html" style="display: inline-flex; align-items: center; min-height: 52px; margin-top: 24px; padding: 0 26px; background: #3F4633; color: #FDFCF8; text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: .14em;">BACK TO LUMI →</a>
+    </div>
+  </sc-if>
+  <sc-if value="{{ hasOrder }}" hint-placeholder-val="{{ true }}">
+    <div style="position: relative; text-align: center; padding: clamp(20px, 3vw, 40px) 0 clamp(30px, 4vw, 52px);">
+      {{ doneBeads }}
+      <p style="position: relative; margin: 0 0 16px; display: inline-block; padding: 6px 12px; border: 1.5px dashed #D4A7A5; background: #FBF1EF; font-size: 12px; font-weight: 700; letter-spacing: .12em;">PREVIEW — NO PAYMENT TAKEN, NO REAL ORDER CREATED</p>
+      <h1 style="position: relative; margin: 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(38px, 5.6vw, 76px); line-height: .95; letter-spacing: -0.02em; text-wrap: balance;">You're officially in the LUMI club.</h1>
+      <p style="position: relative; margin: 16px 0 0; font-size: 18px;">Your order is confirmed. We'll get it ready.</p>
+    </div>
+    <div data-pair="" style="display: grid; grid-template-columns: 1fr 1fr; gap: 26px 36px; padding: clamp(22px, 3vw, 36px); background: #F6F2EA;">
+      <div><h2 style="margin: 0 0 8px; font-size: 12px; font-weight: 700; letter-spacing: .2em;">ORDER NUMBER</h2><p style="margin: 0; font-size: 15px; color: #6B7258;">Assigned once the store backend is connected</p></div>
+      <div><h2 style="margin: 0 0 8px; font-size: 12px; font-weight: 700; letter-spacing: .2em;">ESTIMATED DELIVERY</h2><p style="margin: 0; font-size: 15px;">5–7 working days after dispatch</p></div>
+      <div><h2 style="margin: 0 0 8px; font-size: 12px; font-weight: 700; letter-spacing: .2em;">DELIVERY ADDRESS</h2><p style="margin: 0; font-size: 15px; line-height: 1.55; white-space: pre-line;">{{ oAddress }}</p></div>
+      <div><h2 style="margin: 0 0 8px; font-size: 12px; font-weight: 700; letter-spacing: .2em;">CONTACT</h2><p style="margin: 0; font-size: 15px; line-height: 1.55; white-space: pre-line;">{{ oContact }}</p></div>
+      <div style="grid-column: 1 / -1;">
+        <h2 style="margin: 0 0 12px; font-size: 12px; font-weight: 700; letter-spacing: .2em;">ORDER DETAILS</h2>
+        <ul style="list-style: none; margin: 0; padding: 0; display: grid; gap: 10px;">
+          <sc-for list="{{ oLines }}" as="l" hint-placeholder-count="2">
+            <li style="display: flex; justify-content: space-between; gap: 14px; font-size: 15px;"><span><strong style="letter-spacing: .04em;">{{ l.name }}</strong> <span style="color: #6B7258;">· {{ l.meta }}</span></span><span>{{ l.total }}</span></li>
+          </sc-for>
+        </ul>
+        <sc-for list="{{ oPromos }}" as="op" hint-placeholder-count="0"><div style="display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; font-size: 14px; font-weight: 700;"><span>{{ op.label }}</span><span>{{ op.text }}</span></div></sc-for>
+        <div style="display: flex; justify-content: space-between; margin-top: 16px; padding-top: 14px; border-top: 1.5px solid #3F4633; font-weight: 700;"><span>TOTAL</span><span>{{ oTotal }}</span></div>
+      </div>
+    </div>
+    <p style="margin: 18px 0 0; font-size: 14px; color: #6B7258; text-align: center;">An order confirmation email will be sent once email is connected.</p>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 16px; margin-top: 26px;">
+      <a href="LUMI-Pages.dc.html#/track-order" style="display: inline-flex; align-items: center; min-height: 54px; padding: 0 26px; background: #3F4633; color: #FDFCF8; text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: .14em;" style-hover="background: #6B7258; color: #FDFCF8;">TRACK YOUR ORDER →</a>
+      <a href="LUMI%20Hero%20v2.dc.html" style="display: inline-flex; align-items: center; min-height: 54px; padding: 0 26px; border: 1.5px solid #3F4633; text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: .14em;" style-hover="background: #3F4633; color: #FDFCF8;">BACK TO LUMI →</a>
+    </div>
+  </sc-if>
+</main>
+</sc-if>
+
+<sc-if value="{{ undoOn }}" hint-placeholder-val="{{ false }}">
+  <div role="status" style="position: fixed; z-index: 280; left: 50%; bottom: 24px; transform: translateX(-50%); background: #3F4633; color: #FDFCF8; padding: 12px 18px; display: flex; align-items: center; gap: 16px; font-size: 13px; font-weight: 700; letter-spacing: .08em; box-shadow: 0 14px 34px rgba(22,24,18,.3);">
+    <span>Removed from your bag.</span>
+    <button onClick="{{ undo }}" style="min-height: 36px; background: none; border: 0; border-bottom: 1px solid #EFCFCB; color: #EFCFCB; cursor: pointer; font-size: 12px; font-weight: 700; letter-spacing: .14em;">UNDO</button>
+  </div>
+</sc-if>
+
+<dc-import name="LUMI-Cart" hint-size="0px,0px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const STATES = ["Andaman and Nicobar Islands","Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chandigarh","Chhattisgarh","Dadra and Nagar Haveli and Daman and Diu","Delhi","Goa","Gujarat","Haryana","Himachal Pradesh","Jammu and Kashmir","Jharkhand","Karnataka","Kerala","Ladakh","Lakshadweep","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Puducherry","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Pradesh","Uttarakhand","West Bengal"];
+const route = () => { const h = (location.hash || "").replace(/^#\/?/, ""); return ["checkout", "order-confirmation"].includes(h) ? h : "bag"; };
+const money = n => "₹" + Math.round(n).toLocaleString("en-IN");
+const OKEY = "lumi-last-order-v1";
+const V = {
+  email: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? "" : "Please enter a valid email address.",
+  phone: v => /^(\+?91[\s-]?)?[6-9]\d{9}$/.test(v.replace(/[\s-]/g, "")) ? "" : "Please enter a valid 10-digit mobile number.",
+  first: v => v.trim() ? "" : "Please enter your first name.",
+  last: v => v.trim() ? "" : "Please enter your last name.",
+  addr1: v => v.trim().length >= 5 ? "" : "Please enter your street address.",
+  addr2: () => "",
+  city: v => v.trim() ? "" : "Please enter your city.",
+  state: v => v ? "" : "Please select your state.",
+  pin: v => /^[1-9]\d{5}$/.test(v.trim()) ? "" : "Please enter a valid PIN code."
+};
+class Component extends DCLogic {
+  state = { r: route(), v: 0, code: "", codeMsg: "", codeOk: false, undo: null, f: { email: "", phone: "", first: "", last: "", addr1: "", addr2: "", city: "", state: "", pin: "" }, err: {}, touched: {}, pay: null, payErr: "", topError: "", sumOpen: false };
+  componentDidMount() {
+    this.onHash = () => { this.setState({ r: route(), topError: "" }); window.scrollTo(0, 0); };
+    window.addEventListener("hashchange", this.onHash);
+    const tryCart = n => { const LC = window.LumiCart; if (!LC) { if (n < 60) this.ct = setTimeout(() => tryCart(n + 1), 100); return; } this.unsub = LC.subscribe(() => this.setState(s => ({ v: s.v + 1 }))); this.setState(s => ({ v: s.v + 1 })); };
+    tryCart(0);
+  }
+  componentWillUnmount() { window.removeEventListener("hashchange", this.onHash); clearTimeout(this.ct); clearTimeout(this.ut); this.unsub && this.unsub(); }
+  beads(n, spread) {
+    const C = ["#D4A7A5", "#EFCFCB", "#6B7258", "#A9AE96", "#D4A7A5", "#EFCFCB", "#6B7258"];
+    const P = [[8, 18], [16, 70], [88, 22], [80, 76], [30, 6], [70, 8], [50, 92]];
+    return React.createElement(React.Fragment, null, P.slice(0, n).map((p, i) => React.createElement("span", { key: i, "aria-hidden": "true", style: {
+      position: "absolute", left: p[0] + "%", top: p[1] + "%", width: 10 + (i % 3) * 4, height: 10 + (i % 3) * 4, borderRadius: "50%",
+      background: "radial-gradient(circle at 34% 30%, #fff 0 11%, " + C[i] + " 46%, rgba(22,24,18,.5) 120%)", boxShadow: "0 4px 10px rgba(22,24,18,.2)",
+      "--fx": ((50 - p[0]) * spread) + "px", "--fy": ((50 - p[1]) * spread) + "px",
+      animation: spread ? "lumiGather 1.4s cubic-bezier(.2,.9,.3,1) " + (i * .08) + "s both" : "lumiFloat " + (5 + i) + "s ease-in-out " + (i * .4) + "s infinite" } })));
+  }
+  lineMeta(p, l) { return (p.sizes ? (l.size ? "Size " + l.size : "Size not selected") + " · " : "") + "Qty " + l.qty; }
+  renderVals() { const v = this.baseVals(); return window.LumiCart && window.LumiCart.decorate ? window.LumiCart.decorate(v) : v; }
+  baseVals() {
+    const s = this.state, LC = window.LumiCart, r = s.r;
+    const out = { isBag: r === "bag", isCheckout: r === "checkout", isDone: r === "order-confirmation", states: STATES };
+    if (r === "order-confirmation") {
+      let o = null; try { o = JSON.parse(sessionStorage.getItem(OKEY) || "null"); } catch (e) {}
+      return Object.assign(out, { noOrder: !o, hasOrder: !!o, doneBeads: o ? this.beads(7, 3) : null,
+        oAddress: o ? o.address : "", oContact: o ? o.contact : "", oLines: o ? o.lines : [], oPromos: o && o.promos ? o.promos : [], oTotal: o ? o.total : "" });
+    }
+    if (!LC) return Object.assign(out, { empty: false, hasItems: false, lines: [], recs: [], ckEmpty: false, ckReady: false });
+    const Q = LC.quote(), cat = LC.catalog, items = LC.items(), sub = LC.subtotal(), disc = Q.total, cp = LC.coupon(), SH = LC.shipping || {};
+    const soldOut = l => { const p = cat[l.id]; return !!(p.sizes && l.size && (p.soldOut || []).includes(l.size)); };
+    const blocked = LC.missingSize() || items.some(soldOut);
+    const lines = items.map((l, i) => { const p = cat[l.id], miss = !!p.sizes && !l.size, so = soldOut(l); return {
+      name: p.name, field: p.field, size: p.size, pos: p.pos, href: "LUMI-Pages.dc.html#/product/" + l.id, viewAria: "View " + p.name,
+      total: money(p.price * l.qty), unit: money(p.price), qty: l.qty, qtyAria: "Quantity for " + p.name, sized: !!p.sizes,
+      sizeVal: l.size || "", sizeAria: "Size for " + p.name, sizeBorder: miss || so ? "#8E4F4C" : "#C5B7AB", sizeBg: miss || so ? "#FBF1EF" : "#FDFCF8",
+      warn: miss ? "Select a size to continue." : (so ? "Looks like this size just sold out. Pick another size or remove it." : ""),
+      opts: (miss ? [{ v: "", t: "Select size", dis: true }] : []).concat((p.sizes || []).map(z => { const x = (p.soldOut || []).includes(z); return { v: z, t: z + (x ? " — SOLD OUT" : ""), dis: x }; })),
+      meta: this.lineMeta(p, l), metaWeight: miss || so ? "700" : "400", metaInk: miss || so ? "#8E4F4C" : "#6B7258",
+      setSize: e => LC.setSize(i, e.target.value), inc: () => LC.setQty(i, l.qty + 1), dec: () => { if (l.qty > 1) LC.setQty(i, l.qty - 1); },
+      remove: () => { const snap = { i, line: { id: l.id, size: l.size, qty: l.qty } }; LC.remove(i); clearTimeout(this.ut); this.setState({ undo: snap }); this.ut = setTimeout(() => this.setState({ undo: null }), 5000); } }; });
+    const hasTank = items.some(l => cat[l.id].sizes), inCart = new Set(items.map(l => l.id));
+    const recIds = Object.keys(cat).filter(id => !inCart.has(id)).sort((a, b) => { const w = id => (!!cat[id].sizes === hasTank ? 1 : 0); return w(a) - w(b); }).slice(0, 3);
+    const recs = recIds.map(id => { const p = cat[id]; return { name: p.name, price: money(p.price), field: p.field, size: p.size, pos: p.pos, href: "LUMI-Pages.dc.html#/product/" + id, viewAria: "View " + p.name, cta: p.sizes ? "PICK SIZE +" : "QUICK ADD +",
+      add: e => { const b = e.currentTarget; if (LC.requiresSize(id)) LC.requestSize({ id, anchor: b.getBoundingClientRect(), onDone: z => LC.add(id, { size: z }) }); else LC.add(id); } }; });
+    const shipKnown = typeof SH.rate === "number", freeShip = shipKnown && SH.freeOver != null && sub - disc >= SH.freeOver;
+    const ship = shipKnown ? (freeShip ? 0 : SH.rate) : 0, total = sub - disc + ship;
+    Object.assign(out, {
+      empty: items.length === 0, hasItems: items.length > 0, count: LC.count(), lines, recs, emptyBeads: items.length ? null : this.beads(5, 0),
+      subtotal: money(sub), discount: money(Q.couponSave), total: money(sub - disc), hasCoupon: !!cp, noCoupon: !cp, couponCode: cp ? cp.label : "",
+      promoRows: Q.rows, promoRowsNoCoupon: Q.rows.filter(r => r.kind !== "coupon"), noPromo: Q.rows.length === 0,
+      hasBundles: Q.bundles.length > 0, bundles: Q.bundles.map(b => Object.assign({}, b, { namesText: b.names.join(" + ") })), promoNudge: LC.nudge(),
+      thMsg: Q.thresholdMsg ? (Q.thresholdOn ? "✓ 10% OFF APPLIED" : Q.thresholdMsg.replace("You're", "You're") + " (on items outside bundles).") : "", thInk: Q.thresholdOn ? "#3F4633" : "#6B7258",
+      code: s.code, onCode: e => this.setState({ code: e.target.value, codeMsg: "" }), codeBad: !!s.codeMsg && !s.codeOk, codeBorder: s.codeMsg && !s.codeOk ? "#8E4F4C" : "#C5B7AB",
+      codeMsg: s.codeMsg, codeMsgInk: s.codeOk ? "#6B7258" : "#8E4F4C",
+      applyCode: e => { e.preventDefault(); if (!s.code.trim()) return; const ok = LC.applyCoupon(s.code); this.setState(ok ? { code: "", codeMsg: "Discount applied.", codeOk: true } : { codeMsg: "That code didn't work. Check the code and try again.", codeOk: false }); },
+      removeCode: () => { LC.removeCoupon(); this.setState({ codeMsg: "", codeOk: false }); },
+      blocked, ctaBg: blocked ? "#A9AE96" : "#3F4633", ctaCursor: blocked ? "not-allowed" : "pointer", checkoutHref: "#/checkout",
+      goCheckout: e => { if (blocked) e.preventDefault(); },
+      shipText: ship === 0 ? "Free" : money(ship), shipWeight: ship === 0 ? "700" : "400", shipInk: ship === 0 ? "#6B7258" : "#3F4633", ckTotal: money(total),
+      freeMsg: freeShip ? "✓ You've got free shipping." : "Add items worth " + money(SH.freeOver - (sub - disc)) + " more to get free shipping.",
+      freePct: Math.min(100, Math.round((sub - disc) / SH.freeOver * 100)) + "%",
+      undoOn: !!s.undo, undo: () => { if (s.undo) LC.insert(s.undo.i, s.undo.line); clearTimeout(this.ut); this.setState({ undo: null }); }
+    });
+    if (r !== "checkout") return out;
+    const F = s.f, err = s.err;
+    const field = (k, label, o) => { const e = err[k] || ""; return Object.assign({ k, label, v: F[k], err: e, bad: !!e, eid: "e-" + k, border: e ? "#8E4F4C" : "#C5B7AB", type: "text", ac: "on", im: "text", ph: "", span: "auto",
+      on: ev => { const v = ev.target.value; this.setState(st => ({ f: Object.assign({}, st.f, { [k]: v }), err: st.err[k] ? Object.assign({}, st.err, { [k]: V[k](v) }) : st.err })); },
+      blur: ev => { const v = ev.target.value; if (v) this.setState(st => ({ err: Object.assign({}, st.err, { [k]: V[k](v) }) })); } }, o || {}); };
+    const validate = () => { const e = {}; Object.keys(V).forEach(k => { const m = V[k](F[k] || ""); if (m) e[k] = m; }); return e; };
+    const PAY = [["upi", "UPI", "GPay, PhonePe, Paytm & more"], ["card", "Credit / Debit Card", ""], ["netbanking", "Net Banking", ""], ["wallet", "Wallets", ""]];
+    Object.assign(out, {
+      ckEmpty: items.length === 0, ckReady: items.length > 0,
+      contactFields: [field("email", "Email address", { type: "email", ac: "email", im: "email", ph: "you@example.com" }), field("phone", "Phone number", { type: "tel", ac: "tel", im: "tel", ph: "10-digit mobile" })],
+      addrFields: [field("first", "First name", { ac: "given-name" }), field("last", "Last name", { ac: "family-name" }), field("addr1", "Address", { ac: "address-line1", span: "1 / -1", ph: "House no., street" }), field("addr2", "Apartment / Building / Area (optional)", { ac: "address-line2", span: "1 / -1" })],
+      city: field("city", "City", { ac: "address-level2" }), st: field("state", "State"), pin: field("pin", "PIN code"),
+      shipName: SH.name || "STANDARD DELIVERY", shipEta: SH.eta || "5–7 working days after dispatch",
+      totalNote: freeShip ? "" : "Free shipping on orders of " + money(SH.freeOver) + " and above.",
+      sumOpenS: s.sumOpen ? "1" : "0", sumOpen: s.sumOpen, sumDisp: s.sumOpen ? "block" : "none", sumToggleLabel: s.sumOpen ? "HIDE ORDER SUMMARY ▴" : "SHOW ORDER SUMMARY ▾", toggleSum: () => this.setState(st => ({ sumOpen: !st.sumOpen })),
+      payMethods: PAY.map(([id, label, sub2]) => { const on = s.pay === id; return { label, sub: sub2, on, border: on ? "#3F4633" : "#C5B7AB", bg: on ? "#F6F2EA" : "#FDFCF8", dot: on ? "#3F4633" : "transparent", pick: () => this.setState({ pay: id, payErr: "" }) }; }),
+      payErr: s.payErr, topError: s.topError,
+      placeOrder: e => {
+        e && e.preventDefault && e.preventDefault();
+        if (LC.missingSize()) { this.setState({ topError: "Select a size to continue. One of your tanks doesn't have a size yet — go back to your bag to pick one." }); window.scrollTo(0, 0); return; }
+        if (items.some(soldOut)) { this.setState({ topError: "Looks like this piece just sold out. Remove it or pick another size in your bag." }); window.scrollTo(0, 0); return; }
+        const errs = validate(), payErr = s.pay ? "" : "Please choose a payment method.";
+        if (Object.keys(errs).length || payErr) { this.setState({ err: errs, payErr, topError: "Please check your delivery details." }); window.scrollTo(0, 0); return; }
+        const order = { lines: items.map(l => { const p = cat[l.id]; return { name: p.name, meta: this.lineMeta(p, l), total: money(p.price * l.qty) }; }), total: money(total), promos: Q.rows.map(r => ({ label: r.label, text: r.text })),
+          address: [F.first + " " + F.last, F.addr1, F.addr2, F.city + ", " + F.state + " " + F.pin].filter(x => x && x.trim()).join("\n"), contact: F.email + "\n" + F.phone };
+        try { sessionStorage.setItem(OKEY, JSON.stringify(order)); } catch (x) {}
+        LC.clear(); location.hash = "#/order-confirmation";
+      }
+    });
+    return out;
+  }
+}
+</script>
+</body>
+</html>
