@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="./lumi-cart.js"></script>
+<style>
+  [data-bund] button:focus-visible, [data-bund] a:focus-visible { outline: 2px solid #EFCFCB; outline-offset: 2px; }
+  [data-bmod] button:focus-visible { outline-color: #3F4633; }
+  @media (max-width: 900px) {
+    [data-bgrid] { grid-template-columns: 1fr !important; }
+    [data-bcard] { gap: 14px !important; }
+  }
+</style>
+</helmet>
+<section id="bundles" data-bund="" aria-labelledby="bund-title" style="position: relative; z-index: 9; background: #3F4633; color: #FDFCF8; font-family: 'DM Sans', system-ui, sans-serif; padding: clamp(52px, 6vw, 96px) clamp(16px, 3vw, 48px) clamp(48px, 5.5vw, 84px); overflow: hidden;">
+  <div style="max-width: 1480px; margin: 0 auto;">
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px 40px; margin-bottom: clamp(24px, 3vw, 40px); opacity: {{ headOp }}; transform: {{ headT }}; transition: opacity .7s ease, transform .7s cubic-bezier(.16,.8,.3,1);">
+      <div>
+        <span style="display: block; font-size: 12px; font-weight: 700; letter-spacing: .2em; color: #EFCFCB;">MORE LUMI. BETTER TOGETHER.</span>
+        <h2 id="bund-title" style="margin: 10px 0 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(44px, 6vw, 96px); line-height: .92; letter-spacing: -0.02em;">BUNDLE <span style="font-style: italic; color: #EFCFCB;">&amp;</span> SAVE.</h2>
+      </div>
+      <p style="margin: 0 0 6px; max-width: 34ch; font-size: clamp(15px, 1.2vw, 18px); line-height: 1.5;">Pick your pieces right here. We'll do the maths — the bundle price applies automatically in your bag.</p>
+    </div>
+
+    <div data-bgrid="" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 1.4vw, 22px); align-items: stretch;">
+      <sc-for list="{{ cards }}" as="c" hint-placeholder-count="3">
+        <article data-bcard="" aria-labelledby="{{ c.hid }}" style="position: relative; background: {{ c.bg }}; color: {{ c.ink }}; padding: clamp(18px, 1.8vw, 26px); display: flex; flex-direction: column; gap: 16px; opacity: {{ c.op }}; transform: {{ c.t }}; transition: opacity .7s ease {{ c.delay }}, transform .8s cubic-bezier(.16,.8,.3,1) {{ c.delay }};">
+          <div>
+            <span style="display: block; font-size: 11px; font-weight: 700; letter-spacing: .2em; color: {{ c.sub }};">{{ c.kicker }}</span>
+            <h3 id="{{ c.hid }}" style="margin: 6px 0 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(28px, 2.4vw, 38px); line-height: 1;">{{ c.title }}</h3>
+            <p style="margin: 8px 0 0; font-size: 14px; line-height: 1.45; font-weight: 500;">{{ c.blurb }}</p>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; align-items: end;">
+            <sc-for list="{{ c.prev }}" as="p" hint-placeholder-count="3">
+              <button onClick="{{ c.open }}" aria-label="{{ p.aria }}" style="padding: 0; border: 0; background: none; cursor: pointer; color: inherit; text-align: left; transform: rotate({{ p.r }}); transition: transform .4s cubic-bezier(.34,1.4,.5,1);" style-hover="transform: rotate(0deg) translateY(-4px);">
+                <span style="display: block; aspect-ratio: 4 / 5; background-color: {{ p.field }}; background-image: url('assets/lumi-hero-campaign.png'); background-repeat: no-repeat; background-size: {{ p.size }}; background-position: {{ p.pos }}; box-shadow: 0 10px 22px rgba(22,24,18,.22);"></span>
+                <span style="display: block; margin-top: 7px; font-size: 10px; font-weight: 700; letter-spacing: .06em; line-height: 1.2; overflow-wrap: anywhere;">{{ p.name }}</span>
+              </button>
+            </sc-for>
+            <sc-if value="{{ c.moreOn }}" hint-placeholder-val="{{ true }}">
+              <button onClick="{{ c.open }}" aria-label="{{ c.moreAria }}" style="align-self: stretch; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 88px; margin-bottom: 22px; padding: 6px; background: transparent; border: 1.5px dashed currentColor; color: inherit; cursor: pointer; font-size: 10px; font-weight: 700; letter-spacing: .14em;" style-hover="background: rgba(253,252,248,.16);">
+                <span style="font-family: 'Fraunces', serif; font-size: 22px; letter-spacing: 0; line-height: 1;">{{ c.more }}</span>
+                <span>MORE</span>
+              </button>
+            </sc-if>
+          </div>
+          <button onClick="{{ c.open }}" style="margin-top: auto; width: 100%; min-height: 54px; background: {{ c.cta }}; color: {{ c.ctaInk }}; border: 0; cursor: pointer; font-size: 13px; font-weight: 700; letter-spacing: .14em; display: flex; align-items: center; justify-content: center; gap: 10px; transition: transform .3s ease, gap .3s ease;" style-hover="transform: translateY(-2px); gap: 16px;">CREATE BUNDLE <span aria-hidden="true">→</span></button>
+        </article>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{ bOpen }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ close }}" style="position: fixed; inset: 0; z-index: 240; background: rgba(27,31,22,.55);"></div>
+      <div data-bdrawer="" role="dialog" aria-modal="true" aria-label="{{ bLabel }}" onKeyDown="{{ bKey }}" style="position: fixed; z-index: 250; top: 0; right: 0; bottom: 0; width: min(560px, 100%); overflow-y: auto; overscroll-behavior: contain; background: {{ bBg }}; box-shadow: -24px 0 60px rgba(22,24,18,.3);">
+        <div style="position: sticky; top: 0; z-index: 4; display: flex; justify-content: space-between; align-items: center; padding: 12px clamp(18px, 1.8vw, 26px); background: {{ bBg }}; color: {{ bInk }};">
+          <span style="font-size: 12px; font-weight: 700; letter-spacing: .18em;">{{ bHead }}</span>
+          <button data-bclose="" onClick="{{ close }}" style="min-height: 44px; padding: 0 4px; background: none; border: 0; cursor: pointer; color: inherit; font-size: 12px; font-weight: 700; letter-spacing: .14em;">CLOSE ×</button>
+        </div>
+      <sc-for list="{{ builder }}" as="m" hint-placeholder-count="0">
+        <article data-bmod="" data-on="{{ m.onMob }}" aria-labelledby="{{ m.hid }}" style="position: relative; background: {{ m.bg }}; color: {{ m.ink }}; padding: clamp(18px, 1.8vw, 26px); display: flex; flex-direction: column; gap: 16px; opacity: {{ m.op }}; transform: {{ m.t }}; transition: opacity .7s ease {{ m.delay }}, transform .8s cubic-bezier(.16,.8,.3,1) {{ m.delay }};">
+          <div style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: start;">
+            <div>
+              <span style="display: block; font-size: 11px; font-weight: 700; letter-spacing: .2em; color: {{ m.sub }};">{{ m.kicker }}</span>
+              <h3 id="{{ m.hid }}" style="margin: 6px 0 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(28px, 2.4vw, 38px); line-height: 1;">{{ m.title }}</h3>
+              <p style="margin: 8px 0 0; font-size: 14px; line-height: 1.45;">{{ m.blurb }}</p>
+            </div>
+            <div aria-hidden="true" style="position: relative; width: 104px; height: 92px;">
+              <sc-for list="{{ m.stack }}" as="sk" hint-placeholder-count="3">
+                <span style="position: absolute; left: {{ sk.x }}; top: {{ sk.y }}; width: 52px; aspect-ratio: 4 / 5; border: 2px solid #FDFCF8; box-shadow: 0 8px 18px rgba(22,24,18,.22); transform: rotate({{ sk.r }}); background-color: {{ sk.field }}; background-image: url('assets/lumi-hero-campaign.png'); background-size: {{ sk.size }}; background-position: {{ sk.pos }}; background-repeat: no-repeat;"></span>
+              </sc-for>
+            </div>
+          </div>
+
+          <div aria-live="polite" style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 0; border-top: 1px solid {{ m.rule }}; border-bottom: 1px solid {{ m.rule }};">
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: .16em;">{{ m.progress }}</span>
+            <span aria-hidden="true" style="display: flex; gap: 6px;">
+              <sc-for list="{{ m.dots }}" as="d" hint-placeholder-count="3">
+                <span style="display: block; width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid {{ m.ink }}; background: {{ d.bg }}; transform: {{ d.t }}; transition: background .3s ease, transform .4s cubic-bezier(.34,1.6,.5,1);"></span>
+              </sc-for>
+            </span>
+          </div>
+
+          <sc-for list="{{ m.groups }}" as="g" hint-placeholder-count="1">
+            <div>
+              <span style="display: block; margin-bottom: 8px; font-size: 11px; font-weight: 700; letter-spacing: .18em; color: {{ m.sub }};">{{ g.label }}</span>
+              <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: 12px 8px;">
+                <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="3">
+                  <button onClick="{{ it.pick }}" aria-pressed="{{ it.pressed }}" aria-label="{{ it.aria }}" disabled="{{ it.off }}" style="position: relative; display: flex; flex-direction: column; gap: 6px; padding: 0; background: none; border: 0; cursor: {{ it.cursor }}; text-align: left; color: inherit; opacity: {{ it.op }};">
+                    <span style="position: relative; display: block; width: 100%; aspect-ratio: 4 / 5; overflow: hidden; outline: {{ it.ring }}; outline-offset: 2px; transition: outline-color .25s ease;">
+                      <span style="position: absolute; inset: 0; background-color: {{ it.field }}; background-image: url('assets/lumi-hero-campaign.png'); background-size: {{ it.size }}; background-position: {{ it.pos }}; background-repeat: no-repeat; transform: {{ it.zoom }}; transition: transform .6s cubic-bezier(.16,.8,.3,1);"></span>
+                      <sc-if value="{{ it.hasCount }}" hint-placeholder-val="{{ false }}"><span style="position: absolute; right: 5px; top: 5px; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 999px; display: flex; align-items: center; justify-content: center; background: #3F4633; color: #FDFCF8; font-size: 12px; font-weight: 700;">✓{{ it.count }}</span></sc-if>
+                    </span>
+                    <span style="font-size: 11px; font-weight: 700; letter-spacing: .04em; line-height: 1.25; overflow-wrap: anywhere; hyphens: auto;">{{ it.name }}</span>
+                  </button>
+                </sc-for>
+                <sc-if value="{{ g.moreOn }}" hint-placeholder-val="{{ false }}">
+                  <button onClick="{{ g.moreToggle }}" aria-expanded="{{ g.expanded }}" aria-label="{{ g.moreAria }}" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 88px; padding: 8px; background: transparent; border: 1.5px dashed currentColor; color: inherit; cursor: pointer; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-align: center; transition: background .25s ease;" style-hover="background: rgba(253,252,248,.18);">
+                    <span style="font-family: 'Fraunces', serif; font-size: 22px; letter-spacing: 0; line-height: 1;">{{ g.moreBig }}</span>
+                    <span>{{ g.moreLabel }}</span>
+                  </button>
+                </sc-if>
+              </div>
+              <sc-if value="{{ g.sizeOn }}" hint-placeholder-val="{{ false }}">
+                <div role="group" aria-label="{{ g.sizeAria }}" style="margin-top: 10px; padding: 10px; background: #FDFCF8; color: #3F4633; box-shadow: 0 10px 24px rgba(22,24,18,.16);">
+                  <span style="display: block; font-size: 11px; font-weight: 700; letter-spacing: .16em;">{{ g.sizeTitle }}</span>
+                  <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; margin-top: 8px;">
+                    <sc-for list="{{ g.sizes }}" as="z" hint-placeholder-count="5">
+                      <button onClick="{{ z.pick }}" disabled="{{ z.out }}" aria-label="{{ z.aria }}" style="min-width: 0; min-height: 44px; padding: 0; border: 1.5px solid {{ z.border }}; background: transparent; color: {{ z.ink }}; cursor: {{ z.cursor }}; font-size: 14px; font-weight: 700; text-decoration: {{ z.strike }};">{{ z.label }}</button>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+
+          <sc-if value="{{ m.hasSel }}" hint-placeholder-val="{{ false }}">
+            <ul aria-label="Your bundle" style="list-style: none; margin: 0; padding: 0; display: grid; gap: 6px;">
+              <sc-for list="{{ m.sel }}" as="s" hint-placeholder-count="1">
+                <li style="display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; align-items: center; gap: 10px; font-size: 13px;">
+                  <span aria-hidden="true" style="display: block; aspect-ratio: 4 / 5; background-color: {{ s.field }}; background-image: url('assets/lumi-hero-campaign.png'); background-size: {{ s.size }}; background-position: {{ s.pos }}; background-repeat: no-repeat;"></span>
+                  <span style="min-width: 0;"><strong style="letter-spacing: .04em;">{{ s.name }}</strong><span style="display: block; font-size: 12px; font-weight: 700;">{{ s.meta }}</span></span>
+                  <button onClick="{{ s.remove }}" aria-label="{{ s.aria }}" style="width: 44px; height: 44px; background: none; border: 0; cursor: pointer; color: inherit; font-size: 20px;">×</button>
+                </li>
+              </sc-for>
+            </ul>
+          </sc-if>
+          <sc-if value="{{ m.msg }}" hint-placeholder-val="{{ false }}"><p role="status" style="margin: 0; font-size: 13px; font-weight: 700;">{{ m.msg }}</p></sc-if>
+
+          <div style="position: relative; margin-top: auto; padding-top: 4px;">
+            <sc-for list="{{ m.beads }}" as="bd" hint-placeholder-count="0">
+              <span aria-hidden="true" style="position: absolute; left: {{ bd.x }}; top: {{ bd.y }}; width: {{ bd.s }}; height: {{ bd.s }}; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #fff 0 12%, {{ bd.c }} 48%, rgba(22,24,18,.5) 120%); opacity: {{ bd.op }}; transform: {{ bd.t }}; transition: opacity .5s ease {{ bd.d }}, transform .8s cubic-bezier(.3,1.4,.5,1) {{ bd.d }}; pointer-events: none;"></span>
+            </sc-for>
+            <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px;">
+              <span style="font-size: 12px; font-weight: 700; letter-spacing: .16em;">{{ m.status }}</span>
+              <span style="display: flex; align-items: baseline; gap: 8px;"><s style="font-size: 14px; opacity: .72;">{{ m.regular }}</s><span style="font-family: 'Fraunces', serif; font-weight: 600; font-size: 32px; line-height: 1;">{{ m.price }}</span></span>
+            </div>
+            <p style="margin: 4px 0 0; text-align: right; font-size: 13px; font-weight: 700; color: {{ m.saveInk }};">{{ m.save }}</p>
+            <button onClick="{{ m.add }}" aria-disabled="{{ m.notReady }}" style="margin-top: 12px; width: 100%; min-height: 54px; border: 0; background: {{ m.ctaBg }}; color: {{ m.ctaInk }}; cursor: {{ m.ctaCursor }}; font-size: 13px; font-weight: 700; letter-spacing: .14em; transition: background .3s ease, color .3s ease;">{{ m.cta }}</button>
+          </div>
+        </article>
+      </sc-for>
+      </div>
+    </sc-if>
+
+    <div style="display: flex; justify-content: center; margin-top: clamp(24px, 3vw, 40px);">
+      <a href="LUMI-Pages.dc.html#/shop" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 6px; color: #FDFCF8; text-decoration: none; border-bottom: 1.5px solid #EFCFCB; font-size: 13px; font-weight: 700; letter-spacing: .16em;" style-hover="color: #EFCFCB;">SHOP ALL →</a>
+    </div>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { ready: false, inView: false, tab: 0, open: {}, build: null, sel: [[], [], []], pend: [null, null, null], msg: ["", "", ""], done: [false, false, false] };
+  componentDidMount() {
+    const go = n => { if (window.LumiCart && window.LumiCart.promos) { this.setState({ ready: true }); this.unsub = window.LumiCart.subscribe(() => this.forceUpdate()); return; } if (n < 60) this.ct = setTimeout(() => go(n + 1), 100); };
+    go(0);
+    const sec = () => document.getElementById("bundles");
+    const obs = n => { const s = sec(); if (!s) { if (n < 60) this.ot = setTimeout(() => obs(n + 1), 100); return; }
+      if (!("IntersectionObserver" in window)) { this.setState({ inView: true }); return; }
+      this.io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { this.setState({ inView: true }); this.io.disconnect(); } }, { rootMargin: "0px 0px -12% 0px" }); this.io.observe(s); };
+    obs(0);
+  }
+  componentDidUpdate(pp, ps) { if (ps.build !== this.state.build) document.documentElement.style.overflow = this.state.build === null ? "" : "hidden"; }
+  componentWillUnmount() { document.documentElement.style.overflow = ""; clearTimeout(this.ct); clearTimeout(this.ot); clearTimeout(this.mt); this.io && this.io.disconnect(); this.unsub && this.unsub(); }
+  upd(k, fn) { this.setState(s => { const o = { sel: s.sel.slice(), pend: s.pend.slice(), msg: s.msg.slice(), done: s.done.slice() }; fn(o); return o; }); }
+  renderVals() {
+    const LC = window.LumiCart, st = this.state, inV = st.inView;
+    const base = { headOp: inV ? "1" : "0", headT: inV ? "none" : "translateY(16px)" };
+    if (!LC || !LC.promos) return Object.assign(base, { tabs: [], mods: [] });
+    const cat = LC.catalog, PR = LC.promos, f = n => "₹" + Math.round(n).toLocaleString("en-IN");
+    const TANKS = ["pink-popcorn-tank", "white-cocktail-tank", "black-fries-tank"], ACC = ["popcorn-brooch", "fries-brooch", "cocktail-brooch", "heart-charm", "cherry-charm"];
+    const short = id => cat[id].name.replace(" TANK", "").replace(" BROOCH", " BROOCH").replace(" CHARM", " CHARM");
+    const SPEC = [
+      { p: PR.tank3, kicker: "BUNDLE 01", title: "3 TANKS", blurb: "Pick any 3 tanks. Mix it up — repeats welcome.", need: { tank: 3, acc: 0 }, groups: [["PICK 3 TANKS", "tank", TANKS]], bg: "#EFCFCB", ink: "#3F4633", sub: "#6B7258", rule: "rgba(63,70,51,.25)", cta: "#3F4633", ctaInk: "#FDFCF8", stack: TANKS, done: "3 TANK BUNDLE IN THE BAG." },
+      { p: PR.acc3, kicker: "BUNDLE 02", title: "ANY 3 EXTRAS", blurb: "Any mix of brooches + bag charms.", need: { tank: 0, acc: 3 }, groups: [["PICK ANY 3", "acc", ACC]], bg: "#FDFCF8", ink: "#3F4633", sub: "#6B7258", rule: "#E8DDD4", cta: "#3F4633", ctaInk: "#FDFCF8", stack: ["popcorn-brooch", "heart-charm", "cherry-charm"], done: "3 EXTRAS IN THE BAG." },
+      { p: PR.combo, kicker: "BUNDLE 03", title: "1 TANK + 2 EXTRAS", blurb: "Pick 1 tank + any 2 brooches or charms.", need: { tank: 1, acc: 2 }, groups: [["1 · PICK A TANK", "tank", TANKS], ["2 · PICK 2 EXTRAS", "acc", ACC]], bg: "#6B7258", ink: "#FDFCF8", sub: "#EFCFCB", rule: "rgba(253,252,248,.3)", cta: "#FDFCF8", ctaInk: "#3F4633", stack: ["black-fries-tank", "fries-brooch", "heart-charm"], done: "TANK COMBO IN THE BAG." }
+    ];
+    const crop = id => ({ field: cat[id].field, size: cat[id].size, pos: cat[id].pos });
+    const mods = SPEC.map((sp, k) => {
+      const sel = st.sel[k], pend = st.pend[k], total = sp.need.tank + sp.need.acc, n = sel.length, full = n === total;
+      const cnt = kind => sel.filter(x => (kind === "tank") === !!cat[x.id].sizes).length;
+      const regular = sel.reduce((a, x) => a + cat[x.id].price, 0);
+      const setMsg = m => { this.upd(k, o => { o.msg[k] = m; }); clearTimeout(this.mt); this.mt = setTimeout(() => this.upd(k, o => { o.msg[k] = ""; }), 2600); };
+      const addSel = (id, size) => this.upd(k, o => {
+        const cur = o.sel[k].slice(), isT = !!cat[id].sizes, have = cur.filter(x => !!cat[x.id].sizes === isT).length, cap = isT ? sp.need.tank : sp.need.acc;
+        if (have >= cap) { if (isT && cap === 1) { const i = cur.findIndex(x => !!cat[x.id].sizes); cur.splice(i, 1); } else { o.msg[k] = (isT ? "That's 3 tanks" : "That's " + cap + " extras") + " — remove one to swap."; return; } }
+        cur.push({ id, size: size || null }); o.sel[k] = cur; o.pend[k] = null; o.done[k] = false; o.msg[k] = "";
+      });
+      const groups = sp.groups.map(([label, kind, ids], gi) => {
+        const pid = pend && pend.g === gi ? pend.id : null;
+        return {
+          label: label + (kind === "tank" && sp.need.tank > 1 ? " · " + cnt("tank") + "/" + sp.need.tank : kind === "acc" && sp.need.acc ? " · " + cnt("acc") + "/" + sp.need.acc : ""),
+          cols: ids.length > 3 ? (ids.length === 5 ? 5 : 4) : 3,
+          ...(() => { const key = k + "-" + gi, LIM = 3, many = false, ex = true, hidden = 0;
+            return { moreOn: many, expanded: ex, moreBig: ex ? "−" : "+" + hidden, moreLabel: ex ? "SHOW LESS" : "VIEW ALL",
+              moreAria: ex ? "Show fewer pieces" : "View all " + ids.length + " pieces",
+              moreToggle: () => this.setState(s => ({ open: Object.assign({}, s.open, { [key]: !s.open[key] }) })) }; })(),
+          items: ids.map(id => { const c = sel.filter(x => x.id === id).length, on = pid === id; return Object.assign(crop(id), {
+            name: short(id), count: c > 1 ? "×" + c : "", hasCount: c > 0, pressed: c > 0 || on, off: false, op: "1", cursor: "pointer",
+            aria: cat[id].name + ", " + f(cat[id].price) + (c ? ", " + c + " selected" : ""),
+            ring: on ? "3px solid " + sp.ink : (c ? "2px solid " + sp.ink : "2px solid transparent"), zoom: on || c ? "scale(1.05)" : "scale(1)",
+            pick: () => { if (cat[id].sizes) this.upd(k, o => { o.pend[k] = on ? null : { g: gi, id }; }); else addSel(id, null); } }); }),
+          sizeOn: !!pid, sizeTitle: pid ? "SIZE FOR " + cat[pid].name : "", sizeAria: pid ? "Pick a size for " + cat[pid].name : "",
+          sizes: pid ? cat[pid].sizes.map(z => { const out = (cat[pid].soldOut || []).includes(z); return { label: z, out, aria: z + (out ? ", sold out" : ""), border: out ? "#E8DDD4" : "#3F4633", ink: out ? "#A9AE96" : "#3F4633", cursor: out ? "not-allowed" : "pointer", strike: out ? "line-through" : "none", pick: () => { if (!out) addSel(pid, z); } }; }) : []
+        };
+      });
+      const done = st.done[k];
+      const beadC = ["#D4A7A5", "#EFCFCB", "#A9AE96", "#FDFCF8", "#D4A7A5"], bx = [["4%", "-6px"], ["20%", "-14px"], ["50%", "-10px"], ["78%", "-16px"], ["94%", "-4px"]];
+      return {
+        hid: "bund-" + k, kicker: sp.kicker, title: sp.title + " — " + f(sp.p.price), blurb: sp.blurb, bg: sp.bg, ink: sp.ink, sub: sp.sub, rule: sp.rule,
+        onMob: st.tab === k ? "1" : "0", op: inV ? "1" : "0", t: inV ? "none" : "translateY(26px)", delay: (k * 0.12) + "s",
+        stack: sp.stack.map((id, i) => Object.assign(crop(id), { x: (i * 26) + "px", y: (i % 2 ? 14 : 0) + "px", r: [-6, 3, -2][i] + "deg" })),
+        progress: full ? "✓ BUNDLE COMPLETE" : n + " / " + total + " SELECTED",
+        dots: Array.from({ length: total }, (_, i) => ({ bg: i < n ? sp.ink : "transparent", t: i < n ? "scale(1)" : "scale(.8)" })),
+        groups, hasSel: n > 0,
+        sel: sel.map((x, i) => Object.assign(crop(x.id), { name: cat[x.id].name, meta: (x.size ? "Size " + x.size + " · " : "") + f(cat[x.id].price), aria: "Remove " + cat[x.id].name + (x.size ? " size " + x.size : ""),
+          remove: () => this.upd(k, o => { const c = o.sel[k].slice(); c.splice(i, 1); o.sel[k] = c; o.done[k] = false; }) })),
+        msg: st.msg[k],
+        status: full ? "BUNDLE COMPLETE" : "BUNDLE PRICE",
+        regular: "", price: f(sp.p.price),
+        save: full ? "Regular total " + f(regular) + " · YOU SAVE " + f(regular - sp.p.price) : "", saveInk: sp.ink,
+        notReady: !full, ctaBg: done ? sp.sub : (full ? sp.cta : "transparent"), ctaInk: done ? sp.ink : (full ? sp.ctaInk : sp.ink), ctaCursor: full ? "pointer" : "not-allowed",
+        cta: done ? "IN THE BAG ✓" : (full ? "ADD BUNDLE TO BAG →" : "PICK " + (total - n) + " MORE"),
+        beads: bx.map((p, i) => ({ x: p[0], y: p[1], s: [9, 12, 10, 13, 8][i] + "px", c: beadC[i], op: full ? "1" : "0", t: full ? "translateY(0) scale(1)" : "translateY(18px) scale(.4)", d: (i * .06) + "s" })),
+        add: () => { if (!full || done) return; let ok = true; sel.forEach(x => { ok = LC.add(x.id, { size: x.size, toast: false }) && ok; }); if (!ok) { setMsg("Something didn't add — check your sizes."); return; }
+          LC.toast(sp.done + " YOU SAVE " + f(regular - sp.p.price) + "."); this.upd(k, o => { o.done[k] = true; o.sel[k] = []; }); setTimeout(() => { this.upd(k, o => { o.done[k] = false; }); if (this.state.build === k) this.setState({ build: null }); }, 1400); }
+      };
+    });
+    const bk = st.build, bs = bk === null ? null : SPEC[bk];
+    const PREV = [TANKS.slice(0, 3), ["popcorn-brooch", "cocktail-brooch", "heart-charm"], ["pink-popcorn-tank", "fries-brooch", "cherry-charm"]];
+    const cards = SPEC.map((sp, k) => { const all = [...new Set(sp.groups.flatMap(g => g[2]))], prev = PREV[k].filter(id => cat[id]), more = all.length - prev.length;
+      return { hid: "bundc-" + k, kicker: sp.kicker, title: sp.title + " — " + f(sp.p.price), blurb: sp.blurb, bg: sp.bg, ink: sp.ink, sub: sp.sub, cta: sp.cta, ctaInk: sp.ctaInk,
+        op: inV ? "1" : "0", t: inV ? "none" : "translateY(26px)", delay: (k * 0.12) + "s",
+        prev: prev.map((id, i) => Object.assign(crop(id), { name: short(id), r: [-3, 2, -1][i] + "deg", aria: "Create bundle with " + cat[id].name })),
+        moreOn: more > 0, more: "+" + more, moreAria: "See all " + all.length + " pieces — create bundle",
+        open: e => { this.lastFocus = e && e.currentTarget; this.setState({ build: k }, () => setTimeout(() => { const b = document.querySelector("[data-bclose]"); b && b.focus(); }, 40)); } }; });
+    const closeB = () => { this.setState({ build: null }); const lf = this.lastFocus; setTimeout(() => lf && lf.focus && lf.focus(), 30); };
+    return Object.assign(base, {
+      cards, bOpen: bk !== null, builder: bk === null ? [] : [mods[bk]],
+      bLabel: bs ? "Build your " + bs.title + " bundle" : "", bHead: bs ? "BUILD YOUR BUNDLE" : "", bBg: bs ? bs.bg : "#FDFCF8", bInk: bs ? bs.ink : "#3F4633",
+      close: closeB, bKey: e => { if (e.key === "Escape") closeB(); },
+      tabs: SPEC.map((sp, k) => { const on = st.tab === k; return { label: sp.title, price: f(sp.p.price), on, bg: on ? "#FDFCF8" : "transparent", ink: on ? "#3F4633" : "#FDFCF8", border: on ? "#FDFCF8" : "rgba(253,252,248,.4)", pick: () => this.setState({ tab: k }) }; }),
+      mods
+    });
+  }
+}
+</script>
+</body>
+</html>

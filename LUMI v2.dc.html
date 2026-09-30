@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>LUMI — Handmade beaded tanks, brooches & bag charms | Make it yours.</title>
+<meta name="description" content="LUMI makes handmade beaded tank tops, reusable brooches and bag charms in India. Pick a mood, play with the beads, make it yours." />
+<meta property="og:title" content="LUMI — Make it yours." />
+<meta property="og:description" content="Handmade beaded pieces for whatever mood you're in." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet" />
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #FDFCF8; color: #3F4633; font-family: "DM Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #3F4633; text-decoration: none; }
+  a:hover { color: #E94B45; }
+  button { font-family: inherit; }
+  :focus-visible { outline: 2px solid #3155D8; outline-offset: 3px; }
+  ::selection { background: #F6D66A; color: #3F4633; }
+  @keyframes lumiMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes lumiGlint { 0%,100% { transform: rotate(45deg) scale(.8); opacity: .6; } 50% { transform: rotate(135deg) scale(1.15); opacity: 1; } }
+  @keyframes lumiRise { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
+  @keyframes lumiPop { from { opacity: 0; transform: translateY(24px) scale(.97); } to { opacity: 1; transform: none; } }
+  @keyframes lumiDrawer { from { transform: translateX(100%); } to { transform: none; } }
+  @keyframes lumiFade { from { opacity: 0; } to { opacity: 1; } }
+  @media (max-width: 900px) {
+    [data-moodrow] { display: grid !important; grid-template-columns: 1fr 1fr !important; height: auto !important; }
+    [data-moodrow] > button { min-height: 250px !important; }
+    [data-results] { grid-template-columns: 1fr !important; }
+    [data-hero-detail] { display: none !important; }
+  }
+  @media (max-width: 780px) {
+    [data-mob="hide"] { display: none !important; }
+    [data-mob="show"] { display: flex !important; }
+    [data-hero] { min-height: 100svh !important; }
+    [data-hero-img] { right: 0 !important; top: 70px !important; bottom: auto !important; width: 66% !important; height: 50% !important; }
+    [data-hero-rose] { right: 0 !important; top: 130px !important; bottom: auto !important; width: 80% !important; height: 44% !important; }
+    [data-hero-h1] { top: auto !important; bottom: 236px !important; left: 18px !important; font-size: 23vw !important; }
+    [data-hero-side] { display: none !important; }
+    [data-hero-cta] { left: 18px !important; right: 18px !important; bottom: 24px !important; max-width: none !important; }
+    [data-ctas] { flex-direction: column !important; align-items: stretch !important; }
+    [data-ctas] > button { justify-content: center !important; }
+    [data-picks] { display: flex !important; overflow-x: auto !important; scroll-snap-type: x mandatory; padding-bottom: 12px !important; }
+    [data-picks] > * { flex: 0 0 74% !important; scroll-snap-align: start; transform: none !important; margin-top: 0 !important; }
+  }
+</style>
+</helmet>
+
+<div style="min-height: 100vh; background: #FDFCF8; overflow-x: hidden;">
+
+  <header style="position: fixed; top: 0; left: 0; right: 0; z-index: 60; height: {{ headerH }}; background: {{ headerBg }}; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid {{ headerLine }}; transition: height .45s cubic-bezier(.16,.8,.3,1), background .45s ease, border-color .45s ease;">
+    <div style="height: 100%; max-width: 1600px; margin: 0 auto; padding: 0 clamp(16px, 3.5vw, 48px); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px;">
+      <nav aria-label="Primary" style="display: flex; align-items: center; gap: clamp(16px, 2.4vw, 34px);">
+        <button onClick="{{ openMenu }}" aria-label="Open menu" data-mob="show" style="display: none; flex-direction: column; gap: 6px; background: none; border: 0; cursor: pointer; padding: 12px 12px 12px 0;">
+          <span style="display: block; width: 24px; height: 2px; background: #3F4633;"></span>
+          <span style="display: block; width: 16px; height: 2px; background: #3F4633;"></span>
+        </button>
+        <button onClick="{{ shopClick }}" data-mob="hide" style="background: none; border: 0; cursor: pointer; font-size: 13px; font-weight: 500; letter-spacing: .14em; color: #3F4633; padding: 8px 0; transition: color .3s ease, transform .3s ease;" style-hover="color: #E94B45; transform: translateY(-2px);">SHOP</button>
+        <button onClick="{{ playClick }}" data-mob="hide" style="background: none; border: 0; cursor: pointer; font-size: 13px; font-weight: 500; letter-spacing: .14em; color: #3F4633; padding: 8px 0; transition: color .3s ease, transform .3s ease;" style-hover="color: #3155D8; transform: translateY(-2px);">PLAY</button>
+      </nav>
+
+      <a href="#top" onPointerEnter="{{ logoOn }}" onPointerLeave="{{ logoOff }}" aria-label="LUMI home" style="display: flex; align-items: center; gap: 9px; padding: 6px;">
+        <span style="font-family: 'Bodoni Moda', serif; font-weight: 500; font-size: clamp(22px, 2.4vw, 30px); letter-spacing: .3em; text-indent: .3em; color: #3F4633; line-height: 1;">LUMI</span>
+        <span aria-hidden="true" style="width: 8px; height: 8px; background: {{ logoGem }}; transform: {{ logoGemT }}; transition: transform .7s cubic-bezier(.34,1.8,.5,1), background .4s ease;"></span>
+      </a>
+
+      <div style="display: flex; align-items: center; justify-content: flex-end; gap: clamp(16px, 2.4vw, 34px);">
+        <a href="#world" data-mob="hide" style="font-size: 13px; font-weight: 500; letter-spacing: .14em; padding: 8px 0;">OUR WORLD</a>
+        <button onClick="{{ openCart }}" aria-label="{{ bagAria }}" style="background: none; border: 0; cursor: pointer; font-size: 13px; font-weight: 500; letter-spacing: .14em; color: #3F4633; display: flex; align-items: center; gap: 8px; padding: 8px 0;">
+          <span>BAG</span>
+          <span ref="{{ bagRef }}" data-lumi="bag" style="min-width: 24px; height: 24px; border-radius: 999px; background: {{ bagBg }}; color: {{ bagInk }}; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; padding: 0 7px; transition: background .4s ease;">{{ cartCount }}</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 90; background: #B8A2E8; padding: 22px 20px 32px; display: flex; flex-direction: column; animation: lumiFade .3s ease;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-family: 'Bodoni Moda', serif; font-size: 24px; letter-spacing: .3em; color: #1B1F16;">LUMI</span>
+        <button onClick="{{ closeMenu }}" style="background: none; border: 0; font-size: 13px; font-weight: 700; letter-spacing: .14em; color: #1B1F16; padding: 14px 0 14px 14px; cursor: pointer;">CLOSE</button>
+      </div>
+      <nav aria-label="Mobile" style="display: flex; flex-direction: column; gap: 2px; margin-top: 40px;">
+        <button onClick="{{ shopClick }}" style="background: none; border: 0; text-align: left; font-family: 'Bodoni Moda', serif; font-size: 17vw; line-height: 1.02; color: #1B1F16; padding: 4px 0; cursor: pointer;">Shop</button>
+        <button onClick="{{ playClick }}" style="background: none; border: 0; text-align: left; font-family: 'Bodoni Moda', serif; font-size: 17vw; line-height: 1.02; color: #1B1F16; padding: 4px 0; cursor: pointer;">Play</button>
+        <a href="#world" onClick="{{ closeMenu }}" style="font-family: 'Bodoni Moda', serif; font-size: 17vw; line-height: 1.02; color: #1B1F16; padding: 4px 0;">Our World</a>
+      </nav>
+      <p style="margin-top: auto; font-size: 15px; font-weight: 500; color: #1B1F16;">Handmade pieces for whatever mood you're in.</p>
+    </div>
+  </sc-if>
+
+  <main id="top">
+    <section ref="{{ heroRef }}" data-lumi="hero" data-hero onPointerMove="{{ heroMove }}" onPointerLeave="{{ heroLeave }}" onPointerDown="{{ heroTap }}" aria-label="Make it yours" style="position: relative; height: 100svh; min-height: 660px; overflow: hidden; background: #FDFCF8; touch-action: pan-y;">
+      <div data-hero-rose aria-hidden="true" style="position: absolute; z-index: 1; right: 3vw; top: 150px; bottom: 0; width: 33vw; background: #EFCFCB;"></div>
+
+      <div ref="{{ heroImgRef }}" data-lumi="heroImg" data-hero-img role="img" aria-label="Model wearing the LUMI Cherry Tank in warm daylight" style="position: absolute; z-index: 2; right: 8vw; top: 96px; bottom: 60px; width: 31vw; background: repeating-linear-gradient(135deg, rgba(107,114,88,0.2) 0 2px, transparent 2px 12px), linear-gradient(180deg, #E8DDD4, #D4A7A5); will-change: transform; animation: lumiRise 1.2s cubic-bezier(.16,.8,.3,1) both;">
+        <span style="position: absolute; left: 14px; bottom: 14px; right: 14px; font-family: ui-monospace, monospace; font-size: 10px; letter-spacing: .14em; color: #3F4633;"><span style="background: rgba(253,252,248,0.9); padding: 5px 8px; display: inline-block;">HERO — MODEL IN CHERRY TANK, DAYLIGHT, CANDID</span></span>
+      </div>
+
+      <div data-hero-detail role="img" aria-label="Macro of hand-strung glass beads" style="position: absolute; z-index: 2; right: 35vw; bottom: 70px; width: 12vw; min-width: 130px; aspect-ratio: 4/5; background: repeating-linear-gradient(135deg, rgba(63,70,51,0.18) 0 2px, transparent 2px 10px), #F6D66A; transform: rotate(-7deg); box-shadow: 0 18px 40px rgba(63,70,51,0.18); animation: lumiRise 1.4s .15s cubic-bezier(.16,.8,.3,1) both;">
+        <span aria-hidden="true" style="position: absolute; top: -10px; left: 50%; width: 64px; height: 20px; margin-left: -32px; background: rgba(253,252,248,0.75); transform: rotate(4deg);"></span>
+        <span style="position: absolute; left: 8px; bottom: 8px; font-family: ui-monospace, monospace; font-size: 9px; letter-spacing: .1em; color: #3F4633; background: rgba(253,252,248,0.9); padding: 3px 6px;">BEAD MACRO</span>
+      </div>
+
+      <canvas ref="{{ heroBackRef }}" data-lumi="heroBack" aria-hidden="true" style="position: absolute; z-index: 3; inset: 0; width: 100%; height: 100%; pointer-events: none;"></canvas>
+
+      <h1 data-hero-h1 style="position: absolute; z-index: 4; left: 4.5vw; top: 104px; margin: 0; font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: clamp(76px, min(14.5vw, 23vh), 250px); line-height: .84; letter-spacing: -0.035em; color: #3F4633; pointer-events: none; animation: lumiRise 1s cubic-bezier(.16,.8,.3,1) both;">
+        <span style="display: block;">MAKE</span>
+        <span style="display: block; padding-left: .9em; color: #6B7258; font-style: italic;">it</span>
+        <span style="display: block; color: #E94B45;">YOURS.</span>
+      </h1>
+
+      <canvas ref="{{ heroFrontRef }}" data-lumi="heroFront" aria-hidden="true" style="position: absolute; z-index: 5; inset: 0; width: 100%; height: 100%; pointer-events: none;"></canvas>
+
+      <div data-hero-cta style="position: absolute; z-index: 6; left: 4.5vw; bottom: 44px; max-width: 520px; display: flex; flex-direction: column; gap: 20px; animation: lumiRise 1.1s .25s cubic-bezier(.16,.8,.3,1) both;">
+        <p style="margin: 0; font-size: clamp(16px, 1.3vw, 19px); font-weight: 500; line-height: 1.45; color: #3F4633;">Handmade pieces for whatever mood you're in.</p>
+        <div data-ctas style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+          <button onClick="{{ shopClick }}" style="display: inline-flex; align-items: center; gap: 10px; background: #3F4633; color: #FDFCF8; border: 0; padding: 19px 34px; font-size: 13px; font-weight: 700; letter-spacing: .16em; cursor: pointer; border-radius: 999px; transition: transform .45s cubic-bezier(.34,1.8,.5,1), background .3s ease;" style-hover="background: #E94B45; transform: translateY(-3px) rotate(-1.5deg);">SHOP LUMI</button>
+          <button onClick="{{ playClick }}" style="display: inline-flex; align-items: center; gap: 10px; background: #FDFCF8; color: #3F4633; border: 2px solid #3F4633; padding: 17px 30px; font-size: 13px; font-weight: 700; letter-spacing: .16em; cursor: pointer; border-radius: 999px; transition: transform .45s cubic-bezier(.34,1.8,.5,1), background .3s ease;" style-hover="background: #F6D66A; transform: translateY(-3px) rotate(1.5deg);">PLAY WITH LUMI →</button>
+        </div>
+        <span style="display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 500; letter-spacing: .12em; color: #6B7258;">
+          <span aria-hidden="true" style="width: 7px; height: 7px; background: #E94B45; animation: lumiGlint 3s ease-in-out infinite;"></span>
+          {{ heroHint }}
+        </span>
+      </div>
+
+      <span data-hero-side aria-hidden="true" style="position: absolute; z-index: 6; right: 18px; top: 50%; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; font-size: 11px; font-weight: 700; letter-spacing: .24em; color: #3F4633;">DROP 01 — HAND-STRUNG IN BENGALURU</span>
+    </section>
+
+    <div id="world" style="background: #E94B45; overflow: hidden; border-top: 2px solid #3F4633; border-bottom: 2px solid #3F4633;">
+      <div aria-label="Playful, personal, expressive, handcrafted" style="display: flex; width: max-content; animation: lumiMarquee 38s linear infinite;">
+        <sc-for list="{{ ticker }}" as="t" hint-placeholder-count="10">
+          <span style="display: flex; align-items: center; gap: 28px; padding: 18px 14px; font-size: clamp(22px, 2.6vw, 34px); font-weight: 700; letter-spacing: .04em; color: #FDFCF8; white-space: nowrap;">
+            {{ t }}
+            <span aria-hidden="true" style="width: 12px; height: 12px; background: #F6D66A; transform: rotate(45deg); display: block;"></span>
+          </span>
+        </sc-for>
+      </div>
+    </div>
+
+    <section id="mood" ref="{{ moodRef }}" data-lumi="mood" onPointerMove="{{ moodMove }}" onPointerLeave="{{ moodLeave }}" aria-labelledby="mood-title" style="position: relative; background: {{ moodBg }}; transition: background .9s cubic-bezier(.16,.8,.3,1); padding: clamp(64px, 8vw, 110px) clamp(16px, 3.5vw, 48px) clamp(64px, 8vw, 110px); overflow: hidden;">
+      <canvas ref="{{ moodCanvasRef }}" data-lumi="moodCanvas" aria-hidden="true" style="position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; pointer-events: none;"></canvas>
+
+      <div style="position: relative; z-index: 3; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 18px 40px; margin-bottom: clamp(28px, 4vw, 48px);">
+        <div>
+          <span style="display: block; font-size: 12px; font-weight: 700; letter-spacing: .22em; color: {{ moodInk }}; transition: color .6s ease;">PLAY · THE MOOD MACHINE</span>
+          <h2 id="mood-title" style="margin: 14px 0 0; font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: clamp(52px, 8.4vw, 136px); line-height: .88; letter-spacing: -0.03em; color: {{ moodInk }}; transition: color .6s ease;">WHAT'S YOUR <span style="font-style: italic;">mood?</span></h2>
+        </div>
+        <p style="margin: 0 0 10px; font-size: clamp(17px, 1.5vw, 21px); font-weight: 500; color: {{ moodInk }}; transition: color .6s ease; max-width: 22ch;">Pick a mood. We'll pick the LUMI.</p>
+      </div>
+
+      <div data-moodrow role="group" aria-label="Choose a mood" style="position: relative; display: flex; gap: clamp(8px, 1vw, 14px); height: clamp(420px, 60vh, 620px);">
+        <button onClick="{{ pickSoft }}" onPointerEnter="{{ hoverSoft }}" onPointerLeave="{{ unhover }}" onFocus="{{ hoverSoft }}" onBlur="{{ unhover }}" aria-pressed="{{ pressSoft }}" style="position: relative; flex: {{ flexSoft }}; min-width: 0; border: 0; padding: 0; cursor: pointer; background: #EFCFCB; overflow: hidden; text-align: left; outline-offset: -4px; transition: flex .9s cubic-bezier(.16,.8,.3,1);">
+          <span style="position: absolute; inset: 16px 16px 128px; display: block; background: repeating-linear-gradient(135deg, rgba(212,167,165,0.45) 0 2px, transparent 2px 13px), #F8E3DF; transform: {{ imgSoft }}; transition: transform 1.8s cubic-bezier(.16,.8,.3,1);">
+            <span style="position: absolute; left: 12px; top: 12px; font-family: ui-monospace, monospace; font-size: 9px; letter-spacing: .12em; color: #3F4633; background: rgba(253,252,248,0.9); padding: 4px 7px;">SOFT-LIGHT PORTRAIT, BLUSH TANK</span>
+          </span>
+          <span style="position: absolute; z-index: 3; left: 18px; right: 18px; bottom: 18px; display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: .18em; color: #3F4633;">01 · SLOW / BLUSH</span>
+            <span style="font-family: 'Bodoni Moda', serif; font-size: clamp(40px, 4.8vw, 80px); line-height: .9; color: #3F4633; letter-spacing: -0.02em;">SOFT</span>
+          </span>
+        </button>
+
+        <button onClick="{{ pickBold }}" onPointerEnter="{{ hoverBold }}" onPointerLeave="{{ unhover }}" onFocus="{{ hoverBold }}" onBlur="{{ unhover }}" aria-pressed="{{ pressBold }}" style="position: relative; flex: {{ flexBold }}; min-width: 0; border: 0; padding: 0; cursor: pointer; background: #3155D8; overflow: hidden; text-align: left; outline-offset: -4px; transition: flex .9s cubic-bezier(.16,.8,.3,1);">
+          <span style="position: absolute; inset: 16px 16px 128px; display: block; background: repeating-linear-gradient(135deg, rgba(253,252,248,0.14) 0 2px, transparent 2px 13px), #1B1F16; transform: {{ imgBold }}; transition: transform .35s cubic-bezier(.7,0,.2,1);">
+            <span aria-hidden="true" style="position: absolute; right: 0; bottom: 0; width: 42%; height: 38%; background: #E94B45;"></span>
+            <span style="position: absolute; left: 12px; top: 12px; font-family: ui-monospace, monospace; font-size: 9px; letter-spacing: .12em; color: #1B1F16; background: #FDFCF8; padding: 4px 7px;">FLASH STREET SHOT, STAR BROOCH</span>
+          </span>
+          <span style="position: absolute; z-index: 3; left: 18px; right: 18px; bottom: 18px; display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: .18em; color: #FDFCF8;">02 · SHARP / CHERRY</span>
+            <span style="font-family: 'Bodoni Moda', serif; font-size: clamp(40px, 4.8vw, 80px); line-height: .9; color: #FDFCF8; letter-spacing: -0.02em; font-weight: 500;">BOLD</span>
+          </span>
+        </button>
+
+        <button onClick="{{ pickPlayful }}" onPointerEnter="{{ hoverPlayful }}" onPointerLeave="{{ unhover }}" onFocus="{{ hoverPlayful }}" onBlur="{{ unhover }}" aria-pressed="{{ pressPlayful }}" style="position: relative; flex: {{ flexPlayful }}; min-width: 0; border: 0; padding: 0; cursor: pointer; background: #F6D66A; overflow: hidden; text-align: left; outline-offset: -4px; transition: flex .9s cubic-bezier(.16,.8,.3,1);">
+          <span style="position: absolute; inset: 16px 16px 128px; display: block; background: repeating-linear-gradient(135deg, rgba(245,138,180,0.4) 0 2px, transparent 2px 13px), #F9B8D2; transform: {{ imgPlayful }}; transition: transform .9s cubic-bezier(.34,1.9,.5,1);">
+            <span style="position: absolute; left: 12px; top: 12px; font-family: ui-monospace, monospace; font-size: 9px; letter-spacing: .12em; color: #3F4633; background: rgba(253,252,248,0.9); padding: 4px 7px;">FRIENDS MID-LAUGH, CHARM ON BAG</span>
+          </span>
+          <span style="position: absolute; z-index: 3; left: 18px; right: 18px; bottom: 18px; display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: .18em; color: #3F4633;">03 · BOUNCY / BUTTER</span>
+            <span style="font-family: 'Bodoni Moda', serif; font-size: clamp(40px, 4.8vw, 80px); line-height: .9; color: #3F4633; letter-spacing: -0.02em; font-style: italic;">PLAYFUL</span>
+          </span>
+        </button>
+
+        <button onClick="{{ pickChaotic }}" onPointerEnter="{{ hoverChaotic }}" onPointerLeave="{{ unhover }}" onFocus="{{ hoverChaotic }}" onBlur="{{ unhover }}" aria-pressed="{{ pressChaotic }}" style="position: relative; flex: {{ flexChaotic }}; min-width: 0; border: 0; padding: 0; cursor: pointer; background: #B8A2E8; overflow: hidden; text-align: left; outline-offset: -4px; transition: flex .9s cubic-bezier(.16,.8,.3,1);">
+          <span style="position: absolute; inset: 16px 16px 128px; display: block;">
+            <span style="position: absolute; left: 0; top: 0; width: 62%; height: 70%; background: repeating-linear-gradient(135deg, rgba(27,31,22,0.14) 0 2px, transparent 2px 11px), #F28A45; transform: {{ chaosA }}; transition: transform .3s cubic-bezier(.2,.9,.3,1);"></span>
+            <span style="position: absolute; right: 0; top: 18%; width: 52%; height: 56%; background: repeating-linear-gradient(135deg, rgba(27,31,22,0.14) 0 2px, transparent 2px 11px), #9FE1C3; transform: {{ chaosB }}; transition: transform .28s cubic-bezier(.2,.9,.3,1);"></span>
+            <span style="position: absolute; left: 14%; bottom: 0; width: 56%; height: 44%; background: repeating-linear-gradient(135deg, rgba(27,31,22,0.14) 0 2px, transparent 2px 11px), #8EC9E8; transform: {{ chaosC }}; transition: transform .32s cubic-bezier(.2,.9,.3,1);">
+              <span style="position: absolute; left: 8px; bottom: 8px; font-family: ui-monospace, monospace; font-size: 9px; letter-spacing: .12em; color: #1B1F16; background: rgba(253,252,248,0.9); padding: 4px 7px;">LAYERED COLLAGE</span>
+            </span>
+          </span>
+          <span style="position: absolute; z-index: 3; left: 18px; right: 18px; bottom: 18px; display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: .18em; color: #1B1F16;">04 · FAST / EVERYTHING</span>
+            <span style="font-family: 'Bodoni Moda', serif; font-size: clamp(40px, 4.8vw, 80px); line-height: .9; color: #1B1F16; letter-spacing: -0.02em;">CHAOTIC</span>
+          </span>
+        </button>
+      </div>
+
+      <sc-if value="{{ moodPicked }}" hint-placeholder-val="{{ false }}">
+        <div id="your-lumi" data-results style="position: relative; z-index: 3; display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(28px, 4vw, 64px); align-items: center; margin-top: clamp(44px, 6vw, 80px); animation: lumiPop .8s cubic-bezier(.16,.8,.3,1) both;">
+          <div>
+            <span style="display: block; font-size: 12px; font-weight: 700; letter-spacing: .22em; color: {{ moodInk }};">YOUR LUMI</span>
+            <h3 style="margin: 12px 0 0; font-family: 'Bodoni Moda', serif; font-weight: 400; font-size: clamp(44px, 6vw, 96px); line-height: .9; letter-spacing: -0.03em; color: {{ moodInk }};">Feeling <span style="font-style: italic;">{{ moodName }}?</span></h3>
+            <p style="margin: 20px 0 0; font-size: 17px; line-height: 1.55; color: {{ moodInk }}; max-width: 32ch;">{{ moodBlurb }}</p>
+            <div style="display: flex; align-items: baseline; gap: 14px; margin-top: 26px; font-size: 15px; font-weight: 500; color: {{ moodInk }};">
+              <span>The whole look</span>
+              <span style="font-size: 24px; font-weight: 700;">{{ lookTotal }}</span>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px;">
+              <button onClick="{{ addLook }}" style="background: {{ moodInk }}; color: {{ moodBtnInk }}; border: 0; padding: 18px 30px; font-size: 13px; font-weight: 700; letter-spacing: .14em; border-radius: 999px; cursor: pointer; transition: transform .45s cubic-bezier(.34,1.8,.5,1);" style-hover="transform: translateY(-3px) rotate(-1.5deg);">ADD ALL THREE +</button>
+              <a href="#mood" style="display: inline-flex; align-items: center; border: 2px solid {{ moodInk }}; color: {{ moodInk }}; padding: 16px 28px; font-size: 13px; font-weight: 700; letter-spacing: .14em; border-radius: 999px; transition: transform .45s cubic-bezier(.34,1.8,.5,1);" style-hover="transform: translateY(-3px) rotate(1.5deg);">SHOP THIS MOOD →</a>
+            </div>
+          </div>
+
+          <div data-picks style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 22px); align-items: start;">
+            <sc-for list="{{ picks }}" as="p" hint-placeholder-count="3">
+              <article style="background: #FDFCF8; padding: 10px 10px 16px; transform: {{ p.tilt }}; margin-top: {{ p.drop }}; box-shadow: 0 20px 44px rgba(27,31,22,0.16); transition: transform .6s cubic-bezier(.34,1.6,.5,1);" style-hover="transform: rotate(0deg) translateY(-6px);">
+                <div style="position: relative; aspect-ratio: 4/5; background: repeating-linear-gradient(135deg, rgba(27,31,22,0.12) 0 2px, transparent 2px 11px), {{ p.tint }}; overflow: hidden;">
+                  <span style="position: absolute; left: 8px; bottom: 8px; font-family: ui-monospace, monospace; font-size: 9px; letter-spacing: .1em; color: #1B1F16; background: rgba(253,252,248,0.9); padding: 3px 6px;">{{ p.shot }}</span>
+                  <button onClick="{{ p.onWish }}" aria-label="{{ p.wishAria }}" aria-pressed="{{ p.wished }}" style="position: absolute; top: 8px; right: 8px; width: 38px; height: 38px; border-radius: 999px; border: 0; background: #FDFCF8; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                    <span aria-hidden="true" style="width: 10px; height: 10px; transform: rotate(45deg); background: {{ p.wishFill }}; border: 2px solid #E94B45;"></span>
+                  </button>
+                </div>
+                <div style="padding: 12px 4px 0;">
+                  <div style="display: flex; justify-content: space-between; gap: 8px; align-items: baseline;">
+                    <span style="font-size: 13px; font-weight: 700; letter-spacing: .06em; color: #1B1F16;">{{ p.name }}</span>
+                    <span style="font-size: 14px; font-weight: 500; color: #1B1F16; white-space: nowrap;">{{ p.price }}</span>
+                  </div>
+                  <p style="margin: 4px 0 0; font-size: 14px; color: #4A5140;">{{ p.line }}</p>
+                  <button onClick="{{ p.onAdd }}" style="margin-top: 12px; width: 100%; min-height: 44px; background: none; border: 2px solid #1B1F16; color: #1B1F16; font-size: 12px; font-weight: 700; letter-spacing: .14em; border-radius: 999px; cursor: pointer; transition: background .25s ease, color .25s ease;" style-hover="background: #1B1F16; color: #FDFCF8;">ADD TO BAG +</button>
+                </div>
+              </article>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+    </section>
+  </main>
+
+  <sc-if value="{{ cartOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 95;">
+      <div onClick="{{ closeCart }}" style="position: absolute; inset: 0; background: rgba(27,31,22,0.4); animation: lumiFade .3s ease;"></div>
+      <aside role="dialog" aria-label="Your bag" style="position: absolute; top: 0; right: 0; bottom: 0; width: min(430px, 100%); background: #FDFCF8; display: flex; flex-direction: column; animation: lumiDrawer .5s cubic-bezier(.16,.8,.3,1);">
+        <div style="padding: 24px 24px 18px; background: #F6D66A; display: flex; justify-content: space-between; align-items: flex-start;">
+          <div>
+            <span style="display: block; font-family: 'Bodoni Moda', serif; font-size: 34px; line-height: 1; color: #1B1F16;">{{ cartTitle }}</span>
+            <span style="display: block; margin-top: 8px; font-size: 13px; font-weight: 500; color: #1B1F16;">{{ cartCountLabel }}</span>
+          </div>
+          <button onClick="{{ closeCart }}" style="background: none; border: 0; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: #1B1F16; cursor: pointer; padding: 12px 0 12px 12px;">CLOSE</button>
+        </div>
+        <div style="flex: 1; overflow-y: auto; padding: 4px 24px;">
+          <sc-for list="{{ cartLines }}" as="l" hint-placeholder-count="0">
+            <div style="display: grid; grid-template-columns: 70px 1fr; gap: 14px; padding: 18px 0; border-bottom: 1px solid #E8DDD4;">
+              <span style="display: block; aspect-ratio: 4/5; background: repeating-linear-gradient(135deg, rgba(27,31,22,0.12) 0 2px, transparent 2px 9px), {{ l.tint }};"></span>
+              <div>
+                <div style="display: flex; justify-content: space-between; gap: 10px;">
+                  <span style="font-size: 13px; font-weight: 700; letter-spacing: .05em; color: #1B1F16;">{{ l.name }}</span>
+                  <span style="font-size: 14px; color: #1B1F16;">{{ l.total }}</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 14px; margin-top: 12px;">
+                  <div style="display: flex; align-items: center; border: 1px solid #C5B7AB; border-radius: 999px;">
+                    <button onClick="{{ l.onDec }}" aria-label="Decrease quantity" style="width: 40px; height: 40px; background: none; border: 0; cursor: pointer; font-size: 16px; color: #3F4633;">−</button>
+                    <span style="min-width: 18px; text-align: center; font-size: 14px;">{{ l.qty }}</span>
+                    <button onClick="{{ l.onInc }}" aria-label="Increase quantity" style="width: 40px; height: 40px; background: none; border: 0; cursor: pointer; font-size: 16px; color: #3F4633;">+</button>
+                  </div>
+                  <button onClick="{{ l.onRemove }}" style="background: none; border: 0; min-height: 44px; font-size: 12px; font-weight: 700; letter-spacing: .12em; color: #6B7258; cursor: pointer;" style-hover="color: #E94B45;">REMOVE</button>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+          <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ false }}">
+            <p style="padding: 50px 0; text-align: center; font-size: 16px; color: #6B7258;">Nothing in here yet. Pick a mood?</p>
+          </sc-if>
+        </div>
+        <div style="padding: 20px 24px 24px; border-top: 1px solid #E8DDD4;">
+          <div style="display: flex; justify-content: space-between; font-size: 15px; font-weight: 500; color: #1B1F16;"><span>Subtotal</span><span>{{ subtotal }}</span></div>
+          <p style="margin: 6px 0 16px; font-size: 13px; color: #6B7258;">{{ shipNote }}</p>
+          <button onClick="{{ checkout }}" style="width: 100%; min-height: 56px; background: #3F4633; color: #FDFCF8; border: 0; border-radius: 999px; font-size: 13px; font-weight: 700; letter-spacing: .16em; cursor: pointer; transition: background .3s ease;" style-hover="background: #E94B45;">CHECKOUT →</button>
+        </div>
+      </aside>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div role="status" style="position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%); z-index: 99; background: #1B1F16; color: #FDFCF8; padding: 15px 24px; border-radius: 999px; font-size: 13px; font-weight: 700; letter-spacing: .14em; display: flex; align-items: center; gap: 10px; animation: lumiPop .45s cubic-bezier(.34,1.6,.5,1) both;">
+      <span aria-hidden="true" style="width: 8px; height: 8px; background: #F6D66A; transform: rotate(45deg);"></span>
+      {{ toast }}
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;beadCount&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:80,&quot;min&quot;:30,&quot;max&quot;:140,&quot;step&quot;:5,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Beads&quot;},&quot;cursorMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;mixed&quot;,&quot;options&quot;:[&quot;mixed&quot;,&quot;repel&quot;,&quot;attract&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Beads&quot;},&quot;cursorGlow&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Beads&quot;}}">
+const POP = ["#E94B45", "#F6D66A", "#B8A2E8", "#3155D8", "#F58AB4", "#F28A45", "#9FE1C3", "#8EC9E8"];
+const HERO_PAL = ["#E94B45", "#F6D66A", "#B8A2E8", "#3155D8", "#F58AB4", "#F28A45", "#9FE1C3", "#8EC9E8", "#D4A7A5", "#6B7258", "#FDFCF8"];
+const MOODS = {
+  none:    { bg: "#F3ECE3", ink: "#3F4633", btnInk: "#FDFCF8", pal: POP, speed: .8, gravity: 520, bounce: .6, floatRatio: .6, glow: "246,214,106" },
+  soft:    { bg: "#F7E1DD", ink: "#3F4633", btnInk: "#FDFCF8", pal: ["#EFCFCB", "#D4A7A5", "#FDFCF8", "#F58AB4", "#E8DDD4"], speed: .45, gravity: 120, bounce: .3, floatRatio: .92, glow: "245,138,180" },
+  bold:    { bg: "#3F4633", ink: "#FDFCF8", btnInk: "#1B1F16", pal: ["#E94B45", "#3155D8", "#FDFCF8", "#1B1F16"], speed: 1.35, gravity: 1500, bounce: .25, floatRatio: .15, glow: "233,75,69" },
+  playful: { bg: "#FBE9A6", ink: "#3F4633", btnInk: "#FDFCF8", pal: ["#F6D66A", "#F58AB4", "#B8A2E8", "#FDFCF8", "#9FE1C3"], speed: 1, gravity: 1000, bounce: .92, floatRatio: .25, glow: "245,138,180" },
+  chaotic: { bg: "#3155D8", ink: "#FDFCF8", btnInk: "#1B1F16", pal: POP, speed: 1.85, gravity: 700, bounce: .75, floatRatio: .5, glow: "246,214,106" }
+};
+const PRODUCTS = [
+  { id: "cherry-tank", name: "THE CHERRY TANK", price: 2650, tint: "#E94B45", line: "Not your basic tank.", shot: "TANK, FLAT LAY" },
+  { id: "blush-tank", name: "THE BLUSH BLOOM TANK", price: 2400, tint: "#EFCFCB", line: "Soft, but make it a statement.", shot: "TANK ON MODEL" },
+  { id: "butter-tank", name: "THE BUTTER TANK", price: 2500, tint: "#F6D66A", line: "Sunshine, hand-strung.", shot: "TANK, MIRROR SELFIE" },
+  { id: "confetti-tank", name: "THE CONFETTI TANK", price: 2900, tint: "#B8A2E8", line: "Every colour. One top.", shot: "TANK, BACK DETAIL" },
+  { id: "star-brooch", name: "THE STAR BROOCH", price: 690, tint: "#3155D8", line: "Small detail. Big energy.", shot: "BROOCH ON JACKET" },
+  { id: "heart-brooch", name: "THE HEART BROOCH", price: 640, tint: "#F58AB4", line: "Wear your mood.", shot: "BROOCH ON TOTE" },
+  { id: "daisy-brooch", name: "THE DAISY BROOCH", price: 590, tint: "#F28A45", line: "Pin it. Play with it.", shot: "BROOCH ON KNIT" },
+  { id: "evil-eye", name: "THE EVIL EYE BROOCH", price: 640, tint: "#D9DCCB", line: "Protection, but cute.", shot: "BROOCH MACRO" },
+  { id: "bubble-charm", name: "THE BUBBLE CHARM", price: 850, tint: "#8EC9E8", line: "Your bag, but better.", shot: "CHARM ON BAG" },
+  { id: "pearl-charm", name: "THE PEARL PUDDLE CHARM", price: 780, tint: "#E8DDD4", line: "The quiet one.", shot: "CHARM ON LEATHER" },
+  { id: "disco-charm", name: "THE DISCO CHARM", price: 920, tint: "#6B7258", line: "Catches every light.", shot: "CHARM, NIGHT OUT" },
+  { id: "auto-charm", name: "THE AUTO CHARM", price: 920, tint: "#9FE1C3", line: "Hometown, clipped on.", shot: "CHARM ON BACKPACK" }
+];
+const MOOD_PICKS = {
+  soft: { name: "soft", blurb: "Blush beads, quiet pearls, pieces that whisper instead of shout.", ids: ["blush-tank", "evil-eye", "pearl-charm"] },
+  bold: { name: "bold", blurb: "Cherry, cobalt, zero apologies. Walk in like you mean it.", ids: ["cherry-tank", "star-brooch", "disco-charm"] },
+  playful: { name: "playful", blurb: "Yellow, pink, a little ridiculous — in the best possible way.", ids: ["butter-tank", "heart-brooch", "bubble-charm"] },
+  chaotic: { name: "chaotic", blurb: "Every colour at once. Pin three things. Why not.", ids: ["confetti-tank", "daisy-brooch", "auto-charm"] }
+};
+const money = n => "₹" + n.toLocaleString("en-IN");
+function shade(hex, amt) {
+  const n = parseInt(hex.slice(1), 16), t = amt < 0 ? 0 : 255, p = Math.abs(amt);
+  const f = v => Math.round((t - v) * p + v);
+  return "rgb(" + f(n >> 16) + "," + f((n >> 8) & 255) + "," + f(n & 255) + ")";
+}
+
+class BeadField {
+  constructor(o) {
+    this.o = Object.assign({ count: 80, pal: POP, speed: 1, gravity: 900, bounce: .55, floatRatio: .35, frontRatio: 0, glow: "212,167,165", attractRatio: .18, rain: .55 }, o);
+    this.beads = []; this.px = -999; this.py = -999; this.gx = -999; this.gy = -999; this.inside = false;
+    this.time = 0; this.rainT = 0; this.running = false; this.visible = false;
+    this.reduced = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    this.loop = this.loop.bind(this);
+  }
+  mount(host, back, front) {
+    this.host = host; this.back = back; this.front = front || null;
+    this.resize(); this.seed();
+    this.ro = new ResizeObserver(() => this.resize()); this.ro.observe(host);
+    this.io = new IntersectionObserver(([e]) => { this.visible = e.isIntersecting; this.visible ? this.start() : this.stop(); }); this.io.observe(host);
+    if (this.reduced) { for (let i = 0; i < 240; i++) this.step(1 / 60); this.draw(); }
+  }
+  destroy() { this.stop(); this.ro && this.ro.disconnect(); this.io && this.io.disconnect(); }
+  resize() {
+    const r = this.host.getBoundingClientRect(), d = Math.min(window.devicePixelRatio || 1, 2);
+    const wasW = this.w; this.w = r.width; this.h = r.height; this.small = this.w < 700;
+    [this.back, this.front].forEach(c => { if (!c) return; c.width = Math.round(r.width * d); c.height = Math.round(r.height * d); c.getContext("2d").setTransform(d, 0, 0, d, 0, 0); });
+    if (wasW && Math.abs(wasW - this.w) > 200) this.seed();
+    if (this.reduced || !this.running) this.draw();
+  }
+  mk(x, y, extra) {
+    const o = this.o, s = this.small ? .72 : 1, k = Math.random();
+    const r = (k < .5 ? 5 + Math.random() * 4 : k < .88 ? 10 + Math.random() * 6 : 17 + Math.random() * 8) * s;
+    const b = { x, y, vx: (Math.random() - .5) * 80, vy: 0, r, m: r * r, float: Math.random() < o.floatRatio,
+      front: Math.random() < o.frontRatio && r < 12, attract: Math.random() < o.attractRatio,
+      ph: Math.random() * 6.28, rot: Math.random() * 6.28, hole: Math.random() < .55, spark: Math.random() < .14, life: -1 };
+    this.paint(b, o.pal[Math.floor(Math.random() * o.pal.length)]);
+    return Object.assign(b, extra || {});
+  }
+  paint(b, c) { b.c = c; b.hi = shade(c, .6); b.lo = shade(c, -.38); }
+  seed() {
+    const n = Math.round(this.o.count * (this.small ? .5 : 1));
+    this.beads = [];
+    for (let i = 0; i < n; i++) {
+      const b = this.mk(Math.random() * this.w, 0);
+      b.y = b.float ? Math.random() * this.h : -Math.random() * this.h * 1.1 - 20;
+      this.beads.push(b);
+    }
+  }
+  setCount(n) { if (n === this.o.count) return; this.o.count = n; if (this.w) this.seed(); }
+  setMood(p) {
+    Object.assign(this.o, { pal: p.pal, speed: p.speed, gravity: p.gravity, bounce: p.bounce, floatRatio: p.floatRatio, glow: p.glow });
+    this.beads.forEach(b => {
+      setTimeout(() => { this.paint(b, p.pal[Math.floor(Math.random() * p.pal.length)]); b.float = Math.random() < p.floatRatio; }, Math.random() * 650);
+      b.vx += (Math.random() - .5) * 300 * p.speed; b.vy -= Math.random() * 300 * p.speed;
+    });
+  }
+  pointer(x, y) { if (!this.inside) { this.gx = x; this.gy = y; } this.px = x; this.py = y; this.inside = true; }
+  leave() { this.inside = false; }
+  burst(x, y, n, power) {
+    power = power || 900;
+    this.beads.forEach(b => {
+      const dx = b.x - x, dy = b.y - y, d = Math.hypot(dx, dy) || 1;
+      if (d < 300) { const f = (1 - d / 300) * power; b.vx += dx / d * f; b.vy += dy / d * f - 120; }
+    });
+    for (let i = 0; i < (n || 0); i++) {
+      const a = Math.random() * Math.PI * 2, sp = power * (.4 + Math.random() * .7);
+      const b = this.mk(x, y, { vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 300, life: 1.6 + Math.random(), float: false, front: true });
+      b.r = (4 + Math.random() * 5) * (this.small ? .8 : 1); b.m = b.r * b.r;
+      this.beads.push(b);
+    }
+    this.start();
+  }
+  scatter() {
+    const cx = this.w / 2, cy = this.h / 2;
+    this.beads.forEach(b => {
+      const dx = b.x - cx, dy = b.y - cy, d = Math.hypot(dx, dy) || 1, f = 1100 + Math.random() * 900;
+      b.vx += dx / d * f; b.vy += dy / d * f - 500;
+    });
+    this.start();
+  }
+  start() { if (this.running || this.reduced || !this.visible) return; this.running = true; this.last = performance.now(); requestAnimationFrame(this.loop); }
+  stop() { this.running = false; }
+  loop(t) {
+    if (!this.running) return;
+    const dt = Math.min((t - this.last) / 1000, 1 / 30); this.last = t;
+    this.step(dt); this.draw();
+    requestAnimationFrame(this.loop);
+  }
+  step(rawDt) {
+    const o = this.o, dt = rawDt * o.speed, w = this.w, h = this.h, B = this.beads;
+    this.time += rawDt;
+    this.gx += (this.px - this.gx) * .12; this.gy += (this.py - this.gy) * .12;
+    for (let i = B.length - 1; i >= 0; i--) {
+      const b = B[i];
+      if (b.life > 0) { b.life -= rawDt; if (b.life <= 0) { B.splice(i, 1); continue; } }
+      if (b.float) {
+        b.ph += dt * .9;
+        b.vx += Math.cos(b.ph) * 22 * dt; b.vy += Math.sin(b.ph * 1.3) * 22 * dt - 4 * dt;
+        b.vx *= .985; b.vy *= .985;
+      } else b.vy += o.gravity * dt;
+      if (this.inside) {
+        const dx = b.x - this.px, dy = b.y - this.py, d = Math.hypot(dx, dy) || 1;
+        if (b.attract && d < 300 && d > 60) { const f = (1 - d / 300) * 1600; b.vx -= dx / d * f * dt; b.vy -= dy / d * f * dt; b.vx *= .97; b.vy *= .97; }
+        const R = (this.small ? 80 : 120) + b.r;
+        if (d < R && !(b.attract && d > 45)) { const f = (1 - d / R) * 6000; b.vx += dx / d * f * dt; b.vy += dy / d * f * dt; }
+      }
+      const sp = Math.hypot(b.vx, b.vy); if (sp > 1800) { b.vx *= 1800 / sp; b.vy *= 1800 / sp; }
+      b.x += b.vx * dt; b.y += b.vy * dt; b.rot += b.vx * dt / b.r;
+      if (b.x < b.r) { b.x = b.r; b.vx = Math.abs(b.vx) * o.bounce; }
+      if (b.x > w - b.r) { b.x = w - b.r; b.vx = -Math.abs(b.vx) * o.bounce; }
+      if (b.y > h - b.r) { b.y = h - b.r; b.vy = -Math.abs(b.vy) * o.bounce; if (Math.abs(b.vy) < 40) b.vy = 0; b.vx *= .985; b.rest = true; } else b.rest = false;
+      if (b.float && b.y < b.r) { b.y = b.r; b.vy = Math.abs(b.vy); }
+    }
+    for (let i = 0; i < B.length; i++) {
+      const a = B[i];
+      for (let j = i + 1; j < B.length; j++) {
+        const c = B[j], dx = c.x - a.x, dy = c.y - a.y, min = a.r + c.r;
+        if (dx > min || dx < -min || dy > min || dy < -min) continue;
+        const d2 = dx * dx + dy * dy; if (d2 >= min * min) continue;
+        const d = Math.sqrt(d2) || .01, nx = dx / d, ny = dy / d, ov = min - d, tm = a.m + c.m;
+        a.x -= nx * ov * (c.m / tm); a.y -= ny * ov * (c.m / tm); c.x += nx * ov * (a.m / tm); c.y += ny * ov * (a.m / tm);
+        const vn = (c.vx - a.vx) * nx + (c.vy - a.vy) * ny;
+        if (vn < 0) { const e = Math.min(o.bounce + .1, .95), jj = -(1 + e) * vn / tm; a.vx -= jj * c.m * nx; a.vy -= jj * c.m * ny; c.vx += jj * a.m * nx; c.vy += jj * a.m * ny; }
+      }
+    }
+    this.rainT += rawDt;
+    if (this.rainT > o.rain) {
+      this.rainT = 0;
+      const rest = B.filter(b => b.rest && !b.float && b.life < 0);
+      if (rest.length > B.length * .25) { const b = rest[Math.floor(Math.random() * rest.length)]; b.y = -30; b.x = Math.random() * w; b.vy = 0; b.vx = (Math.random() - .5) * 60; }
+    }
+  }
+  draw() {
+    const w = this.w, h = this.h, bc = this.back.getContext("2d"), fc = this.front ? this.front.getContext("2d") : null;
+    bc.clearRect(0, 0, w, h); if (fc) fc.clearRect(0, 0, w, h);
+    if (this.inside && this.o.glow && !this.noGlow) {
+      const R = this.small ? 150 : 240, g = bc.createRadialGradient(this.gx, this.gy, 0, this.gx, this.gy, R);
+      g.addColorStop(0, "rgba(" + this.o.glow + ",.5)"); g.addColorStop(1, "rgba(" + this.o.glow + ",0)");
+      bc.fillStyle = g; bc.fillRect(this.gx - R, this.gy - R, R * 2, R * 2);
+    }
+    for (const b of this.beads) this.bead(b.front && fc ? fc : bc, b);
+  }
+  bead(ctx, b) {
+    const { x, y, r } = b;
+    if (b.life > 0) ctx.globalAlpha = Math.min(1, b.life / .5);
+    const g = ctx.createRadialGradient(x - r * .35, y - r * .4, r * .08, x, y, r);
+    g.addColorStop(0, b.hi); g.addColorStop(.55, b.c); g.addColorStop(1, b.lo);
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, 6.2832); ctx.fill();
+    if (b.hole && r > 7) {
+      const hx = x + Math.cos(b.rot) * r * .32, hy = y + Math.sin(b.rot) * r * .14;
+      ctx.fillStyle = b.lo; ctx.globalAlpha *= .55; ctx.beginPath(); ctx.ellipse(hx, hy, r * .2, r * .15, 0, 0, 6.2832); ctx.fill();
+      ctx.globalAlpha = b.life > 0 ? Math.min(1, b.life / .5) : 1;
+    }
+    ctx.fillStyle = "rgba(255,255,255,.85)"; ctx.beginPath(); ctx.arc(x - r * .38, y - r * .42, r * .17, 0, 6.2832); ctx.fill();
+    if (b.spark) {
+      const a = (Math.sin(this.time * 2.2 + b.ph) + 1) / 2;
+      if (a > .72) {
+        const s = r * 1.1 * (a - .72) / .28 + 2, sx = x - r * .38, sy = y - r * .42;
+        ctx.fillStyle = "rgba(255,255,255,.95)"; ctx.beginPath();
+        ctx.moveTo(sx, sy - s); ctx.lineTo(sx + s * .18, sy); ctx.lineTo(sx, sy + s); ctx.lineTo(sx - s * .18, sy); ctx.closePath();
+        ctx.moveTo(sx - s, sy); ctx.lineTo(sx, sy + s * .18); ctx.lineTo(sx + s, sy); ctx.lineTo(sx, sy - s * .18); ctx.closePath(); ctx.fill();
+      }
+    }
+    ctx.globalAlpha = 1;
+  }
+}
+
+class Component extends DCLogic {
+  state = { scrolled: false, menuOpen: false, cartOpen: false, cart: [], wish: [], hover: null, picked: null, toast: "", logo: false, touch: false };
+  heroRef = React.createRef(); heroBackRef = React.createRef(); heroFrontRef = React.createRef(); heroImgRef = React.createRef();
+  moodRef = React.createRef(); moodCanvasRef = React.createRef(); bagRef = React.createRef();
+
+  $(n) { const r = this[n + "Ref"]; return (r && r.current) || document.querySelector('[data-lumi="' + n + '"]'); }
+  cfg() {
+    const p = this.props;
+    const mode = p.cursorMode ?? "mixed";
+    return { count: p.beadCount ?? 80, attractRatio: mode === "repel" ? 0 : mode === "attract" ? .75 : .18, glow: p.cursorGlow ?? true };
+  }
+  componentDidMount() { this.tryInit(0); }
+  tryInit(n) {
+    if (this.hero) return;
+    if (!this.$("hero") || !this.$("heroBack") || !this.$("mood") || !this.$("moodCanvas")) { if (n < 40) this.initT = setTimeout(() => this.tryInit(n + 1), 100); return; }
+    try { this.init(); } catch (err) { console.warn("LUMI init failed", err && err.message); }
+  }
+  init() {
+    const c = this.cfg();
+    this.touch = window.matchMedia && matchMedia("(hover: none)").matches;
+    if (this.touch) this.setState({ touch: true });
+    this.hero = new BeadField({ count: c.count, pal: HERO_PAL, gravity: 700, bounce: .6, floatRatio: .4, frontRatio: .16, attractRatio: c.attractRatio, glow: "212,167,165" });
+    this.hero.noGlow = !c.glow;
+    this.hero.mount(this.$("hero"), this.$("heroBack"), this.$("heroFront"));
+    const m = MOODS.none;
+    this.mood = new BeadField({ count: Math.round(c.count * .55), pal: m.pal, speed: m.speed, gravity: m.gravity, bounce: m.bounce, floatRatio: m.floatRatio, attractRatio: c.attractRatio, glow: m.glow, rain: .9 });
+    this.mood.noGlow = !c.glow;
+    this.mood.mount(this.$("mood"), this.$("moodCanvas"));
+    this.ptr = { x: 0, y: 0, cx: 0, cy: 0 };
+    this.onScroll = () => { const s = window.scrollY > 24; if (s !== this.state.scrolled) this.setState({ scrolled: s }); };
+    window.addEventListener("scroll", this.onScroll, { passive: true });
+    const tick = () => {
+      this.raf = requestAnimationFrame(tick);
+      const el = this.$("heroImg"); if (!el) return;
+      const y = window.scrollY; if (y > window.innerHeight * 1.2) return;
+      this.ptr.cx += (this.ptr.x - this.ptr.cx) * .06; this.ptr.cy += (this.ptr.y - this.ptr.cy) * .06;
+      el.style.transform = "translate3d(" + (this.ptr.cx * -14).toFixed(2) + "px," + (y * .14 + this.ptr.cy * -10).toFixed(2) + "px,0)";
+    };
+    if (!this.hero.reduced) tick();
+  }
+  componentDidUpdate(prev) {
+    if (!this.hero) return;
+    const c = this.cfg();
+    this.hero.setCount(c.count); this.mood.setCount(Math.round(c.count * .55));
+    [this.hero, this.mood].forEach(f => { f.noGlow = !c.glow; if (f.o.attractRatio !== c.attractRatio) { f.o.attractRatio = c.attractRatio; f.beads.forEach(b => b.attract = Math.random() < c.attractRatio); } });
+  }
+  componentWillUnmount() { this.hero && this.hero.destroy(); this.mood && this.mood.destroy(); cancelAnimationFrame(this.raf); clearTimeout(this.initT); window.removeEventListener("scroll", this.onScroll); clearTimeout(this.tt); }
+
+  local(e, el) { const r = el.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top, r]; }
+  flash(msg) { clearTimeout(this.tt); this.setState({ toast: msg }); this.tt = setTimeout(() => this.setState({ toast: "" }), 2400); }
+  goTo(id, delay) {
+    setTimeout(() => { const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 40, behavior: "smooth" }); }, delay || 0);
+  }
+  ctaBurst(e) {
+    const host = this.$("hero"); if (!host || !this.hero || !e || !e.currentTarget) return;
+    const hr = host.getBoundingClientRect(), br = e.currentTarget.getBoundingClientRect();
+    if (br.bottom < hr.top || br.top > hr.bottom) return;
+    this.hero.burst(br.left + br.width / 2 - hr.left, br.top + br.height / 2 - hr.top, 14, 1000);
+  }
+  flyBead(from, color) {
+    const bag = this.$("bag"); if (!from || !bag) return this.bump();
+    const a = from.getBoundingClientRect(), b = bag.getBoundingClientRect();
+    const el = document.createElement("div");
+    Object.assign(el.style, { position: "fixed", left: "0", top: "0", width: "16px", height: "16px", borderRadius: "50%", zIndex: "200", pointerEvents: "none",
+      background: "radial-gradient(circle at 35% 30%, #fff 0 12%, " + color + " 45%, " + shade(color, -.4) + ")", boxShadow: "0 4px 10px rgba(27,31,22,.25)" });
+    document.body.appendChild(el);
+    const x0 = a.left + a.width / 2 - 8, y0 = a.top + a.height / 2 - 8, x1 = b.left + b.width / 2 - 8, y1 = b.top + b.height / 2 - 8;
+    const mx = (x0 + x1) / 2, my = Math.min(y0, y1) - 140;
+    const anim = el.animate([
+      { transform: "translate(" + x0 + "px," + y0 + "px) scale(.5)" },
+      { transform: "translate(" + mx + "px," + my + "px) scale(1.25)", offset: .45 },
+      { transform: "translate(" + x1 + "px," + y1 + "px) scale(.45)" }
+    ], { duration: 820, easing: "cubic-bezier(.45,0,.3,1)" });
+    anim.onfinish = () => { el.remove(); this.bump(); };
+  }
+  bump() {
+    const b = this.$("bag"); if (!b || !b.animate) return;
+    b.animate([{ transform: "scale(1)" }, { transform: "scale(1.45) rotate(-10deg)" }, { transform: "scale(.92)" }, { transform: "scale(1)" }], { duration: 620, easing: "cubic-bezier(.3,1.6,.5,1)" });
+  }
+  add(p, e, silent) {
+    const from = e && e.currentTarget;
+    this.setState(s => {
+      const cart = s.cart.slice(), i = cart.findIndex(l => l.id === p.id);
+      if (i > -1) cart[i] = Object.assign({}, cart[i], { qty: cart[i].qty + 1 }); else cart.push({ id: p.id, qty: 1 });
+      return { cart };
+    });
+    this.flyBead(from, p.tint === "#E8DDD4" || p.tint === "#D9DCCB" ? "#D4A7A5" : p.tint);
+    if (!silent) this.flash("OOH. GOOD CHOICE.");
+  }
+  hoverMood(k) { this.setState({ hover: k }); this.mood && this.mood.setMood(MOODS[k || this.state.picked || "none"]); }
+  pickMood(k, e) {
+    this.setState({ picked: k, hover: this.touch ? null : k });
+    this.mood && this.mood.setMood(MOODS[k]);
+    if (this.mood && e && e.currentTarget) {
+      const [x, y] = this.local(e, this.$("mood"));
+      this.mood.burst(x, y, 12, 900);
+    }
+    this.goTo("your-lumi", 350);
+  }
+
+  renderVals() {
+    const s = this.state;
+    const env = s.hover || s.picked || "none", M = MOODS[env];
+    const count = s.cart.reduce((a, l) => a + l.qty, 0);
+    const sub = s.cart.reduce((a, l) => a + PRODUCTS.find(p => p.id === l.id).price * l.qty, 0);
+    const active = s.hover || s.picked;
+    const flex = k => (active === k ? "2.1" : "1");
+    const on = k => s.hover === k;
+    const picks = s.picked ? MOOD_PICKS[s.picked].ids.map(id => PRODUCTS.find(p => p.id === id)) : [];
+    const tilts = ["rotate(-3deg)", "rotate(2deg)", "rotate(-1deg)"], drops = ["0px", "48px", "14px"];
+    const byId = id => PRODUCTS.find(p => p.id === id);
+
+    return {
+      headerH: s.scrolled ? "60px" : "80px",
+      headerBg: s.scrolled ? "rgba(253,252,248,0.9)" : "rgba(253,252,248,0)",
+      headerLine: s.scrolled ? "rgba(197,183,171,0.5)" : "rgba(197,183,171,0)",
+      logoGem: s.logo ? "#E94B45" : "#D4A7A5",
+      logoGemT: s.logo ? "rotate(225deg) scale(1.6)" : "rotate(45deg) scale(1)",
+      logoOn: () => this.setState({ logo: true }), logoOff: () => this.setState({ logo: false }),
+      cartCount: count, bagAria: "Open bag, " + count + " items",
+      bagBg: count ? "#E94B45" : "#E8DDD4", bagInk: count ? "#FDFCF8" : "#3F4633",
+      menuOpen: s.menuOpen, openMenu: () => this.setState({ menuOpen: true }), closeMenu: () => this.setState({ menuOpen: false }),
+      heroHint: s.touch ? "TAP ANYWHERE — THE BEADS ARE REAL (ALMOST)" : "MOVE YOUR CURSOR — THE BEADS ARE REAL (ALMOST)",
+
+      heroMove: e => { if (!this.hero) return; const [x, y, r] = this.local(e, this.$("hero")); this.hero.pointer(x, y); this.ptr.x = x / r.width - .5; this.ptr.y = y / r.height - .5; },
+      heroLeave: () => { this.hero && this.hero.leave(); if (this.ptr) { this.ptr.x = 0; this.ptr.y = 0; } },
+      heroTap: e => { if (!this.hero || e.pointerType === "mouse") return; const [x, y] = this.local(e, this.$("hero")); this.hero.pointer(x, y); this.hero.burst(x, y, 6, 700); setTimeout(() => this.hero.leave(), 500); },
+      shopClick: e => { this.setState({ menuOpen: false }); this.hero && this.hero.scatter(); this.ctaBurst(e); this.goTo("mood", 420); },
+      playClick: e => { this.setState({ menuOpen: false }); this.ctaBurst(e); this.goTo("mood", 320); },
+
+      ticker: ["MAKE IT YOURS", "PLAYFUL", "PERSONAL", "EXPRESSIVE", "HANDCRAFTED", "MAKE IT YOURS", "PLAYFUL", "PERSONAL", "EXPRESSIVE", "HANDCRAFTED"],
+
+      moodBg: M.bg, moodInk: M.ink, moodBtnInk: M.btnInk,
+      moodMove: e => { if (!this.mood) return; const [x, y] = this.local(e, this.$("mood")); this.mood.pointer(x, y); },
+      moodLeave: () => this.mood && this.mood.leave(),
+      flexSoft: flex("soft"), flexBold: flex("bold"), flexPlayful: flex("playful"), flexChaotic: flex("chaotic"),
+      pressSoft: s.picked === "soft", pressBold: s.picked === "bold", pressPlayful: s.picked === "playful", pressChaotic: s.picked === "chaotic",
+      imgSoft: on("soft") ? "scale(1.06)" : "scale(1)",
+      imgBold: on("bold") ? "scale(1.1) translateY(-10px)" : "scale(1)",
+      imgPlayful: on("playful") ? "rotate(-4deg) scale(1.06)" : "rotate(0deg) scale(1)",
+      chaosA: on("chaotic") ? "rotate(-8deg) translate(-8px,-6px)" : "rotate(-2deg)",
+      chaosB: on("chaotic") ? "rotate(9deg) translate(10px,4px) scale(1.06)" : "rotate(3deg)",
+      chaosC: on("chaotic") ? "rotate(-5deg) translate(4px,10px) scale(1.08)" : "rotate(-1deg)",
+      hoverSoft: () => this.hoverMood("soft"), hoverBold: () => this.hoverMood("bold"), hoverPlayful: () => this.hoverMood("playful"), hoverChaotic: () => this.hoverMood("chaotic"),
+      unhover: () => this.hoverMood(null),
+      pickSoft: e => this.pickMood("soft", e), pickBold: e => this.pickMood("bold", e), pickPlayful: e => this.pickMood("playful", e), pickChaotic: e => this.pickMood("chaotic", e),
+
+      moodPicked: !!s.picked,
+      moodName: s.picked ? MOOD_PICKS[s.picked].name : "",
+      moodBlurb: s.picked ? MOOD_PICKS[s.picked].blurb : "",
+      lookTotal: money(picks.reduce((a, p) => a + p.price, 0)),
+      addLook: e => { picks.forEach((p, i) => setTimeout(() => this.add(p, i === 0 ? e : { currentTarget: e.currentTarget }, true), i * 160)); this.flash("OOH. THE WHOLE LOOK."); },
+      picks: picks.map((p, i) => {
+        const wished = s.wish.includes(p.id);
+        return {
+          name: p.name, price: money(p.price), line: p.line, tint: p.tint, shot: p.shot, tilt: tilts[i], drop: drops[i],
+          wished, wishFill: wished ? "#E94B45" : "transparent", wishAria: (wished ? "Remove " : "Save ") + p.name + (wished ? " from" : " to") + " wishlist",
+          onWish: () => this.setState(st => ({ wish: st.wish.includes(p.id) ? st.wish.filter(x => x !== p.id) : st.wish.concat(p.id) })),
+          onAdd: e => this.add(p, e)
+        };
+      }),
+
+      cartOpen: s.cartOpen, openCart: () => this.setState({ cartOpen: true, menuOpen: false }), closeCart: () => this.setState({ cartOpen: false }),
+      cartTitle: count ? "Ooh. Good choice." : "Your bag",
+      cartCountLabel: count + (count === 1 ? " piece" : " pieces") + " of LUMI",
+      cartEmpty: s.cart.length === 0,
+      cartLines: s.cart.map((l, i) => {
+        const p = byId(l.id);
+        return {
+          name: p.name, tint: p.tint, qty: l.qty, total: money(p.price * l.qty),
+          onInc: () => this.setState(st => { const c = st.cart.slice(); c[i] = Object.assign({}, c[i], { qty: c[i].qty + 1 }); return { cart: c }; }),
+          onDec: () => this.setState(st => { const c = st.cart.slice(); if (c[i].qty <= 1) return { cart: c.filter((_, j) => j !== i) }; c[i] = Object.assign({}, c[i], { qty: c[i].qty - 1 }); return { cart: c }; }),
+          onRemove: () => this.setState(st => ({ cart: st.cart.filter((_, j) => j !== i) }))
+        };
+      }),
+      subtotal: money(sub),
+      shipNote: sub >= 1500 ? "Free shipping unlocked." : "Free shipping over ₹1,500.",
+      checkout: () => this.flash("CHECKOUT — COMING IN PHASE 4"),
+      toast: s.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

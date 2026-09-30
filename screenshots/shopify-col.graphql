@@ -1,0 +1,25 @@
+mutation {
+ c1: collectionAddProducts(id: "gid://shopify/Collection/333418856610", productIds: ["gid://shopify/Product/10320463560866","gid://shopify/Product/10320463593634","gid://shopify/Product/10320463626402"]) { userErrors { message } }
+ c2: collectionAddProducts(id: "gid://shopify/Collection/333418889378", productIds: ["gid://shopify/Product/10320463659170","gid://shopify/Product/10320463691938","gid://shopify/Product/10320463724706"]) { userErrors { message } }
+ c3: collectionAddProducts(id: "gid://shopify/Collection/333418922146", productIds: ["gid://shopify/Product/10320463757474","gid://shopify/Product/10320463790242"]) { userErrors { message } }
+ pb0: publishablePublish(id: "gid://shopify/Product/10320463560866", input: [{ publicationId: "gid://shopify/Publication/196602298530" }]) { userErrors { message } }
+ pb1: publishablePublish(id: "gid://shopify/Product/10320463593634", input: [{ publicationId: "gid://shopify/Publication/196602298530" }]) { userErrors { message } }
+ pb2: publishablePublish(id: "gid://shopify/Product/10320463626402", input: [{ publicationId: "gid://shopify/Publication/196602298530" }]) { userErrors { message } }
+ pb3: publishablePublish(id: "gid://shopify/Product/10320463659170", input: [{ publicationId: "gid://shopify/Publication/196602298530" }]) { userErrors { message } }
+ pb4: publishablePublish(id: "gid://shopify/Product/10320463691938", input: [{ publicationId: "gid://shopify/Publication/196602298530" }]) { userErrors { message } }
+ pb5: publishablePublish(id: "gid://shopify/Product/10320463724706", input: [{ publicationId: "gid://shopify/Publication/196602298530" }]) { userErrors { message } }
+ pb6: publishablePublish(id: "gid://shopify/Product/10320463757474", input: [{ publicationId: "gid://shopify/Publication/196602298530" }]) { userErrors { message } }
+ pb7: publishablePublish(id: "gid://shopify/Product/10320463790242", input: [{ publicationId: "gid://shopify/Publication/196602298530" }]) { userErrors { message } }
+ ar0: productUpdate(product: { id: "gid://shopify/Product/9336074469538", status: ARCHIVED }) { userErrors { message } }
+ ar1: productUpdate(product: { id: "gid://shopify/Product/9336075124898", status: ARCHIVED }) { userErrors { message } }
+ ar2: productUpdate(product: { id: "gid://shopify/Product/9336075157666", status: ARCHIVED }) { userErrors { message } }
+ ar3: productUpdate(product: { id: "gid://shopify/Product/9336076042402", status: ARCHIVED }) { userErrors { message } }
+ ar4: productUpdate(product: { id: "gid://shopify/Product/9336076107938", status: ARCHIVED }) { userErrors { message } }
+ ar5: productUpdate(product: { id: "gid://shopify/Product/9336077877410", status: ARCHIVED }) { userErrors { message } }
+ ar6: productUpdate(product: { id: "gid://shopify/Product/9336081121442", status: ARCHIVED }) { userErrors { message } }
+ ar7: productUpdate(product: { id: "gid://shopify/Product/9336081252514", status: ARCHIVED }) { userErrors { message } }
+ ar8: productUpdate(product: { id: "gid://shopify/Product/9336081449122", status: ARCHIVED }) { userErrors { message } }
+ ar9: productUpdate(product: { id: "gid://shopify/Product/9336081678498", status: ARCHIVED }) { userErrors { message } }
+ ar10: productUpdate(product: { id: "gid://shopify/Product/9336098521250", status: ARCHIVED }) { userErrors { message } }
+ ar11: productUpdate(product: { id: "gid://shopify/Product/9336098586786", status: ARCHIVED }) { userErrors { message } }
+}

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="./lumi-cart.js"></script>
+<style>
+  select { -webkit-appearance: none; -moz-appearance: none; appearance: none; padding-right: 44px !important; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%233F4633' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important; background-repeat: no-repeat !important; background-position: right 16px center !important; background-size: 12px 8px !important; cursor: pointer; }
+  select::-ms-expand { display: none; }
+  @media (max-width: 760px) {
+    [data-picker] { left: 0 !important; right: 0 !important; top: auto !important; bottom: 0 !important; width: auto !important; padding-bottom: 26px !important; }
+  }
+</style>
+</helmet>
+<div style="font-family: 'DM Sans', system-ui, sans-serif; color: #3F4633;">
+  <sc-if value="{{ pickOn }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ pickClose }}" style="position: fixed; inset: 0; z-index: 290;"></div>
+    <div data-picker="" role="dialog" aria-modal="true" aria-labelledby="lumi-pick-title" onKeyDown="{{ pickKey }}" style="position: fixed; z-index: 300; left: {{ pickLeft }}; top: {{ pickTop }}; width: 312px; background: #FDFCF8; padding: 18px 18px 16px; box-shadow: 0 24px 60px rgba(22,24,18,0.28); border-top: 3px solid #3F4633;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;">
+        <div>
+          <span id="lumi-pick-title" style="display: block; font-size: 11px; font-weight: 700; letter-spacing: .18em; color: #6B7258;">{{ pickTitle }}</span>
+          <span style="display: block; margin-top: 6px; font-size: 14px; font-weight: 700; letter-spacing: .05em;">{{ pickName }}</span>
+          <span style="display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 3px 7px;"><s style="font-size: .84em; font-weight: 400; opacity: .72;">{{ pickPriceMrp }}</s><span style="display: block; margin-top: 2px; font-size: 14px;">{{ pickPrice }}</span><span style="font-size: .7em; font-weight: 700; letter-spacing: .08em; line-height: 1; padding: 3px 5px; background: #EFCFCB; color: #3F4633; align-self: center;">{{ pickPriceOff }}</span></span>
+        </div>
+        <button onClick="{{ pickClose }}" aria-label="Close size picker" style="width: 36px; height: 36px; background: none; border: 0; cursor: pointer; font-size: 20px; color: #3F4633;">×</button>
+      </div>
+      <div role="radiogroup" aria-label="Size" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;">
+        <sc-for list="{{ pickSizes }}" as="z" hint-placeholder-count="4">
+          <button role="radio" aria-checked="{{ z.on }}" aria-disabled="{{ z.out }}" aria-label="{{ z.aria }}" data-size="{{ z.label }}" onClick="{{ z.pick }}" style="position: relative; min-width: 52px; min-height: 48px; padding: 0 10px; border: 1.5px solid {{ z.border }}; background: {{ z.bg }}; color: {{ z.ink }}; cursor: {{ z.cursor }}; font-size: 14px; font-weight: 700; letter-spacing: .06em; text-decoration: {{ z.strike }}; transition: background .2s ease, color .2s ease;">{{ z.text }}</button>
+        </sc-for>
+      </div>
+      <button onClick="{{ pickConfirm }}" aria-disabled="{{ pickDisabled }}" style="margin-top: 14px; width: 100%; min-height: 50px; background: {{ pickCtaBg }}; color: {{ pickCtaInk }}; border: 0; cursor: {{ pickCtaCursor }}; font-size: 12px; font-weight: 700; letter-spacing: .14em;">{{ pickCta }}</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ open }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ close }}" style="position: fixed; inset: 0; z-index: 250; background: rgba(27,31,22,0.4);"></div>
+    <aside role="dialog" aria-modal="true" aria-labelledby="lumi-bag-title" onKeyDown="{{ bagKey }}" style="position: fixed; z-index: 260; top: 0; right: 0; bottom: 0; width: min(420px, 100%); background: #FDFCF8; display: flex; flex-direction: column; box-shadow: -20px 0 60px rgba(22,24,18,0.2);">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 22px; border-bottom: 1px solid #E8DDD4;">
+        <div>
+          <h2 id="lumi-bag-title" style="margin: 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: 28px; line-height: 1;">The LUMI Bag</h2>
+          <span style="display: block; margin-top: 4px; font-size: 13px;">{{ countLabel }}</span>
+        </div>
+        <button onClick="{{ close }}" data-bagclose="" style="min-height: 44px; background: none; border: 0; cursor: pointer; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: #3F4633;">CLOSE</button>
+      </div>
+      <div style="flex: 1; overflow-y: auto; padding: 0 22px;">
+        <sc-for list="{{ lines }}" as="l" hint-placeholder-count="0">
+          <div style="display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 14px; padding: 18px 0; border-bottom: 1px solid #E8DDD4;">
+            <span aria-hidden="true" style="display: block; aspect-ratio: 4/5; background-color: {{ l.field }}; background-image: url('assets/lumi-hero-campaign.png'); background-size: {{ l.size }}; background-position: {{ l.pos }}; background-repeat: no-repeat;"></span>
+            <div style="min-width: 0;">
+              <div style="display: flex; justify-content: space-between; gap: 10px;">
+                <span style="font-size: 13px; font-weight: 700; letter-spacing: .05em;">{{ l.name }}</span>
+                <span style="font-size: 14px; white-space: nowrap;">{{ l.total }}</span>
+              </div>
+              <sc-if value="{{ l.sized }}" hint-placeholder-val="{{ false }}">
+                <label style="display: flex; align-items: center; gap: 8px; margin-top: 8px; font-size: 13px; font-weight: 700;">
+                  <span>Size:</span>
+                  <select value="{{ l.sizeVal }}" onChange="{{ l.setSize }}" aria-label="{{ l.sizeAria }}" style="min-height: 36px; padding: 0 8px; border: 1.5px solid {{ l.sizeBorder }}; background: {{ l.sizeBg }}; color: #3F4633; font-size: 14px; font-weight: 700;">
+                    <sc-for list="{{ l.opts }}" as="o" hint-placeholder-count="4"><option value="{{ o.v }}" disabled="{{ o.dis }}">{{ o.t }}</option></sc-for>
+                  </select>
+                </label>
+                <sc-if value="{{ l.missing }}" hint-placeholder-val="{{ false }}"><span role="alert" style="display: block; margin-top: 6px; font-size: 12px; font-weight: 700; color: #8E4F4C;">Select your size before checkout.</span></sc-if>
+              </sc-if>
+              <div style="display: flex; align-items: center; gap: 14px; margin-top: 10px;">
+                <div role="group" aria-label="Quantity" style="display: flex; align-items: center; border: 1px solid #C5B7AB;">
+                  <button onClick="{{ l.dec }}" aria-label="Decrease quantity" style="width: 38px; height: 38px; background: none; border: 0; cursor: pointer; font-size: 16px; color: #3F4633;">−</button>
+                  <span style="min-width: 22px; text-align: center; font-size: 14px;">Qty {{ l.qty }}</span>
+                  <button onClick="{{ l.inc }}" aria-label="Increase quantity" style="width: 38px; height: 38px; background: none; border: 0; cursor: pointer; font-size: 16px; color: #3F4633;">+</button>
+                </div>
+                <button onClick="{{ l.remove }}" style="min-height: 38px; background: none; border: 0; cursor: pointer; font-size: 12px; font-weight: 700; letter-spacing: .12em; color: #6B7258;">REMOVE</button>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+        <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}"><p style="padding: 48px 0; text-align: center; font-size: 16px; color: #6B7258;">Nothing in here yet.</p></sc-if>
+      </div>
+      <div style="padding: 18px 22px 22px; border-top: 1px solid #E8DDD4;">
+        <div style="display: flex; justify-content: space-between; font-size: 15px; font-weight: 700;"><span>Subtotal</span><span>{{ subtotal }}</span></div>
+        <sc-for list="{{ promoRows }}" as="pr" hint-placeholder-count="0"><div style="display: flex; justify-content: space-between; gap: 10px; margin-top: 6px; font-size: 13px; font-weight: 700; color: #3F4633;"><span>✦ {{ pr.label }}</span><span>{{ pr.text }}</span></div></sc-for>
+        <sc-if value="{{ promoNudge }}" hint-placeholder-val="{{ false }}"><p style="margin: 8px 0 0; padding: 8px 10px; border: 1.5px dashed #D4A7A5; font-size: 12px; font-weight: 700;">{{ promoNudge }}</p></sc-if>
+        <sc-if value="{{ hasPromo }}" hint-placeholder-val="{{ false }}"><div style="display: flex; justify-content: space-between; margin-top: 8px; font-size: 15px; font-weight: 700;"><span>After offers</span><span>{{ afterPromo }}</span></div></sc-if>
+        <sc-if value="{{ blocked }}" hint-placeholder-val="{{ false }}"><p style="margin: 10px 0 0; font-size: 13px; font-weight: 700; color: #8E4F4C;">Pick a size for every tank to continue.</p></sc-if>
+        <button onClick="{{ checkout }}" aria-disabled="{{ checkoutDis }}" style="margin-top: 14px; width: 100%; min-height: 54px; background: {{ checkoutBg }}; color: #FDFCF8; border: 0; cursor: {{ checkoutCursor }}; font-size: 13px; font-weight: 700; letter-spacing: .14em;">CHECKOUT →</button>
+        <a href="LUMI-Checkout.dc.html#/bag" style="display: block; margin-top: 12px; text-align: center; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: #3F4633;">VIEW FULL BAG &amp; PROMO CODE →</a>
+        <sc-if value="{{ note }}" hint-placeholder-val="{{ false }}"><p role="status" style="margin: 10px 0 0; padding: 10px 12px; border: 1.5px dashed #D4A7A5; background: #FBF1EF; font-size: 13px;">Checkout isn't connected yet — nothing has been charged.</p></sc-if>
+      </div>
+    </aside>
+  </sc-if>
+
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div role="status" style="position: fixed; z-index: 280; left: 50%; bottom: 24px; transform: translateX(-50%); max-width: calc(100% - 32px); background: #3F4633; color: #FDFCF8; padding: 14px 20px; font-size: 12px; font-weight: 700; letter-spacing: .12em; display: flex; align-items: center; gap: 14px; box-shadow: 0 14px 34px rgba(22,24,18,0.3);">
+      <span>{{ toast }}</span>
+      <button onClick="{{ openFromToast }}" style="background: none; border: 0; border-bottom: 1px solid #EFCFCB; color: #EFCFCB; cursor: pointer; padding: 4px 0; font-size: 12px; font-weight: 700; letter-spacing: .12em; white-space: nowrap;">VIEW BAG</button>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { v: 0, open: false, pick: null, pickSize: null, toast: "", note: false };
+  componentDidMount() {
+    this.onOpen = () => this.setState({ open: true, note: false }, () => setTimeout(() => { const b = document.querySelector("[data-bagclose]"); b && b.focus(); }, 30));
+    this.onToast = e => { clearTimeout(this.tt); this.setState({ toast: e.detail }); this.tt = setTimeout(() => this.setState({ toast: "" }), 2800); };
+    this.onSize = e => { this.lastFocus = document.activeElement; this.setState({ pick: e.detail, pickSize: null }, () => setTimeout(() => { const b = document.querySelector('[data-picker] [role="radio"]:not([aria-disabled="true"])'); b && b.focus(); }, 30)); };
+    this.onChange = () => this.setState(s => ({ v: s.v + 1 }));
+    window.addEventListener("lumi:open", this.onOpen); window.addEventListener("lumi:toast", this.onToast);
+    window.addEventListener("lumi:size", this.onSize); window.addEventListener("lumi:change", this.onChange);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("lumi:open", this.onOpen); window.removeEventListener("lumi:toast", this.onToast);
+    window.removeEventListener("lumi:size", this.onSize); window.removeEventListener("lumi:change", this.onChange); clearTimeout(this.tt);
+  }
+  closePick() { this.setState({ pick: null, pickSize: null }); if (this.lastFocus && this.lastFocus.focus) this.lastFocus.focus(); }
+  renderVals() { const v = this.baseVals(); return window.LumiCart && window.LumiCart.decorate ? window.LumiCart.decorate(v) : v; }
+  baseVals() {
+    const s = this.state, LC = window.LumiCart, money = n => "₹" + n.toLocaleString("en-IN");
+    const out = { open: s.open, toast: s.toast, note: s.note, pickOn: !!s.pick && !!LC };
+    out.close = () => this.setState({ open: false });
+    out.bagKey = e => { if (e.key === "Escape") this.setState({ open: false }); };
+    out.openFromToast = () => this.setState({ open: true, toast: "" });
+    if (!LC) return Object.assign(out, { lines: [], empty: true, subtotal: "₹0", countLabel: "0 pieces", blocked: false, checkoutDis: true, checkoutBg: "#A9AE96", checkoutCursor: "not-allowed", checkout: () => {} });
+    const items = LC.items(), cat = LC.catalog;
+    out.lines = items.map((l, i) => { const p = cat[l.id], sized = !!p.sizes, miss = sized && !l.size; return {
+      name: p.name, field: p.field, size: p.size, pos: p.pos, qty: l.qty, total: money(p.price * l.qty), sized, missing: miss,
+      sizeVal: l.size || "", sizeAria: "Size for " + p.name, sizeBorder: miss ? "#8E4F4C" : "#C5B7AB", sizeBg: miss ? "#FBF1EF" : "#FDFCF8",
+      opts: (miss ? [{ v: "", t: "Select size", dis: true }] : []).concat((p.sizes || []).map(z => { const out2 = (p.soldOut || []).includes(z); return { v: z, t: z + (out2 ? " — sold out" : ""), dis: out2 }; })),
+      setSize: e => LC.setSize(i, e.target.value), inc: () => LC.setQty(i, l.qty + 1), dec: () => LC.setQty(i, l.qty - 1), remove: () => LC.remove(i) }; });
+    const n = LC.count(), blocked = LC.missingSize(), dis = blocked || n === 0;
+    const Q = LC.quote();
+    Object.assign(out, { promoRows: Q.rows, promoNudge: LC.nudge(), hasPromo: Q.total > 0, afterPromo: money(LC.subtotal() - Q.total), empty: items.length === 0, subtotal: money(LC.subtotal()), countLabel: n + (n === 1 ? " piece" : " pieces"), blocked,
+      checkoutDis: dis, checkoutBg: dis ? "#A9AE96" : "#3F4633", checkoutCursor: dis ? "not-allowed" : "pointer",
+      checkout: () => { if (!LC.missingSize() && LC.count()) LC.shopifyCheckout(); } });
+    if (s.pick) {
+      const p = cat[s.pick.id] || { name: "", price: 0, sizes: [] }, a = s.pick.anchor, W = 312, H = 250, vw = window.innerWidth, vh = window.innerHeight;
+      let left = a ? a.left + a.width / 2 - W / 2 : vw / 2 - W / 2, top = a ? a.top - H - 10 : vh / 2 - H / 2;
+      if (a && top < 12) top = Math.min(vh - H - 12, a.bottom + 10);
+      left = Math.max(12, Math.min(vw - W - 12, left)); top = Math.max(12, top);
+      const chosen = s.pickSize;
+      Object.assign(out, {
+        pickLeft: left + "px", pickTop: top + "px", pickTitle: s.pick.title || "PICK YOUR SIZE", pickName: p.name, pickPrice: money(p.price),
+        pickSizes: (p.sizes || []).map(z => { const so = (p.soldOut || []).includes(z), on = chosen === z; return {
+          label: z, text: on ? "✓ " + z : z, on, out: so, aria: z + (so ? ", sold out" : ""),
+          border: on ? "#3F4633" : (so ? "#E8DDD4" : "#C5B7AB"), bg: on ? "#3F4633" : "transparent", ink: on ? "#FDFCF8" : (so ? "#A9AE96" : "#3F4633"),
+          cursor: so ? "not-allowed" : "pointer", strike: so ? "line-through" : "none", pick: () => { if (!so) this.setState({ pickSize: z }); } }; }),
+        pickDisabled: !chosen, pickCta: chosen ? (s.pick.cta || "ADD TO BAG →") : "SELECT A SIZE",
+        pickCtaBg: chosen ? "#3F4633" : "#E8DDD4", pickCtaInk: chosen ? "#FDFCF8" : "#6B7258", pickCtaCursor: chosen ? "pointer" : "not-allowed",
+        pickConfirm: () => { if (!this.state.pickSize) return; const cb = s.pick.onDone, z = this.state.pickSize; this.setState({ pick: null, pickSize: null }); cb && cb(z); },
+        pickClose: () => this.closePick(),
+        pickKey: e => { if (e.key === "Escape") this.closePick(); }
+      });
+    }
+    return out;
+  }
+}
+</script>
+</body>
+</html>

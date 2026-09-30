@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="./lumi-cart.js"></script>
+<style>
+  @keyframes lumiOffers { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
+  [data-offers] a:focus-visible { outline: 2px solid #EFCFCB; outline-offset: -4px; }
+  @media (max-width: 760px) { [data-offers] { height: 44px !important; } [data-offers] a { font-size: 12.5px !important; } }
+  @media (prefers-reduced-motion: reduce) {
+    [data-offers] { height: auto !important; }
+    [data-offers] [data-otrack] { animation: none !important; flex-wrap: wrap; justify-content: center; width: auto !important; padding: 6px 12px; }
+    [data-offers] [data-odup] { display: none !important; }
+  }
+</style>
+</helmet>
+<div data-offers="" role="region" aria-label="LUMI offers" onPointerEnter="{{ pause }}" onPointerLeave="{{ play }}" onPointerDown="{{ pause }}" onPointerUp="{{ playSoon }}" onPointerCancel="{{ play }}" onFocus="{{ pause }}" onBlur="{{ play }}" style="position: relative; z-index: 30; height: 38px; overflow: hidden; background: #3F4633; color: #FDFCF8; font-family: 'DM Sans', system-ui, sans-serif; display: flex; align-items: center; touch-action: pan-y;">
+  <div data-otrack="" style="display: flex; align-items: center; width: max-content; will-change: transform; animation: lumiOffers {{ dur }} linear infinite; animation-play-state: {{ playState }};">
+    <sc-for list="{{ sets }}" as="set" hint-placeholder-count="2">
+      <div data-odup="{{ set.dup }}" aria-hidden="{{ set.hidden }}" style="display: flex; align-items: center; flex: none;">
+        <sc-for list="{{ set.offers }}" as="o" hint-placeholder-count="4">
+          <a href="{{ o.href }}" tabIndex="{{ set.tab }}" style="display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 22px; color: #FDFCF8; text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: .12em; white-space: nowrap; transition: transform .3s ease, color .3s ease;" style-hover="color: #EFCFCB; transform: translateY(-1px);">
+            <span>{{ o.lead }} <strong style="font-weight: 700; color: #EFCFCB;">{{ o.num }}</strong></span>
+          </a>
+          <span aria-hidden="true" style="display: block; width: 7px; height: 7px; flex: none; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #fff 0 14%, #D4A7A5 50%, #8E6F6C 120%);"></span>
+        </sc-for>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:44},&quot;base&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;LUMI-Pages.dc.html#/&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { paused: false, dur: "60s", ready: false };
+  componentDidMount() {
+    this.tryCart(0);
+    this.measure = () => { const t = document.querySelector("[data-offers] [data-otrack]"); if (!t) return; const half = t.scrollWidth / 2; if (half > 0) { const d = Math.round(half / 26) + "s"; if (d !== this.state.dur) this.setState({ dur: d }); } };
+    window.addEventListener("resize", this.measure);
+    this.mt = setTimeout(this.measure, 400);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.measure && this.measure());
+  }
+  componentWillUnmount() { window.removeEventListener("resize", this.measure); clearTimeout(this.mt); clearTimeout(this.ct); clearTimeout(this.pt); }
+  tryCart(n) { if (window.LumiCart && window.LumiCart.promos) { this.setState({ ready: true }, () => setTimeout(this.measure, 50)); return; } if (n < 60) this.ct = setTimeout(() => this.tryCart(n + 1), 100); }
+  renderVals() {
+    const base = this.props.base ?? "LUMI-Pages.dc.html#/";
+    const PR = window.LumiCart && window.LumiCart.promos, f = n => "₹" + Number(n).toLocaleString("en-IN");
+    const offers = PR ? [
+      { lead: PR.tank3.tanks + " TANKS —", num: f(PR.tank3.price), href: base + "tank-tops" },
+      { lead: "ANY " + PR.acc3.acc + " BROOCHES + BAG CHARMS —", num: f(PR.acc3.price), href: base + "brooches" },
+      { lead: PR.combo.tanks + " TANK + " + PR.combo.acc + " EXTRAS —", num: f(PR.combo.price), href: base + "shop" },
+      { lead: PR.threshold.pct + "% OFF ORDERS ABOVE", num: f(PR.threshold.over), href: base + "shop" }
+    ] : [];
+    const rep = offers.concat(offers);
+    return {
+      dur: this.state.dur, playState: this.state.paused ? "paused" : "running",
+      sets: [{ offers: rep, dup: "0", hidden: false, tab: 0 }, { offers: rep, dup: "1", hidden: true, tab: -1 }],
+      pause: () => { clearTimeout(this.pt); if (!this.state.paused) this.setState({ paused: true }); },
+      play: () => { clearTimeout(this.pt); if (this.state.paused) this.setState({ paused: false }); },
+      playSoon: e => { if (e.pointerType === "mouse") return; clearTimeout(this.pt); this.pt = setTimeout(() => this.setState({ paused: false }), 1200); }
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><style>body{margin:0;background:#222;display:flex;gap:12px;padding:12px;align-items:flex-start}iframe{border:0;background:#fff;height:760px;flex:none}</style></head>
+<body>
+<iframe id="f320" style="width:320px" src="../LUMI%20Hero%20v2.dc.html"></iframe>
+<iframe id="f375" style="width:375px" src="../LUMI%20Hero%20v2.dc.html"></iframe>
+<iframe id="f430" style="width:430px" src="../LUMI%20Hero%20v2.dc.html"></iframe>
+<script>
+window.audit = function (id) {
+  const w = document.getElementById(id).contentWindow, d = w.document, vw = d.documentElement.clientWidth, out = [];
+  d.querySelectorAll('body *').forEach(el => {
+    const r = el.getBoundingClientRect(); if (!r.width || !r.height) return;
+    const cs = w.getComputedStyle(el); if (cs.position === 'fixed' && cs.visibility === 'hidden') return;
+    if (r.right > vw + 2 || r.left < -2) {
+      let p = el.parentElement, clipped = false;
+      while (p && p !== d.body) { const pc = w.getComputedStyle(p); if (/(hidden|clip|auto|scroll)/.test(pc.overflowX)) { const pr = p.getBoundingClientRect(); if (pr.right <= vw + 2 && pr.left >= -2) { clipped = true; break; } } p = p.parentElement; }
+      if (!clipped) out.push((el.closest('section,header,footer')?.id || el.closest('section,header,footer')?.getAttribute('aria-label') || el.closest('section,header,footer')?.tagName || '?') + ' | ' + el.tagName + ' ' + (el.getAttribute('data-lumi') || [...el.attributes].filter(a => a.name.startsWith('data-')).map(a => a.name).join(',') || (el.textContent || '').trim().slice(0, 30)) + ' L' + Math.round(r.left) + ' R' + Math.round(r.right));
+    }
+  });
+  return { vw, sw: d.documentElement.scrollWidth, n: out.length, items: [...new Set(out)].slice(0, 40) };
+};
+window.smallTap = function (id) {
+  const w = document.getElementById(id).contentWindow, d = w.document, out = [];
+  d.querySelectorAll('a, button, [role=radio], [role=tab], input, select').forEach(el => { const r = el.getBoundingClientRect(); if (!r.width) return; if (r.height < 36 || r.width < 36) out.push((el.closest('section,header,footer')?.id || '?') + ' ' + el.tagName + ' ' + ((el.textContent || el.getAttribute('aria-label') || '').trim().slice(0, 24)) + ' ' + Math.round(r.width) + 'x' + Math.round(r.height)); });
+  return [...new Set(out)].slice(0, 40);
+};
+</script>
+</body></html>

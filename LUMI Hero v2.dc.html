@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>LUMI — Make it yours. Handmade beaded tanks, brooches &amp; bag charms</title>
+<meta name="description" content="LUMI makes handmade beaded tank tops, brooches and bag charms in India. Handmade pieces for whatever mood you're in.">
+<meta property="og:title" content="LUMI — Make it yours.">
+<meta property="og:description" content="Handmade pieces for whatever mood you're in.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,600&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<script src="./lumi-cart.js"></script>
+<style>
+  [data-s4view] { display: flex !important; flex-direction: column; justify-content: flex-start !important; }
+  [data-s4track] { flex: 1; align-items: flex-end !important; }
+  [data-s4item][data-on="true"] { align-self: stretch; display: flex; flex-direction: column; }
+  [data-s4item][data-on="true"] [data-s4img] { flex: 1; aspect-ratio: auto !important; min-height: 0; }
+  body { margin: 0; background: #3F4633; color: #FDFCF8; font-family: "DM Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #FDFCF8; text-decoration: none; }
+  a:hover { color: #EFCFCB; }
+  button { font-family: inherit; }
+  :focus-visible { outline: 2px solid #FDFCF8; outline-offset: 4px; }
+  ::selection { background: #EFCFCB; color: #3F4633; }
+  @keyframes lumiUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  @keyframes lumiIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes lumiSettle { from { transform: scale(1.08); } to { transform: scale(1.03); } }
+  @keyframes lumiDrop { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 760px) {
+    [data-mmslot] { display: block !important; }
+    nav[aria-label="Primary"] { visibility: hidden !important; pointer-events: none !important; }
+    [data-lumi="logo"] { grid-column: 2; justify-self: center; }
+    [data-ed] [data-edimg] { aspect-ratio: 4 / 5 !important; }
+    [data-ed] [data-slot="s1"] [data-edimg] { aspect-ratio: 1 !important; }
+    #irl a, #irl button { min-height: 44px !important; display: inline-flex !important; align-items: center; }
+    #drop [role="tab"], #edit [role="tab"] { min-width: 44px; min-height: 44px; justify-content: center; }
+    [data-m="hide"] { display: none !important; }
+    [data-copy] { left: 20px !important; right: 20px !important; bottom: calc(22px + env(safe-area-inset-bottom)) !important; max-width: none !important; gap: 10px !important; }
+    [data-copy] h1 { font-size: clamp(42px, 12.5vw, 54px) !important; line-height: .95 !important; }
+    [data-copy] p { font-size: 16px !important; max-width: 30ch; }
+    [data-copy] [data-cta] { align-self: stretch !important; justify-content: center; margin-top: 6px !important; }
+    [data-lumi="photo"] img { object-position: 52% 22% !important; }
+    [data-mtiles] { display: flex !important; }
+    [data-mgrad] { display: block !important; }
+    [data-cta] { align-self: stretch !important; justify-content: center !important; }
+    [data-scrim-copy] { background: linear-gradient(0deg, rgba(38,42,30,0.78) 0%, rgba(38,42,30,0.45) 34%, rgba(38,42,30,0) 60%) !important; }
+  }
+  html { scroll-behavior: smooth; }
+  @keyframes lumiAttach { 0% { transform: scale(.3); opacity: 0; } 60% { transform: scale(1.14); opacity: 1; } 100% { transform: scale(1); } }
+  @keyframes lumiSweep { 0%, 55% { transform: translateX(0); } 100% { transform: translateX(950%); } }
+  @keyframes lumiMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes lumiFloatA { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+  @keyframes lumiFloatB { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(10px); } }
+  @keyframes lumiPing { 0% { opacity: .95; transform: scale(.7); } 100% { opacity: 0; transform: scale(1.55); } }
+  @media (max-width: 760px) {
+    [data-cats] { flex-direction: column !important; height: auto !important; gap: 10px !important; margin: 0 -16px; }
+    [data-cats] > article { flex: none !important; width: 100%; height: 330px; cursor: pointer; transition: height .65s cubic-bezier(.16,.8,.3,1) !important; }
+    [data-cats] > article[data-open="1"] { height: min(680px, 88svh); cursor: default; }
+    [data-cats] > article > [data-stage] { opacity: 0; transition: opacity .45s ease; pointer-events: none; }
+    [data-cats] > article[data-open="1"] > [data-stage] { opacity: 1; transition-delay: .2s; pointer-events: auto; }
+    [data-mcover] { display: block !important; }
+    [data-cats] > article[data-open="1"] > [data-mcover] { opacity: 0; }
+    [data-cats] > article[data-open="0"] h3, [data-cats] > article[data-open="0"] > div:first-of-type span, [data-cats] > article[data-open="0"] [data-exp] { color: #FDFCF8 !important; text-shadow: 0 1px 14px rgba(22,24,18,.45); }
+    [data-cats] > article::after { content: "+"; position: absolute; z-index: 6; top: 16px; right: 16px; width: 44px; height: 44px; border-radius: 50%; background: #FDFCF8; color: #3F4633; font: 400 26px/44px 'DM Sans', sans-serif; text-align: center; box-shadow: 0 6px 18px rgba(22,24,18,.2); transition: transform .45s cubic-bezier(.34,1.5,.5,1); }
+    [data-cats] > article[data-open="1"]::after { transform: rotate(45deg); }
+    [data-exp] { opacity: 1 !important; transform: none !important; }
+    [data-wf="l"] { left: 0% !important; width: 40% !important; opacity: 1 !important; transform: rotate(-4deg) !important; }
+    [data-wf="c"] { left: 29% !important; width: 42% !important; }
+    [data-wf="r"] { left: 60% !important; width: 40% !important; opacity: 1 !important; transform: rotate(4deg) !important; }
+    [data-surf] { left: 8% !important; width: 84% !important; bottom: 0 !important; }
+    [data-br="pop"] { left: 12% !important; top: 4% !important; }
+    [data-br="fries"] { left: 52% !important; top: 18% !important; }
+    [data-br="cock"] { left: 16% !important; top: 48% !important; }
+    [data-br="heart"] { left: 54% !important; top: 60% !important; opacity: 1 !important; }
+    [data-ch="h"] { left: 18% !important; } [data-ch="p"] { left: 50% !important; opacity: 1 !important; } [data-ch="c"] { left: 82% !important; }
+    [data-cf] { width: 84px !important; }
+    [data-swipe] { display: block !important; }
+    [data-s3grid] { grid-template-columns: minmax(0, 1fr) !important; gap: 0 !important; }
+    [data-s3stage] { order: -1; max-width: none !important; width: min(100%, calc(56svh * 4 / 4.9)) !important; min-width: min(250px, 100%); margin: 0 auto !important; aspect-ratio: 4 / 4.9 !important; height: auto !important; box-shadow: 0 14px 34px rgba(22,24,18,.16) !important; }
+    [data-s3mtabs] { display: flex !important; order: 0; margin: 0 -16px; background: #FDFCF8; border-bottom: 1px solid #E8DDD4; }
+    [data-s3tanks] { order: 1; padding-top: 14px !important; }
+    [data-s3side] { order: 2; gap: 0 !important; }
+    [data-s3tanks] > span, [data-tinfo], [data-s3side] > div:first-child > span, [data-sum] ul { display: none !important; }
+    [data-s3mtab="brooches"] [data-s3tanks], [data-s3mtab="charms"] [data-s3tanks], [data-s3mtab="tanks"] [data-s3side] > div:first-child { display: none !important; }
+    [data-s3mtab="brooches"] [data-ck], [data-s3mtab="charms"] [data-bk] { display: none !important; }
+    [data-s3side] > div:first-child { padding-top: 14px; }
+    [data-s3tanks] [data-tray] > button, [data-s3side] [data-tray] > button { min-height: 44px; }
+    [data-sum] { margin: 12px -16px 0 !important; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)) !important; box-shadow: 0 -10px 30px rgba(63,70,51,.12) !important; display: grid !important; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 4px 14px; position: sticky; bottom: 0; z-index: 8; }
+    [data-sum] > div:first-child { grid-column: 1; }
+    [data-sum] > div:first-child > span:first-child { font-size: 20px !important; }
+    [data-sum] > div:nth-of-type(2) { grid-column: 1; border: 0 !important; padding: 0 !important; justify-content: flex-start !important; gap: 8px; }
+    [data-sum] [data-addlook] { grid-column: 2; grid-row: 1 / 3; margin: 0 !important; width: auto !important; min-width: 150px; font-size: 12px !important; }
+    [data-s3tanks], [data-s3side] { margin: 0 !important; }
+    [data-s3tanks] [data-tray] { flex-direction: row !important; overflow-x: auto; padding: 6px 4px 10px; }
+    [data-s3tanks] [data-tray] > button { flex: 0 0 auto; transform: none !important; grid-template-columns: 64px auto !important; }
+    [data-s3side] [data-tray] { flex-wrap: nowrap !important; overflow-x: auto; padding: 6px 4px 10px; }
+    [data-s3side] [data-tray] > button { flex: 0 0 auto; }
+    [data-s4grid] { grid-template-columns: 1fr !important; grid-template-areas: 'head' 'view' 'info' !important; padding-right: 16px; }
+    [data-s4track] { flex: none !important; }
+    [data-s4item][data-on="true"] { display: block !important; }
+    [data-s4item][data-on="true"] [data-s4img] { aspect-ratio: 4 / 5 !important; flex: none !important; }
+    [data-s4view] { overflow-x: auto !important; scroll-snap-type: x mandatory; scrollbar-width: none; margin-right: -16px; }
+    [data-s4track] { transform: none !important; gap: 12px !important; padding-right: 16px; }
+    [data-s4item] { width: 76vw !important; scroll-snap-align: start; }
+    [data-s4end] { width: 56vw !important; scroll-snap-align: start; }
+    [data-irl] { display: block !important; columns: 2; column-gap: 10px; margin: 0 -6px; padding: 4px 0 8px; }
+    [data-irlt] { display: block; break-inside: avoid; width: 100% !important; height: auto !important; aspect-ratio: 4 / 5; margin: 0 0 10px !important; translate: none !important; grid-column: auto !important; grid-row: auto !important; }
+    [data-irlt]:nth-child(4n+1) { aspect-ratio: 4 / 6; }
+    [data-irlt]:nth-child(4n+2) { aspect-ratio: 1 / 1; margin-top: 28px !important; }
+    [data-irlt]:nth-child(4n+3) { aspect-ratio: 3 / 4; }
+    [data-irlt]:nth-child(5n) { aspect-ratio: 4 / 5.6; margin-top: -26px !important; margin-left: 12px !important; width: calc(100% - 12px) !important; z-index: 3; box-shadow: 0 16px 34px rgba(22,24,18,.28); }
+    [data-irlt]:nth-child(7n) { rotate: -2deg; }
+    [data-irlt] [data-tilt] { transform: none !important; }
+    [data-irlt] [data-tilt] > span:first-of-type { font-size: 11px !important; opacity: 0; transform: translateY(6px); transition: opacity .3s ease, transform .3s ease; }
+    [data-irlt][data-mon="1"] [data-tilt] > span:first-of-type { opacity: 1; transform: none; }
+    [data-irlt] [data-tilt] > div:last-child { opacity: 0 !important; transform: translateY(-6px) !important; pointer-events: none !important; transition: opacity .3s ease, transform .3s ease !important; }
+    [data-irlt][data-mon="1"] [data-tilt] > div:last-child { opacity: 1 !important; transform: none !important; pointer-events: auto !important; }
+    [data-irlt][data-mon="1"] { z-index: 6; }
+    [data-irlt]::after { content: "+"; position: absolute; z-index: 4; right: 8px; bottom: 8px; width: 30px; height: 30px; border-radius: 50%; background: #FDFCF8; color: #3F4633; font: 400 20px/30px 'DM Sans', sans-serif; text-align: center; box-shadow: 0 4px 12px rgba(22,24,18,.22); transition: transform .35s cubic-bezier(.34,1.5,.5,1); pointer-events: none; }
+    [data-irlt][data-mon="1"]::after { transform: rotate(45deg); }
+    [data-irlcta] { display: flex !important; break-inside: avoid; column-span: all; width: auto !important; min-height: 0 !important; margin: 14px 6px 0 !important; padding: 22px 18px !important; grid-column: auto !important; grid-row: auto !important; }
+    [data-s6comp] { height: auto !important; display: grid; grid-template-columns: 1fr 1fr; gap: 16px 14px; }
+    [data-s6main] { position: relative !important; left: auto !important; width: auto !important; transform: none !important; grid-column: 1 / 3; aspect-ratio: 4 / 4.6; }
+    [data-s6thumb] { position: relative !important; left: auto !important; right: auto !important; top: auto !important; bottom: auto !important; width: auto !important; transform: none !important; min-height: 44px; }
+    [data-s6thumb] > span:first-child { aspect-ratio: 4 / 3 !important; }
+    [data-s6b] { display: none; }
+    [data-ed] { grid-template-columns: 1fr 1fr !important; grid-template-rows: none !important; grid-auto-rows: auto !important; row-gap: 18px; }
+    [data-edhead] { grid-column: 1 / 3 !important; grid-row: auto !important; }
+    [data-ed] [data-pc] { grid-column: auto !important; grid-row: auto !important; transform: none !important; translate: none !important; }
+    [data-ed] [data-edimg] { flex: none !important; aspect-ratio: 4 / 5; }
+    [data-ed] [data-slot="s0"] { grid-column: 1 / 3 !important; }
+    [data-ed] { column-gap: 12px !important; row-gap: 22px !important; align-items: start !important; }
+    [data-ed] [data-pc] { align-self: start !important; height: auto !important; }
+    [data-ed] [data-pc]:not([data-slot="s0"]) [data-edimg] { aspect-ratio: 4 / 5 !important; }
+    [data-ed] [data-pc][data-slot="s1"] [data-edimg], [data-ed] [data-pc][data-slot="s5"] [data-edimg] { aspect-ratio: 1 / 1 !important; }
+    [data-ed] [data-slot="s0"] { margin: 0 -16px; }
+    [data-ed] [data-slot="s0"] [data-edimg] { aspect-ratio: 4 / 5.2 !important; }
+    [data-ed] [data-slot="s0"] > div { z-index: 5; }
+    [data-ed] [data-slot="s1"] { margin-top: -28px; margin-left: 12%; z-index: 4; }
+    [data-ed] [data-slot="s1"] [data-edimg] > span:first-child { box-shadow: 0 16px 34px rgba(22,24,18,.28); }
+    [data-ed] [data-slot="s2"] { margin-top: 36px; }
+    [data-ed] [data-slot="s4"], [data-ed] [data-slot="s6"] { margin-top: 28px; }
+    [data-ed] [data-slot="s5"] { margin-top: -18px; }
+    [data-ed] [data-pc] h3 { font-size: 13px !important; line-height: 1.25; }
+    [data-ed] [data-pc] [data-padd] { min-height: 44px !important; width: 100%; font-size: 11px !important; letter-spacing: .1em !important; }
+    [data-ed] [data-pc] [data-padd] + * , [data-ed] [data-pc] div:has(> [data-padd]) { flex-wrap: wrap; gap: 6px; }
+    [data-ed] [data-slot="s1"] [data-edimg] { aspect-ratio: 1; align-self: stretch !important; }
+    [data-ed] [data-edimg] { transform: none !important; }
+    [data-s4nav] { display: none !important; }
+    [data-s4view], [data-s4info] { display: none !important; }
+    [data-s4grid] { display: block !important; }
+    [data-s4m] { display: grid !important; margin-top: 20px; }
+    [data-s4mg] { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 22px 12px; }
+    #drop [role="tab"] { min-height: 44px; }
+    [data-s4info] { position: sticky; bottom: 0; background: #F3E1DD; padding: 14px 0 18px !important; }
+  }
+</style>
+</helmet>
+
+<dc-import name="LUMI-Offers" hint-size="100%,38px"></dc-import>
+<section id="top" data-lumi="hero" aria-label="LUMI — make it yours" style="position: relative; height: calc(100svh - 40px); min-height: 600px; overflow: hidden; background: #3F4633; touch-action: pan-y;">
+
+  <div aria-hidden="true" style="position: absolute; inset: -40px; z-index: 0; background: url('assets/lumi-hero-campaign.png') center / cover no-repeat; filter: blur(28px) saturate(1.05); opacity: .85;"></div>
+  <div data-lumi="photo" style="position: absolute; inset: 0; z-index: 0; will-change: transform;">
+    <img src="assets/lumi-hero-campaign.png" alt="Three friends in LUMI beaded tanks — cocktail, popcorn and fries patches — lounging in a pink-and-sage bedroom" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%;" />
+  </div>
+
+  <div data-mtiles="" style="display: none; position: absolute; z-index: 2; left: 12px; top: 34%; flex-direction: column; gap: 10px;">
+    <a href="LUMI-Pages.dc.html#/product/white-cocktail-tank" aria-label="White Cocktail Tank" style="display: block; width: 23vw; max-width: 100px; aspect-ratio: 3 / 4; border: 3px solid #FDFCF8; box-shadow: 0 12px 28px rgba(22,24,18,.35); background-color: #E8DDD4; background-image: url('assets/lumi-hero-campaign.png'); background-repeat: no-repeat; background-size: 430% auto; background-position: 21% 34%; transform: rotate(-3deg);"></a>
+    <a href="LUMI-Pages.dc.html#/product/black-fries-tank" aria-label="Black Fries Tank" style="display: block; width: 23vw; max-width: 100px; aspect-ratio: 3 / 4; margin-left: 10px; border: 3px solid #FDFCF8; box-shadow: 0 12px 28px rgba(22,24,18,.35); background-color: #1B1F16; background-image: url('assets/lumi-hero-campaign.png'); background-repeat: no-repeat; background-size: 430% auto; background-position: 89% 34%; transform: rotate(2.5deg);"></a>
+  </div>
+  <div data-mgrad="" aria-hidden="true" style="display: none; position: absolute; z-index: 4; left: 0; right: 0; bottom: 0; height: 58%; pointer-events: none; background: linear-gradient(180deg, rgba(30,34,24,0) 0%, rgba(30,34,24,.38) 38%, rgba(30,34,24,.78) 100%);"></div>
+  <canvas data-lumi="far" aria-hidden="true" style="position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; pointer-events: none;"></canvas>
+
+  <div aria-hidden="true" style="position: absolute; z-index: 2; left: 0; right: 0; top: 0; height: 170px; background: linear-gradient(180deg, rgba(38,42,30,0.42), rgba(38,42,30,0)); pointer-events: none;"></div>
+  <div data-scrim-copy="" aria-hidden="true" style="position: absolute; z-index: 2; inset: 0; background: radial-gradient(75% 70% at 0% 100%, rgba(38,42,30,0.7) 0%, rgba(38,42,30,0.34) 42%, rgba(38,42,30,0) 72%); pointer-events: none;"></div>
+
+  <canvas data-lumi="main" aria-hidden="true" style="position: absolute; z-index: 3; inset: 0; width: 100%; height: 100%; pointer-events: none;"></canvas>
+
+  <header style="position: absolute; z-index: 8; top: 0; left: 0; right: 0; height: 84px; padding: 0 clamp(20px, 3.6vw, 56px); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; animation: lumiIn 1.2s .3s ease both;">
+    <nav aria-label="Primary" onPointerEnter="{{ shopEnter }}" onPointerLeave="{{ shopLeave }}" onKeyDown="{{ shopKey }}" style="position: relative; display: flex; align-self: stretch; align-items: center;">
+      <button onClick="{{ shopToggle }}" aria-expanded="{{ shopOpen }}" aria-controls="lumi-shop-menu" style="display: flex; align-items: center; gap: 8px; background: none; border: 0; cursor: pointer; font-size: 13px; font-weight: 500; letter-spacing: .18em; color: #FDFCF8; padding: 12px 0;" style-hover="color: #EFCFCB;">
+        SHOP <span aria-hidden="true" style="display: inline-block; font-size: 12px; letter-spacing: 0; transform: {{ shopArrow }}; transition: transform .35s cubic-bezier(.16,.8,.3,1);">↓</span>
+      </button>
+      <sc-if value="{{ shopOpen }}" hint-placeholder-val="{{ false }}">
+        <div id="lumi-shop-menu" style="position: absolute; top: 70px; left: 0; width: min(560px, calc(100vw - 40px)); background: #FDFCF8; color: #3F4633; display: grid; grid-template-columns: minmax(0, 1fr) 200px; box-shadow: 0 30px 70px rgba(38,42,30,0.28); animation: lumiDrop .35s cubic-bezier(.16,.8,.3,1) both;">
+          <div style="padding: 26px 28px 24px;">
+            <span style="display: block; font-size: 11px; font-weight: 700; letter-spacing: .2em; color: #6B7258; margin-bottom: 10px;">SHOP LUMI</span>
+            <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column;">
+              <sc-for list="{{ cats }}" as="c" hint-placeholder-count="3">
+                <li>
+                  <a href="{{ c.href }}" onPointerEnter="{{ c.onHover }}" onFocus="{{ c.onHover }}" style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid #E8DDD4; color: #3F4633;">
+                    <span style="display: flex; flex-direction: column; gap: 3px;">
+                      <span style="font-size: 15px; font-weight: 700; letter-spacing: .12em; color: #3F4633;">{{ c.label }}</span>
+                      <span style="font-family: 'Fraunces', serif; font-weight: 600; font-style: italic; font-size: 17px; color: {{ c.tagColor }}; transition: color .3s ease;">{{ c.tag }}</span>
+                    </span>
+                    <span aria-hidden="true" style="font-size: 15px; color: #3F4633; opacity: {{ c.arrowOp }}; transform: {{ c.arrowT }}; transition: opacity .3s ease, transform .35s cubic-bezier(.16,.8,.3,1);">→</span>
+                  </a>
+                </li>
+              </sc-for>
+            </ul>
+            <a href="LUMI-Pages.dc.html#/shop" style="display: inline-flex; margin-top: 16px; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: #3F4633; border-bottom: 2px solid #D4A7A5; padding-bottom: 3px;">SHOP ALL →</a>
+          </div>
+          <div role="img" aria-label="{{ previewAlt }}" style="position: relative; background-color: #E8DDD4; background-image: url('assets/lumi-hero-campaign.png'); background-repeat: no-repeat; background-size: 1000%; background-position: {{ previewPos }}; transition: background-position .8s cubic-bezier(.16,.8,.3,1);">
+            <span style="position: absolute; left: 12px; bottom: 12px; font-size: 11px; font-weight: 700; letter-spacing: .14em; color: #3F4633; background: #FDFCF8; padding: 5px 8px;">{{ previewLabel }}</span>
+          </div>
+        </div>
+      </sc-if>
+    </nav>
+    <a href="#top" data-lumi="logo" aria-label="LUMI home" style="display: flex; align-items: center; padding: 8px;">
+      <img src="assets/lumi-logo-ivory.png" alt="LUMI" width="1141" height="365" style="display: block; height: clamp(26px, 2.5vw, 34px); width: auto;" />
+    </a>
+    <div style="display: flex; justify-content: flex-end; align-items: center; gap: clamp(20px, 2.6vw, 36px);">
+      <button data-m="hide" style="background: none; border: 0; cursor: pointer; font-size: 13px; font-weight: 500; letter-spacing: .18em; color: #FDFCF8; padding: 12px 0;" style-hover="color: #EFCFCB;">SEARCH</button>
+      <button data-lumi="bag" onClick="{{ openBag }}" aria-label="{{ bagAria }}" style="background: none; border: 0; cursor: pointer; font-size: 13px; font-weight: 500; letter-spacing: .18em; color: #FDFCF8; padding: 12px 0;" style-hover="color: #EFCFCB;">BAG ({{ bagN }})</button>
+    </div>
+  </header>
+
+  <div data-copy="" style="position: absolute; z-index: 5; left: clamp(20px, 3.6vw, 56px); bottom: clamp(24px, 5vh, 64px); max-width: 520px; display: flex; flex-direction: column; gap: 14px;">
+    <h1 style="margin: 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(40px, 4.4vw, 72px); line-height: 1; letter-spacing: -0.01em; color: #FDFCF8; text-shadow: 0 2px 24px rgba(38,42,30,0.35); opacity: {{ copyOpacity }}; transform: {{ copyShift }}; transition: opacity 1.4s ease, transform 1.4s cubic-bezier(.16,.8,.3,1);">MAKE IT <span style="font-style: italic;">yours.</span></h1>
+    <p style="margin: 0; font-size: clamp(16px, 1.2vw, 18px); font-weight: 500; line-height: 1.45; color: #FDFCF8; text-shadow: 0 1px 14px rgba(38,42,30,0.45); opacity: {{ copyOpacity }}; transform: {{ copyShift }}; transition: opacity 1.4s .15s ease, transform 1.4s .15s cubic-bezier(.16,.8,.3,1);">Beaded tops, brooches &amp; bag charms for whatever mood you're in.</p>
+    <a href="LUMI-Pages.dc.html#/shop" onClick="{{ heroShop }}" data-cta="" data-lumi="cta" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 12px; margin-top: 10px; background: #FDFCF8; color: #3F4633; padding: 18px 32px; min-height: 56px; font-size: 13px; font-weight: 700; letter-spacing: .16em; opacity: {{ copyOpacity }}; transform: {{ copyShift }}; transition: opacity 1.4s .3s ease, transform .5s cubic-bezier(.34,1.6,.5,1), background .3s ease;" style-hover="background: #EFCFCB; color: #3F4633; transform: translateY(-3px);">SHOP LUMI →</a>
+  </div>
+
+  <canvas data-lumi="near" aria-hidden="true" style="position: absolute; z-index: 7; inset: 0; width: 100%; height: 100%; pointer-events: none;"></canvas>
+</section>
+<section id="shop" data-s2="" aria-labelledby="s2-title" onPointerMove="{{ s2Move }}" onPointerLeave="{{ s2Leave }}" style="position: relative; z-index: 9; background: {{ s2Bg }}; transition: background 1.1s cubic-bezier(.16,.8,.3,1); padding: clamp(56px, 7vw, 96px) clamp(16px, 3vw, 44px) clamp(56px, 7vw, 100px); color: #3F4633;">
+  <canvas data-s2c="" aria-hidden="true" style="position: absolute; z-index: 4; left: 0; top: -140px; width: 100%; height: calc(100% + 140px); pointer-events: none;"></canvas>
+
+  <div style="position: relative; z-index: 2; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 40px; margin-bottom: clamp(24px, 3vw, 40px); opacity: {{ s2HeadOp }}; transform: {{ s2HeadT }}; transition: opacity 1s .35s ease, transform 1s .35s cubic-bezier(.16,.8,.3,1);">
+    <h2 id="s2-title" style="margin: 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(44px, 6vw, 96px); line-height: .95; letter-spacing: -0.02em; color: #3F4633;">PICK YOUR <span style="font-style: italic;">LUMI.</span></h2>
+    <p style="margin: 0 0 8px; font-size: clamp(16px, 1.3vw, 19px); font-weight: 500; color: #3F4633;">Three ways to make it yours.</p>
+  </div>
+
+  <div data-cats="" onPointerLeave="{{ catsLeave }}" style="position: relative; z-index: 1; display: flex; gap: clamp(8px, .9vw, 14px); height: clamp(560px, 80vh, 840px);">
+
+    <article data-cat="wear" data-open="{{ openWear }}" aria-expanded="{{ ariaOpenWear }}" onPointerEnter="{{ enterWear }}" onFocus="{{ focusWear }}" onClick="{{ tapWear }}" style="position: relative; container-type: inline-size; flex: {{ flexWear }}; min-width: 0; overflow: hidden; background: #EFCFCB; color: #3F4633; opacity: {{ s2PanOp }}; transform: {{ s2PanT }}; transition: flex 1s cubic-bezier(.16,.8,.3,1), opacity .9s .45s ease, transform .9s .45s cubic-bezier(.16,.8,.3,1);">
+      <div data-mcover="" role="img" aria-label="Friends wearing the LUMI beaded tanks" style="display: none; position: absolute; inset: 0; z-index: 1; background-color: #EFCFCB; background-image: linear-gradient(180deg, rgba(22,24,18,.42) 0%, rgba(22,24,18,.08) 40%, rgba(22,24,18,.62) 100%), url('assets/lumi-hero-campaign.png'); background-repeat: no-repeat; background-size: 100% 100%, 300% auto; background-position: 0 0, 53% 28%; transition: opacity .5s ease; pointer-events: none;"></div>
+      <div style="position: absolute; z-index: 4; left: 22px; right: 22px; top: 20px;">
+        <span style="display: block; font-size: 12px; font-weight: 700; letter-spacing: .16em; line-height: 1.35;">01 · BEADED TANKS</span>
+        <h3 style="margin: 8px 0 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(26px, 14cqw, 58px); line-height: .95; letter-spacing: -0.015em; white-space: nowrap;">WEAR IT</h3>
+      </div>
+      <div data-stage="wear" style="position: absolute; left: 22px; right: 22px; top: 136px; bottom: 150px;">
+          <a href="LUMI-Pages.dc.html#/product/white-cocktail-tank" data-prod="ct" data-wf="l" onPointerEnter="{{ pr.ct.on }}" onPointerLeave="{{ pr.ct.off }}" onFocus="{{ pr.ct.on }}" onBlur="{{ pr.ct.off }}" aria-label="The Cocktail Tank, ₹899" style="position: absolute; top: 7%; bottom: 5%; left: {{ wf.l.l }}; width: {{ wf.l.w }}; opacity: {{ wf.l.op }}; transform: {{ wf.l.t }}; z-index: {{ wf.l.z }}; overflow: hidden; background: #E8DDD4; box-shadow: 0 26px 54px rgba(63,70,51,0.22); transition: left 1s cubic-bezier(.16,.8,.3,1), width 1s cubic-bezier(.16,.8,.3,1), opacity .7s ease, transform 1s cubic-bezier(.16,.8,.3,1);">
+            <img src="assets/lumi-hero-campaign.png" alt="" loading="lazy" style="position: absolute; left: 50%; top: 50%; height: 190%; width: auto; max-width: none; transform-origin: 30% 47%; transform: {{ pr.ct.zoom }}; transition: transform 1.2s cubic-bezier(.16,.8,.3,1);" />
+            <span style="position: absolute; left: 10px; right: 10px; bottom: 10px; display: flex; flex-direction: column; align-items: flex-start; gap: 3px; background: #FDFCF8; color: #3F4633; padding: 9px 10px; font-size: 11px; line-height: 1.3; font-weight: 700; letter-spacing: .06em; white-space: normal; opacity: {{ pr.ct.cap }}; transform: {{ pr.ct.capT }}; transition: opacity .35s ease, transform .35s ease; pointer-events: none;"><span>THE COCKTAIL TANK</span><span style="font-weight: 500;">₹899 · VIEW →</span></span>
+          </a>
+          <a href="LUMI-Pages.dc.html#/product/black-fries-tank" data-prod="ft" data-wf="r" onPointerEnter="{{ pr.ft.on }}" onPointerLeave="{{ pr.ft.off }}" onFocus="{{ pr.ft.on }}" onBlur="{{ pr.ft.off }}" aria-label="The Fries Tank, ₹899" style="position: absolute; top: 11%; bottom: 2%; left: {{ wf.r.l }}; width: {{ wf.r.w }}; opacity: {{ wf.r.op }}; transform: {{ wf.r.t }}; z-index: {{ wf.r.z }}; overflow: hidden; background: #E8DDD4; box-shadow: 0 26px 54px rgba(63,70,51,0.22); transition: left 1s cubic-bezier(.16,.8,.3,1), width 1s cubic-bezier(.16,.8,.3,1), opacity .7s ease, transform 1s cubic-bezier(.16,.8,.3,1);">
+            <img src="assets/lumi-hero-campaign.png" alt="" loading="lazy" style="position: absolute; left: 50%; top: 50%; height: 190%; width: auto; max-width: none; transform-origin: 75.4% 49%; transform: {{ pr.ft.zoom }}; transition: transform 1.2s cubic-bezier(.16,.8,.3,1);" />
+            <span style="position: absolute; left: 10px; right: 10px; bottom: 10px; display: flex; flex-direction: column; align-items: flex-start; gap: 3px; background: #FDFCF8; color: #3F4633; padding: 9px 10px; font-size: 11px; line-height: 1.3; font-weight: 700; letter-spacing: .06em; white-space: normal; opacity: {{ pr.ft.cap }}; transform: {{ pr.ft.capT }}; transition: opacity .35s ease, transform .35s ease; pointer-events: none;"><span>THE FRIES TANK</span><span style="font-weight: 500;">₹899 · VIEW →</span></span>
+          </a>
+          <a href="LUMI-Pages.dc.html#/product/pink-popcorn-tank" data-prod="pt" data-wf="c" onPointerEnter="{{ pr.pt.on }}" onPointerLeave="{{ pr.pt.off }}" onFocus="{{ pr.pt.on }}" onBlur="{{ pr.pt.off }}" aria-label="The Popcorn Tank, ₹899" style="position: absolute; top: 0; bottom: 0; left: {{ wf.c.l }}; width: {{ wf.c.w }}; opacity: {{ wf.c.op }}; transform: {{ wf.c.t }}; z-index: {{ wf.c.z }}; overflow: hidden; background: #E8DDD4; box-shadow: 0 26px 54px rgba(63,70,51,0.22); transition: left 1s cubic-bezier(.16,.8,.3,1), width 1s cubic-bezier(.16,.8,.3,1), opacity .7s ease, transform 1s cubic-bezier(.16,.8,.3,1);">
+            <img src="assets/lumi-hero-campaign.png" alt="" loading="lazy" style="position: absolute; left: 50%; top: 50%; height: 190%; width: auto; max-width: none; transform-origin: 52% 46%; transform: {{ pr.pt.zoom }}; transition: transform 1.2s cubic-bezier(.16,.8,.3,1);" />
+            <span style="position: absolute; left: 10px; right: 10px; bottom: 10px; display: flex; flex-direction: column; align-items: flex-start; gap: 3px; background: #FDFCF8; color: #3F4633; padding: 9px 10px; font-size: 11px; line-height: 1.3; font-weight: 700; letter-spacing: .06em; white-space: normal; opacity: {{ pr.pt.cap }}; transform: {{ pr.pt.capT }}; transition: opacity .35s ease, transform .35s ease; pointer-events: none;"><span>THE POPCORN TANK</span><span style="font-weight: 500;">₹899 · VIEW →</span></span>
+          </a>
+      </div>
+      <div style="position: absolute; z-index: 4; left: 22px; right: 22px; bottom: 22px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start;">
+        <p data-exp="" style="margin: 0; font-size: clamp(16px, 1.25vw, 19px); font-weight: 500; line-height: 1.4; max-width: 30ch; opacity: {{ exp.wear.op }}; transform: {{ exp.wear.t }}; transition: opacity .6s .3s ease, transform .6s .3s cubic-bezier(.16,.8,.3,1);">Beaded tanks for outfits that need a little extra.</p>
+        <a href="LUMI-Pages.dc.html#/tank-tops" style="display: inline-flex; align-items: center; min-height: 48px; padding: 14px clamp(12px, 6cqw, 24px); max-width: 100%; background: #3F4633; color: #FDFCF8; font-size: clamp(10px, 5.6cqw, 12px); font-weight: 700; letter-spacing: clamp(.04em, .8cqw, .16em); white-space: normal; line-height: 1.25; text-align: left; transition: transform .45s cubic-bezier(.34,1.6,.5,1), background .3s ease;" style-hover="background: #6B7258; color: #FDFCF8; transform: translateY(-2px);">SHOP TANKS →</a>
+      </div>
+    </article>
+
+    <article data-cat="pin" data-open="{{ openPin }}" aria-expanded="{{ ariaOpenPin }}" onPointerEnter="{{ enterPin }}" onFocus="{{ focusPin }}" onClick="{{ tapPin }}" style="position: relative; container-type: inline-size; flex: {{ flexPin }}; min-width: 0; overflow: hidden; background: #3F4633; color: #FDFCF8; opacity: {{ s2PanOp }}; transform: {{ s2PanT }}; transition: flex 1s cubic-bezier(.16,.8,.3,1), opacity .9s .57s ease, transform .9s .57s cubic-bezier(.16,.8,.3,1);">
+      <div data-mcover="" role="img" aria-label="LUMI beaded brooches up close" style="display: none; position: absolute; inset: 0; z-index: 1; background-color: #3F4633; background-image: linear-gradient(180deg, rgba(22,24,18,.42) 0%, rgba(22,24,18,.08) 40%, rgba(22,24,18,.62) 100%), url('assets/lumi-hero-campaign.png'); background-repeat: no-repeat; background-size: 100% 100%, 440% auto; background-position: 0 0, 51% 60%; transition: opacity .5s ease; pointer-events: none;"></div>
+      <div style="position: absolute; z-index: 4; left: 22px; right: 22px; top: 20px;">
+        <span style="display: block; font-size: 12px; font-weight: 700; letter-spacing: .16em; line-height: 1.35; color: #EFCFCB;">02 · BEADED BROOCHES</span>
+        <h3 style="margin: 8px 0 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(26px, 14cqw, 58px); line-height: .95; letter-spacing: -0.015em; white-space: nowrap; color: #FDFCF8;">PIN IT</h3>
+      </div>
+      <div data-stage="pin" style="position: absolute; left: 22px; right: 22px; top: 136px; bottom: 150px;">
+        <div data-surf="" style="position: absolute; top: 0; left: {{ surf.l }}; width: {{ surf.w }}; bottom: {{ surf.b }}; box-shadow: 0 26px 60px rgba(0,0,0,0.32); transition: left 1s cubic-bezier(.16,.8,.3,1), width 1s cubic-bezier(.16,.8,.3,1), bottom 1s cubic-bezier(.16,.8,.3,1);">
+          <image-slot id="lumi-pin-surface" shape="rect" placeholder="Denim jacket or tote, flat lay" style="background: repeating-linear-gradient(90deg, rgba(253,252,248,0.05) 0 1px, transparent 1px 6px), repeating-linear-gradient(0deg, rgba(22,24,18,0.07) 0 1px, transparent 1px 6px), linear-gradient(160deg, #9A9F86, #7A806A 55%, #626950);"></image-slot>
+          <span aria-hidden="true" style="position: absolute; top: 0; bottom: 0; left: 50%; border-left: 2px dashed rgba(253,252,248,0.3); pointer-events: none;"></span>
+        </div>
+          <a href="LUMI-Pages.dc.html#/product/popcorn-brooch" data-prod="pb" data-br="pop" onPointerEnter="{{ pr.pb.on }}" onPointerLeave="{{ pr.pb.off }}" onFocus="{{ pr.pb.on }}" onBlur="{{ pr.pb.off }}" aria-label="THE POPCORN BROOCH, ₹269" style="position: absolute; left: {{ pin.pop.l }}; top: {{ pin.pop.t }}; opacity: {{ pin.pop.op }}; width: clamp(84px, 7.4vw, 124px); aspect-ratio: 1; z-index: 3; transition: left 1s 0s cubic-bezier(.6,0,.2,1), top 1s 0s cubic-bezier(.6,0,.2,1), opacity .6s 0s ease;">
+            <span style="position: absolute; inset: 0; border-radius: 50%; overflow: hidden; border: 4px solid #FDFCF8; box-shadow: 0 14px 28px rgba(22,24,18,0.38); background: #EFCFCB; transform: {{ pr.pb.lift }}; transition: transform .45s cubic-bezier(.34,1.6,.5,1);">
+              <img src="assets/lumi-hero-campaign.png" alt="" loading="lazy" style="position: absolute; left: 50%; top: 50%; width: 1300%; height: auto; max-width: none; transform-origin: 51.3% 56.9%; transform: {{ pr.pb.zoom }}; transition: transform 1.2s cubic-bezier(.16,.8,.3,1);" />
+            </span>
+            <span aria-hidden="true" style="position: absolute; inset: -9px; border-radius: 50%; border: 2px solid #EFCFCB; opacity: 0; animation: {{ pin.pop.ping }}; pointer-events: none;"></span>
+            <span style="position: absolute; top: calc(100% + 10px); left: 50%; white-space: nowrap; background: #FDFCF8; color: #3F4633; padding: 8px 11px; font-size: 11px; font-weight: 700; letter-spacing: .08em; opacity: {{ pr.pb.cap }}; transform: {{ pr.pb.capB }}; transition: opacity .35s ease, transform .35s ease; pointer-events: none; z-index: 5; box-shadow: 0 8px 20px rgba(22,24,18,.18);">THE POPCORN BROOCH · <span style="font-weight: 500;">₹269 · VIEW →</span></span>
+          </a>
+          <a href="LUMI-Pages.dc.html#/product/fries-brooch" data-prod="fb" data-br="fries" onPointerEnter="{{ pr.fb.on }}" onPointerLeave="{{ pr.fb.off }}" onFocus="{{ pr.fb.on }}" onBlur="{{ pr.fb.off }}" aria-label="THE FRIES BROOCH, ₹269" style="position: absolute; left: {{ pin.fries.l }}; top: {{ pin.fries.t }}; opacity: {{ pin.fries.op }}; width: clamp(84px, 7.4vw, 124px); aspect-ratio: 1; z-index: 3; transition: left 1s 0.16s cubic-bezier(.6,0,.2,1), top 1s 0.16s cubic-bezier(.6,0,.2,1), opacity .6s 0.16s ease;">
+            <span style="position: absolute; inset: 0; border-radius: 50%; overflow: hidden; border: 4px solid #FDFCF8; box-shadow: 0 14px 28px rgba(22,24,18,0.38); background: #EFCFCB; transform: {{ pr.fb.lift }}; transition: transform .45s cubic-bezier(.34,1.6,.5,1);">
+              <img src="assets/lumi-hero-campaign.png" alt="" loading="lazy" style="position: absolute; left: 50%; top: 50%; width: 1300%; height: auto; max-width: none; transform-origin: 76.1% 63.8%; transform: {{ pr.fb.zoom }}; transition: transform 1.2s cubic-bezier(.16,.8,.3,1);" />
+            </span>
+            <span aria-hidden="true" style="position: absolute; inset: -9px; border-radius: 50%; border: 2px solid #EFCFCB; opacity: 0; animation: {{ pin.fries.ping }}; pointer-events: none;"></span>
+            <span style="position: absolute; top: calc(100% + 10px); left: 50%; white-space: nowrap; background: #FDFCF8; color: #3F4633; padding: 8px 11px; font-size: 11px; font-weight: 700; letter-spacing: .08em; opacity: {{ pr.fb.cap }}; transform: {{ pr.fb.capB }}; transition: opacity .35s ease, transform .35s ease; pointer-events: none; z-index: 5; box-shadow: 0 8px 20px rgba(22,24,18,.18);">THE FRIES BROOCH · <span style="font-weight: 500;">₹269 · VIEW →</span></span>
+          </a>
+          <a href="LUMI-Pages.dc.html#/product/cocktail-brooch" data-prod="cb" data-br="cock" onPointerEnter="{{ pr.cb.on }}" onPointerLeave="{{ pr.cb.off }}" onFocus="{{ pr.cb.on }}" onBlur="{{ pr.cb.off }}" aria-label="THE COCKTAIL BROOCH, ₹269" style="position: absolute; left: {{ pin.cock.l }}; top: {{ pin.cock.t }}; opacity: {{ pin.cock.op }}; width: clamp(84px, 7.4vw, 124px); aspect-ratio: 1; z-index: 3; transition: left 1s 0.32s cubic-bezier(.6,0,.2,1), top 1s 0.32s cubic-bezier(.6,0,.2,1), opacity .6s 0.32s ease;">
+            <span style="position: absolute; inset: 0; border-radius: 50%; overflow: hidden; border: 4px solid #FDFCF8; box-shadow: 0 14px 28px rgba(22,24,18,0.38); background: #EFCFCB; transform: {{ pr.cb.lift }}; transition: transform .45s cubic-bezier(.34,1.6,.5,1);">
+              <img src="assets/lumi-hero-campaign.png" alt="" loading="lazy" style="position: absolute; left: 50%; top: 50%; width: 1300%; height: auto; max-width: none; transform-origin: 28.6% 59.1%; transform: {{ pr.cb.zoom }}; transition: transform 1.2s cubic-bezier(.16,.8,.3,1);" />
+            </span>
+            <span aria-hidden="true" style="position: absolute; inset: -9px; border-radius: 50%; border: 2px solid #EFCFCB; opacity: 0; animation: {{ pin.cock.ping }}; pointer-events: none;"></span>
+            <span style="position: absolute; top: calc(100% + 10px); left: 50%; white-space: nowrap; background: #FDFCF8; color: #3F4633; padding: 8px 11px; font-size: 11px; font-weight: 700; letter-spacing: .08em; opacity: {{ pr.cb.cap }}; transform: {{ pr.cb.capB }}; transition: opacity .35s ease, transform .35s ease; pointer-events: none; z-index: 5; box-shadow: 0 8px 20px rgba(22,24,18,.18);">THE COCKTAIL BROOCH · <span style="font-weight: 500;">₹269 · VIEW →</span></span>
+          </a>
+          <a href="LUMI-Pages.dc.html#/brooches" data-prod="hb" data-br="heart" onPointerEnter="{{ pr.hb.on }}" onPointerLeave="{{ pr.hb.off }}" onFocus="{{ pr.hb.on }}" onBlur="{{ pr.hb.off }}" aria-label="THE HEART BROOCH, ₹269" style="position: absolute; left: {{ pin.heart.l }}; top: {{ pin.heart.t }}; opacity: {{ pin.heart.op }}; width: clamp(84px, 7.4vw, 124px); aspect-ratio: 1; z-index: 3; transition: left 1s 0.48s cubic-bezier(.6,0,.2,1), top 1s 0.48s cubic-bezier(.6,0,.2,1), opacity .6s 0.48s ease;">
+            <span style="position: absolute; inset: 0; border-radius: 50%; overflow: hidden; border: 4px solid #FDFCF8; box-shadow: 0 14px 28px rgba(22,24,18,0.38); background: #EFCFCB; transform: {{ pr.hb.lift }}; transition: transform .45s cubic-bezier(.34,1.6,.5,1);">
+              <image-slot id="lumi-brooch-heart" shape="circle" placeholder="Heart brooch" style="background: #EFCFCB;"></image-slot>
+            </span>
+            <span aria-hidden="true" style="position: absolute; inset: -9px; border-radius: 50%; border: 2px solid #EFCFCB; opacity: 0; animation: {{ pin.heart.ping }}; pointer-events: none;"></span>
+            <span style="position: absolute; top: calc(100% + 10px); left: 50%; white-space: nowrap; background: #FDFCF8; color: #3F4633; padding: 8px 11px; font-size: 11px; font-weight: 700; letter-spacing: .08em; opacity: {{ pr.hb.cap }}; transform: {{ pr.hb.capB }}; transition: opacity .35s ease, transform .35s ease; pointer-events: none; z-index: 5; box-shadow: 0 8px 20px rgba(22,24,18,.18);">THE HEART BROOCH · <span style="font-weight: 500;">₹269 · VIEW →</span></span>
+          </a>
+      </div>
+      <div style="position: absolute; z-index: 4; left: 22px; right: 22px; bottom: 22px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start;">
+        <p data-exp="" style="margin: 0; font-size: clamp(16px, 1.25vw, 19px); font-weight: 500; line-height: 1.4; max-width: 34ch; color: #FDFCF8; opacity: {{ exp.pin.op }}; transform: {{ exp.pin.t }}; transition: opacity .6s .3s ease, transform .6s .3s cubic-bezier(.16,.8,.3,1);">Turn your jacket, bag or tee into something that feels like you.</p>
+        <a href="LUMI-Pages.dc.html#/brooches" style="display: inline-flex; align-items: center; min-height: 48px; padding: 14px clamp(12px, 6cqw, 24px); max-width: 100%; background: #EFCFCB; color: #3F4633; font-size: clamp(10px, 5.6cqw, 12px); font-weight: 700; letter-spacing: clamp(.04em, .8cqw, .16em); white-space: normal; line-height: 1.25; text-align: left; transition: transform .45s cubic-bezier(.34,1.6,.5,1), background .3s ease;" style-hover="background: #FDFCF8; color: #3F4633; transform: translateY(-2px);">SHOP BROOCHES →</a>
+      </div>
+    </article>
+
+    <article data-cat="charm" data-open="{{ openCharm }}" aria-expanded="{{ ariaOpenCharm }}" onPointerEnter="{{ enterCharm }}" onFocus="{{ focusCharm }}" onClick="{{ tapCharm }}" style="position: relative; container-type: inline-size; flex: {{ flexCharm }}; min-width: 0; overflow: hidden; background: #D4A7A5; color: #3F4633; opacity: {{ s2PanOp }}; transform: {{ s2PanT }}; transition: flex 1s cubic-bezier(.16,.8,.3,1), opacity .9s .69s ease, transform .9s .69s cubic-bezier(.16,.8,.3,1);">
+      <div data-mcover="" role="img" aria-label="LUMI beaded bag charms" style="display: none; position: absolute; inset: 0; z-index: 1; background-color: #E8DDD4; background-image: linear-gradient(180deg, rgba(22,24,18,.42) 0%, rgba(22,24,18,.08) 40%, rgba(22,24,18,.62) 100%), url('assets/lumi-hero-campaign.png'); background-repeat: no-repeat; background-size: 100% 100%, 440% auto; background-position: 0 0, 86% 68%; transition: opacity .5s ease; pointer-events: none;"></div>
+      <div style="position: absolute; z-index: 4; left: 22px; right: 22px; top: 20px;">
+        <span style="display: block; font-size: 12px; font-weight: 700; letter-spacing: .16em; line-height: 1.35;">03 · BEADED BAG CHARMS</span>
+        <h3 style="margin: 8px 0 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(26px, 14cqw, 58px); line-height: .95; letter-spacing: -0.015em; white-space: nowrap;">CHARM IT</h3>
+      </div>
+      <div data-stage="charm" style="position: absolute; left: 22px; right: 22px; top: 136px; bottom: 150px;">
+        <div aria-hidden="true" style="position: absolute; left: -22px; right: -22px; top: 0; height: 20px; background: #3F4633; box-shadow: 0 8px 18px rgba(63,70,51,0.28);">
+          <span style="position: absolute; left: 0; right: 0; top: 50%; border-top: 1px dashed rgba(253,252,248,0.45);"></span>
+        </div>
+          <div data-ch="h" style="position: absolute; top: 12px; left: {{ ch.h.l }}; width: 0; height: 0; opacity: {{ ch.h.op }}; z-index: {{ ch.h.z }}; transition: left 1s cubic-bezier(.16,.8,.3,1), opacity .6s ease;">
+            <div data-charm="0" style="position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform;">
+              <span aria-hidden="true" style="position: absolute; left: -8px; top: -8px; width: 16px; height: 16px; border-radius: 50%; border: 3px solid #E8DDD4; box-shadow: 0 2px 4px rgba(22,24,18,.25);"></span>
+              <span aria-hidden="true" style="position: absolute; left: -1px; top: 7px; width: 2px; height: 70px; background: repeating-linear-gradient(180deg, #F3ECE4 0 4px, #A89A8E 4px 6px);"></span>
+              <a href="LUMI-Pages.dc.html#/product/heart-charm" data-prod="hc" data-cf="" onPointerEnter="{{ pr.hc.on }}" onPointerLeave="{{ pr.hc.off }}" onFocus="{{ pr.hc.on }}" onBlur="{{ pr.hc.off }}" aria-label="THE HEART STACK CHARM, ₹289" style="position: absolute; top: 76px; left: 0; transform: translateX(-50%); width: clamp(96px, 8.4vw, 144px); aspect-ratio: 3/4; display: block;">
+                <span style="position: absolute; inset: 0; overflow: hidden; border-radius: 14px; border: 4px solid #FDFCF8; background: #EFCFCB; box-shadow: 0 18px 34px rgba(63,70,51,0.3); transform: {{ pr.hc.lift }}; transition: transform .45s cubic-bezier(.34,1.6,.5,1);">
+                  <img src="assets/lumi-hero-campaign.png" alt="" loading="lazy" style="position: absolute; left: 50%; top: 50%; width: 1500%; height: auto; max-width: none; transform-origin: 83% 65.4%; transform: {{ pr.hc.zoom }}; transition: transform 1.2s cubic-bezier(.16,.8,.3,1);" />
+                </span>
+                <span style="position: absolute; top: calc(100% + 10px); left: -8px; white-space: nowrap; background: #FDFCF8; color: #3F4633; padding: 8px 11px; font-size: 11px; font-weight: 700; letter-spacing: .08em; opacity: {{ pr.hc.cap }}; transform: {{ pr.hc.capL }}; transition: opacity .35s ease, transform .35s ease; pointer-events: none; z-index: 5; box-shadow: 0 8px 20px rgba(22,24,18,.18);">THE HEART STACK CHARM · <span style="font-weight: 500;">₹289 · VIEW →</span></span>
+              </a>
+            </div>
+          </div>
+          <div data-ch="p" style="position: absolute; top: 12px; left: {{ ch.p.l }}; width: 0; height: 0; opacity: {{ ch.p.op }}; z-index: {{ ch.p.z }}; transition: left 1s cubic-bezier(.16,.8,.3,1), opacity .6s ease;">
+            <div data-charm="1" style="position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform;">
+              <span aria-hidden="true" style="position: absolute; left: -8px; top: -8px; width: 16px; height: 16px; border-radius: 50%; border: 3px solid #E8DDD4; box-shadow: 0 2px 4px rgba(22,24,18,.25);"></span>
+              <span aria-hidden="true" style="position: absolute; left: -1px; top: 7px; width: 2px; height: 110px; background: repeating-linear-gradient(180deg, #F3ECE4 0 4px, #A89A8E 4px 6px);"></span>
+              <a href="LUMI-Pages.dc.html#/bag-charms" data-prod="pc" data-cf="" onPointerEnter="{{ pr.pc.on }}" onPointerLeave="{{ pr.pc.off }}" onFocus="{{ pr.pc.on }}" onBlur="{{ pr.pc.off }}" aria-label="THE PEARL CHARM, ₹289" style="position: absolute; top: 116px; left: 0; transform: translateX(-50%); width: clamp(96px, 8.4vw, 144px); aspect-ratio: 3/4; display: block;">
+                <span style="position: absolute; inset: 0; overflow: hidden; border-radius: 14px; border: 4px solid #FDFCF8; background: #EFCFCB; box-shadow: 0 18px 34px rgba(63,70,51,0.3); transform: {{ pr.pc.lift }}; transition: transform .45s cubic-bezier(.34,1.6,.5,1);">
+                  <image-slot id="lumi-charm-pearl" shape="rect" placeholder="Pearl charm" style="background: #EFCFCB;"></image-slot>
+                </span>
+                <span style="position: absolute; top: calc(100% + 10px); left: 50%; white-space: nowrap; background: #FDFCF8; color: #3F4633; padding: 8px 11px; font-size: 11px; font-weight: 700; letter-spacing: .08em; opacity: {{ pr.pc.cap }}; transform: {{ pr.pc.capB }}; transition: opacity .35s ease, transform .35s ease; pointer-events: none; z-index: 5; box-shadow: 0 8px 20px rgba(22,24,18,.18);">THE PEARL CHARM · <span style="font-weight: 500;">₹289 · VIEW →</span></span>
+              </a>
+            </div>
+          </div>
+          <div data-ch="c" style="position: absolute; top: 12px; left: {{ ch.c.l }}; width: 0; height: 0; opacity: {{ ch.c.op }}; z-index: {{ ch.c.z }}; transition: left 1s cubic-bezier(.16,.8,.3,1), opacity .6s ease;">
+            <div data-charm="2" style="position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform;">
+              <span aria-hidden="true" style="position: absolute; left: -8px; top: -8px; width: 16px; height: 16px; border-radius: 50%; border: 3px solid #E8DDD4; box-shadow: 0 2px 4px rgba(22,24,18,.25);"></span>
+              <span aria-hidden="true" style="position: absolute; left: -1px; top: 7px; width: 2px; height: 140px; background: repeating-linear-gradient(180deg, #F3ECE4 0 4px, #A89A8E 4px 6px);"></span>
+              <a href="LUMI-Pages.dc.html#/product/cherry-charm" data-prod="cc" data-cf="" onPointerEnter="{{ pr.cc.on }}" onPointerLeave="{{ pr.cc.off }}" onFocus="{{ pr.cc.on }}" onBlur="{{ pr.cc.off }}" aria-label="THE CHERRY CHARM, ₹289" style="position: absolute; top: 146px; left: 0; transform: translateX(-50%); width: clamp(96px, 8.4vw, 144px); aspect-ratio: 3/4; display: block;">
+                <span style="position: absolute; inset: 0; overflow: hidden; border-radius: 14px; border: 4px solid #FDFCF8; background: #EFCFCB; box-shadow: 0 18px 34px rgba(63,70,51,0.3); transform: {{ pr.cc.lift }}; transition: transform .45s cubic-bezier(.34,1.6,.5,1);">
+                  <img src="assets/lumi-hero-campaign.png" alt="" loading="lazy" style="position: absolute; left: 50%; top: 50%; width: 1500%; height: auto; max-width: none; transform-origin: 22.25% 65.4%; transform: {{ pr.cc.zoom }}; transition: transform 1.2s cubic-bezier(.16,.8,.3,1);" />
+                </span>
+                <span style="position: absolute; top: calc(100% + 10px); right: -8px; white-space: nowrap; background: #FDFCF8; color: #3F4633; padding: 8px 11px; font-size: 11px; font-weight: 700; letter-spacing: .08em; opacity: {{ pr.cc.cap }}; transform: {{ pr.cc.capL }}; transition: opacity .35s ease, transform .35s ease; pointer-events: none; z-index: 5; box-shadow: 0 8px 20px rgba(22,24,18,.18);">THE CHERRY CHARM · <span style="font-weight: 500;">₹289 · VIEW →</span></span>
+              </a>
+            </div>
+          </div>
+      </div>
+      <div style="position: absolute; z-index: 4; left: 22px; right: 22px; bottom: 22px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start;">
+        <p data-exp="" style="margin: 0; font-size: clamp(16px, 1.25vw, 19px); font-weight: 500; line-height: 1.4; max-width: 32ch; opacity: {{ exp.charm.op }}; transform: {{ exp.charm.t }}; transition: opacity .6s .3s ease, transform .6s .3s cubic-bezier(.16,.8,.3,1);">Give your everyday bag a little more personality.</p>
+        <a href="LUMI-Pages.dc.html#/bag-charms" style="display: inline-flex; align-items: center; min-height: 48px; padding: 14px clamp(12px, 6cqw, 24px); max-width: 100%; background: #3F4633; color: #FDFCF8; font-size: clamp(10px, 5.6cqw, 12px); font-weight: 700; letter-spacing: clamp(.04em, .8cqw, .16em); white-space: normal; line-height: 1.25; text-align: left; transition: transform .45s cubic-bezier(.34,1.6,.5,1), background .3s ease;" style-hover="background: #6B7258; color: #FDFCF8; transform: translateY(-2px);">SHOP CHARMS →</a>
+      </div>
+    </article>
+  </div>
+  <p data-swipe="" aria-hidden="true" style="display: none; margin: 16px 0 0; font-size: 12px; font-weight: 700; letter-spacing: .16em; color: #3F4633;">{{ swipeHint }}</p>
+</section>
+<section id="build" data-s3="" data-s3mtab="{{ s3mtab }}" aria-labelledby="s3-title" style="position: relative; z-index: 9; background: {{ s3Bg }}; transition: background 1.1s cubic-bezier(.16,.8,.3,1); padding: clamp(56px, 7vw, 96px) clamp(16px, 3vw, 44px) clamp(56px, 7vw, 100px); color: #3F4633; overflow: hidden;">
+  <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 40px; margin-bottom: clamp(24px, 3vw, 40px);">
+    <h2 id="s3-title" style="margin: 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(44px, 6vw, 96px); line-height: .95; letter-spacing: -0.02em; color: #3F4633;">BUILD YOUR <span style="font-style: italic;">LUMI.</span></h2>
+    <p style="margin: 0 0 8px; font-size: clamp(16px, 1.3vw, 19px); font-weight: 500; color: #3F4633;">One piece, or a little bit of everything.</p>
+  </div>
+
+  <div data-s3grid="" style="display: grid; grid-template-columns: minmax(170px, .72fr) minmax(0, 1.5fr) minmax(250px, .95fr); gap: clamp(14px, 2vw, 30px); align-items: center;">
+
+    <div data-s3mtabs="" role="tablist" aria-label="Pick your pieces" style="display: none;">
+      <sc-for list="{{ s3mtabs }}" as="m" hint-placeholder-count="3">
+        <button role="tab" aria-selected="{{ m.on }}" onClick="{{ m.pick }}" style="flex: 1; min-height: 46px; display: flex; align-items: center; justify-content: center; gap: 6px; border: 0; cursor: pointer; background: {{ m.bg }}; color: {{ m.ink }}; font-size: 12px; font-weight: 700; letter-spacing: .14em; transition: background .3s ease, color .3s ease;">{{ m.label }}<span style="min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; display: {{ m.chipShow }}; align-items: center; justify-content: center; background: #D4A7A5; color: #3F4633; font-size: 11px; letter-spacing: 0;">{{ m.n }}</span></button>
+      </sc-for>
+    </div>
+    <div data-s3tanks="" style="position: relative; z-index: 3; margin-right: calc(-1 * clamp(10px, 4vw, 70px)); display: flex; flex-direction: column; gap: 14px;">
+      <span style="font-size: 12px; font-weight: 700; letter-spacing: .18em;">01 · PICK YOUR BASE.</span>
+      <div data-tray="" role="radiogroup" aria-label="Pick a tank" style="display: flex; flex-direction: column; gap: 14px;">
+        <sc-for list="{{ s3tanks }}" as="t" hint-placeholder-count="3">
+          <button role="radio" aria-checked="{{ t.on }}" aria-label="{{ t.aria }}" data-tk="{{ t.id }}" onClick="{{ t.pick }}" style="position: relative; display: grid; grid-template-columns: clamp(64px, 6.4vw, 96px) 1fr; align-items: center; gap: 12px; text-align: left; background: #FDFCF8; border: 0; padding: 8px 14px 8px 8px; cursor: pointer; transform: {{ t.tilt }}; outline: 2px solid {{ t.ring }}; outline-offset: 3px; box-shadow: 0 14px 30px rgba(63,70,51,0.14); transition: transform .45s cubic-bezier(.34,1.6,.5,1), outline-color .3s ease;" style-hover="transform: rotate(0deg) scale(1.04);">
+            <span data-thumb="" style="display: block; aspect-ratio: 1; background-color: #E8DDD4; background-image: url('assets/lumi-hero-campaign.png'); background-size: 500% auto; background-position: {{ t.pos }}; background-repeat: no-repeat;"></span>
+            <span style="display: flex; flex-direction: column; gap: 3px; min-width: 0;">
+              <span style="font-size: 12px; font-weight: 700; letter-spacing: .1em; color: #3F4633;">{{ t.short }}</span>
+              <span style="font-size: 13px; color: #4A5140;">{{ t.sub }}</span>
+            </span>
+            <span aria-hidden="true" style="position: absolute; top: -6px; right: -6px; width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff 0 14%, #D4A7A5 50%, #9C6F6D); opacity: {{ t.dot }}; transform: scale({{ t.dot }}); transition: opacity .3s ease, transform .45s cubic-bezier(.34,1.8,.5,1);"></span>
+          </button>
+        </sc-for>
+      </div>
+      <div data-tinfo="" style="padding: 4px 2px 0;">
+        <span style="display: block; font-size: 13px; font-weight: 700; letter-spacing: .1em;">{{ s3tName }}</span>
+        <span style="display: block; margin-top: 4px; font-family: 'Fraunces', serif; font-weight: 600; font-style: italic; font-size: 18px;">{{ s3tLine }}</span>
+        <span style="display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 3px 7px;"><s style="font-size: .84em; font-weight: 400; opacity: .72;">{{ s3tPriceMrp }}</s><span style="display: block; margin-top: 4px; font-size: 15px; font-weight: 500;">{{ s3tPrice }}</span><span style="font-size: .7em; font-weight: 700; letter-spacing: .08em; line-height: 1; padding: 3px 5px; background: #EFCFCB; color: #3F4633; align-self: center;">{{ s3tPriceOff }}</span></span>
+      </div>
+    </div>
+
+    <div data-s3stage="" style="position: relative; z-index: 1; width: 100%; max-width: calc(80vh * .8); margin: 0 auto; aspect-ratio: 4/5; background: #E8DDD4; box-shadow: 0 30px 70px rgba(63,70,51,0.22);">
+      <sc-for list="{{ s3layers }}" as="L" hint-placeholder-count="3">
+        <div role="img" aria-label="{{ L.alt }}" aria-hidden="{{ L.hidden }}" style="position: absolute; inset: 0; background-image: url('assets/lumi-hero-campaign.png'); background-size: 278% auto; background-position: {{ L.pos }}; background-repeat: no-repeat; z-index: {{ L.z }}; clip-path: inset(0 0 {{ L.clip }} 0); transform: {{ L.scale }}; transition: clip-path .9s cubic-bezier(.65,0,.25,1) {{ L.delay }}, transform 1.4s cubic-bezier(.16,.8,.3,1);"></div>
+      </sc-for>
+      <span style="position: absolute; z-index: 5; left: 14px; top: 14px; background: #FDFCF8; color: #3F4633; padding: 7px 10px; font-size: 11px; font-weight: 700; letter-spacing: .14em;">WEARING · {{ s3tShort }}{{ s3dragHint }}</span>
+      <sc-for list="{{ s3onB }}" as="b" hint-placeholder-count="0">
+        <span data-s3drag="" onPointerDown="{{ b.down }}" aria-label="{{ b.name }}" role="img" style="position: absolute; z-index: 6; cursor: grab; touch-action: none; left: {{ b.x }}; top: {{ b.y }}; width: clamp(40px, 12%, 78px); aspect-ratio: 1; margin: calc(-1 * clamp(20px, 6%, 39px)) 0 0 calc(-1 * clamp(20px, 6%, 39px)); border-radius: 50%; border: 3px solid #FDFCF8; background-color: #EFCFCB; background-image: url('assets/lumi-hero-campaign.png'); background-size: 1300% auto; background-position: {{ b.pos }}; background-repeat: no-repeat; box-shadow: 0 10px 20px rgba(22,24,18,0.35); transition: left .9s cubic-bezier(.16,.8,.3,1), top .9s cubic-bezier(.16,.8,.3,1); animation: lumiAttach .55s cubic-bezier(.34,1.8,.5,1) both;"></span>
+      </sc-for>
+      <sc-for list="{{ s3onC }}" as="c" hint-placeholder-count="0">
+        <div data-s3drag="" style="position: absolute; z-index: 6; left: {{ c.x }}; top: {{ c.y }}; width: 0; height: 0; transition: left .9s cubic-bezier(.16,.8,.3,1), top .9s cubic-bezier(.16,.8,.3,1);">
+          <div data-bch="{{ c.id }}" style="position: absolute; left: 0; top: 0; transform-origin: 0 0; animation: lumiIn .4s ease both;">
+            <span aria-hidden="true" style="position: absolute; left: -6px; top: -6px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid #F3ECE4; box-shadow: 0 1px 3px rgba(22,24,18,.4);"></span>
+            <span aria-hidden="true" style="position: absolute; left: -1px; top: 5px; width: 2px; height: {{ c.len }}; background: repeating-linear-gradient(180deg, #F3ECE4 0 3px, #A89A8E 3px 5px);"></span>
+            <span role="img" aria-label="{{ c.name }}" onPointerDown="{{ c.down }}" style="position: absolute; left: 0; top: {{ c.top }}; cursor: grab; touch-action: none; transform: translateX(-50%); width: clamp(38px, 4.4vw, 62px); aspect-ratio: 3/4; border-radius: 10px; border: 3px solid #FDFCF8; background-color: #EFCFCB; background-image: url('assets/lumi-hero-campaign.png'); background-size: 1500% auto; background-position: {{ c.pos }}; background-repeat: no-repeat; box-shadow: 0 10px 20px rgba(22,24,18,0.32);"></span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div data-s3side="" style="position: relative; z-index: 3; margin-left: calc(-1 * clamp(10px, 4vw, 70px)); display: flex; flex-direction: column; gap: 18px;">
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <span style="font-size: 12px; font-weight: 700; letter-spacing: .18em;">02 · ADD A LITTLE EXTRA.</span>
+        <div data-tray="" style="display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start;">
+          <sc-for list="{{ s3brooches }}" as="b" hint-placeholder-count="3">
+            <button aria-pressed="{{ b.on }}" aria-label="{{ b.aria }}" data-bk="{{ b.id }}" onClick="{{ b.toggle }}" style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; background: none; border: 0; padding: 0; cursor: pointer; color: #3F4633;">
+              <span data-thumb="" style="display: block; width: clamp(58px, 5.2vw, 76px); aspect-ratio: 1; border-radius: 50%; border: 3px solid #FDFCF8; outline: 2px solid {{ b.ring }}; outline-offset: 2px; background-color: #EFCFCB; background-image: url('assets/lumi-hero-campaign.png'); background-size: 1300% auto; background-position: {{ b.pos }}; background-repeat: no-repeat; box-shadow: 0 10px 22px rgba(63,70,51,0.2); transition: transform .45s cubic-bezier(.34,1.6,.5,1), outline-color .3s ease;" style-hover="transform: rotate(-10deg) scale(1.06);"></span>
+              <span style="font-size: 11px; font-weight: 700; letter-spacing: .08em;">{{ b.label }}</span>
+              <span aria-hidden="true" style="position: absolute; top: -4px; right: -4px; min-width: 22px; height: 22px; border-radius: 999px; background: {{ b.chipBg }}; color: {{ b.chipInk }}; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; transition: background .3s ease;">{{ b.chip }}</span>
+            </button>
+          </sc-for>
+          <sc-for list="{{ s3charms }}" as="c" hint-placeholder-count="2">
+            <button aria-pressed="{{ c.on }}" aria-label="{{ c.aria }}" data-ck="{{ c.id }}" onClick="{{ c.toggle }}" style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; background: none; border: 0; padding: 0; cursor: pointer; color: #3F4633;">
+              <span data-thumb="" style="display: block; width: clamp(54px, 4.8vw, 70px); aspect-ratio: 3/4; border-radius: 12px; border: 3px solid #FDFCF8; outline: 2px solid {{ c.ring }}; outline-offset: 2px; background-color: #EFCFCB; background-image: url('assets/lumi-hero-campaign.png'); background-size: 1500% auto; background-position: {{ c.pos }}; background-repeat: no-repeat; box-shadow: 0 10px 22px rgba(63,70,51,0.2); transform-origin: 50% 0; transition: transform .6s cubic-bezier(.34,1.8,.5,1), outline-color .3s ease;" style-hover="transform: rotate(7deg);"></span>
+              <span style="font-size: 11px; font-weight: 700; letter-spacing: .08em;">{{ c.label }}</span>
+              <span aria-hidden="true" style="position: absolute; top: -4px; right: -4px; min-width: 22px; height: 22px; border-radius: 999px; background: {{ c.chipBg }}; color: {{ c.chipInk }}; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; transition: background .3s ease;">{{ c.chip }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div data-sum="" style="background: #FDFCF8; padding: 20px 20px 18px; box-shadow: 0 22px 50px rgba(63,70,51,0.16);">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;">
+          <span style="font-family: 'Fraunces', serif; font-weight: 600; font-size: 28px; line-height: 1;">YOUR <span style="font-style: italic;">LUMI.</span></span>
+          <span style="font-size: 12px; font-weight: 700; letter-spacing: .14em; color: #6B7258;">{{ s3status }}</span>
+        </div>
+        <ul style="list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-direction: column;">
+          <sc-for list="{{ s3lines }}" as="l" hint-placeholder-count="1">
+            <li style="display: flex; justify-content: space-between; gap: 10px; padding: 8px 0; border-top: 1px solid #E8DDD4; font-size: 14px; animation: lumiIn .4s ease both;">
+              <span style="font-weight: 500;">{{ l.name }}</span><span style="display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 3px 7px;"><s style="font-size: .84em; font-weight: 400; opacity: .72;">{{ l.priceMrp }}</s><span>{{ l.price }}</span><span style="font-size: .7em; font-weight: 700; letter-spacing: .08em; line-height: 1; padding: 3px 5px; background: #EFCFCB; color: #3F4633; align-self: center;">{{ l.priceOff }}</span></span>
+            </li>
+          </sc-for>
+        </ul>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; padding-top: 10px; border-top: 2px solid #3F4633;">
+          <span style="font-size: 13px; font-weight: 700; letter-spacing: .12em;">TOTAL</span>
+          <span style="font-size: 20px; font-weight: 700;">{{ s3total }}</span>
+        </div>
+        <sc-if value="{{ s3promoOn }}" hint-placeholder-val="{{ false }}"><div role="status" style="margin-top: 12px; padding: 10px 12px; background: {{ s3promoBg }}; color: #3F4633;"><span style="display: block; font-size: 12px; font-weight: 700; letter-spacing: .14em;">{{ s3promoTitle }}</span><span style="display: block; margin-top: 3px; font-size: 13px;">{{ s3promoSub }}</span></div></sc-if>
+        <button data-addlook="" onClick="{{ s3add }}" style="margin-top: 16px; width: 100%; min-height: 54px; padding: 14px 16px; background: {{ s3ctaBg }}; color: #FDFCF8; border: 0; font-size: 13px; font-weight: 700; letter-spacing: .14em; line-height: 1.3; cursor: pointer; transition: background .35s ease, transform .45s cubic-bezier(.34,1.6,.5,1);" style-hover="transform: translateY(-2px);">{{ s3cta }}</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="drop" data-s4="" aria-labelledby="s4-title" style="position: relative; z-index: 9; background: #FDFCF8; padding: clamp(56px, 7vw, 96px) 0 clamp(48px, 4.5vw, 64px); overflow: hidden; color: #3F4633;">
+  <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: 44%; background: #F3E1DD;"></div>
+  <div aria-hidden="true" style="position: absolute; left: 0; top: 0; bottom: 0; width: clamp(8px, 1vw, 14px); background: #6B7258;"></div>
+  <div data-s4grid="" style="position: relative; display: grid; grid-template-columns: minmax(250px, 23vw) minmax(0, 1fr); grid-template-areas: 'head view' 'info view'; column-gap: clamp(20px, 3vw, 48px); row-gap: 28px; padding-left: clamp(22px, 3.4vw, 52px);">
+    <div data-s4nav="" style="position: absolute; z-index: 5; top: 0; right: clamp(22px, 3.4vw, 52px); display: flex; align-items: center; gap: 18px; opacity: {{ s4HeadOp }}; transition: opacity .9s .5s ease;">
+      <button onClick="{{ s4prev }}" aria-label="Previous piece" style="background: none; border: 0; min-width: 44px; min-height: 44px; padding: 0; cursor: pointer; font-size: 22px; line-height: 1; color: {{ s4prevInk }}; transition: transform .3s ease;" style-hover="transform: translateX(-3px);">←</button>
+      <span aria-live="polite" style="font-size: 13px; font-weight: 700; letter-spacing: .16em; color: #3F4633; white-space: nowrap;">{{ s4count }}</span>
+      <button onClick="{{ s4next }}" aria-label="Next piece" style="background: none; border: 0; min-width: 44px; min-height: 44px; padding: 0; cursor: pointer; font-size: 22px; line-height: 1; color: {{ s4nextInk }}; transition: transform .3s ease;" style-hover="transform: translateX(3px);">→</button>
+    </div>
+
+    <div data-s4head="" style="grid-area: head; align-self: start; opacity: {{ s4HeadOp }}; transform: {{ s4HeadT }}; transition: opacity .9s .2s ease, transform .9s .2s cubic-bezier(.16,.8,.3,1);">
+      <span style="display: block; font-size: 12px; font-weight: 700; letter-spacing: .18em; color: #6B7258;">FOUND YOUR FAVOURITE?</span>
+      <h2 id="s4-title" style="margin: 12px 0 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(40px, min(5.4vw, 9vh), 88px); line-height: .92; letter-spacing: -0.02em;">THE LUMI <span style="font-style: italic;">DROP.</span></h2>
+      <p style="margin: 14px 0 0; font-size: clamp(16px, 1.2vw, 18px); font-weight: 500; line-height: 1.45;">The pieces we're currently obsessed with.</p>
+      <div aria-label="Offers" style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px;"><span style="padding: 6px 10px; background: #3F4633; color: #FDFCF8; font-size: 11px; font-weight: 700; letter-spacing: .12em;">3 TANKS → ₹2,400</span><span style="padding: 6px 10px; background: #EFCFCB; color: #3F4633; font-size: 11px; font-weight: 700; letter-spacing: .12em;">ANY 3 EXTRAS → ₹699</span><span style="padding: 6px 10px; background: #EFCFCB; color: #3F4633; font-size: 11px; font-weight: 700; letter-spacing: .12em;">TANK + 2 EXTRAS → ₹1,300</span><span style="padding: 6px 10px; border: 1.5px solid #6B7258; color: #3F4633; font-size: 11px; font-weight: 700; letter-spacing: .12em;">10% OFF ₹3,500+</span></div>
+      <div role="tablist" aria-label="Filter the drop" style="display: flex; flex-wrap: nowrap; gap: 6px clamp(15px, 1.4vw, 24px); margin-top: 22px; white-space: nowrap; width: max-content; position: relative; z-index: 2;">
+        <sc-for list="{{ s4tabs }}" as="t" hint-placeholder-count="4">
+          <button role="tab" aria-selected="{{ t.on }}" onClick="{{ t.pick }}" style="background: none; border: 0; border-bottom: 2px solid {{ t.line }}; padding: 8px 0 6px; min-height: 40px; cursor: pointer; font-size: 12px; font-weight: 700; letter-spacing: clamp(.1em, .9vw, .16em); color: {{ t.ink }}; transition: border-color .3s ease, color .3s ease;" style-hover="color: #3F4633;">{{ t.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div data-s4info="" style="grid-area: info; align-self: end; padding-bottom: 20px; opacity: {{ s4HeadOp }}; transition: opacity .9s .5s ease;">
+      <span style="display: block; font-size: 11px; font-weight: 700; letter-spacing: .18em; color: #6B7258;">{{ s4a.fmt }}</span>
+      <h3 style="margin: 8px 0 0; font-size: clamp(20px, 1.7vw, 26px); font-weight: 700; letter-spacing: .04em;">{{ s4a.name }}</h3>
+      <p style="margin: 6px 0 0; font-family: 'Fraunces', serif; font-weight: 600; font-style: italic; font-size: clamp(19px, 1.5vw, 24px); line-height: 1.2;">{{ s4a.line }}</p>
+      <span style="display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 3px 7px;"><s style="font-size: .84em; font-weight: 400; opacity: .72;">{{ s4a.priceMrp }}</s><span style="display: block; margin-top: 10px; font-size: 18px; font-weight: 500;">{{ s4a.price }}</span><span style="font-size: .7em; font-weight: 700; letter-spacing: .08em; line-height: 1; padding: 3px 5px; background: #EFCFCB; color: #3F4633; align-self: center;">{{ s4a.priceOff }}</span></span>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin-top: 18px;">
+        <button data-s4add="" onClick="{{ s4add }}" style="min-height: 54px; padding: 16px 26px; background: {{ s4addBg }}; color: #FDFCF8; border: 0; cursor: pointer; font-size: 13px; font-weight: 700; letter-spacing: .14em; transition: background .3s ease, transform .45s cubic-bezier(.34,1.6,.5,1);" style-hover="transform: translateY(-2px);">{{ s4addLabel }}</button>
+        <a href="{{ s4a.href }}" style="display: inline-flex; align-items: center; min-height: 44px; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: #3F4633; border-bottom: 2px solid #D4A7A5;">VIEW PRODUCT →</a>
+      </div>
+    </div>
+
+
+    <div data-s4m="" data-s4mf="" style="display: none;">
+      <sc-for list="{{ s4mFeat }}" as="m" hint-placeholder-count="1">
+        <article style="display: flex; flex-direction: column; gap: 8px; min-width: 0;">
+          <a href="{{ m.href }}" aria-label="{{ m.aria }}" style="position: relative; display: block; aspect-ratio: {{ m.ar }}; background-color: {{ m.tint }}; background-image: url('assets/lumi-hero-campaign.png'); background-size: {{ m.size }}; background-position: {{ m.pos }}; background-repeat: no-repeat;">
+            <span style="position: absolute; left: 8px; top: 8px; background: #FDFCF8; color: #3F4633; padding: 4px 7px; font-size: 10px; font-weight: 700; letter-spacing: .14em;">{{ m.fmt }}</span>
+          </a>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px;">
+            <span style="font-size: {{ m.nameSize }}; font-weight: 700; letter-spacing: .04em; line-height: 1.25;">{{ m.name }}</span>
+            <span style="display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 3px 7px;"><s style="font-size: .84em; font-weight: 400; opacity: .72;">{{ m.priceMrp }}</s><span style="font-size: 14px; font-weight: 500; white-space: nowrap;">{{ m.price }}</span><span style="font-size: .7em; font-weight: 700; letter-spacing: .08em; line-height: 1; padding: 3px 5px; background: #EFCFCB; color: #3F4633; align-self: center;">{{ m.priceOff }}</span></span>
+          </div>
+          <button onClick="{{ m.add }}" style="min-height: 46px; background: {{ m.bg }}; color: {{ m.ink }}; border: 1.5px solid #3F4633; cursor: pointer; font-size: 12px; font-weight: 700; letter-spacing: .12em;">{{ m.cta }}</button>
+        </article>
+      </sc-for>
+    </div>
+    <div data-s4m="" data-s4mg="" style="display: none;">
+      <sc-for list="{{ s4mRest }}" as="m" hint-placeholder-count="4">
+        <article style="display: flex; flex-direction: column; gap: 8px; min-width: 0;">
+          <a href="{{ m.href }}" aria-label="{{ m.aria }}" style="position: relative; display: block; aspect-ratio: {{ m.ar }}; background-color: {{ m.tint }}; background-image: url('assets/lumi-hero-campaign.png'); background-size: {{ m.size }}; background-position: {{ m.pos }}; background-repeat: no-repeat;">
+            <span style="position: absolute; left: 8px; top: 8px; background: #FDFCF8; color: #3F4633; padding: 4px 7px; font-size: 10px; font-weight: 700; letter-spacing: .14em;">{{ m.fmt }}</span>
+          </a>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px;">
+            <span style="font-size: {{ m.nameSize }}; font-weight: 700; letter-spacing: .04em; line-height: 1.25;">{{ m.name }}</span>
+            <span style="display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 3px 7px;"><s style="font-size: .84em; font-weight: 400; opacity: .72;">{{ m.priceMrp }}</s><span style="font-size: 14px; font-weight: 500; white-space: nowrap;">{{ m.price }}</span><span style="font-size: .7em; font-weight: 700; letter-spacing: .08em; line-height: 1; padding: 3px 5px; background: #EFCFCB; color: #3F4633; align-self: center;">{{ m.priceOff }}</span></span>
+          </div>
+          <button onClick="{{ m.add }}" style="min-height: 46px; background: {{ m.bg }}; color: {{ m.ink }}; border: 1.5px solid #3F4633; cursor: pointer; font-size: 12px; font-weight: 700; letter-spacing: .12em;">{{ m.cta }}</button>
+        </article>
+      </sc-for>
+    </div>
+    <div data-s4view="" tabindex="0" aria-roledescription="carousel" aria-label="The LUMI drop" onWheel="{{ s4wheel }}" onPointerDown="{{ s4down }}" onPointerUp="{{ s4up }}" onKeyDown="{{ s4key }}" onScroll="{{ s4scroll }}" style="grid-area: view; position: relative; overflow: hidden; padding: 14px 0 20px; touch-action: pan-y; outline-offset: -4px; display: flex; flex-direction: column; justify-content: flex-end;">
+      <div data-s4track="" style="display: flex; align-items: flex-end; gap: 1.4vw; transform: {{ s4shift }}; transition: transform .95s cubic-bezier(.16,.8,.3,1);">
+        <sc-for list="{{ s4items }}" as="p" hint-placeholder-count="5">
+          <div data-s4item="" data-on="{{ p.on }}" style="flex: 0 0 auto; width: {{ p.w }}; opacity: {{ p.op }}; transform: {{ p.enter }}; transition: width .95s cubic-bezier(.16,.8,.3,1), opacity .8s {{ p.delay }} ease, transform .9s {{ p.delay }} cubic-bezier(.16,.8,.3,1);">
+            <button data-s4img="" data-bsize="{{ p.size }}" onClick="{{ p.pick }}" aria-label="{{ p.aria }}" aria-current="{{ p.on }}" style="position: relative; display: block; width: 100%; aspect-ratio: 4/5; padding: 0; border: 0; cursor: pointer; overflow: hidden; background-color: {{ p.tint }}; background-image: url('assets/lumi-hero-campaign.png'); background-size: {{ p.size }}; background-position: {{ p.pos }}; background-repeat: no-repeat; filter: {{ p.filter }}; transition: filter .5s ease, transform .6s cubic-bezier(.16,.8,.3,1);" style-hover="filter: saturate(1.08) brightness(1.05); transform: translateY(-6px);">
+              <span style="position: absolute; left: 10px; top: 10px; background: #FDFCF8; color: #3F4633; padding: 5px 8px; font-size: 10px; font-weight: 700; letter-spacing: .14em;">{{ p.fmt }}</span>
+            </button>
+            <div style="display: flex; flex-direction: column; gap: 2px; margin-top: 10px; height: 34px; font-size: 12px; line-height: 1.35; font-weight: 700; letter-spacing: .06em; opacity: {{ p.capOp }}; transition: opacity .5s ease;">
+              <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ p.name }}</span><span style="display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 3px 7px;"><s style="font-size: .84em; font-weight: 400; opacity: .72;">{{ p.priceMrp }}</s><span style="font-weight: 500;">{{ p.price }}</span><span style="font-size: .7em; font-weight: 700; letter-spacing: .08em; line-height: 1; padding: 3px 5px; background: #EFCFCB; color: #3F4633; align-self: center;">{{ p.priceOff }}</span></span>
+            </div>
+          </div>
+        </sc-for>
+        <a href="LUMI-Pages.dc.html#/shop" data-s4end="" style="flex: 0 0 auto; width: 16vw; min-width: 150px; aspect-ratio: 4/5; margin-bottom: 44px; background: #3F4633; color: #FDFCF8; display: flex; flex-direction: column; justify-content: space-between; padding: 18px; transition: background .3s ease;" style-hover="background: #6B7258; color: #FDFCF8;">
+          <span style="font-size: 11px; font-weight: 700; letter-spacing: .16em; color: #EFCFCB;">THAT'S THE DROP</span>
+          <span style="font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(26px, 2.4vw, 38px); line-height: 1;">SEE ALL <span style="font-style: italic;">LUMI</span> →</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<dc-import name="LUMI-Bundles" hint-size="100%,900px"></dc-import>
+<section id="irl" data-s5="" aria-labelledby="s5-title" style="position: relative; z-index: 9; background: #F6F2EA; padding: clamp(56px, 7vw, 100px) clamp(14px, 2.4vw, 36px) clamp(56px, 7vw, 100px); overflow: hidden; color: #3F4633;">
+  <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 40px; margin: 0 clamp(4px, 1vw, 16px) clamp(24px, 3vw, 44px);">
+    <h2 id="s5-title" style="margin: 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(52px, 8vw, 132px); line-height: .9; letter-spacing: -0.025em;">LUMI <span style="font-style: italic;">IRL.</span></h2>
+    <p style="margin: 0 0 10px; font-size: clamp(16px, 1.3vw, 19px); font-weight: 500;">Seen on you. Made to be yours.</p>
+  </div>
+
+  <div data-irl="" onPointerLeave="{{ irlLeave }}" style="position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-rows: clamp(40px, 4.4vw, 64px); gap: clamp(8px, 1vw, 14px);">
+    <sc-for list="{{ irl }}" as="t" hint-placeholder-count="9">
+      <figure data-irlt="" data-mon="{{ t.mon }}" aria-expanded="{{ t.monA }}" data-speed="{{ t.speed }}" onPointerEnter="{{ t.enter }}" onPointerMove="{{ t.move }}" onClick="{{ t.tap }}" style="position: relative; margin: 0; grid-column: {{ t.col }}; grid-row: {{ t.row }}; z-index: {{ t.z }}; transform: {{ t.rot }}; opacity: {{ t.dim }}; transition: opacity .5s ease, transform .6s cubic-bezier(.16,.8,.3,1); will-change: translate;">
+        <div data-tilt="" style="position: absolute; inset: 0; overflow: hidden; background-color: #E8DDD4; box-shadow: {{ t.shadow }}; border: {{ t.border }}; transform: {{ t.scale }}; transition: transform .6s cubic-bezier(.16,.8,.3,1), box-shadow .5s ease;">
+          <sc-if value="{{ t.crop }}" hint-placeholder-val="{{ false }}">
+            <div role="img" aria-label="{{ t.alt }}" style="position: absolute; inset: 0; background-image: url('assets/lumi-hero-campaign.png'); background-size: {{ t.size }}; background-position: {{ t.pos }}; background-repeat: no-repeat;"></div>
+          </sc-if>
+          <sc-if value="{{ t.slot }}" hint-placeholder-val="{{ false }}">
+            <image-slot id="{{ t.slotId }}" shape="rect" placeholder="{{ t.alt }}" style="background: {{ t.tint }};"></image-slot>
+          </sc-if>
+          <span style="position: absolute; left: 10px; bottom: 10px; z-index: 2; background: rgba(253,252,248,0.94); color: #3F4633; padding: 5px 9px; font-size: 12px; font-weight: 500; pointer-events: none;">{{ t.user }}</span>
+          <div style="position: absolute; left: 10px; right: 10px; top: 10px; z-index: 3; background: #FDFCF8; color: #3F4633; padding: 12px 14px; box-shadow: 0 12px 28px rgba(22,24,18,0.2); opacity: {{ t.tagOp }}; transform: {{ t.tagT }}; transition: opacity .35s ease, transform .35s cubic-bezier(.16,.8,.3,1); pointer-events: {{ t.tagPE }};">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;">
+              <span style="font-size: 12px; font-weight: 700; letter-spacing: .1em;">{{ t.tagTitle }}</span>
+              <span style="display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 3px 7px;"><s style="font-size: .84em; font-weight: 400; opacity: .72;">{{ t.tagPriceMrp }}</s><span style="font-size: 13px; font-weight: 500; white-space: nowrap;">{{ t.tagPrice }}</span><span style="font-size: .7em; font-weight: 700; letter-spacing: .08em; line-height: 1; padding: 3px 5px; background: #EFCFCB; color: #3F4633; align-self: center;">{{ t.tagPriceOff }}</span></span>
+            </div>
+            <sc-if value="{{ t.isLook }}" hint-placeholder-val="{{ false }}">
+              <ul style="list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 8px; font-size: 13px; color: #4A5140;">
+                <sc-for list="{{ t.items }}" as="it" hint-placeholder-count="3"><li>{{ it }}</li></sc-for>
+              </ul>
+            </sc-if>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 10px;">
+              <a href="{{ t.href }}" style="display: inline-flex; align-items: center; min-height: 32px; font-size: 12px; font-weight: 700; letter-spacing: .12em; color: #3F4633; border-bottom: 2px solid #D4A7A5;">{{ t.cta }}</a>
+              <sc-if value="{{ t.isLook }}" hint-placeholder-val="{{ false }}">
+                <button data-irladd="" onClick="{{ t.addLook }}" style="min-height: 32px; padding: 6px 12px; background: {{ t.addBg }}; color: #FDFCF8; border: 0; cursor: pointer; font-size: 11px; font-weight: 700; letter-spacing: .12em;">{{ t.addLabel }}</button>
+              </sc-if>
+            </div>
+          </div>
+        </div>
+      </figure>
+    </sc-for>
+
+    <div data-irlcta="" style="position: relative; z-index: 5; grid-column: 9 / 13; grid-row: 19 / 24; background: #3F4633; color: #FDFCF8; padding: clamp(18px, 2vw, 30px); display: flex; flex-direction: column; justify-content: space-between; gap: 18px;">
+      <span style="font-size: 12px; font-weight: 700; letter-spacing: .18em; color: #EFCFCB;">YOUR TURN</span>
+      <div>
+        <span style="display: block; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(30px, 3vw, 48px); line-height: .95; letter-spacing: -0.015em;">SHOW US YOUR <span style="font-style: italic;">LUMI.</span></span>
+        <span style="display: block; margin-top: 12px; font-size: 15px; font-weight: 500; line-height: 1.45;">Tag @LUMI to be part of the world.</span>
+      </div>
+      <a href="https://instagram.com/getlumi.in" target="_blank" rel="noopener" style="align-self: flex-start; display: inline-flex; align-items: center; min-height: 48px; padding: 12px 22px; background: #EFCFCB; color: #3F4633; font-size: 13px; font-weight: 700; letter-spacing: .14em; transition: background .3s ease, transform .45s cubic-bezier(.34,1.6,.5,1);" style-hover="background: #FDFCF8; color: #3F4633; transform: translateY(-2px);">@LUMI →</a>
+    </div>
+  </div>
+</section>
+<section id="closer" data-s6="" aria-labelledby="s6-title" onPointerMove="{{ s6move }}" onPointerLeave="{{ s6leave }}" style="position: relative; z-index: 9; background: #FDFCF8; color: #3F4633; overflow: hidden; padding: clamp(56px, 6.5vw, 100px) clamp(14px, 3vw, 48px) clamp(48px, 5.5vw, 84px);">
+  <div style="text-align: center; margin: 0 auto clamp(26px, 3vw, 44px);">
+    <h2 id="s6-title" style="margin: 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(48px, 7vw, 116px); line-height: .92; letter-spacing: -0.03em;">LOOK <span style="font-style: italic; color: #6B7258;">CLOSER.</span></h2>
+    <p style="margin: 12px 0 0; font-size: clamp(16px, 1.3vw, 19px); font-weight: 500;">See how a little detail becomes LUMI.</p>
+  </div>
+
+  <div data-s6comp="" style="position: relative; max-width: 1560px; margin: 0 auto; height: clamp(460px, 70vh, 720px);">
+    <div data-s6main="" style="position: absolute; z-index: 2; left: 50%; top: 0; bottom: 0; width: min(50%, 720px); transform: translateX(-50%); overflow: hidden; background: #EFCFCB; box-shadow: 0 34px 70px rgba(22,24,18,.18);">
+      <sc-for list="{{ s6layers }}" as="ly" hint-placeholder-count="4">
+        <div style="position: absolute; inset: 0; opacity: {{ ly.op }}; transition: opacity .5s ease; pointer-events: {{ ly.pe }};">
+          <sc-if value="{{ ly.slot }}" hint-placeholder-val="{{ false }}">
+            <image-slot id="closer-hands" shape="rect" placeholder="Hands placing beads onto a LUMI tank — close, warm daylight" style="background: #D4A7A5;"></image-slot>
+          </sc-if>
+          <sc-if value="{{ ly.photo }}" hint-placeholder-val="{{ true }}">
+            <div role="img" aria-label="{{ ly.alt }}" style="position: absolute; inset: 0; background-color: #EFCFCB; background-image: url('assets/lumi-hero-campaign.png'); background-repeat: no-repeat; background-size: {{ ly.size }}; background-position: {{ ly.pos }};"></div>
+          </sc-if>
+        </div>
+      </sc-for>
+      <div data-s6glow="" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(220px circle at var(--gx, 55%) var(--gy, 45%), rgba(255,255,255,.3), rgba(255,255,255,0) 70%); mix-blend-mode: soft-light;"></div>
+      <p aria-live="polite" style="position: absolute; left: clamp(14px, 1.6vw, 24px); bottom: clamp(12px, 1.6vw, 22px); margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .2em; color: #FDFCF8; text-shadow: 0 1px 12px rgba(18,20,14,.65);">{{ s6label }}</p>
+    </div>
+
+    <div data-s6thumbs="" role="group" aria-label="Look closer at" style="display: contents;">
+      <sc-for list="{{ s6thumbs }}" as="t" hint-placeholder-count="4">
+        <button data-s6thumb="" aria-pressed="{{ t.on }}" onClick="{{ t.pick }}" onPointerEnter="{{ t.hover }}" style="position: absolute; z-index: {{ t.z }}; left: {{ t.l }}; right: {{ t.r }}; top: {{ t.t }}; bottom: {{ t.b }}; width: {{ t.w }}; padding: 0; background: none; border: 0; cursor: pointer; text-align: left; color: #3F4633; transform: {{ t.tf }}; transition: transform .6s cubic-bezier(.16,.8,.3,1);">
+          <span style="position: relative; display: block; overflow: hidden; aspect-ratio: {{ t.ar }}; box-shadow: {{ t.sh }}; transition: box-shadow .5s ease, filter .5s ease; filter: {{ t.fl }};">
+            <sc-if value="{{ t.slot }}" hint-placeholder-val="{{ false }}">
+              <span aria-hidden="true" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: #D4A7A5; color: #FDFCF8; font-size: 11px; font-weight: 700; letter-spacing: .16em;">HAND PHOTO</span>
+            </sc-if>
+            <sc-if value="{{ t.photo }}" hint-placeholder-val="{{ true }}">
+              <span aria-hidden="true" style="position: absolute; inset: 0; background-color: #EFCFCB; background-image: url('assets/lumi-hero-campaign.png'); background-repeat: no-repeat; background-size: {{ t.size }}; background-position: {{ t.pos }};"></span>
+            </sc-if>
+          </span>
+          <span style="display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 12px; font-weight: 700; letter-spacing: .2em; color: {{ t.ink }}; transition: color .4s ease;">
+            <span aria-hidden="true" style="display: block; width: 9px; height: 9px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #fff 0 12%, #D4A7A5 48%, rgba(22,24,18,.5) 120%); transform: {{ t.dot }}; transition: transform .45s cubic-bezier(.34,1.5,.5,1);"></span>
+            {{ t.name }}
+          </span>
+        </button>
+      </sc-for>
+    </div>
+
+    <sc-for list="{{ s6beads }}" as="bd" hint-placeholder-count="0">
+      <span data-s6b="" aria-hidden="true" style="position: absolute; z-index: 4; left: {{ bd.x }}; top: {{ bd.y }}; transition: left 1s cubic-bezier(.3,1.3,.5,1), top 1s cubic-bezier(.3,1.3,.5,1), transform .8s cubic-bezier(.3,1.35,.5,1); transition-delay: {{ bd.d }}; pointer-events: none;">{{ bd.el }}</span>
+    </sc-for>
+  </div>
+
+  <p style="margin: clamp(26px, 3vw, 44px) 0 0; text-align: center; font-family: 'Fraunces', serif; font-weight: 600; font-style: italic; font-size: clamp(20px, 1.8vw, 26px); color: #6B7258;">Made by hand. Worn your way.</p>
+</section>
+<section id="edit" data-s7="" aria-labelledby="s7-title" onPointerMove="{{ s7move }}" onPointerLeave="{{ s7leave }}" style="position: relative; z-index: 9; background: #FDFCF8; color: #3F4633; padding: clamp(56px, 7vw, 100px) clamp(16px, 3vw, 44px) clamp(56px, 7vw, 96px); overflow: hidden;">
+  <div data-edhead="" style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 40px; margin-bottom: clamp(20px, 2.6vw, 36px); opacity: {{ s7In }}; transform: {{ s7headT }}; transition: opacity .8s ease, transform .8s cubic-bezier(.16,.8,.3,1);">
+    <div><h2 id="s7-title" style="margin: 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(38px, 4.2vw, 66px); line-height: .95; letter-spacing: -0.02em;">THE LUMI <span style="font-style: italic;">EDIT</span></h2>
+    <p style="margin: 10px 0 0; font-size: clamp(15px, 1.15vw, 18px); font-weight: 500; line-height: 1.4;">A few things we're loving right now.</p><div aria-label="Offers" style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px;"><span style="padding: 6px 10px; background: #3F4633; color: #FDFCF8; font-size: 11px; font-weight: 700; letter-spacing: .12em;">3 TANKS → ₹2,400</span><span style="padding: 6px 10px; background: #EFCFCB; color: #3F4633; font-size: 11px; font-weight: 700; letter-spacing: .12em;">ANY 3 EXTRAS → ₹699</span><span style="padding: 6px 10px; background: #EFCFCB; color: #3F4633; font-size: 11px; font-weight: 700; letter-spacing: .12em;">TANK + 2 EXTRAS → ₹1,300</span><span style="padding: 6px 10px; border: 1.5px solid #6B7258; color: #3F4633; font-size: 11px; font-weight: 700; letter-spacing: .12em;">10% OFF ₹3,500+</span></div></div>
+    <div role="tablist" aria-label="Choose an edit" style="display: flex; flex-wrap: wrap; gap: 2px 18px;">
+      <sc-for list="{{ s7tabs }}" as="t" hint-placeholder-count="4">
+        <button role="tab" aria-selected="{{ t.on }}" onClick="{{ t.pick }}" style="background: none; border: 0; border-bottom: 2px solid {{ t.line }}; padding: 10px 0 5px; min-height: 42px; cursor: pointer; font-size: 12px; font-weight: 700; letter-spacing: .16em; color: {{ t.ink }}; transition: color .3s ease, border-color .3s ease;" style-hover="color: #3F4633;">{{ t.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <div data-ed="" style="position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: repeat(19, clamp(40px, 4.2vw, 62px)); column-gap: clamp(10px, 1.4vw, 20px);">
+    <sc-for list="{{ s7items }}" as="p" hint-placeholder-count="8">
+      <article data-pc="{{ p.key }}" data-slot="{{ p.slot }}" data-depth="{{ p.depth }}" onPointerEnter="{{ p.on }}" onPointerLeave="{{ p.off }}" style="position: relative; grid-column: {{ p.col }}; grid-row: {{ p.row }}; z-index: {{ p.z }}; display: flex; flex-direction: column; min-width: 0; min-height: 0; opacity: {{ p.op }}; filter: {{ p.filter }}; transform: {{ p.enter }}; transition: opacity .5s ease, filter .5s ease, transform .8s {{ p.delay }} cubic-bezier(.16,.8,.3,1);">
+        <a href="{{ p.href }}" data-pimg="" data-edimg="" aria-label="{{ p.aria }}" style="position: relative; display: block; flex: 1; min-height: 0; aspect-ratio: {{ p.ar }}; align-self: {{ p.alignImg }}; overflow: hidden; background: {{ p.field }}; border: {{ p.border }}; border-radius: {{ p.radius }}; box-shadow: {{ p.shadow }}; transform: {{ p.lift }}; transition: transform .6s cubic-bezier(.16,.8,.3,1), box-shadow .5s ease;">
+          <span style="position: absolute; inset: {{ p.pad }}; overflow: hidden; border-radius: {{ p.radius }};">
+            <span style="position: absolute; inset: 0; background-image: url('assets/lumi-hero-campaign.png'); background-size: {{ p.size }}; background-position: {{ p.pos }}; background-repeat: no-repeat; opacity: {{ p.op1 }}; transform: {{ p.zoom }}; transition: opacity .5s ease, transform 1s cubic-bezier(.16,.8,.3,1);"></span>
+            <span style="position: absolute; inset: 0; background-image: url('assets/lumi-hero-campaign.png'); background-size: {{ p.size2 }}; background-position: {{ p.pos2 }}; background-repeat: no-repeat; opacity: {{ p.op2 }}; transform: {{ p.zoom }}; transition: opacity .5s ease, transform 1s cubic-bezier(.16,.8,.3,1);"></span>
+          </span>
+          <span aria-hidden="true" style="position: absolute; right: 12px; top: 12px; width: 12px; height: 12px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #fff 0 12%, #EFCFCB 48%, #9C6F6D 125%); opacity: {{ p.op2 }}; transform: {{ p.beadT }}; transition: opacity .4s ease, transform .6s cubic-bezier(.34,1.8,.5,1);"></span>
+          <span aria-hidden="true" style="position: absolute; right: 30px; top: 16px; width: 8px; height: 8px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #fff 0 12%, #A9AE96 48%, #5E644E 125%); opacity: {{ p.op2 }}; transform: {{ p.beadT2 }}; transition: opacity .4s .08s ease, transform .7s .08s cubic-bezier(.34,1.8,.5,1);"></span>
+        </a>
+        <sc-if value="{{ p.feat }}" hint-placeholder-val="{{ false }}">
+          <div style="position: absolute; left: clamp(12px, 1.6vw, 24px); bottom: clamp(12px, 1.6vw, 24px); z-index: 3; background: #FDFCF8; color: #3F4633; padding: 16px 18px; width: min(270px, calc(100% - 24px)); box-shadow: 0 16px 40px rgba(22,24,18,.18);">
+            <span style="display: block; font-size: 10px; font-weight: 700; letter-spacing: .16em; color: #6B7258;">{{ p.cat }}</span>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-top: 6px;">
+              <h3 style="margin: 0; font-size: 16px; font-weight: 700; letter-spacing: .05em;">{{ p.name }}</h3>
+              <span style="display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 3px 7px;"><s style="font-size: .84em; font-weight: 400; opacity: .72;">{{ p.priceMrp }}</s><span style="font-size: 15px; font-weight: 500; white-space: nowrap;">{{ p.price }}</span><span style="font-size: .7em; font-weight: 700; letter-spacing: .08em; line-height: 1; padding: 3px 5px; background: #EFCFCB; color: #3F4633; align-self: center;">{{ p.priceOff }}</span></span>
+            </div>
+            <div style="display: grid; grid-template-rows: {{ p.moreRows }}; transition: grid-template-rows .5s cubic-bezier(.16,.8,.3,1);">
+              <p style="margin: 0; overflow: hidden; font-size: 14px; font-style: italic; color: #4A5140;"><span style="display: block; padding-top: 6px;">{{ p.line }}</span></p>
+            </div>
+            <button data-padd="" onClick="{{ p.add }}" aria-label="{{ p.addAria }}" style="margin-top: 12px; width: 100%; min-height: 46px; background: {{ p.btnBgF }}; color: {{ p.btnInkF }}; border: 1.5px solid #3F4633; cursor: pointer; font-size: 12px; font-weight: 700; letter-spacing: .14em; transition: background .3s ease;">{{ p.btnF }}</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ p.small }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; flex-direction: column; gap: 6px; padding-top: 8px;">
+            <h3 style="margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .06em; line-height: 1.25; transform: {{ p.nameT }}; transition: transform .4s cubic-bezier(.16,.8,.3,1);">{{ p.name }}</h3>
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+            <span style="display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 3px 7px;"><s style="font-size: .84em; font-weight: 400; opacity: .72;">{{ p.priceMrp }}</s><span style="font-size: 13px; font-weight: 500;">{{ p.price }}</span><span style="font-size: .7em; font-weight: 700; letter-spacing: .08em; line-height: 1; padding: 3px 5px; background: #EFCFCB; color: #3F4633; align-self: center;">{{ p.priceOff }}</span></span>
+            <button data-padd="" onClick="{{ p.add }}" aria-label="{{ p.addAria }}" style="flex: none; min-height: 36px; min-width: 44px; padding: 6px 12px; background: {{ p.btnBg }}; color: {{ p.btnInk }}; border: 1.5px solid #3F4633; cursor: pointer; font-size: 11px; font-weight: 700; letter-spacing: .12em; white-space: nowrap; transition: background .3s ease, color .3s ease;">{{ p.btn }}</button>
+            </div>
+          </div>
+        </sc-if>
+      </article>
+    </sc-for>
+    <span aria-hidden="true" style="position: absolute; left: 31%; top: 3%; z-index: 8; width: 14px; height: 14px; border-radius: 50%; pointer-events: none; background: radial-gradient(circle at 34% 30%, #fff 0 12%, #D4A7A5 48%, rgba(22,24,18,.45) 125%); box-shadow: 0 3px 8px rgba(22,24,18,.2); opacity: {{ s7In }}; transition: opacity 1s 0.6s ease; animation: lumiFloatA 8s 0s ease-in-out infinite;"></span><span aria-hidden="true" style="position: absolute; left: 34.5%; top: 6%; z-index: 8; width: 9px; height: 9px; border-radius: 50%; pointer-events: none; background: radial-gradient(circle at 34% 30%, #fff 0 12%, #A9AE96 48%, rgba(22,24,18,.45) 125%); box-shadow: 0 3px 8px rgba(22,24,18,.2); opacity: {{ s7In }}; transition: opacity 1s 0.6799999999999999s ease;"></span><span aria-hidden="true" style="position: absolute; left: 66%; top: 46%; z-index: 8; width: 12px; height: 12px; border-radius: 50%; pointer-events: none; background: radial-gradient(circle at 34% 30%, #fff 0 12%, #EFCFCB 48%, rgba(22,24,18,.45) 125%); box-shadow: 0 3px 8px rgba(22,24,18,.2); opacity: {{ s7In }}; transition: opacity 1s 0.76s ease;"></span><span aria-hidden="true" style="position: absolute; left: 29%; top: 62%; z-index: 8; width: 10px; height: 10px; border-radius: 50%; pointer-events: none; background: radial-gradient(circle at 34% 30%, #fff 0 12%, #D4A7A5 48%, rgba(22,24,18,.45) 125%); box-shadow: 0 3px 8px rgba(22,24,18,.2); opacity: {{ s7In }}; transition: opacity 1s 0.84s ease; animation: lumiFloatA 11s -3s ease-in-out infinite;"></span><span aria-hidden="true" style="position: absolute; left: 74%; top: 8%; z-index: 8; width: 8px; height: 8px; border-radius: 50%; pointer-events: none; background: radial-gradient(circle at 34% 30%, #fff 0 12%, #6B7258 48%, rgba(22,24,18,.45) 125%); box-shadow: 0 3px 8px rgba(22,24,18,.2); opacity: {{ s7In }}; transition: opacity 1s 0.9199999999999999s ease;"></span><span aria-hidden="true" style="position: absolute; left: 47%; top: 97%; z-index: 8; width: 11px; height: 11px; border-radius: 50%; pointer-events: none; background: radial-gradient(circle at 34% 30%, #fff 0 12%, #EFCFCB 48%, rgba(22,24,18,.45) 125%); box-shadow: 0 3px 8px rgba(22,24,18,.2); opacity: {{ s7In }}; transition: opacity 1s 1s ease;"></span><span aria-hidden="true" style="position: absolute; left: 90%; top: 60%; z-index: 8; width: 9px; height: 9px; border-radius: 50%; pointer-events: none; background: radial-gradient(circle at 34% 30%, #fff 0 12%, #D4A7A5 48%, rgba(22,24,18,.45) 125%); box-shadow: 0 3px 8px rgba(22,24,18,.2); opacity: {{ s7In }}; transition: opacity 1s 1.08s ease; animation: lumiFloatA 14s -6s ease-in-out infinite;"></span><span aria-hidden="true" style="position: absolute; left: 8%; top: 55%; z-index: 8; width: 12px; height: 12px; border-radius: 50%; pointer-events: none; background: radial-gradient(circle at 34% 30%, #fff 0 12%, #EFCFCB 48%, rgba(22,24,18,.45) 125%); box-shadow: 0 3px 8px rgba(22,24,18,.2); opacity: {{ s7In }}; transition: opacity 1s 1.1600000000000001s ease;"></span><span aria-hidden="true" style="position: absolute; left: 62%; top: 72%; z-index: 8; width: 8px; height: 8px; border-radius: 50%; pointer-events: none; background: radial-gradient(circle at 34% 30%, #fff 0 12%, #A9AE96 48%, rgba(22,24,18,.45) 125%); box-shadow: 0 3px 8px rgba(22,24,18,.2); opacity: {{ s7In }}; transition: opacity 1s 1.24s ease;"></span>
+  </div>
+
+  <div style="display: flex; justify-content: flex-end; margin-top: clamp(20px, 2.4vw, 36px);">
+    <a href="LUMI-Pages.dc.html#/shop" style="display: inline-flex; align-items: center; gap: 12px; min-height: 52px; padding: 13px 30px; background: #3F4633; color: #FDFCF8; font-size: 13px; font-weight: 700; letter-spacing: .16em; transition: background .3s ease, transform .45s cubic-bezier(.34,1.6,.5,1);" style-hover="background: #6B7258; color: #FDFCF8; transform: translateY(-2px);">SHOP ALL →</a>
+  </div>
+</section>
+<dc-import name="LUMI-Cart" hint-size="0px,0px"></dc-import>
+<div data-mmslot="" style="display: none;"><dc-import name="LUMI-MobileMenu" home="#top" fixed="{{ true }}" top-offset="{{ 44 }}" hint-size="0px,0px"></dc-import></div>
+<dc-import name="LUMI-Footer" base="LUMI-Pages.dc.html#/" home="#top" style="position: relative; z-index: 9;" hint-size="100%,560px"></dc-import>
+<sc-if value="{{ pillOn }}" hint-placeholder-val="{{ false }}">
+  <a href="#bag" onClick="{{ openBag }}" data-lumi="bagpill" aria-label="{{ bagAria }}" style="position: fixed; z-index: 60; top: 16px; right: 16px; display: flex; align-items: center; gap: 8px; background: #FDFCF8; color: #3F4633; padding: 11px 16px; font-size: 12px; font-weight: 700; letter-spacing: .16em; box-shadow: 0 10px 26px rgba(63,70,51,0.18); animation: lumiDrop .4s ease both;">BAG <span style="min-width: 22px; height: 22px; border-radius: 999px; background: #3F4633; color: #FDFCF8; display: inline-flex; align-items: center; justify-content: center; padding: 0 6px;">{{ bagN }}</span></a>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;photo&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Image&quot;},&quot;ambientBeads&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0.4,&quot;max&quot;:1.6,&quot;step&quot;:0.1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Beads&quot;},&quot;formDelay&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:3,&quot;min&quot;:2,&quot;max&quot;:10,&quot;step&quot;:0.5,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Beads&quot;},&quot;wordColorway&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;mixed&quot;,&quot;options&quot;:[&quot;mixed&quot;,&quot;blush&quot;,&quot;sage&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Beads&quot;}}">
+const C = { forest: "#3F4633", sage: "#6B7258", paleSage: "#A9AE96", rose: "#D4A7A5", deepRose: "#B07E7C", blush: "#EFCFCB", ivory: "#FDFCF8" };
+const WORD_MIX = {
+  mixed: [[C.ivory, 30], [C.blush, 26], [C.rose, 22], [C.paleSage, 12], [C.sage, 10]],
+  blush: [[C.ivory, 45], [C.blush, 40], [C.rose, 15]],
+  sage: [[C.sage, 40], [C.paleSage, 30], [C.forest, 20], [C.ivory, 10]]
+};
+const AMB_MIX = [[C.blush, 24], [C.rose, 22], [C.ivory, 18], [C.sage, 16], [C.paleSage, 12], [C.deepRose, 8]];
+const pick = m => { let r = Math.random() * m.reduce((a, x) => a + x[1], 0); for (const x of m) { r -= x[1]; if (r <= 0) return x[0]; } return m[0][0]; };
+const rgb = h => { const n = parseInt(h.slice(1), 16); return [n >> 16, (n >> 8) & 255, n & 255]; };
+const tone = (h, p) => { const a = rgb(h), t = p > 0 ? [255, 255, 255] : [22, 24, 18], q = Math.abs(p); return "rgb(" + a.map((v, i) => Math.round(v + (t[i] - v) * q)).join(",") + ")"; };
+const clamp01 = t => t < 0 ? 0 : t > 1 ? 1 : t;
+const rnd = (a, b) => a + Math.random() * (b - a);
+
+const GLYPHS = {
+  L: { w: .6, paths: [[[0, 0], [0, 1], [.6, 1]]] },
+  U: { w: .76, paths: [[[0, 0], [0, .62], "arc", [.76, .62], [.76, 0]]] },
+  M: { w: .96, paths: [[[0, 1], [0, 0], [.48, .66], [.96, 0], [.96, 1]]] },
+  I: { w: 0, paths: [[[0, 0], [0, 1]]] }
+};
+function polyline(path) {
+  const pts = []; let prev = null;
+  for (let i = 0; i < path.length; i++) {
+    const p = path[i];
+    if (p === "arc") {
+      const a = path[i - 1], b = path[i + 1], cx = (a[0] + b[0]) / 2, r = (b[0] - a[0]) / 2;
+      for (let k = 1; k < 24; k++) { const t = Math.PI - (k / 24) * Math.PI; pts.push([cx + Math.cos(t) * r, a[1] + Math.sin(t) * r]); }
+      continue;
+    }
+    pts.push(p); prev = p;
+  }
+  return pts;
+}
+function sampleGlyph(ch, H, sp) {
+  const out = [];
+  GLYPHS[ch].paths.forEach(path => {
+    const pl = polyline(path).map(p => [p[0] * H, p[1] * H]);
+    let total = 0; const seg = [];
+    for (let i = 1; i < pl.length; i++) { const d = Math.hypot(pl[i][0] - pl[i - 1][0], pl[i][1] - pl[i - 1][1]); seg.push(d); total += d; }
+    const n = Math.max(2, Math.round(total / sp)), step = total / n;
+    for (let k = 0; k <= n; k++) {
+      let dist = k * step, i = 0; while (i < seg.length - 1 && dist > seg[i]) { dist -= seg[i]; i++; }
+      const t = seg[i] ? Math.min(1, dist / seg[i]) : 0;
+      out.push([pl[i][0] + (pl[i + 1][0] - pl[i][0]) * t, pl[i][1] + (pl[i + 1][1] - pl[i][1]) * t]);
+    }
+  });
+  return out.filter((p, i) => !out.slice(0, i).some(q => Math.hypot(q[0] - p[0], q[1] - p[1]) < sp * .55));
+}
+
+class Sprites {
+  constructor() { this.m = new Map(); }
+  get(col, blur) {
+    const k = col + "|" + blur; if (this.m.has(k)) return this.m.get(k);
+    const S = 80, pad = 26, c = document.createElement("canvas"); c.width = c.height = S + pad * 2;
+    const x = c.getContext("2d"), cx = pad + S / 2, r = S / 2 - 1;
+    if (blur) x.filter = "blur(" + blur + "px)";
+    if (!blur) { x.save(); x.filter = "blur(6px)"; x.fillStyle = "rgba(22,24,18,.34)"; x.beginPath(); x.ellipse(cx + r * .12, cx + r * .62, r * .82, r * .42, 0, 0, 6.2832); x.fill(); x.restore(); }
+    const g = x.createRadialGradient(cx - r * .36, cx - r * .4, r * .04, cx, cx, r);
+    g.addColorStop(0, tone(col, .75)); g.addColorStop(.3, tone(col, .2)); g.addColorStop(.72, col); g.addColorStop(1, tone(col, -.34));
+    x.fillStyle = g; x.beginPath(); x.arc(cx, cx, r, 0, 6.2832); x.fill();
+    x.globalCompositeOperation = "source-atop";
+    const rim = x.createRadialGradient(cx + r * .3, cx + r * .45, 0, cx + r * .3, cx + r * .45, r * .7);
+    rim.addColorStop(0, "rgba(255,255,255,.22)"); rim.addColorStop(1, "rgba(255,255,255,0)"); x.fillStyle = rim; x.fillRect(0, 0, c.width, c.height);
+    x.globalCompositeOperation = "source-over";
+    x.fillStyle = "rgba(255,255,255,.92)"; x.beginPath(); x.ellipse(cx - r * .34, cx - r * .4, r * .15, r * .1, -0.65, 0, 6.2832); x.fill();
+    const o = { c, S, hole: tone(col, -.5) }; this.m.set(k, o); return o;
+  }
+}
+
+class Scene {
+  constructor(o) {
+    this.o = Object.assign({ amount: 1, formAt: 5, colorway: "mixed" }, o);
+    this.sp = new Sprites(); this.loop = this.loop.bind(this); this.running = false;
+    this.px = this.py = -9999; this.pvx = this.pvy = 0; this.inside = false; this.sy = 0;
+    this.reduced = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+  mount(host, cv, avoid) {
+    this.host = host; this.cv = cv; this.avoid = avoid;
+    this.resize(true);
+    this.ro = new ResizeObserver(() => this.resize(false)); this.ro.observe(host);
+    this.io = new IntersectionObserver(([e]) => { this.vis = e.isIntersecting; this.vis ? this.start() : this.stop(); }); this.io.observe(host);
+  }
+  destroy() { this.stop(); this.ro && this.ro.disconnect(); this.io && this.io.disconnect(); }
+  resize(first) {
+    const r = this.host.getBoundingClientRect(), d = Math.min(window.devicePixelRatio || 1, 2);
+    const big = !this.w || Math.abs(r.width - this.w) > 80 || Math.abs(r.height - this.h) > 140;
+    this.w = r.width; this.h = r.height; this.small = this.w < 760;
+    Object.values(this.cv).forEach(c => { c.width = Math.round(this.w * d); c.height = Math.round(this.h * d); c.getContext("2d").setTransform(d, 0, 0, d, 0, 0); });
+    if (first || big) this.build(); else this.draw();
+  }
+  wordLayout() {
+    const w = this.w, h = this.h, a = this.avoid(), letters = ["L", "U", "M", "I"], gap = .5;
+    const unitW = letters.reduce((s, l) => s + GLYPHS[l].w, 0) + gap * 3;
+    let H, x0, y0;
+    if (this.small) { H = Math.min((w * .74) / unitW, h * .15); x0 = (w - unitW * H) / 2; y0 = Math.max(104, h * .2); }
+    else {
+      const maxW = Math.min(w * .46, 700); H = maxW / unitW;
+      const bottom = a.top - Math.max(36, H * .3); H = Math.min(H, (bottom - 120)); y0 = bottom - H; x0 = a.left + H * .08;
+    }
+    const sp = H / 5.4, R = sp * .46;
+    let cx = x0; const targets = [];
+    letters.forEach((ch, li) => { sampleGlyph(ch, H, sp).forEach((p, k) => targets.push({ x: cx + p[0], y: y0 + p[1], li, k })); cx += (GLYPHS[ch].w + gap) * H; });
+    return { targets, R, H, x0, y0, wW: unitW * H };
+  }
+  mk(o) { return Object.assign({ vx: 0, vy: 0, ph: Math.random() * 6.28, rot: Math.random() * 6.28, a: 1, mode: "float", attract: Math.random() < .2, spark: 0 }, o); }
+  build() {
+    const w = this.w, h = this.h, s = this.small, A = this.o.amount, av = this.avoid();
+    this.L = this.wordLayout();
+    const R = this.L.R;
+    const clusters = s
+      ? [[w * .12, h * .14, 50], [w * .86, h * .5, 60], [w * .8, h * .08 + 70, 40]]
+      : [[w * .1, h * .2, 90], [w * .6, h * .3, 120], [w * .82, h * .66, 110], [w * .9, h * .16, 70], [w * .46, h * .82, 70]];
+    const inCopy = (x, y) => x > av.left - 30 && x < av.right + 30 && y > av.top - 30;
+    const nearCluster = () => {
+      for (let t = 0; t < 12; t++) { const c = clusters[Math.floor(Math.random() * clusters.length)], an = Math.random() * 6.28, d = Math.sqrt(Math.random()) * c[2]; const x = c[0] + Math.cos(an) * d, y = c[1] + Math.sin(an) * d; if (!inCopy(x, y) && y > 96 && x > 10 && x < w - 10) return [x, y]; }
+      return [rnd(w * .55, w * .95), rnd(110, h * .5)];
+    };
+    const wm = WORD_MIX[this.o.colorway] || WORD_MIX.mixed;
+    this.word = this.L.targets.map((t, i) => ({ t, col: pick(wm) }));
+    const visibleWord = Math.round(this.word.length * (s ? .2 : .38));
+    const order = this.word.map((_, i) => i).sort(() => Math.random() - .5);
+    const vis = new Set(order.slice(0, visibleWord));
+    this.beads = [];
+    const letterStart = [0, 1.25, 2.4, 3.9];
+    this.word.forEach((wd, i) => {
+      const t = wd.t, shown = vis.has(i);
+      const [x, y] = shown ? nearCluster() : [t.x + rnd(-60, 60), -R * 3 - rnd(0, 120)];
+      const r = R * rnd(.94, 1.04);
+      this.beads.push(this.mk({ x, y, r, m: r * r, col: wd.col, tx: t.x, ty: t.y, form: true, hidden: !shown, a: shown ? 1 : 1,
+        delay: this.o.formAt + letterStart[t.li] + t.k * .085 + rnd(0, .05) }));
+    });
+    const nAmb = Math.round((s ? 6 : 16) * A);
+    for (let i = 0; i < nAmb; i++) { const [x, y] = nearCluster(); const r = R * rnd(.35, .95); this.beads.push(this.mk({ x, y, r, m: r * r, col: pick(AMB_MIX), form: false })); }
+    this.far = []; for (let i = 0; i < Math.round((s ? 3 : 9) * A); i++) { const [x, y] = nearCluster(); this.far.push(this.mk({ x: x + rnd(-80, 80), y: y + rnd(-60, 60), r: R * rnd(.25, .45), a: rnd(.35, .6), col: pick([[C.blush, 3], [C.rose, 2], [C.paleSage, 2], [C.ivory, 1]]), blur: 3, z: rnd(.2, .5) })); }
+    this.near = []; for (let i = 0; i < (s ? 1 : 4); i++) { const right = i % 2 === 0; this.near.push(this.mk({ x: right ? rnd(w * .86, w * 1.02) : rnd(w * .38, w * .55), y: right ? rnd(110, h * .45) : rnd(90, 200), r: R * rnd(1.5, 2.3), a: rnd(.55, .75), col: pick([[C.blush, 2], [C.rose, 2], [C.sage, 1]]), blur: 7, z: rnd(1.3, 1.8) })); }
+    this.t = 0; this.drops = [1.7, 3.1, 3.9, 4.3]; this.dropI = 0; this.glint = -1; this.formedAt = 0; this.calm = 1;
+    this.formEnd = Math.max(...this.beads.filter(b => b.form).map(b => b.delay)) + 1.4;
+    if (this.reduced) { this.beads.forEach(b => { if (b.form) { b.x = b.tx; b.y = b.ty; b.mode = "home"; b.hidden = false; b.t0 = -9; } }); this.done = true; this.onFormed && this.onFormed(); this.draw(); }
+    else this.draw();
+  }
+  replay() { this.done = false; this.build(); this.start(); }
+  pointer(x, y) { if (this.inside) { this.pvx = this.pvx * .5 + (x - this.px) * .5; this.pvy = this.pvy * .5 + (y - this.py) * .5; } this.px = x; this.py = y; this.inside = true; this.nx = x / this.w - .5; this.ny = y / this.h - .5; }
+  leave() { this.inside = false; this.nx = this.ny = 0; this.pvx = this.pvy = 0; }
+  poke(x, y, p) { this.beads.forEach(b => { if (b.hidden) return; const dx = b.x - x, dy = b.y - y, d = Math.hypot(dx, dy) || 1; if (d < 170) { const f = (1 - d / 170) * p; b.vx += dx / d * f; b.vy += dy / d * f - 40; if (!b.form && b.mode === "float" && Math.random() < .5) b.mode = "fall"; } }); this.start(); }
+  start() { if (this.running || this.reduced || this.vis === false) return; this.running = true; this.last = performance.now(); requestAnimationFrame(this.loop); }
+  stop() { this.running = false; }
+  loop(now) { if (!this.running) return; const dt = Math.min((now - this.last) / 1000, 1 / 30); this.last = now; this.step(dt); this.draw(); requestAnimationFrame(this.loop); }
+  step(dt) {
+    const w = this.w, h = this.h, t = (this.t += dt), B = this.beads, floor = h - 6;
+    if (this.dropI < this.drops.length && t >= this.drops[this.dropI]) {
+      this.dropI++;
+      const c = B.filter(b => !b.form && b.mode === "float" && b.y < h * .55);
+      if (c.length) { const b = this.dropI === 1 ? c.reduce((a, q) => (q.r > a.r ? q : a)) : c[Math.floor(Math.random() * c.length)]; b.mode = "fall"; b.vx = rnd(-14, 14); }
+    }
+    if (!this.done && t > this.formEnd) { this.done = true; this.formedAt = t; this.glint = t + .4; this.onFormed && this.onFormed(); }
+    const settled = this.done ? clamp01((t - this.formedAt) / 3) : 0;
+    this.calm = 1 - settled * .6;
+    const Rr = this.small ? 80 : 115;
+    for (const b of B) {
+      if (b.form && b.mode !== "home" && t >= b.delay) { b.mode = "home"; b.t0 = t; b.hidden = false; }
+      if (b.hidden) continue;
+      if (b.fade) { b.a -= dt * .7; if (b.a <= 0) { b.fade = false; b.mode = "float"; b.vx = b.vy = 0; const cl = this.respawn(); b.x = cl[0]; b.y = cl[1]; b.a = 0; b.fadeIn = true; } }
+      if (b.fadeIn) { b.a += dt * .6; if (b.a >= 1) { b.a = 1; b.fadeIn = false; } }
+      if (b.mode === "float") {
+        b.ph += dt * .45; const amp = 3.2 * this.calm;
+        b.vx += Math.cos(b.ph) * amp * dt; b.vy += Math.sin(b.ph * 1.27) * amp * dt; b.vx *= .95; b.vy *= .95;
+      } else if (b.mode === "fall") {
+        b.vy += 520 * dt; b.vx *= .996;
+      } else {
+        const age = t - b.t0, k = 22 * clamp01(age / .9) + 2, damp = 2 * Math.sqrt(k) * (age < 1.1 ? .55 : .9);
+        b.vx += ((b.tx - b.x) * k - b.vx * damp) * dt; b.vy += ((b.ty - b.y) * k - b.vy * damp) * dt;
+      }
+      if (this.inside) {
+        const dx = b.x - this.px, dy = b.y - this.py, d2 = dx * dx + dy * dy;
+        if (d2 < 62500) {
+          const d = Math.sqrt(d2) || 1, rr = Rr + b.r;
+          if (b.attract && !b.form && d > 60 && d < 250) { const f = (1 - d / 250) * 70; b.vx -= dx / d * f * dt; b.vy -= dy / d * f * dt; }
+          if (d < rr) { const q = 1 - d / rr, f = q * q * (b.mode === "home" ? 2600 : 1500); b.vx += (dx / d * f + this.pvx * q * 22) * dt; b.vy += (dy / d * f + this.pvy * q * 22) * dt; if (!b.form && b.mode === "float" && q > .6 && Math.random() < .02) b.mode = "fall"; }
+        }
+      }
+      const s2 = b.vx * b.vx + b.vy * b.vy; if (s2 > 640000) { const k = 800 / Math.sqrt(s2); b.vx *= k; b.vy *= k; }
+      b.x += b.vx * dt; b.y += b.vy * dt; b.rot += b.vx * dt / b.r;
+      if (b.x < b.r) { b.x = b.r; b.vx = Math.abs(b.vx) * .4; }
+      if (b.x > w - b.r) { b.x = w - b.r; b.vx = -Math.abs(b.vx) * .4; }
+      if (b.mode === "fall" && b.y > floor - b.r) {
+        b.y = floor - b.r; b.vy = -Math.abs(b.vy) * .38; if (Math.abs(b.vy) < 22) b.vy = 0; b.vx *= .97;
+        if (b.vy === 0) { b.restT = (b.restT || 0) + dt; if (b.restT > 5 && !b.fade) { b.fade = true; b.restT = 0; } }
+      }
+      if (b.mode === "float" && b.y < 96) { b.y = 96; b.vy = Math.abs(b.vy) * .5; }
+    }
+    this.collide();
+    this.pvx *= .88; this.pvy *= .88;
+    for (const b of this.far) { b.ph += dt * .25; b.x += Math.cos(b.ph) * 2.5 * dt * this.calm; b.y += Math.sin(b.ph * 1.2) * 2 * dt * this.calm; }
+    for (const b of this.near) { b.ph += dt * .2; b.x += Math.cos(b.ph) * 2 * dt; b.y += Math.sin(b.ph * 1.1) * 1.6 * dt; }
+    this.cx = (this.cx || 0) + ((this.nx || 0) - (this.cx || 0)) * .04; this.cy = (this.cy || 0) + ((this.ny || 0) - (this.cy || 0)) * .04;
+  }
+  respawn() {
+    const w = this.w, h = this.h, a = this.avoid();
+    for (let i = 0; i < 10; i++) { const x = rnd(w * .5, w * .95), y = rnd(110, h * .55); if (!(x > a.left - 30 && x < a.right + 30 && y > a.top - 30)) return [x, y]; }
+    return [w * .8, h * .3];
+  }
+  collide() {
+    const B = this.beads;
+    for (let i = 0; i < B.length; i++) {
+      const a = B[i]; if (a.hidden) continue;
+      for (let j = i + 1; j < B.length; j++) {
+        const c = B[j]; if (c.hidden) continue;
+        if (a.mode === "home" && c.mode === "home") continue;
+        if (a.mode === "float" && c.mode === "float") continue;
+        const dx = c.x - a.x, dy = c.y - a.y, min = a.r + c.r;
+        if (dx > min || dx < -min || dy > min || dy < -min) continue;
+        const d2 = dx * dx + dy * dy; if (d2 >= min * min) continue;
+        const d = Math.sqrt(d2) || .01, nx = dx / d, ny = dy / d, ov = min - d;
+        const ma = a.mode === "home" ? a.m * 4 : a.m, mc = c.mode === "home" ? c.m * 4 : c.m, tm = ma + mc;
+        a.x -= nx * ov * mc / tm; a.y -= ny * ov * mc / tm; c.x += nx * ov * ma / tm; c.y += ny * ov * ma / tm;
+        const vn = (c.vx - a.vx) * nx + (c.vy - a.vy) * ny;
+        if (vn < 0) { const jj = -1.35 * vn / tm; a.vx -= jj * mc * nx; a.vy -= jj * mc * ny; c.vx += jj * ma * nx; c.vy += jj * ma * ny; }
+      }
+    }
+  }
+  drawB(ctx, b, ox, oy, scale) {
+    const s = this.sp.get(b.col, b.blur || 0), k = (b.r * 2 * (scale || 1)) / s.S, size = s.c.width * k, x = b.x + ox, y = b.y + oy;
+    ctx.globalAlpha = b.a; ctx.drawImage(s.c, x - size / 2, y - size / 2, size, size);
+    if (!b.blur && b.r > 5) {
+      const sn = Math.sin(b.rot), cs = Math.cos(b.rot);
+      ctx.globalAlpha = b.a * .42 * Math.abs(cs); ctx.fillStyle = s.hole;
+      ctx.beginPath(); ctx.ellipse(x + sn * b.r * .3, y + b.r * .04, b.r * .18 * Math.abs(cs) + .5, b.r * .2, 0, 0, 6.2832); ctx.fill();
+    }
+  }
+  sparkle(ctx, x, y, L, a) {
+    ctx.globalAlpha = a; ctx.fillStyle = "#FFFFFF"; ctx.beginPath();
+    ctx.moveTo(x, y - L); ctx.lineTo(x + L * .13, y); ctx.lineTo(x, y + L); ctx.lineTo(x - L * .13, y); ctx.closePath();
+    ctx.moveTo(x - L, y); ctx.lineTo(x, y + L * .13); ctx.lineTo(x + L, y); ctx.lineTo(x, y - L * .13); ctx.closePath(); ctx.fill();
+  }
+  draw() {
+    const w = this.w, h = this.h, cx = this.cx || 0, cy = this.cy || 0, sy = this.sy;
+    const F = this.cv.far.getContext("2d"), M = this.cv.main.getContext("2d"), N = this.cv.near.getContext("2d");
+    F.clearRect(0, 0, w, h); M.clearRect(0, 0, w, h); N.clearRect(0, 0, w, h);
+    if (this.inside) { const g = F.createRadialGradient(this.px, this.py, 0, this.px, this.py, 200); g.addColorStop(0, "rgba(239,207,203,.22)"); g.addColorStop(1, "rgba(239,207,203,0)"); F.globalAlpha = 1; F.fillStyle = g; F.fillRect(this.px - 200, this.py - 200, 400, 400); }
+    for (const b of this.far) this.drawB(F, b, -cx * 16 * b.z, -cy * 10 * b.z + sy * .06);
+    for (const b of this.beads) {
+      if (b.hidden) continue;
+      let sc = 1;
+      if (b.mode === "home") { const age = this.t - b.t0; if (age > .55 && age < .95) sc = 1 + Math.sin((age - .55) / .4 * Math.PI) * .12; }
+      this.drawB(M, b, 0, 0, sc);
+    }
+    if (this.glint > 0 && this.t > this.glint) {
+      const p = (this.t - this.glint) / 1.8, L = this.L;
+      if (p <= 1.1) {
+        const gx = L.x0 - 40 + p * (L.wW + 80);
+        this.beads.forEach(b => { if (!b.form) return; const d = Math.abs(b.tx - gx); if (d < b.r * 2.2) this.sparkle(M, b.x - b.r * .34, b.y - b.r * .4, b.r * 1.1 * (1 - d / (b.r * 2.2)), .95 * (1 - d / (b.r * 2.2))); });
+      } else this.glint = this.t + 9 + Math.random() * 5;
+    }
+    for (const b of this.near) this.drawB(N, b, -cx * 34 * b.z, -cy * 22 * b.z - sy * .1);
+    F.globalAlpha = M.globalAlpha = N.globalAlpha = 1;
+  }
+}
+
+class Drift {
+  constructor(host, cv, floorEl) {
+    this.host = host; this.cv = cv; this.floorEl = floorEl; this.sp = new Sprites(); this.b = []; this.px = this.py = -9999; this.inside = false;
+    this.run = false; this.loop = this.loop.bind(this); this.t = 0;
+    this.reduced = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    this.resize(); this.ro = new ResizeObserver(() => this.resize()); this.ro.observe(host);
+  }
+  destroy() { this.run = false; this.ro && this.ro.disconnect(); }
+  resize() {
+    const r = this.cv.getBoundingClientRect(), d = Math.min(window.devicePixelRatio || 1, 2);
+    this.w = r.width; this.h = r.height; this.small = this.w < 760;
+    this.cv.width = Math.round(this.w * d); this.cv.height = Math.round(this.h * d); this.cv.getContext("2d").setTransform(d, 0, 0, d, 0, 0);
+    this.floor(); if (!this.run) this.draw();
+  }
+  floor() { const a = this.floorEl.getBoundingClientRect(), c = this.cv.getBoundingClientRect(); this.fy = a.top - c.top; }
+  local(r) { const c = this.cv.getBoundingClientRect(); return { x: r.left - c.left, y: r.top - c.top, w: r.width, h: r.height }; }
+  spawn() {
+    if (this.spawned) return; this.spawned = true; this.floor();
+    const n = this.small ? 8 : 12;
+    for (let i = 0; i < n; i++) {
+      const r = rnd(6, 12) * (this.small ? .85 : 1);
+      this.b.push({ x: rnd(.06, .94) * this.w, y: rnd(-6, 60), vx: rnd(-18, 18), vy: rnd(10, 50), r, m: r * r, col: pick(AMB_MIX), mode: "wait", at: i * .13 + rnd(0, .1), ph: rnd(0, 6.28), rot: rnd(0, 6.28), hx: 0, hy: 0 });
+    }
+    if (this.reduced) { this.b.forEach(b => { b.mode = "float"; b.y = b.hy = this.fy - b.r - rnd(8, 60); b.hx = b.x; }); this.draw(); return; }
+    this.t = 0; this.start();
+  }
+  target(rect) {
+    if (!rect) return; const L = this.local(rect);
+    this.b.forEach(b => { b.g = false; if (b.mode === "wait" || b.mode === "fall") { b.pend = true; } b.hx = L.x + rnd(.06, .94) * L.w; b.hy = L.y + rnd(.05, .95) * L.h; if (b.mode === "float") b.k = 0; });
+    this.start();
+  }
+  gather(rect) {
+    const L = this.local(rect), cx = L.x + L.w / 2, cy = L.y + L.h / 2, R = Math.max(L.w, L.h) * .62;
+    const fl = this.b.filter(b => b.mode === "float").sort((a, c) => Math.hypot(a.x - cx, a.y - cy) - Math.hypot(c.x - cx, c.y - cy)).slice(0, 5);
+    fl.forEach((b, i) => { const an = (i / fl.length) * 6.283 + rnd(-.3, .3); b.hx = cx + Math.cos(an) * R; b.hy = cy + Math.sin(an) * R * .9; b.k = 0; b.g = true; });
+    this.start();
+  }
+  pointer(x, y) { this.px = x; this.py = y; this.inside = true; this.start(); }
+  leave() { this.inside = false; }
+  start() { if (this.run || this.reduced || this.vis === false || !this.b.length) return; this.run = true; this.last = performance.now(); requestAnimationFrame(this.loop); }
+  loop(now) { if (!this.run) return; if (this.vis === false) { this.run = false; return; } const dt = Math.min((now - this.last) / 1000, 1 / 30); this.last = now; this.step(dt); this.draw(); requestAnimationFrame(this.loop); }
+  step(dt) {
+    const t = (this.t += dt), B = this.b, fy = this.fy;
+    for (const b of B) {
+      if (b.mode === "wait") { if (t >= b.at) b.mode = "fall"; else continue; }
+      if (b.mode === "fall") {
+        b.vy += 820 * dt; b.vx *= .995;
+        if (b.y > fy - b.r) { b.y = fy - b.r; b.vy = -Math.abs(b.vy) * .42; b.vx *= .9; if (Math.abs(b.vy) < 24) { b.vy = 0; b.rest = (b.rest || 0) + dt; if (b.rest > .7) { b.mode = "float"; b.k = 0; if (!b.pend) { b.hx = b.x + rnd(-30, 30); b.hy = fy - b.r - rnd(2, 14); } } } }
+      } else {
+        b.k = Math.min(1, (b.k || 0) + dt * .6); const k = 3.2 * b.k, c = 2.6;
+        b.ph += dt * .5;
+        const hx = b.hx + Math.cos(b.ph) * 6, hy = b.hy + Math.sin(b.ph * 1.3) * 5;
+        b.vx += ((hx - b.x) * k - b.vx * c) * dt; b.vy += ((hy - b.y) * k - b.vy * c) * dt;
+      }
+      if (this.inside) { const dx = b.x - this.px, dy = b.y - this.py, d = Math.hypot(dx, dy) || 1, R = 100 + b.r; if (d < R) { const q = 1 - d / R, fz = q * q * 2400; b.vx += dx / d * fz * dt; b.vy += dy / d * fz * dt; } }
+      b.x += b.vx * dt; b.y += b.vy * dt; b.rot += b.vx * dt / b.r;
+      if (b.x < b.r) { b.x = b.r; b.vx = Math.abs(b.vx) * .4; } if (b.x > this.w - b.r) { b.x = this.w - b.r; b.vx = -Math.abs(b.vx) * .4; }
+    }
+    for (let i = 0; i < B.length; i++) for (let j = i + 1; j < B.length; j++) {
+      const a = B[i], c = B[j]; if (a.mode === "wait" || c.mode === "wait") continue;
+      const dx = c.x - a.x, dy = c.y - a.y, min = a.r + c.r, d2 = dx * dx + dy * dy; if (d2 >= min * min) continue;
+      const d = Math.sqrt(d2) || .01, nx = dx / d, ny = dy / d, ov = (min - d) / 2;
+      a.x -= nx * ov; a.y -= ny * ov; c.x += nx * ov; c.y += ny * ov;
+      const vn = (c.vx - a.vx) * nx + (c.vy - a.vy) * ny; if (vn < 0) { const tm = a.m + c.m, jj = -1.4 * vn / tm; a.vx -= jj * c.m * nx; a.vy -= jj * c.m * ny; c.vx += jj * a.m * nx; c.vy += jj * a.m * ny; }
+    }
+  }
+  draw() {
+    const x = this.cv.getContext("2d"); x.clearRect(0, 0, this.w, this.h);
+    for (const b of this.b) {
+      if (b.mode === "wait") continue;
+      const s = this.sp.get(b.col, 0), k = (b.r * 2) / s.S, size = s.c.width * k;
+      x.globalAlpha = 1; x.drawImage(s.c, b.x - size / 2, b.y - size / 2, size, size);
+      const cs = Math.cos(b.rot); x.globalAlpha = .4 * Math.abs(cs); x.fillStyle = s.hole;
+      x.beginPath(); x.ellipse(b.x + Math.sin(b.rot) * b.r * .3, b.y + b.r * .04, b.r * .18 * Math.abs(cs) + .5, b.r * .2, 0, 0, 6.2832); x.fill();
+    }
+    x.globalAlpha = 1;
+  }
+}
+
+class Component extends DCLogic {
+  state = { formed: false, shopOpen: false, cat: 0, active: null, hp: null, s2In: false, mobile: false, s3tank: "pink", s3b: [], s3c: [], s3pos: {}, s3done: false, bagN: 0, pastHero: false, s4tab: "all", s4i: 0, s4In: false, s4added: false, irlH: null, irlAdded: null, s6i: 0, s6end: false, s7in: false, s7hot: false, s7h: null, s7tab: "all", s7added: {} };
+  q(n) { return document.querySelector('[data-lumi="' + n + '"]'); }
+  opts() { return { amount: this.props.ambientBeads ?? 1, formAt: this.props.formDelay ?? 5, colorway: this.props.wordColorway ?? "mixed" }; }
+  cartInit(n) {
+    const LC = window.LumiCart;
+    if (!LC) { if (n < 60) this.cartT = setTimeout(() => this.cartInit(n + 1), 100); return; }
+    const sync = () => this.setState({ bagN: LC.count() }); this.cartUnsub = LC.subscribe(sync); sync();
+  }
+  sized(id, anchor, cb, opts) {
+    const LC = window.LumiCart; if (!LC) return;
+    if (!LC.requiresSize(id)) { cb(null); return; }
+    LC.requestSize(Object.assign({ id, anchor: anchor && anchor.getBoundingClientRect ? anchor.getBoundingClientRect() : null, onDone: cb }, opts || {}));
+  }
+  irlRun(i, src) {
+    const target = this.state.pastHero ? document.querySelector('[data-lumi="bagpill"]') : document.querySelector('[data-lumi="bag"]');
+    const done = () => this.setState({ irlAdded: i }, () => { clearTimeout(this.irlT); this.irlT = setTimeout(() => this.setState({ irlAdded: null }), 2200); });
+    if (!target || !src || (this.dr && this.dr.reduced)) { done(); return; }
+    const a = src.getBoundingClientRect(), b = target.getBoundingClientRect(), bd = this.beadEl(C.rose, 14);
+    this.flyEl(bd, { x: a.left + a.width / 2 - 7, y: a.top }, { x: b.left + b.width / 2 - 7, y: b.top + b.height / 2 - 7 }, 850, 1, .6, 140).onfinish = () => { bd.remove(); done(); };
+  }
+  cartAdd(id, size, toast) { const LC = window.LumiCart; return LC ? LC.add(id, { size, toast }) : false; }
+  mCatScroll(el) {
+    if (!this.state.mobile || !el) return;
+    clearTimeout(this.mcs); this.mcs = setTimeout(() => { const r = el.getBoundingClientRect(); if (r.top < 60 || r.top > window.innerHeight * .45) window.scrollBy({ top: r.top - 76, behavior: "smooth" }); }, 680);
+  }
+  s4Fit() {
+    const R = this.s4R; if (!R) return;
+    document.querySelectorAll("#drop [data-s4img]").forEach(b => {
+      const m = /^([\d.]+)%/.exec(b.getAttribute("data-bsize") || ""); if (!m) return;
+      const W = b.clientWidth, H = b.clientHeight; if (!W || !H) return;
+      const need = H * R / W * 100 * 1.02, x = Math.max(parseFloat(m[1]), need);
+      const v = x.toFixed(1) + "% auto"; if (b.style.backgroundSize !== v) b.style.backgroundSize = v;
+    });
+  }
+  componentDidMount() {
+    { const im = new Image(); im.onload = () => { this.s4R = im.naturalWidth / im.naturalHeight; this.s4Fit(); }; im.src = "assets/lumi-hero-campaign.png"; }
+    this.s4Iv = setInterval(() => this.s4Fit(), 250);
+    this.cartInit(0); this.tryInit(0); this.s2Init(0); this.s3Init(0); this.s4Init(0); this.s5Init(0); this.s6Init(0); this.s7Init(0); }
+  s7Init(n) {
+    if (this.s7io) return;
+    const sec = document.querySelector("[data-s7]");
+    if (!sec) { if (n < 50) this.s7t = setTimeout(() => this.s7Init(n + 1), 80); return; }
+    this.s7io = new IntersectionObserver(([e]) => { if (e.isIntersecting && !this.state.s7in) { this.setState({ s7in: true }); this.s7io.disconnect(); } }, { rootMargin: "0px 0px -15% 0px" });
+    this.s7io.observe(sec);
+  }
+  s7Add(p, btn) {
+    const card = btn.closest("[data-pc]"), img = card && card.querySelector("[data-pimg]");
+    const target = this.state.pastHero ? document.querySelector('[data-lumi="bagpill"]') : document.querySelector('[data-lumi="bag"]');
+    const done = () => this.setState(s => ({ s7added: Object.assign({}, s.s7added, { [p.key]: true }) }), () => {
+      const t = document.querySelector('[data-lumi="bagpill"]') || document.querySelector('[data-lumi="bag"]'); t && t.animate && t.animate([{ transform: "scale(1)" }, { transform: "scale(1.18)" }, { transform: "scale(1)" }], { duration: 520, easing: "cubic-bezier(.3,1.6,.5,1)" });
+      setTimeout(() => this.setState(s => { const a = Object.assign({}, s.s7added); delete a[p.key]; return { s7added: a }; }), 1800); });
+    if (!img || !target || (this.dr && this.dr.reduced)) { done(); return; }
+    const r = img.getBoundingClientRect(), T = target.getBoundingClientRect();
+    const ghost = document.createElement("div");
+    Object.assign(ghost.style, { position: "fixed", left: "0", top: "0", width: r.width + "px", height: r.height + "px", zIndex: "210", pointerEvents: "none", transformOrigin: "0 0", backgroundImage: "url('assets/lumi-hero-campaign.png')", backgroundSize: p.size, backgroundPosition: p.pos, backgroundRepeat: "no-repeat", backgroundColor: p.field });
+    document.body.appendChild(ghost);
+    this.flyEl(ghost, { x: r.left, y: r.top }, { x: T.left + T.width / 2, y: T.top + T.height / 2 }, 800, 1, .06, 60).onfinish = () => ghost.remove();
+    ghost.animate([{ opacity: 1 }, { opacity: 1, offset: .6 }, { opacity: 0 }], { duration: 800, fill: "forwards" });
+    const b = this.beadEl(C.rose, 12);
+    setTimeout(() => this.flyEl(b, { x: r.left + r.width / 2, y: r.top + r.height / 2 }, { x: T.left + T.width / 2 - 6, y: T.top + T.height / 2 - 6 }, 760, 1, .6, 120).onfinish = () => { b.remove(); done(); }, 120);
+  }
+  s7Frame() {
+    this.s7raf = 0;
+    const sec = document.querySelector("[data-s7]"); if (!sec || this.state.mobile || (this.dr && this.dr.reduced)) return;
+    const r = sec.getBoundingClientRect(), p = this.s7p || { in: false };
+    const nx = p.in ? (p.x - r.left) / r.width - .5 : 0, ny = p.in ? (p.y - r.top) / r.height - .5 : 0;
+    sec.querySelectorAll("[data-pc]").forEach(el => { const d = parseFloat(el.getAttribute("data-depth")) || 0; el.style.translate = (-nx * d).toFixed(1) + "px " + (-ny * d).toFixed(1) + "px"; });
+  }
+  s7Vals() {
+    const st = this.state, on = st.s7in, tab = st.s7tab, h = st.s7h, money = n => "₹" + n.toLocaleString("en-IN");
+    const P = {
+      pink: { c: "tanks", cat: "TANK TOP", name: "PINK POPCORN TANK", line: "Not your basic tank.", price: 899, main: ["auto 150%", "52% 20%"], alt: ["520% auto", "52% 56%"] },
+      white: { c: "tanks", cat: "TANK TOP", name: "WHITE COCKTAIL TANK", line: "Just add plans.", price: 899, main: ["auto 150%", "21% 20%"], alt: ["900% auto", "26.8% 61%"] },
+      black: { c: "tanks", cat: "TANK TOP", name: "BLACK FRIES TANK", line: "For outfits with appetite.", price: 899, main: ["700% auto", "80.4% 70%"], alt: ["auto 150%", "91% 20%"] },
+      pop: { c: "brooches", cat: "BROOCH", name: "POPCORN BROOCH", line: "Small detail. Big energy.", price: 269, main: ["1000% auto", "51.4% 59%"], alt: ["1400% auto", "51.4% 59%"] },
+      fries: { c: "brooches", cat: "BROOCH", name: "FRIES BROOCH", line: "Side of fries, anyone?", price: 269, main: ["1200% auto", "78.5% 67%"], alt: ["1600% auto", "78.5% 67%"] },
+      cock: { c: "brooches", cat: "BROOCH", name: "COCKTAIL BROOCH", line: "Cheers to your jacket.", price: 269, main: ["1200% auto", "26.7% 61%"], alt: ["1600% auto", "26.7% 61%"] },
+      heart: { c: "charms", cat: "BAG CHARM", name: "HEART CHARM", line: "Your bag, but better.", price: 289, main: ["1000% auto", "87.5% 70%"], alt: ["480% auto", "91% 78%"] },
+      cherry: { c: "charms", cat: "BAG CHARM", name: "CHERRY CHARM", line: "Clip it. Swing it.", price: 289, main: ["600% auto", "16.7% 74.5%"], alt: ["1500% auto", "20.3% 67.5%"] }
+    };
+    const EDITS = {
+      all: ["pink", "pop", "white", "heart", "black", "fries", "cock", "cherry"],
+      tanks: ["white", "pop", "pink", "heart", "black", "fries", "cock", "cherry"],
+      brooches: ["pop", "fries", "cock", "heart", "black", "white", "pink", "cherry"],
+      charms: ["heart", "cherry", "pink", "pop", "black", "fries", "cock", "white"]
+    };
+    const SLOTS = [
+      { col: "4 / 9", row: "1 / 14", z: 2, depth: 4, field: "#F6F2EA", pad: "0px", border: "0 solid transparent", radius: "0px", shadow: "none" },
+      { col: "1 / 4", row: "2 / 8", z: 4, depth: 9, field: "#EFCFCB", pad: "12px", border: "5px solid #FDFCF8", radius: "50%", shadow: "0 18px 40px rgba(63,70,51,.2)", shift: "translateX(24%)", round: true },
+      { col: "9 / 13", row: "1 / 8", z: 2, depth: 5, field: "#EFCFCB", pad: "0px", border: "0 solid transparent", radius: "0px", shadow: "none" },
+      { col: "9 / 11", row: "8 / 14", z: 4, depth: 10, field: "#E7E9DE", pad: "0px", border: "5px solid #FDFCF8", radius: "0px", shadow: "0 18px 40px rgba(63,70,51,.2)", shift: "translateX(-28%) rotate(-2deg)" },
+      { col: "1 / 4", row: "9 / 20", z: 2, depth: 5, field: "#6B7258", pad: "0px", border: "0 solid transparent", radius: "0px", shadow: "none" },
+      { col: "11 / 13", row: "8 / 14", z: 3, depth: 6, field: "#F6F2EA", pad: "12px", border: "0 solid transparent", radius: "0px", shadow: "none" },
+      { col: "4 / 9", row: "14 / 20", z: 3, depth: 7, field: "#F6E4E1", pad: "12px", border: "0 solid transparent", radius: "0px", shadow: "none" },
+      { col: "9 / 13", row: "14 / 20", z: 2, depth: 5, field: "#E7E9DE", pad: "0px", border: "0 solid transparent", radius: "0px", shadow: "none" }
+    ];
+    const order = EDITS[tab] || EDITS.all;
+    const sched = () => { if (!this.s7raf) this.s7raf = requestAnimationFrame(() => this.s7Frame()); };
+    return {
+      s7In: on ? "1" : "0", s7headT: on ? "translateY(0px)" : "translateY(18px)",
+      s7move: e => { if (e.pointerType && e.pointerType !== "mouse") return; this.s7p = { x: e.clientX, y: e.clientY, in: true }; sched(); },
+      s7leave: () => { this.s7p = { in: false }; sched(); },
+      s7tabs: [["all", "ALL"], ["tanks", "TANKS"], ["brooches", "BROOCHES"], ["charms", "CHARMS"]].map(([k, l]) => ({ label: l, on: tab === k, line: tab === k ? "#3F4633" : "transparent", ink: tab === k ? "#3F4633" : "#6B7258", pick: () => this.setState({ s7tab: k, s7h: null }) })),
+      s7items: order.map((key, i) => {
+        const p = P[key], s = SLOTS[i], hot = h === key, match = tab === "all" || tab === p.c, added = !!(st.s7added || {})[key], feat = i === 0;
+        const item = { key, size: p.main[0], pos: p.main[1], field: s.field };
+        return {
+          key, slot: "s" + i, feat, small: !feat, cat: p.cat, name: p.name, line: p.line, price: money(p.price),
+          col: s.col, row: s.row, z: hot ? "6" : String(s.z), depth: String(s.depth), field: s.field, pad: s.pad, border: s.border, radius: s.radius,
+          shadow: hot ? "0 26px 50px rgba(63,70,51,.28)" : s.shadow, lift: (s.shift || "") + (hot ? " scale(1.025)" : " scale(1)"), ar: s.round ? "1" : "auto", alignImg: s.round ? "flex-start" : "stretch",
+          size: p.main[0], pos: p.main[1], size2: p.alt[0], pos2: p.alt[1], href: "LUMI-Pages.dc.html#/product/" + ({ pink: "pink-popcorn-tank", white: "white-cocktail-tank", black: "black-fries-tank", pop: "popcorn-brooch", fries: "fries-brooch", cock: "cocktail-brooch", heart: "heart-charm", cherry: "cherry-charm" }[key] || "shop"),
+          aria: p.name + ", " + money(p.price), addAria: "Add " + p.name + " to bag",
+          op: !on ? "0" : (match ? "1" : ".3"), filter: match ? "none" : "saturate(.4)",
+          enter: on ? "translateY(0px)" : "translateY(28px)", delay: (i * .07).toFixed(2) + "s",
+          op1: hot ? "0" : "1", op2: hot ? "1" : "0", zoom: hot ? "scale(1.04)" : "scale(1)",
+          beadT: hot ? "translate(0px, 0px)" : "translate(10px, -16px)", beadT2: hot ? "translate(0px, 0px)" : "translate(18px, -10px)",
+          nameT: hot ? "translateX(3px)" : "translateX(0px)", moreRows: hot ? "1fr" : "0fr",
+          btn: added ? "IN THE BAG." : (st.mobile ? (["pink", "white", "black"].includes(key) ? "SELECT SIZE +" : "QUICK ADD +") : (hot ? "ADD TO BAG →" : "ADD +")), btnBg: added ? "#6B7258" : (hot ? "#3F4633" : "transparent"), btnInk: added || hot ? "#FDFCF8" : "#3F4633",
+          btnF: added ? "IN THE BAG." : (st.mobile && ["pink", "white", "black"].includes(key) ? "SELECT SIZE · ADD TO BAG →" : "ADD TO BAG →"), btnBgF: added ? "#6B7258" : (hot ? "#3F4633" : "#FDFCF8"), btnInkF: added || hot ? "#FDFCF8" : "#3F4633",
+          on: () => { if (this.state.s7h !== key) this.setState({ s7h: key }); }, off: () => { if (this.state.s7h === key) this.setState({ s7h: null }); },
+          add: e => { if ((this.state.s7added || {})[key]) return; const b = e.currentTarget, id = { pink: "pink-popcorn-tank", white: "white-cocktail-tank", black: "black-fries-tank", pop: "popcorn-brooch", fries: "fries-brooch", cock: "cocktail-brooch", heart: "heart-charm", cherry: "cherry-charm" }[key]; this.sized(id, b, sz => { if (this.cartAdd(id, sz)) this.s7Add(item, b); }); }
+        };
+      })
+    };
+  }
+  s6Init(n) {
+    if (this.s6io) return;
+    const sec = document.querySelector("[data-s6]");
+    if (!sec) { if (n < 50) this.s6t = setTimeout(() => this.s6Init(n + 1), 80); return; }
+    this.s6io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { this.setState({ s6end: true }); this.s6io.disconnect(); } }, { threshold: .15 });
+    this.s6io.observe(sec);
+  }
+  s6Vals() {
+    const st = this.state, i = st.s6i ?? 3, go = k => { if ((this.state.s6i ?? 3) !== k) this.setState({ s6i: k }); };
+    const D = [
+      { name: "BEAD", label: "HAND-PLACED BEADWORK · PINK POPCORN TANK", alt: "Macro close-up of the popcorn beadwork on the pink LUMI tank — pearl beads and red and white bugle beads", size: "820% auto", pos: "51.5% 57%", tsize: "1100% auto", tpos: "51.5% 55%",
+        at: { l: "2%", t: "4%", w: "17%", ar: "1 / 1" } },
+      { name: "HAND", label: "THE MAKING · BEAD BY BEAD", slot: true, at: { r: "3%", t: "0%", w: "16%", ar: "4 / 5" } },
+      { name: "THREAD", label: "BEADED DETAIL · WHITE COCKTAIL TANK", alt: "Close-up of the beaded martini on the white LUMI tank — fine bead lines and stitching on ribbed cotton", size: "900% auto", pos: "28.8% 59%", tsize: "1200% auto", tpos: "28.6% 58%",
+        at: { l: "8%", b: "0%", w: "15%", ar: "4 / 5" } },
+      { name: "FINISH", label: "THE FINISHED PIECE · PINK POPCORN TANK", alt: "The finished pink popcorn LUMI tank, worn", size: "270% auto", pos: "52% 62%", tsize: "420% auto", tpos: "52% 58%",
+        at: { r: "10%", b: "0%", w: "13%", ar: "4 / 5" } }
+    ];
+    const mk = (c, s) => React.createElement("span", { style: { display: "block", width: s, height: s, borderRadius: "50%", background: "radial-gradient(circle at 34% 30%, #fff 0 11%, " + c + " 46%, rgba(22,24,18,.5) 120%)", boxShadow: "0 4px 10px rgba(22,24,18,.25)" } });
+    this.s6el = this.s6el || [mk("#D4A7A5", 15), mk("#A9AE96", 11), mk("#EFCFCB", 10), mk("#6B7258", 12), mk("#D4A7A5", 9), mk("#EFCFCB", 13), mk("#A9AE96", 9)];
+    const home = [["21%", "30%"], ["23%", "36%"], ["79%", "56%"], ["74%", "4%"], ["26%", "86%"], ["77%", "90%"], ["5%", "56%"]];
+    const toward = [["20%", "22%"], ["22%", "28%"], null, null, null, null, null];
+    const pull = [[["20%", "20%"], ["23%", "26%"]], [["76%", "14%"], ["78%", "20%"]], [["24%", "74%"], ["22%", "80%"]], [["84%", "70%"], ["86%", "76%"]]][i];
+    return {
+      s6label: D[i].label,
+      s6layers: D.map((d, k) => ({ op: k === i ? "1" : "0", pe: k === i && d.slot ? "auto" : "none", slot: !!d.slot, photo: !d.slot, alt: d.alt, size: d.size, pos: d.pos })),
+      s6thumbs: D.map((d, k) => { const on = k === i, a = d.at; return {
+        name: d.name, on, slot: !!d.slot, photo: !d.slot, size: d.tsize, pos: d.tpos, ar: a.ar,
+        l: a.l || "auto", r: a.r || "auto", t: a.t || "auto", b: a.b || "auto", w: a.w, z: on ? 3 : 1,
+        tf: on ? "translateY(-6px) scale(1.03)" : "translateY(0px) scale(1)", sh: on ? "0 26px 50px rgba(22,24,18,.26)" : "0 14px 30px rgba(22,24,18,.14)",
+        fl: on ? "none" : "saturate(.9)", ink: on ? "#3F4633" : "#6B7258", dot: on ? "scale(1)" : "scale(0)",
+        pick: () => go(k), hover: e => { if (e.pointerType === "mouse") go(k); } }; }),
+      s6beads: this.s6el.map((el, k) => { const p = k < 2 ? pull[k] : home[k]; return { el, x: p[0], y: p[1], d: (k * .06) + "s" }; }),
+      s6move: e => {
+        const g = e.currentTarget.querySelector("[data-s6glow]"), m = e.currentTarget.querySelector("[data-s6main]");
+        if (g && m) { const r = m.getBoundingClientRect(); g.style.setProperty("--gx", ((e.clientX - r.left) / r.width * 100) + "%"); g.style.setProperty("--gy", ((e.clientY - r.top) / r.height * 100) + "%"); }
+        e.currentTarget.querySelectorAll("[data-s6b]").forEach(b => { const r = b.getBoundingClientRect(), dx = r.left + r.width / 2 - e.clientX, dy = r.top + r.height / 2 - e.clientY, d = Math.hypot(dx, dy);
+          if (d < 140) { const k = (140 - d) / 140 * 22 / (d || 1); b.style.transform = "translate(" + (dx * k).toFixed(1) + "px, " + (dy * k).toFixed(1) + "px)"; } else if (b.style.transform) b.style.transform = ""; });
+      },
+      s6leave: e => { e.currentTarget.querySelectorAll("[data-s6b]").forEach(b => { b.style.transform = ""; }); }
+    };
+  }
+  s5Init(n) {
+    if (this.s5io) return;
+    const sec = document.querySelector("[data-s5]");
+    if (!sec) { if (n < 50) this.s5t = setTimeout(() => this.s5Init(n + 1), 80); return; }
+    const par = () => {
+      if (!this.s5vis || this.state.mobile) return;
+      const r = sec.getBoundingClientRect(), p = (r.top + r.height / 2 - window.innerHeight / 2) / window.innerHeight;
+      sec.querySelectorAll("[data-irlt]").forEach(el => { const s = parseFloat(el.getAttribute("data-speed")) || 0; el.style.translate = "0 " + (p * s * 60).toFixed(1) + "px"; });
+    };
+    this.s5par = () => { if (this.s5raf) return; this.s5raf = requestAnimationFrame(() => { this.s5raf = 0; par(); }); };
+    this.s5io = new IntersectionObserver(([e]) => { this.s5vis = e.isIntersecting; if (e.isIntersecting) par(); }, { rootMargin: "200px 0px" });
+    this.s5io.observe(sec); window.addEventListener("scroll", this.s5par, { passive: true });
+  }
+  s5Beads(el) {
+    if (!el || (this.dr && this.dr.reduced)) return;
+    const r = el.getBoundingClientRect(), cols = [C.rose, C.sage, C.blush];
+    for (let i = 0; i < 2 + (Math.random() < .5 ? 1 : 0); i++) {
+      const x = r.left + r.width * (i % 2 ? .92 : .08) + (Math.random() - .5) * 20, y = r.top + r.height * (.15 + Math.random() * .3), b = this.beadEl(cols[i], 8 + Math.random() * 6);
+      b.animate([{ transform: "translate(" + x + "px," + (y - 40) + "px)", opacity: 0 }, { transform: "translate(" + x + "px," + y + "px)", opacity: 1, offset: .4 }, { transform: "translate(" + x + "px," + (y - 8) + "px)", opacity: 1, offset: .55 }, { transform: "translate(" + x + "px," + y + "px)", opacity: 1, offset: .7 }, { transform: "translate(" + x + "px," + (y + 6) + "px)", opacity: 0 }], { duration: 1500, delay: i * 110, easing: "ease-out", fill: "forwards" }).onfinish = () => b.remove();
+    }
+  }
+  s5Vals() {
+    const st = this.state, h = st.irlH, money = n => "₹" + n.toLocaleString("en-IN");
+    const T = [
+      { crop: true, size: "cover", pos: "50% 38%", col: "1 / 7", row: "1 / 11", z: 1, rot: 0, speed: -.3, user: "@username.01", alt: "Three friends in LUMI tanks on a bed", look: { title: "SHOP THIS LOOK", items: ["Pink Tank", "+ Popcorn Brooch", "+ Heart Charm"], ids: [899, 269, 289] } },
+      { slot: "irl-mirror", tint: "linear-gradient(160deg, #EFCFCB, #D4A7A5)", col: "6 / 9", row: "7 / 14", z: 3, rot: -2.5, speed: .5, user: "@username.02", alt: "Mirror selfie — white cocktail tank", tag: ["WHITE COCKTAIL TANK", 899] },
+      { crop: true, size: "700% auto", pos: "80.4% 70%", col: "7 / 10", row: "1 / 6", z: 1, rot: 0, speed: .2, user: "@username.03", alt: "Close-up of the beaded fries on a black tank", tag: ["BLACK FRIES TANK", 899] },
+      { crop: true, size: "1000% auto", pos: "87.5% 70%", col: "9 / 13", row: "3 / 9", z: 2, rot: 2, speed: .6, user: "@username.04", alt: "Beaded heart charms on a black shoulder bag", tag: ["HEART CHARM", 289] },
+      { slot: "irl-night", tint: "linear-gradient(170deg, #D9DCCB, #B9BEA8)", col: "9 / 13", row: "10 / 18", z: 1, rot: 0, speed: -.2, user: "@username.05", alt: "Night-out look — black fries tank", look: { title: "SHOP THIS LOOK", items: ["Black Tank", "+ Fries Brooch"], ids: [899, 269] } },
+      { slot: "irl-jacket", tint: "linear-gradient(160deg, #C9CDBB, #A9AE96)", col: "1 / 4", row: "12 / 17", z: 1, rot: 0, speed: .3, user: "@username.06", alt: "Popcorn brooch pinned on a denim jacket", tag: ["POPCORN BROOCH", 269] },
+      { slot: "irl-college", tint: "linear-gradient(170deg, #E8DDD4, #C5B7AB)", col: "4 / 8", row: "13 / 21", z: 1, rot: 0, speed: -.35, user: "@username.07", alt: "College look — pink popcorn tank", tag: ["PINK POPCORN TANK", 899] },
+      { crop: true, size: "1000% auto", pos: "26.8% 61%", col: "6 / 9", row: "19 / 24", z: 3, rot: 3, speed: .25, user: "@username.08", alt: "Close-up of the beaded cocktail patch", tag: ["COCKTAIL BROOCH", 269] },
+      { slot: "irl-backpack", tint: "linear-gradient(160deg, #EFCFCB, #E8DDD4)", col: "1 / 4", row: "17 / 23", z: 2, rot: -1.5, speed: .15, user: "@username.09", alt: "Cherry charm clipped to a backpack", tag: ["CHERRY CHARM", 289] }
+    ];
+    return {
+      irlLeave: () => this.state.irlH !== null && this.setState({ irlH: null }),
+      irl: T.map((t, i) => {
+        const on = h === i, isLook = !!t.look, added = st.irlAdded === i;
+        return {
+          crop: !!t.crop, slot: !!t.slot, slotId: t.slot || "", tint: t.tint || "#E8DDD4", size: t.size || "cover", pos: t.pos || "50% 50%", alt: t.alt, user: t.user,
+          col: t.col, row: t.row, z: on ? "6" : String(t.z), speed: String(t.speed),
+          rot: "rotate(" + (on ? 0 : t.rot) + "deg)", dim: h === null || on ? "1" : ".86",
+          scale: on ? "scale(1.035)" : (h === null ? "scale(1)" : "scale(.985)"),
+          shadow: on ? "0 26px 50px rgba(63,70,51,0.28)" : (t.rot ? "0 16px 34px rgba(63,70,51,0.2)" : "none"),
+          border: t.rot ? "5px solid #FDFCF8" : "0 solid transparent",
+          tagOp: on ? "1" : "0", tagT: on ? "translateY(0px)" : "translateY(-8px)", tagPE: on ? "auto" : "none",
+          isLook, tagTitle: isLook ? t.look.title + " →" : t.tag[0], tagPrice: isLook ? money(t.look.ids.reduce((a, b) => a + b, 0)) : money(t.tag[1]),
+          items: isLook ? t.look.items : [], cta: isLook || st.mobile ? "VIEW PIECES →" : (t.tag[0].includes("TANK") ? "SHOP →" : "VIEW →"), href: "LUMI-Pages.dc.html#/product/" + (isLook ? (i === 0 ? "pink-popcorn-tank" : "black-fries-tank") : ({ "WHITE COCKTAIL TANK": "white-cocktail-tank", "BLACK FRIES TANK": "black-fries-tank", "HEART CHARM": "heart-charm", "POPCORN BROOCH": "popcorn-brooch", "PINK POPCORN TANK": "pink-popcorn-tank", "COCKTAIL BROOCH": "cocktail-brooch", "CHERRY CHARM": "cherry-charm" }[t.tag[0]] || "shop")),
+          addLabel: added ? "IN THE BAG." : "ADD LOOK →", addBg: added ? "#6B7258" : "#3F4633",
+          addLook: e => { e.stopPropagation(); if (this.state.irlAdded === i) return; const src0 = e.currentTarget, ids = i === 0 ? ["pink-popcorn-tank", "popcorn-brooch", "heart-charm"] : ["black-fries-tank", "fries-brooch"];
+            this.sized(ids[0], src0, sz => { if (!this.cartAdd(ids[0], sz, false)) return; ids.slice(1).forEach(id => this.cartAdd(id, null, false)); window.LumiCart.toast("LOOK IN THE BAG · TANK SIZE " + sz); this.irlRun(i, src0); }, { title: "YOUR TANK SIZE?", cta: "ADD LOOK →" }); },
+          enter: e => { if (e.pointerType && e.pointerType !== "mouse") return; if (this.state.irlH !== i) { this.setState({ irlH: i }); this.s5Beads(e.currentTarget); } },
+          move: e => { if (e.pointerType !== "mouse" || (this.dr && this.dr.reduced)) return; const el = e.currentTarget.querySelector("[data-tilt]"); if (!el) return; const r = e.currentTarget.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; el.style.transform = "perspective(900px) rotateY(" + (x * 4).toFixed(2) + "deg) rotateX(" + (-y * 4).toFixed(2) + "deg) scale(1.035)"; },
+          mon: st.irlH === i ? "1" : "0", monA: st.irlH === i,
+          tap: e => { if (e.target.closest && e.target.closest("a,button")) return; if (!this.state.mobile && !(window.matchMedia && matchMedia("(hover: none)").matches)) return; this.setState({ irlH: this.state.irlH === i ? null : i }); if (this.state.irlH !== i) this.s5Beads(e.currentTarget); }
+        };
+      })
+    };
+  }
+  s4Init(n) {
+    if (this.s4io) return;
+    const sec = document.querySelector("[data-s4]");
+    if (!sec) { if (n < 50) this.s4t = setTimeout(() => this.s4Init(n + 1), 80); return; }
+    this.s4io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { this.setState({ s4In: true }); this.s4Rain(sec); setTimeout(() => this.s4Beads(), 1200); this.s4io.disconnect(); } }, { rootMargin: "0px 0px -22% 0px" });
+    this.s4io.observe(sec);
+  }
+  s4Rain(sec) {
+    if (this.dr && this.dr.reduced) return;
+    const r = sec.getBoundingClientRect(), cols = [C.rose, C.blush, C.sage, C.ivory, C.paleSage];
+    for (let i = 0; i < 5; i++) { const x = r.left + r.width * (.3 + Math.random() * .6), b = this.beadEl(cols[i], 9 + Math.random() * 6);
+      const a = b.animate([{ transform: "translate(" + x + "px," + (r.top - 20) + "px)", opacity: 0 }, { opacity: 1, offset: .15 }, { transform: "translate(" + (x + (Math.random() - .5) * 60) + "px," + (r.top + r.height * .34) + "px)", opacity: 1, offset: .8 }, { transform: "translate(" + (x + (Math.random() - .5) * 70) + "px," + (r.top + r.height * .32) + "px)", opacity: 0 }], { duration: 1500 + i * 180, delay: i * 120, easing: "cubic-bezier(.5,0,.6,1)", fill: "forwards" });
+      a.onfinish = () => b.remove(); }
+  }
+  s4Beads() {
+    if (this.dr && this.dr.reduced) return;
+    const el = document.querySelector('[data-s4item][data-on="true"] [data-s4img]'); if (!el) return;
+    const r = el.getBoundingClientRect(); if (r.bottom < 0 || r.top > window.innerHeight) return;
+    const cols = [C.rose, C.blush, C.sage, C.ivory];
+    for (let i = 0; i < 4; i++) {
+      const side = i % 2 ? r.right + 6 : r.left - 16, y = r.top + r.height * (.2 + Math.random() * .6), b = this.beadEl(cols[i], 9 + Math.random() * 7);
+      const sx = side + (i % 2 ? 60 : -60);
+      b.animate([{ transform: "translate(" + sx + "px," + (y - 30) + "px)", opacity: 0 }, { transform: "translate(" + side + "px," + y + "px)", opacity: 1, offset: .35 }, { transform: "translate(" + side + "px," + (y - 10) + "px)", opacity: 1, offset: .8 }, { transform: "translate(" + side + "px," + (y - 14) + "px)", opacity: 0 }], { duration: 2600, delay: i * 90, easing: "ease-out", fill: "forwards" }).onfinish = () => b.remove();
+    }
+  }
+  s4Go(i, list) {
+    const n = list.length; const k = Math.max(0, Math.min(n - 1, i));
+    if (k === this.state.s4i) return;
+    this.setState({ s4i: k });
+    clearTimeout(this.s4bt); this.s4bt = setTimeout(() => this.s4Beads(), 700);
+    if (this.state.mobile) { const v = document.querySelector("[data-s4view]"), it = document.querySelectorAll("[data-s4item]")[k]; if (v && it) v.scrollTo({ left: it.offsetLeft, behavior: "smooth" }); }
+  }
+  s4Add(p) {
+    const img = document.querySelector('[data-s4item][data-on="true"] [data-s4img]');
+    const target = this.state.pastHero ? document.querySelector('[data-lumi="bagpill"]') : document.querySelector('[data-lumi="bag"]');
+    const finish = () => this.setState(s => ({ s4added: true }), () => { clearTimeout(this.s4at); this.s4at = setTimeout(() => this.setState({ s4added: false }), 1800); const t = document.querySelector('[data-lumi="bagpill"]') || document.querySelector('[data-lumi="bag"]'); t && t.animate && t.animate([{ transform: "scale(1)" }, { transform: "scale(1.18)" }, { transform: "scale(1)" }], { duration: 520, easing: "cubic-bezier(.3,1.6,.5,1)" }); });
+    if (!img || !target || (this.dr && this.dr.reduced)) { finish(); return; }
+    const r = img.getBoundingClientRect(), T = img.cloneNode(false), tr = target.getBoundingClientRect(), cs = getComputedStyle(img);
+    Object.assign(T.style, { position: "fixed", left: "0", top: "0", width: r.width + "px", height: r.height + "px", zIndex: "210", pointerEvents: "none", transformOrigin: "0 0", transition: "none", backgroundImage: cs.backgroundImage, backgroundSize: cs.backgroundSize, backgroundPosition: cs.backgroundPosition, backgroundColor: cs.backgroundColor, aspectRatio: "auto" });
+    document.body.appendChild(T);
+    const to = { x: tr.left + tr.width / 2 - r.width * .04, y: tr.top + tr.height / 2 - r.height * .04 };
+    this.flyEl(T, { x: r.left, y: r.top }, to, 850, 1, .08, 60).onfinish = () => T.remove();
+    T.animate([{ opacity: 1 }, { opacity: 1, offset: .6 }, { opacity: 0 }], { duration: 850, fill: "forwards" });
+    const b = this.beadEl(C.rose, 14);
+    setTimeout(() => { this.flyEl(b, { x: r.left + r.width / 2, y: r.top + r.height / 2 }, { x: tr.left + tr.width / 2 - 7, y: tr.top + tr.height / 2 - 7 }, 800, 1, .6, 140).onfinish = () => { b.remove(); finish(); }; }, 120);
+  }
+  s4Vals() {
+    const st = this.state;
+    const P4 = [
+      { id: "pink-tank", cat: "tanks", name: "THE PINK TANK", line: "Not your basic tank.", price: 899, fmt: "ON MODEL", size: "278% auto", pos: "53% 10%", tint: "#EFCFCB" },
+      { id: "fries-tank", cat: "tanks", name: "THE FRIES TANK", line: "Bad outfit? Add fries.", price: 899, fmt: "UP CLOSE", size: "700% auto", pos: "80.4% 70%", tint: "#1B1F16" },
+      { id: "heart-charm", cat: "charms", name: "THE HEART CHARM", line: "Small detail. Big energy.", price: 289, fmt: "ON THE BAG", size: "500% auto", pos: "91% 78%", tint: "#E8DDD4" },
+      { id: "cocktail-tank", cat: "tanks", name: "THE COCKTAIL TANK", line: "A little extra, please.", price: 899, fmt: "ON MODEL", size: "278% auto", pos: "22% 10%", tint: "#FDFCF8" },
+      { id: "popcorn-brooch", cat: "brooches", name: "THE POPCORN BROOCH", line: "Pin it. Play with it.", price: 269, fmt: "UP CLOSE", size: "1000% auto", pos: "51.4% 59%", tint: "#EFCFCB" },
+      { id: "cherry-charm", cat: "charms", name: "THE CHERRY CHARM", line: "Your bag, but better.", price: 289, fmt: "ON THE BAG", size: "600% auto", pos: "16.7% 74.5%", tint: "#EFCFCB" },
+      { id: "fries-brooch", cat: "brooches", name: "THE FRIES BROOCH", line: "Side of fries, anyone?", price: 269, fmt: "UP CLOSE", size: "1200% auto", pos: "78.5% 67%", tint: "#1B1F16" },
+      { id: "cocktail-brooch", cat: "brooches", name: "THE COCKTAIL BROOCH", line: "Cheers to your jacket.", price: 269, fmt: "UP CLOSE", size: "1200% auto", pos: "26.7% 61%", tint: "#FDFCF8" }
+    ];
+    const tab = st.s4tab, list = tab === "all" ? P4 : P4.filter(p => p.cat === tab), i = Math.min(st.s4i, list.length - 1), a = list[i];
+    const money = n => "₹" + n.toLocaleString("en-IN");
+    const S = "16vw", G = "1.4vw";
+    return {
+      s4HeadOp: st.s4In ? "1" : "0", s4HeadT: st.s4In ? "translateY(0px)" : "translateY(22px)",
+      s4tabs: [["all", "ALL"], ["tanks", "TANKS"], ["brooches", "BROOCHES"], ["charms", "CHARMS"]].map(([k, l]) => ({ label: l, on: tab === k, line: tab === k ? "#3F4633" : "transparent", ink: tab === k ? "#3F4633" : "#6B7258",
+        pick: () => { if (this.state.s4tab === k) return; this.setState({ s4tab: k, s4i: 0 }); const v = document.querySelector("[data-s4view]"); if (v) v.scrollTo({ left: 0 }); clearTimeout(this.s4bt); this.s4bt = setTimeout(() => this.s4Beads(), 800); } })),
+      s4count: String(i + 1).padStart(2, "0") + " / " + String(list.length).padStart(2, "0"),
+      s4prev: () => this.s4Go(i - 1, list), s4next: () => this.s4Go(i + 1, list),
+      s4prevInk: i > 0 ? "#3F4633" : "#A9AE96", s4nextInk: i < list.length - 1 ? "#3F4633" : "#A9AE96",
+      s4a: { name: a.name, line: a.line, price: money(a.price), fmt: a.fmt, href: "LUMI-Pages.dc.html#/product/" + ({ "pink-tank": "pink-popcorn-tank", "fries-tank": "black-fries-tank", "cocktail-tank": "white-cocktail-tank", "heart-charm": "heart-charm", "cherry-charm": "cherry-charm", "popcorn-brooch": "popcorn-brooch", "fries-brooch": "fries-brooch", "cocktail-brooch": "cocktail-brooch" }[a.id] || "shop") },
+      s4add: e => { if (this.state.s4added) return; const b = e.currentTarget, id = { "pink-tank": "pink-popcorn-tank", "fries-tank": "black-fries-tank", "cocktail-tank": "white-cocktail-tank", "heart-charm": "heart-charm", "cherry-charm": "cherry-charm", "popcorn-brooch": "popcorn-brooch", "fries-brooch": "fries-brooch", "cocktail-brooch": "cocktail-brooch" }[a.id]; this.sized(id, b, sz => { if (this.cartAdd(id, sz)) this.s4Add(a); }); },
+      s4addLabel: st.s4added ? "IN THE BAG." : "ADD TO BAG +", s4addBg: st.s4added ? "#6B7258" : "#3F4633",
+      s4shift: "translateX(calc(-" + i + " * (" + S + " + " + G + ")))",
+      s4items: list.map((p, k) => { const on = k === i; return { name: p.name, price: money(p.price), fmt: p.fmt, size: p.size, pos: p.pos, tint: p.tint, on,
+        aria: p.name + ", " + money(p.price) + (on ? "" : " — show this piece"),
+        w: on ? "min(34vw, calc(64vh * .8))" : S, filter: on || k === i + 1 ? "none" : "saturate(.9) brightness(.97)", capOp: on ? "0" : "1",
+        op: st.s4In ? "1" : "0", enter: st.s4In ? "translateX(0px)" : "translateX(" + (on ? 40 : 120) + "px)", delay: (on ? .35 : .55 + Math.min(k - i, 4) * .08) + "s",
+        pick: () => { if (this.s4drag) return; if (k !== i) this.s4Go(k, list); } }; }),
+      ...(() => { const M = { "pink-tank": "pink-popcorn-tank", "fries-tank": "black-fries-tank", "cocktail-tank": "white-cocktail-tank", "heart-charm": "heart-charm", "cherry-charm": "cherry-charm", "popcorn-brooch": "popcorn-brooch", "fries-brooch": "fries-brooch", "cocktail-brooch": "cocktail-brooch" }; const mm = (p, k) => { const id = M[p.id] || "shop", done = (this.state.s4madd || {})[id], feat = k === 0, tank = window.LumiCart && window.LumiCart.requiresSize(id);
+          return { name: p.name, price: money(p.price), fmt: p.fmt, tint: p.tint, size: p.size, pos: p.pos, ar: feat ? "4 / 4.6" : "4 / 5", nameSize: feat ? "17px" : "13px",
+            href: "LUMI-Pages.dc.html#/product/" + id, aria: "View " + p.name, cta: done ? "IN THE BAG ✓" : (tank ? "SELECT SIZE +" : "QUICK ADD +"), bg: done ? "#6B7258" : (feat ? "#3F4633" : "#FDFCF8"), ink: done || feat ? "#FDFCF8" : "#3F4633",
+            add: e => { const b = e.currentTarget; this.sized(id, b, sz => { if (this.cartAdd(id, sz)) { this.setState(s => ({ s4madd: Object.assign({}, s.s4madd, { [id]: 1 }) })); clearTimeout(this.s4mt); this.s4mt = setTimeout(() => this.setState({ s4madd: {} }), 2400); } }); } }; };
+        return { s4mFeat: list.slice(0, 1).map(mm), s4mRest: list.slice(1).map((p, k) => mm(p, k + 1)) }; })(),
+      s4wheel: e => { if (this.state.mobile) return; if (Math.abs(e.deltaX) <= Math.abs(e.deltaY) || Math.abs(e.deltaX) < 10) return; const now = Date.now(); if (now - (this.s4wt || 0) < 520) return; this.s4wt = now; this.s4Go(i + (e.deltaX > 0 ? 1 : -1), list); },
+      s4down: e => { this.s4x = e.clientX; this.s4drag = false; },
+      s4up: e => { if (this.state.mobile || this.s4x == null) return; const dx = e.clientX - this.s4x; this.s4x = null; if (Math.abs(dx) > 50) { this.s4drag = true; setTimeout(() => this.s4drag = false, 60); this.s4Go(i + (dx < 0 ? 1 : -1), list); } },
+      s4key: e => { if (e.key === "ArrowRight") { e.preventDefault(); this.s4Go(i + 1, list); } if (e.key === "ArrowLeft") { e.preventDefault(); this.s4Go(i - 1, list); } },
+      s4scroll: e => { if (!this.state.mobile) return; const v = e.currentTarget, it = v.querySelector("[data-s4item]"); if (!it) return; const k = Math.round(v.scrollLeft / (it.offsetWidth + 12)); if (k !== this.state.s4i && k < list.length) this.setState({ s4i: k }); }
+    };
+  }
+  s3Init(n) {
+    if (this.s3io) return;
+    const sec = document.querySelector("[data-s3]");
+    if (!sec) { if (n < 50) this.s3t = setTimeout(() => this.s3Init(n + 1), 80); return; }
+    this.s3io = new IntersectionObserver(([e]) => { this.s3vis = e.isIntersecting; if (e.isIntersecting) this.s3Swing(); }); this.s3io.observe(sec);
+    this.onPH = () => { const p = window.scrollY > window.innerHeight * .85; if (p !== this.state.pastHero) this.setState({ pastHero: p }); };
+    window.addEventListener("scroll", this.onPH, { passive: true }); this.onPH();
+  }
+  s3Swing() {
+    if (this.swRun) return; this.swRun = true; this.swL = performance.now(); this.sw = this.sw || {};
+    const tick = now => {
+      if (!this.s3vis) { this.swRun = false; return; }
+      const dt = Math.min((now - this.swL) / 1000, 1 / 30); this.swL = now; this.swT = (this.swT || 0) + dt;
+      document.querySelectorAll("[data-bch]").forEach((el, i) => {
+        const id = el.getAttribute("data-bch"), s = this.sw[id] || (this.sw[id] = { a: 0, v: 1.6 });
+        s.v += (-16 * s.a - 1.1 * s.v + Math.sin(this.swT * 1.1 + i * 2) * .06) * dt; s.a = Math.max(-.6, Math.min(.6, s.a + s.v * dt));
+        el.style.transform = "rotate(" + s.a.toFixed(4) + "rad)";
+      });
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+  beadEl(col, size) {
+    const el = document.createElement("div");
+    Object.assign(el.style, { position: "fixed", left: "0", top: "0", width: size + "px", height: size + "px", borderRadius: "50%", zIndex: "200", pointerEvents: "none",
+      background: "radial-gradient(circle at 35% 30%, #fff 0 12%, " + col + " 48%, " + tone(col, -.4) + ")", boxShadow: "0 3px 8px rgba(22,24,18,.25)" });
+    document.body.appendChild(el); return el;
+  }
+  flyEl(el, a, b, dur, s0, s1, lift) {
+    const mx = (a.x + b.x) / 2, my = Math.min(a.y, b.y) - (lift == null ? 80 : lift);
+    return el.animate([
+      { transform: "translate(" + a.x + "px," + a.y + "px) scale(" + s0 + ")" },
+      { transform: "translate(" + mx + "px," + my + "px) scale(" + ((s0 + s1) / 2 + .1) + ")", offset: .45 },
+      { transform: "translate(" + b.x + "px," + b.y + "px) scale(" + s1 + ")" }
+    ], { duration: dur, easing: "cubic-bezier(.45,0,.3,1)", fill: "forwards" });
+  }
+  s3Fly(src, pct, kind, done) {
+    const stage = document.querySelector("[data-s3stage]"), th = src && src.querySelector("[data-thumb]");
+    if (!stage || !th || (this.dr && this.dr.reduced)) { done(); return; }
+    const r = th.getBoundingClientRect(), S = stage.getBoundingClientRect();
+    const to = { x: S.left + S.width * pct[0] / 100, y: S.top + S.height * pct[1] / 100 };
+    const cl = th.cloneNode(true); const cs = getComputedStyle(th);
+    Object.assign(cl.style, { position: "fixed", left: "0", top: "0", width: r.width + "px", height: r.height + "px", margin: "0", zIndex: "210", pointerEvents: "none", transformOrigin: "50% 50%", borderRadius: cs.borderRadius, transition: "none", outline: "none" });
+    document.body.appendChild(cl);
+    const k = kind === "tank" ? 2.4 : (kind === "brooch" ? .72 : .8);
+    const a = this.flyEl(cl, { x: r.left, y: r.top }, { x: to.x - r.width / 2, y: to.y - r.height / 2 }, kind === "tank" ? 700 : 760, 1, k, kind === "tank" ? 40 : 110);
+    if (kind === "tank") cl.animate([{ opacity: 1 }, { opacity: 1, offset: .55 }, { opacity: 0 }], { duration: 700, fill: "forwards" });
+    const n = kind === "tank" ? 4 : 3, cols = [C.rose, C.blush, C.sage, C.ivory, C.paleSage];
+    for (let i = 0; i < n; i++) { const bd = this.beadEl(cols[i % cols.length], 8 + Math.random() * 6); const off = { x: (Math.random() - .5) * 90, y: (Math.random() - .5) * 90 };
+      const an = this.flyEl(bd, { x: r.left + r.width / 2 + off.x * .3, y: r.top + r.height / 2 + off.y * .3 }, { x: to.x + off.x * (kind === "tank" ? 1.6 : .8), y: to.y + off.y * (kind === "tank" ? 1.6 : .8) }, 900 + i * 90, .6, 1, 70);
+      an.onfinish = () => { bd.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 900, delay: 400, fill: "forwards" }).onfinish = () => bd.remove(); }; }
+    setTimeout(done, kind === "tank" ? 260 : 720);
+    a.onfinish = () => cl.remove();
+  }
+  s3AddLook(e) {
+    const st = this.state, stage = document.querySelector("[data-s3stage]");
+    const n = 1 + st.s3b.length + st.s3c.length;
+    const target = this.state.pastHero ? document.querySelector('[data-lumi="bagpill"]') : document.querySelector('[data-lumi="bag"]');
+    const finish = () => this.setState(s => ({ s3done: true }), () => { clearTimeout(this.doneT); this.doneT = setTimeout(() => this.setState({ s3done: false }), 2600); const t = document.querySelector('[data-lumi="bagpill"]') || document.querySelector('[data-lumi="bag"]'); t && t.animate && t.animate([{ transform: "scale(1)" }, { transform: "scale(1.18)" }, { transform: "scale(1)" }], { duration: 520, easing: "cubic-bezier(.3,1.6,.5,1)" }); });
+    if (!stage || !target || (this.dr && this.dr.reduced)) { finish(); return; }
+    const S = stage.getBoundingClientRect(), c = { x: S.left + S.width / 2, y: S.top + S.height * .55 }, T = target.getBoundingClientRect();
+    stage.animate([{ transform: "scale(1)" }, { transform: "scale(.975)" }, { transform: "scale(1)" }], { duration: 700, easing: "cubic-bezier(.3,1.4,.5,1)" });
+    const cols = [C.rose, C.blush, C.sage, C.ivory, C.deepRose];
+    for (let i = 0; i < 5; i++) { const an = (i / 5) * 6.283, bd = this.beadEl(cols[i], 12); const from = { x: c.x + Math.cos(an) * S.width * .38, y: c.y + Math.sin(an) * S.height * .3 };
+      this.flyEl(bd, from, { x: c.x - 6, y: c.y - 6 }, 620, .6, 1, 0).onfinish = () => bd.remove(); }
+    setTimeout(() => { const bd = this.beadEl(C.rose, 16); this.flyEl(bd, { x: c.x - 8, y: c.y - 8 }, { x: T.left + T.width / 2 - 8, y: T.top + T.height / 2 - 8 }, 850, 1.2, .5, 160).onfinish = () => { bd.remove(); finish(); }; }, 600);
+  }
+  s3Drag(e, id, kind, zones, hooks) {
+    const handle = e.currentTarget, el = handle.closest("[data-s3drag]"), stage = document.querySelector("[data-s3stage]");
+    if (!el || !stage) return;
+    e.preventDefault(); e.stopPropagation();
+    const S = stage.getBoundingClientRect();
+    const ax = S.width * parseFloat(el.style.left) / 100, ay = S.height * parseFloat(el.style.top) / 100;
+    const ox = e.clientX - (S.left + ax), oy = e.clientY - (S.top + ay);
+    const prev = { tr: el.style.transition, z: el.style.zIndex, sh: handle.style.boxShadow };
+    el.style.transition = "none"; el.style.zIndex = "9";
+    handle.style.scale = "1.14"; handle.style.transition = (handle.style.transition ? handle.style.transition + ", " : "") + "scale .25s cubic-bezier(.34,1.6,.5,1)";
+    handle.style.boxShadow = "0 22px 36px rgba(22,24,18,0.42)"; handle.style.cursor = "grabbing";
+    try { handle.setPointerCapture(e.pointerId); } catch (_) {}
+    if (!(this.dr && this.dr.reduced)) {
+      const r = handle.getBoundingClientRect(), cols = [C.rose, C.blush, C.sage];
+      cols.forEach((col, i) => { const an = i / 3 * 6.283 + Math.random(), bd = this.beadEl(col, 7 + Math.random() * 4), cx = r.left + r.width / 2, cy = r.top + r.height / 2, R = Math.max(r.width, r.height) * .75;
+        bd.animate([{ transform: "translate(" + cx + "px," + cy + "px) scale(.4)", opacity: 0 }, { transform: "translate(" + (cx + Math.cos(an) * R) + "px," + (cy + Math.sin(an) * R) + "px) scale(1)", opacity: 1, offset: .5 }, { transform: "translate(" + (cx + Math.cos(an) * R * 1.3) + "px," + (cy + Math.sin(an) * R * 1.3 - 10) + "px) scale(.8)", opacity: 0 }], { duration: 900, easing: "ease-out", fill: "forwards" }).onfinish = () => bd.remove(); });
+    }
+    let lx = e.clientX;
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    const move = ev => {
+      const x = clamp(ev.clientX - S.left - ox, 0, S.width), y = clamp(ev.clientY - S.top - oy, 0, S.height);
+      el.style.left = (x / S.width * 100).toFixed(2) + "%"; el.style.top = (y / S.height * 100).toFixed(2) + "%";
+      if (kind === "c" && this.sw && this.sw[id]) this.sw[id].v -= (ev.clientX - lx) * .09;
+      lx = ev.clientX;
+    };
+    const up = () => {
+      handle.removeEventListener("pointermove", move); handle.removeEventListener("pointerup", up); handle.removeEventListener("pointercancel", up);
+      let x = parseFloat(el.style.left), y = parseFloat(el.style.top);
+      const near = (pts, R) => { let best = null, bd = R; pts.forEach(p => { const d = Math.hypot(p[0] - x, p[1] - y); if (d < bd) { bd = d; best = p; } }); return best; };
+      if (kind === "c") { const h = near(hooks, 13); if (h) { x = h[0]; y = h[1]; } }
+      else { const z = near(zones, 6); if (z) { x += (z[0] - x) * .45; y += (z[1] - y) * .45; } }
+      el.style.transition = prev.tr; el.style.zIndex = prev.z;
+      handle.style.scale = ""; handle.style.boxShadow = prev.sh; handle.style.cursor = "grab";
+      requestAnimationFrame(() => { el.style.left = x.toFixed(2) + "%"; el.style.top = y.toFixed(2) + "%"; });
+      if (kind === "c" && this.sw && this.sw[id]) this.sw[id].v += .8;
+      this.setState(s => ({ s3pos: Object.assign({}, s.s3pos, { [id]: [x, y] }) }));
+    };
+    handle.addEventListener("pointermove", move); handle.addEventListener("pointerup", up); handle.addEventListener("pointercancel", up);
+  }
+  s3Vals() {
+    const st = this.state;
+    const T3 = {
+      white: { short: "WHITE TANK", name: "THE WHITE TANK", sub: "Cocktail beadwork", line: "Shaken, not basic.", price: 899, bg: "#FDFCF8", pos: "22% 10%", thumb: "25% 61%", hook: [25, 64], alt: "Model in the white LUMI tank with beaded cocktail" },
+      pink: { short: "PINK TANK", name: "THE PINK TANK", sub: "Popcorn beadwork", line: "Not your basic tank.", price: 899, bg: "#F6E4E1", pos: "53% 10%", thumb: "52.5% 59%", hook: [82, 74], alt: "Model in the pink LUMI tank with beaded popcorn" },
+      black: { short: "BLACK TANK", name: "THE BLACK TANK", sub: "Fries beadwork", line: "Extra fries, extra you.", price: 899, bg: "#DCE0D2", pos: "90.6% 10%", thumb: "80.6% 61%", hook: [69, 64], alt: "Model in the black LUMI tank with beaded fries" }
+    };
+    const B3 = [{ id: "pop", label: "POPCORN", name: "Popcorn Brooch", price: 269, pos: "51.4% 58%" }, { id: "fri", label: "FRIES", name: "Fries Brooch", price: 269, pos: "78.3% 66%" }, { id: "coc", label: "COCKTAIL", name: "Cocktail Brooch", price: 269, pos: "26.8% 60.5%" }];
+    const C3 = [{ id: "hrt", label: "HEART", name: "Heart Charm", price: 289, pos: "85.4% 67.5%" }, { id: "chr", label: "CHERRY", name: "Cherry Charm", price: 289, pos: "20.3% 67.5%" }];
+    const tk = T3[st.s3tank], money = n => "₹" + n.toLocaleString("en-IN");
+    const slots = [[38, 46], [62, 45], [tk.hook[0] + (tk.hook[0] > 50 ? -12 : 12), tk.hook[1] - 8]];
+    const bSlot = id => st.s3pos[id] || slots[st.s3b.indexOf(id)] || slots[0];
+    const hooks = [0, 1, 2].map(i => [tk.hook[0] + i * 7 * (tk.hook[0] > 50 ? -1 : 1), tk.hook[1]]);
+    const cSlot = id => st.s3pos[id] || hooks[st.s3c.indexOf(id)] || hooks[0];
+    const zones = [[38, 46], [62, 45], [50, 40], [50, 62], [tk.hook[0], tk.hook[1] - 6]];
+    const dropPos = (s, id) => { const p = Object.assign({}, s.s3pos); delete p[id]; return p; };
+    const lines = [{ name: tk.name.replace("THE ", "").toLowerCase().replace(/(^|\s)\S/g, s => s.toUpperCase()), price: money(tk.price) }]
+      .concat(st.s3b.map(id => B3.find(b => b.id === id)).map(b => ({ name: b.name, price: money(b.price) })))
+      .concat(st.s3c.map(id => C3.find(c => c.id === id)).map(c => ({ name: c.name, price: money(c.price) })));
+    const total = tk.price + st.s3b.reduce((a, id) => a + B3.find(b => b.id === id).price, 0) + st.s3c.reduce((a, id) => a + C3.find(c => c.id === id).price, 0);
+    const extras = st.s3b.length + st.s3c.length;
+    const tglB = id => e => { const src = e.currentTarget; if (st.s3b.includes(id)) { this.setState(s => ({ s3b: s.s3b.filter(x => x !== id), s3pos: dropPos(s, id) })); return; } const slot = slots[this.state.s3b.length] || slots[0]; this.s3Fly(src, slot, "brooch", () => this.setState(s => ({ s3b: s.s3b.includes(id) ? s.s3b : s.s3b.concat(id) }))); };
+    const tglC = id => e => { const src = e.currentTarget; if (st.s3c.includes(id)) { this.setState(s => ({ s3c: s.s3c.filter(x => x !== id), s3pos: dropPos(s, id) })); return; } const i = this.state.s3c.length; this.s3Fly(src, [tk.hook[0] + i * 7 * (tk.hook[0] > 50 ? -1 : 1), tk.hook[1] + 9], "charm", () => { if (this.sw) this.sw[id] = { a: (Math.random() < .5 ? -1 : 1) * .35, v: 0 }; this.setState(s => ({ s3c: s.s3c.includes(id) ? s.s3c : s.s3c.concat(id) })); }); };
+    return {
+      s3Bg: tk.bg,
+      s3tanks: ["white", "pink", "black"].map((k, i) => { const t = T3[k], on = st.s3tank === k; return { id: k, short: t.short, sub: t.sub, pos: t.thumb, on, aria: t.name + ", " + money(t.price), tilt: on ? "rotate(0deg)" : ["rotate(-2deg)", "rotate(1.5deg)", "rotate(-1deg)"][i], ring: on ? "#3F4633" : "transparent", dot: on ? "1" : "0",
+        pick: e => { if (this.state.s3tank === k) return; this.s3Fly(e.currentTarget, [50, 50], "tank", () => this.setState({ s3tank: k })); } }; }),
+      s3tName: tk.name, s3tLine: tk.line, s3tPrice: money(tk.price), s3tShort: tk.short,
+      s3layers: ["white", "pink", "black"].map(k => { const on = st.s3tank === k; return { pos: T3[k].pos, alt: T3[k].alt, hidden: !on, z: on ? "2" : "1", clip: on ? "0%" : "100%", delay: on ? "0s" : ".9s", scale: on ? "scale(1)" : "scale(1.04)" }; }),
+      s3brooches: B3.map(b => { const on = st.s3b.includes(b.id); return { id: b.id, label: b.label, pos: b.pos, on, aria: (on ? "Remove " : "Add ") + "the " + b.name + ", " + money(b.price), ring: on ? "#3F4633" : "transparent", chip: on ? "✓" : "+", chipBg: on ? "#3F4633" : "#FDFCF8", chipInk: on ? "#FDFCF8" : "#3F4633", toggle: tglB(b.id) }; }),
+      s3charms: C3.map(c => { const on = st.s3c.includes(c.id); return { id: c.id, label: c.label, pos: c.pos, on, aria: (on ? "Remove " : "Add ") + "the " + c.name + ", " + money(c.price), ring: on ? "#3F4633" : "transparent", chip: on ? "✓" : "+", chipBg: on ? "#3F4633" : "#FDFCF8", chipInk: on ? "#FDFCF8" : "#3F4633", toggle: tglC(c.id) }; }),
+      s3onB: st.s3b.map(id => { const b = B3.find(x => x.id === id), s = bSlot(id); return { name: "The " + b.name + " — drag to move", pos: b.pos, x: s[0] + "%", y: s[1] + "%", down: e => this.s3Drag(e, id, "b", zones, hooks) }; }),
+      s3onC: st.s3c.map((id, i) => { const c = C3.find(x => x.id === id), s = cSlot(id); return { id, name: "The " + c.name + " — drag to move", pos: c.pos, x: s[0] + "%", y: s[1] + "%", down: e => this.s3Drag(e, id, "c", zones, hooks), len: (22 + i * 16) + "px", top: (27 + i * 16) + "px" }; }),
+      s3lines: lines, s3total: (() => { const LC = window.LumiCart; if (!LC || !LC.quote) return money(total); const tId = { white: "white-cocktail-tank", pink: "pink-popcorn-tank", black: "black-fries-tank" }[st.s3tank]; const ids = (tId ? [tId] : []).concat(st.s3b.map(x => ({ pop: "popcorn-brooch", fri: "fries-brooch", coc: "cocktail-brooch" }[x])), st.s3c.map(x => ({ hrt: "heart-charm", chr: "cherry-charm" }[x]))).filter(Boolean); const Q = LC.quote(ids.map(id => ({ id, size: null, qty: 1 }))); return money(total - Q.bundleSave); })(), s3dragHint: extras ? "  ·  DRAG PIECES TO MOVE" : "",
+      s3status: st.s3done ? "THAT LOOKS GOOD." : extras === 0 ? "ADD A LITTLE EXTRA?" : extras < 3 ? "ONE MORE?" : "THAT LOOKS GOOD.",
+      s3cta: st.s3done ? (st.mobile ? "IN THE BAG ✓" : "YOUR LUMI IS IN THE BAG.") : extras === 0 ? (st.mobile ? "ADD TO BAG →" : "ADD " + tk.short + " TO BAG →") : (st.mobile ? "ADD THE LOOK →" : "ADD THE LOOK TO BAG →"),
+      s3ctaBg: st.s3done ? "#6B7258" : "#3F4633",
+      s3mtab: st.s3mtab || "tanks",
+      ...(() => { const LC = window.LumiCart; if (!LC || !LC.quote) return { s3promoOn: false };
+        const tankId = { white: "white-cocktail-tank", pink: "pink-popcorn-tank", black: "black-fries-tank" }[st.s3tank];
+        const ids = (tankId ? [tankId] : []).concat(st.s3b.map(x => ({ pop: "popcorn-brooch", fri: "fries-brooch", coc: "cocktail-brooch" }[x])), st.s3c.map(x => ({ hrt: "heart-charm", chr: "cherry-charm" }[x]))).filter(Boolean);
+        const Q = LC.quote(ids.map(id => ({ id, size: LC.requiresSize(id) ? "M" : null, qty: 1 })));
+        const b = Q.bundles[0], ex = ids.length - (tankId ? 1 : 0);
+        if (b && b.key === "combo") return { s3promoOn: true, s3promoBg: "#EFCFCB", s3promoTitle: "✦ YOU UNLOCKED A LUMI COMBO · ₹1,300", s3promoSub: "Tank + 2 extras. You save " + b.saveText + "." };
+        if (b && b.key === "acc3") return { s3promoOn: true, s3promoBg: "#EFCFCB", s3promoTitle: "✦ ANY 3 EXTRAS = ₹699", s3promoSub: "You save " + b.saveText + "." };
+        if (b && b.key === "tank3") return { s3promoOn: true, s3promoBg: "#EFCFCB", s3promoTitle: "✦ 3 TANKS = ₹2,400", s3promoSub: "You save " + b.saveText + "." };
+        if (tankId && ex === 1) return { s3promoOn: true, s3promoBg: "#F6F2EA", s3promoTitle: "ONE MORE?", s3promoSub: "Add 1 more brooch or charm — tank + 2 extras is ₹1,300." };
+        if (tankId && ex === 0) return { s3promoOn: true, s3promoBg: "#F6F2EA", s3promoTitle: "TANK + 2 EXTRAS = ₹1,300", s3promoSub: "Add any 2 brooches or charms to unlock it." };
+        return { s3promoOn: false }; })(),
+      s3mtabs: [["tanks", "TANKS", 0], ["brooches", "BROOCHES", st.s3b.length], ["charms", "CHARMS", st.s3c.length]].map(([k, label, n]) => { const on = (st.s3mtab || "tanks") === k; return { label, n, on, chipShow: n ? "inline-flex" : "none", bg: on ? "#3F4633" : "#FDFCF8", ink: on ? "#FDFCF8" : "#3F4633", pick: () => this.setState({ s3mtab: k }) }; }),
+      s3add: e => { if (this.state.s3done) return; const b = e.currentTarget, tankId = { white: "white-cocktail-tank", pink: "pink-popcorn-tank", black: "black-fries-tank" }[st.s3tank];
+        const extras = st.s3b.map(x => ({ pop: "popcorn-brooch", fri: "fries-brooch", coc: "cocktail-brooch" }[x])).concat(st.s3c.map(x => ({ hrt: "heart-charm", chr: "cherry-charm" }[x])));
+        this.sized(tankId, b, sz => { if (!this.cartAdd(tankId, sz, false)) return; extras.forEach(id => this.cartAdd(id, null, false)); window.LumiCart.toast("YOUR LUMI IS IN THE BAG · TANK SIZE " + sz); this.s3AddLook({ currentTarget: b }); }, { title: extras.length ? "YOUR TANK SIZE?" : "PICK YOUR SIZE", cta: extras.length ? "ADD THE LOOK TO BAG →" : "ADD TO BAG →" }); },
+      heroShop: e => { if (e.metaKey || e.ctrlKey || e.shiftKey || e.button > 0) return; e.preventDefault(); const u = e.currentTarget.getAttribute("href"); setTimeout(() => { location.href = u; }, 380); },
+      bagN: st.bagN, bagAria: "Open bag, " + st.bagN + " items", pillOn: st.pastHero, openBag: e => { e && e.preventDefault && e.preventDefault(); window.LumiCart && window.LumiCart.open(); }
+    };
+  }
+  s2Init(n) {
+    if (this.dr) return;
+    const sec = document.querySelector("[data-s2]"), cv = document.querySelector("[data-s2c]"), cats = document.querySelector("[data-cats]");
+    if (!sec || !cv || !cats) { if (n < 50) this.s2t = setTimeout(() => this.s2Init(n + 1), 80); return; }
+    try {
+      this.dr = new Drift(sec, cv, cats);
+      const mq = window.matchMedia("(max-width: 760px)");
+      this.setState({ mobile: mq.matches });
+      this.mqh = e => this.setState({ mobile: e.matches, active: e.matches ? (this.state.active || "wear") : null }); mq.addEventListener && mq.addEventListener("change", this.mqh); this.mq = mq;
+      this.io1 = new IntersectionObserver(([e]) => { if (e.isIntersecting) { this.setState({ s2In: true, active: mq.matches ? (this.state.active || "wear") : this.state.active }); this.dr.spawn(); this.io1.disconnect(); } }, { rootMargin: "0px 0px -18% 0px" });
+      this.io1.observe(sec);
+      this.io2 = new IntersectionObserver(([e]) => { this.s2vis = e.isIntersecting; this.dr.vis = e.isIntersecting; if (e.isIntersecting) { this.dr.start(); this.charmStart(); } }, { rootMargin: "140px 0px 0px 0px" });
+      this.io2.observe(sec);
+      this.io3 = new IntersectionObserver(es => { if (!this.state.mobile) return; es.forEach(e => { if (e.isIntersecting) this.setState({ active: e.target.getAttribute("data-cat") }); }); }, { root: cats, threshold: .6 });
+      cats.querySelectorAll("article").forEach(a => this.io3.observe(a));
+    } catch (e) { console.warn("LUMI section init failed:", e && e.message); }
+  }
+  charmStart() {
+    if (this.cRun || (this.dr && this.dr.reduced)) return; this.cRun = true; this.cLast = performance.now(); this.cT = 0;
+    const tick = now => {
+      if (!this.s2vis) { this.cRun = false; return; }
+      const dt = Math.min((now - this.cLast) / 1000, 1 / 30); this.cLast = now; this.cT += dt;
+      const els = Array.from(document.querySelectorAll("[data-charm]"));
+      if (!this.cs || this.cs.length !== els.length) this.cs = els.map((el, i) => ({ a: 0, v: 0, L: [70, 110, 140][i] || 120 }));
+      els.forEach((el, i) => {
+        const c = this.cs[i], k = 2600 / (c.L + 140);
+        let fz = -k * c.a - 1.05 * c.v + Math.sin(this.cT * .9 + i * 1.9) * .05;
+        if (this.cp) { const a = el.querySelector("a"); if (a) { const r = a.getBoundingClientRect(); if (this.cp.x > r.left - 30 && this.cp.x < r.right + 30 && this.cp.y > r.top - c.L && this.cp.y < r.bottom + 20) fz += this.cp.vx * .32; } }
+        c.v += fz * dt; c.a = Math.max(-.55, Math.min(.55, c.a + c.v * dt));
+        el.style.transform = "rotate(" + c.a.toFixed(4) + "rad)";
+      });
+      for (let i = 0; i < this.cs.length - 1; i++) { const a = this.cs[i], b = this.cs[i + 1]; if (a.a - b.a > .32) { const m = (a.v + b.v) / 2; a.v = m - .12; b.v = m + .12; } }
+      if (this.cp) this.cp.vx *= .75;
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+  kickCharms(p) { (this.cs || []).forEach((c, i) => { c.v += (i % 2 ? -1 : 1) * p; }); }
+  s2Update(ps) {
+    if (!this.dr || !ps) return;
+    const st = this.state;
+    if (ps.active !== st.active) {
+      clearTimeout(this.tgt);
+      this.tgt = setTimeout(() => { const el = st.active ? document.querySelector('[data-stage="' + st.active + '"]') : document.querySelector("[data-cats]"); if (el) this.dr.target(el.getBoundingClientRect()); }, 520);
+      if (st.active === "charm") this.kickCharms(.9);
+    }
+    if (ps.hp !== st.hp) {
+      clearTimeout(this.gt);
+      if (st.hp) { const el = document.querySelector('[data-prod="' + st.hp + '"]'); if (el) this.gt = setTimeout(() => this.dr.gather(el.getBoundingClientRect()), 60); }
+      else this.gt = setTimeout(() => { const el = st.active ? document.querySelector('[data-stage="' + st.active + '"]') : null; if (el) this.dr.target(el.getBoundingClientRect()); }, 200);
+    }
+  }
+  s2Vals() {
+    const st = this.state, a = st.active, hp = st.hp;
+    const on = k => a === k;
+    const set = k => { if (this.state.active !== k) this.setState({ active: k }); };
+    const mouse = fn => e => { if (!e || !e.pointerType || e.pointerType === "mouse") fn(); };
+    const W = on("wear"), P = on("pin"), Ch = on("charm");
+    const flex = k => a ? (a === k ? "2.3" : ".85") : "1";
+    const BASE = { ct: ["30%", "47%"], pt: ["52%", "46%"], ft: ["75.4%", "49%"], pb: ["51.3%", "56.9%"], fb: ["76.1%", "63.8%"], cb: ["28.6%", "59.1%"], hb: null, hc: ["83%", "65.4%"], cc: ["22.25%", "65.4%"], pc: null };
+    const pr = {};
+    Object.keys(BASE).forEach(id => {
+      const h = hp === id, b = BASE[id];
+      pr[id] = { cap: h ? "1" : "0", capT: h ? "translateY(0px)" : "translateY(6px)", capB: h ? "translate(-50%, 0px)" : "translate(-50%, 6px)", capL: h ? "translateY(0px)" : "translateY(6px)",
+        zoom: b ? "translate(-" + b[0] + ", -" + b[1] + ")" + (h ? " scale(1.07)" : " scale(1)") : "none",
+        lift: h ? "scale(1.07) rotate(-3deg)" : "scale(1) rotate(0deg)",
+        on: () => { if (this.state.hp !== id) this.setState({ hp: id }); }, off: () => { if (this.state.hp === id) this.setState({ hp: null }); } };
+    });
+    const ex = k => ({ op: on(k) ? "1" : "0", t: on(k) ? "translateY(0px)" : "translateY(12px)" });
+    const ping = d => P ? "lumiPing .9s " + d + "s ease-out both" : "none";
+    return {
+      s2Bg: { none: "#FDFCF8", wear: "#F9EBE8", pin: "#E7E9DE", charm: "#F6E7DF" }[a || "none"],
+      s2HeadOp: st.s2In ? "1" : "0", s2HeadT: st.s2In ? "translateY(0px)" : "translateY(24px)",
+      s2PanOp: st.s2In ? "1" : "0", s2PanT: st.s2In ? "translateY(0px)" : "translateY(40px)",
+      s2Move: e => { if (!this.dr) return; const c = this.dr.cv.getBoundingClientRect(); this.dr.pointer(e.clientX - c.left, e.clientY - c.top); this.cp = { x: e.clientX, y: e.clientY, vx: (this.cp && this.cp.lx != null ? e.clientX - this.cp.lx : 0) * .9 + ((this.cp && this.cp.vx) || 0) * .1, lx: e.clientX }; },
+      s2Leave: () => { this.dr && this.dr.leave(); this.cp = null; },
+      catsLeave: mouse(() => { if (!this.state.mobile) this.setState({ active: null, hp: null }); }),
+      flexWear: flex("wear"), flexPin: flex("pin"), flexCharm: flex("charm"),
+      enterWear: mouse(() => set("wear")), enterPin: mouse(() => set("pin")), enterCharm: mouse(() => set("charm")),
+      focusWear: () => set("wear"), focusPin: () => set("pin"), focusCharm: () => set("charm"),
+      tapWear: e => { set("wear"); this.mCatScroll(e.currentTarget); }, tapPin: e => { set("pin"); this.mCatScroll(e.currentTarget); }, tapCharm: e => { set("charm"); this.mCatScroll(e.currentTarget); },
+      openWear: a === "wear" ? "1" : "0", openPin: a === "pin" ? "1" : "0", openCharm: a === "charm" ? "1" : "0",
+      ariaOpenWear: a === "wear", ariaOpenPin: a === "pin", ariaOpenCharm: a === "charm",
+      exp: { wear: ex("wear"), pin: ex("pin"), charm: ex("charm") },
+      wf: {
+        l: { l: W ? "1%" : "8%", w: W ? "34%" : "84%", op: W ? "1" : "0", t: W ? "rotate(-4deg)" : "rotate(0deg)", z: hp === "ct" ? "5" : "1" },
+        c: { l: W ? "33%" : "8%", w: W ? "34%" : "84%", op: "1", t: W ? "translateY(-8px) scale(1.04)" : "translateY(0px) scale(1)", z: "3" },
+        r: { l: W ? "65%" : "8%", w: W ? "34%" : "84%", op: W ? "1" : "0", t: W ? "rotate(4deg)" : "rotate(0deg)", z: hp === "ft" ? "5" : "2" }
+      },
+      surf: { l: P ? "14%" : "6%", w: P ? "72%" : "88%", b: P ? "0%" : "46%" },
+      pin: {
+        pop: { l: P ? "20%" : "4%", t: P ? "6%" : "60%", op: "1", ping: ping(1.0) },
+        fries: { l: P ? "50%" : "34%", t: P ? "22%" : "68%", op: "1", ping: ping(1.16) },
+        cock: { l: P ? "22%" : "62%", t: P ? "46%" : "58%", op: "1", ping: ping(1.32) },
+        heart: { l: P ? "52%" : "62%", t: P ? "62%" : "58%", op: P ? "1" : "0", ping: ping(1.48) }
+      },
+      ch: { h: { l: Ch ? "20%" : "28%", op: "1", z: hp === "hc" ? "6" : "3" }, p: { l: "50%", op: Ch ? "1" : "0", z: hp === "pc" ? "6" : "3" }, c: { l: Ch ? "80%" : "72%", op: "1", z: hp === "cc" ? "6" : "3" } },
+      pr,
+      swipeHint: { wear: "01 / 03 — SWIPE FOR PIN IT →", pin: "02 / 03 — SWIPE FOR CHARM IT →", charm: "03 / 03 — ← SWIPE BACK" }[a || "wear"]
+    };
+  }
+  tryInit(n) {
+    if (this.s) return;
+    const host = this.q("hero"), far = this.q("far"), main = this.q("main"), near = this.q("near"), copy = document.querySelector("[data-copy]");
+    if (!host || !far || !main || !near || !copy) { if (n < 50) this.it = setTimeout(() => this.tryInit(n + 1), 80); return; }
+    try { this.init(host, { far, main, near }, copy); } catch (e) { console.warn("LUMI hero init failed:", e && e.message); }
+  }
+  init(host, cv, copy) {
+    this.s = new Scene(this.opts());
+    this.s.onFormed = () => this.setState({ formed: true });
+    const avoid = () => { const a = copy.getBoundingClientRect(), b = host.getBoundingClientRect(); return { left: a.left - b.left, right: a.right - b.left, top: a.top - b.top }; };
+    this.s.mount(host, cv, avoid); this.s.vis = true; this.s.start();
+    this.ct = setTimeout(() => this.setState({ formed: true }), 1400);
+    const loc = e => { const r = host.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+    this.h = {
+      move: e => { const [x, y] = loc(e); this.s.pointer(x, y); },
+      leave: () => this.s.leave(),
+      down: e => { const [x, y] = loc(e); if (e.target.closest && e.target.closest('[data-lumi="cta"]')) { this.s.poke(x, y, 420); return; } if (e.target.closest && e.target.closest("a,button")) return; this.s.pointer(x, y); this.s.poke(x, y, e.pointerType === "mouse" ? 260 : 380); },
+      up: e => { if (e.pointerType !== "mouse") setTimeout(() => this.s.leave(), 400); },
+      scroll: () => { const y = window.scrollY; this.s.sy = y; const p = this.q("photo"); if (p) p.style.transform = "translate3d(0," + (y * .18).toFixed(1) + "px,0)"; const m = this.q("main"); if (m) m.style.transform = "translate3d(0," + (y * .08).toFixed(1) + "px,0)"; }
+    };
+    host.addEventListener("pointermove", this.h.move, { passive: true });
+    host.addEventListener("pointerleave", this.h.leave);
+    this.h.tmove = e => { const t = e.touches && e.touches[0]; if (!t) return; const r = host.getBoundingClientRect(), x = t.clientX - r.left, y = t.clientY - r.top; this.s.pointer(x, y); this.s.start(); };
+    this.h.tend = () => setTimeout(() => this.s.leave(), 450);
+    host.addEventListener("touchmove", this.h.tmove, { passive: true });
+    host.addEventListener("touchend", this.h.tend, { passive: true });
+    host.addEventListener("pointerdown", this.h.down);
+    host.addEventListener("pointerup", this.h.up);
+    window.addEventListener("scroll", this.h.scroll, { passive: true });
+  }
+  componentDidUpdate(pp, ps) {
+    this.s2Update(ps);
+    if (!this.s) return;
+    const o = this.opts(), c = this.s.o;
+    if (o.amount !== c.amount || o.formAt !== c.formAt || o.colorway !== c.colorway) { Object.assign(c, o); this.setState({ formed: false }); this.s.replay(); }
+  }
+  componentWillUnmount() {
+    clearTimeout(this.s7t); clearInterval(this.s4Iv); clearTimeout(this.cartT); this.cartUnsub && this.cartUnsub(); cancelAnimationFrame(this.s7raf); this.s7io && this.s7io.disconnect();
+    clearTimeout(this.s6t); this.s6io && this.s6io.disconnect(); if (this.s6sched) { window.removeEventListener("scroll", this.s6sched); window.removeEventListener("resize", this.s6sched); }
+    clearTimeout(this.s5t); clearTimeout(this.irlT); this.s5io && this.s5io.disconnect(); this.s5par && window.removeEventListener("scroll", this.s5par);
+    clearTimeout(this.s4t); clearTimeout(this.s4bt); clearTimeout(this.s4at); this.s4io && this.s4io.disconnect();
+    clearTimeout(this.s3t); clearTimeout(this.doneT); this.s3vis = false; this.s3io && this.s3io.disconnect(); this.onPH && window.removeEventListener("scroll", this.onPH);
+    clearTimeout(this.s2t); clearTimeout(this.tgt); clearTimeout(this.gt); this.s2vis = false;
+    this.dr && this.dr.destroy(); [this.io1, this.io2, this.io3].forEach(o => o && o.disconnect());
+    if (this.mq && this.mqh && this.mq.removeEventListener) this.mq.removeEventListener("change", this.mqh);
+    clearTimeout(this.it); if (!this.s) return; this.s.destroy();
+    const host = this.q("hero");
+    if (host) { host.removeEventListener("pointermove", this.h.move); host.removeEventListener("pointerleave", this.h.leave); host.removeEventListener("pointerdown", this.h.down); host.removeEventListener("pointerup", this.h.up); host.removeEventListener("touchmove", this.h.tmove); host.removeEventListener("touchend", this.h.tend); }
+    window.removeEventListener("scroll", this.h.scroll);
+  }
+  renderVals() { const v = this.baseVals(); return window.LumiCart && window.LumiCart.decorate ? window.LumiCart.decorate(v) : v; }
+  baseVals() {
+    const f = this.state.formed, st = this.state;
+    const CATS = [
+      { label: "TANK TOPS", tag: "Wear it.", href: "LUMI-Pages.dc.html#/tank-tops", pos: "51.5% 58%", alt: "Pink tank with beaded popcorn patch" },
+      { label: "BROOCHES", tag: "Pin it.", href: "LUMI-Pages.dc.html#/brooches", pos: "76.5% 64%", alt: "Beaded fries brooch on a black tank" },
+      { label: "BAG CHARMS", tag: "Charm it.", href: "LUMI-Pages.dc.html#/bag-charms", pos: "85.5% 63%", alt: "Beaded heart charms on a shoulder bag" }
+    ];
+    const cur = CATS[st.cat];
+    const open = v => { clearTimeout(this.closeT); this.setState({ shopOpen: v }); };
+    return {
+      ...this.s2Vals(),
+      ...this.s3Vals(),
+      ...this.s4Vals(),
+      ...this.s5Vals(),
+      ...this.s6Vals(),
+      ...this.s7Vals(),
+      shopOpen: st.shopOpen,
+      shopArrow: st.shopOpen ? "rotate(180deg)" : "rotate(0deg)",
+      shopEnter: e => { if (e.pointerType === "mouse") open(true); },
+      shopLeave: e => { if (e.pointerType === "mouse") { clearTimeout(this.closeT); this.closeT = setTimeout(() => this.setState({ shopOpen: false }), 180); } },
+      shopToggle: () => open(!this.state.shopOpen),
+      shopKey: e => { if (e.key === "Escape") open(false); },
+      previewPos: cur.pos, previewAlt: cur.alt, previewLabel: cur.label,
+      cats: CATS.map((c, i) => ({ label: c.label, tag: c.tag, href: c.href,
+        tagColor: i === st.cat ? "#A5676A" : "#6B7258",
+        arrowOp: i === st.cat ? "1" : "0", arrowT: i === st.cat ? "translateX(0px)" : "translateX(-6px)",
+        onHover: () => this.setState({ cat: i }) })),
+      photo: this.props.photo || undefined,
+      copyOpacity: f ? "1" : "0.001",
+      copyShift: f ? "translateY(0px)" : "translateY(14px)"
+    };
+  }
+}
+</script>
+</body>
+</html>
