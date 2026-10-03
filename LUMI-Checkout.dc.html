@@ -103,7 +103,7 @@
         <ul data-baglist="" aria-label="Items in your bag" style="list-style: none; margin: 0; padding: 0; border-top: 1px solid #E8DDD4;">
           <sc-for list="{{ lines }}" as="l" hint-placeholder-count="2">
             <li data-line="" data-bagline="" style="display: grid; grid-template-columns: 128px minmax(0, 1fr); gap: clamp(14px, 2vw, 26px); padding: 22px 0; border-bottom: 1px solid #E8DDD4;">
-              <a href="{{ l.href }}" aria-label="{{ l.viewAria }}" style="display: block; aspect-ratio: 4 / 5; background-color: {{ l.field }}; background-image: url('assets/lumi-hero-campaign.png'); background-size: {{ l.size }}; background-position: {{ l.pos }}; background-repeat: no-repeat;"></a>
+              <a href="{{ l.href }}" aria-label="{{ l.viewAria }}" style="display: block; aspect-ratio: 4 / 5; background-color: {{ l.field }}; background-image: url('{{ l.img }}'); background-size: {{ l.size }}; background-position: {{ l.pos }}; background-repeat: no-repeat;"></a>
               <div style="min-width: 0; display: flex; flex-direction: column; gap: 10px;">
                 <div style="display: flex; justify-content: space-between; gap: 14px; align-items: baseline;">
                   <a href="{{ l.href }}" style="font-size: 15px; font-weight: 700; letter-spacing: .06em; text-decoration: none;" style-hover="text-decoration: underline;">{{ l.name }}</a>
@@ -134,17 +134,21 @@
         <a data-cont="" href="LUMI-Pages.dc.html#/shop" style="display: inline-flex; align-items: center; min-height: 44px; margin-top: 16px; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-decoration: none;" style-hover="color: #6B7258;">CONTINUE SHOPPING →</a>
 
         <section data-bagrecs="" aria-labelledby="recs-title" style="margin-top: clamp(40px, 5vw, 72px);">
-          <h2 id="recs-title" style="margin: 0 0 18px; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(26px, 2.6vw, 36px); line-height: 1;">Add a little extra?</h2>
-          <div data-recs="" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px;">
+          <h2 id="recs-title" style="margin: 0 0 16px; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(26px, 2.6vw, 36px); line-height: 1.15; overflow-wrap: anywhere;">Add a little extra?</h2>
+          <div role="group" aria-label="Filter extras" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+            <sc-for list="{{ recTabs }}" as="rt" hint-placeholder-count="4"><button type="button" onClick="{{ rt.pick }}" aria-pressed="{{ rt.pressed }}" style="min-height: 44px; padding: 0 16px; background: {{ rt.bg }}; color: {{ rt.ink }}; border: 1.5px solid #3F4633; cursor: pointer; font-size: 12px; font-weight: 700; letter-spacing: .14em; white-space: nowrap;">{{ rt.label }}</button></sc-for>
+          </div>
+          <div data-recs="" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 16px;">
             <sc-for list="{{ recs }}" as="r" hint-placeholder-count="3">
-              <div style="display: flex; flex-direction: column; gap: 8px;">
-                <a href="{{ r.href }}" aria-label="{{ r.viewAria }}" style="display: block; aspect-ratio: 4 / 5; background-color: {{ r.field }}; background-image: url('assets/lumi-hero-campaign.png'); background-size: {{ r.size }}; background-position: {{ r.pos }}; background-repeat: no-repeat;"></a>
-                <span style="font-size: 13px; font-weight: 700; letter-spacing: .05em;">{{ r.name }}</span>
-                <span style="display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 3px 7px;"><s style="font-size: .84em; font-weight: 400; opacity: .72;">{{ r.priceMrp }}</s><span style="font-size: 14px;">{{ r.price }}</span><span style="font-size: .7em; font-weight: 700; letter-spacing: .08em; line-height: 1; padding: 3px 5px; background: #EFCFCB; color: #3F4633; align-self: center;">{{ r.priceOff }}</span></span>
-                <button onClick="{{ r.add }}" style="min-height: 44px; background: #FDFCF8; color: #3F4633; border: 1.5px solid #3F4633; cursor: pointer; font-size: 12px; font-weight: 700; letter-spacing: .14em; transition: background .2s ease, color .2s ease;" style-hover="background: #6B7258; border-color: #6B7258; color: #FDFCF8;">{{ r.cta }}</button>
+              <div style="display: flex; flex-direction: column; gap: 8px; min-width: 0;">
+                <a href="{{ r.href }}" aria-label="{{ r.viewAria }}" style="display: block; aspect-ratio: 4 / 5; background-color: {{ r.field }}; background-image: url('{{ r.img }}'); background-size: {{ r.size }}; background-position: {{ r.pos }}; background-repeat: no-repeat;"></a>
+                <span style="font-size: 13px; font-weight: 700; letter-spacing: .05em; line-height: 1.3; overflow-wrap: anywhere;">{{ r.name }}</span>
+                <span style="display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; line-height: 1.2;"><s style="font-size: 12px; font-weight: 400; opacity: .72;">{{ r.priceMrp }}</s><span style="font-size: 14px; font-weight: 700;">{{ r.price }}</span><span style="font-size: 10px; font-weight: 700; letter-spacing: .08em; line-height: 1; padding: 3px 5px; background: #EFCFCB; color: #3F4633;">{{ r.priceOff }}</span></span>
+                <button onClick="{{ r.add }}" style="min-height: 44px; padding: 8px 6px; background: #FDFCF8; color: #3F4633; border: 1.5px solid #3F4633; cursor: pointer; font-size: 12px; font-weight: 700; letter-spacing: .1em; line-height: 1.2; transition: background .2s ease, color .2s ease;" style-hover="background: #6B7258; border-color: #6B7258; color: #FDFCF8;">{{ r.cta }}</button>
               </div>
             </sc-for>
           </div>
+          <sc-if value="{{ recHasMore }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ recMore }}" style="display: block; margin: 24px auto 0; min-height: 48px; padding: 0 26px; background: transparent; color: #3F4633; border: 1.5px solid #3F4633; cursor: pointer; font-size: 12px; font-weight: 700; letter-spacing: .14em;" style-hover="background: #3F4633; color: #FDFCF8;">{{ recMoreLabel }}</button></sc-if>
         </section>
       </div>
 
@@ -216,7 +220,7 @@
         <ul style="list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 14px;">
           <sc-for list="{{ lines }}" as="l" hint-placeholder-count="2">
             <li style="display: grid; grid-template-columns: 60px minmax(0, 1fr) auto; gap: 12px; align-items: center;">
-              <span aria-hidden="true" style="display: block; aspect-ratio: 4 / 5; background-color: {{ l.field }}; background-image: url('assets/lumi-hero-campaign.png'); background-size: {{ l.size }}; background-position: {{ l.pos }}; background-repeat: no-repeat;"></span>
+              <span aria-hidden="true" style="display: block; aspect-ratio: 4 / 5; background-color: {{ l.field }}; background-image: url('{{ l.img }}'); background-size: {{ l.size }}; background-position: {{ l.pos }}; background-repeat: no-repeat;"></span>
               <span style="min-width: 0;"><span style="display: block; font-size: 13px; font-weight: 700; letter-spacing: .05em;">{{ l.name }}</span><span style="display: block; margin-top: 3px; font-size: 13px; font-weight: {{ l.metaWeight }}; color: {{ l.metaInk }};">{{ l.meta }}</span></span>
               <span style="font-size: 14px;">{{ l.total }}</span>
             </li>
@@ -429,7 +433,7 @@ class Component extends DCLogic {
     const soldOut = l => { const p = cat[l.id]; return !!(p.sizes && l.size && (p.soldOut || []).includes(l.size)); };
     const blocked = LC.missingSize() || items.some(soldOut);
     const lines = items.map((l, i) => { const p = cat[l.id], miss = !!p.sizes && !l.size, so = soldOut(l); return {
-      name: p.name, field: p.field, size: p.size, pos: p.pos, href: "LUMI-Pages.dc.html#/product/" + l.id, viewAria: "View " + p.name,
+      name: p.name, field: p.field, img: p.img, size: p.size, pos: p.pos, href: "LUMI-Pages.dc.html#/product/" + l.id, viewAria: "View " + p.name,
       total: money(p.price * l.qty), unit: money(p.price), qty: l.qty, qtyAria: "Quantity for " + p.name, sized: !!p.sizes,
       sizeVal: l.size || "", sizeAria: "Size for " + p.name, sizeBorder: miss || so ? "#8E4F4C" : "#C5B7AB", sizeBg: miss || so ? "#FBF1EF" : "#FDFCF8",
       warn: miss ? "Select a size to continue." : (so ? "Looks like this size just sold out. Pick another size or remove it." : ""),
@@ -438,13 +442,13 @@ class Component extends DCLogic {
       setSize: e => LC.setSize(i, e.target.value), inc: () => LC.setQty(i, l.qty + 1), dec: () => { if (l.qty > 1) LC.setQty(i, l.qty - 1); },
       remove: () => { const snap = { i, line: { id: l.id, size: l.size, qty: l.qty } }; LC.remove(i); clearTimeout(this.ut); this.setState({ undo: snap }); this.ut = setTimeout(() => this.setState({ undo: null }), 5000); } }; });
     const hasTank = items.some(l => cat[l.id].sizes), inCart = new Set(items.map(l => l.id));
-    const recIds = Object.keys(cat).filter(id => !inCart.has(id)).sort((a, b) => { const w = id => (!!cat[id].sizes === hasTank ? 1 : 0); return w(a) - w(b); }).slice(0, 3);
-    const recs = recIds.map(id => { const p = cat[id]; return { name: p.name, price: money(p.price), field: p.field, size: p.size, pos: p.pos, href: "LUMI-Pages.dc.html#/product/" + id, viewAria: "View " + p.name, cta: p.sizes ? "PICK SIZE +" : "QUICK ADD +",
+    const recIds = Object.keys(cat).filter(id => !inCart.has(id)).sort((a, b) => { const w = id => (!!cat[id].sizes === hasTank ? 1 : 0); return w(a) - w(b); }); const rt = s.recTab || "all", rn = s.recN || 6, pool = recIds.filter(id => rt === "all" ? true : rt === "brooch" ? cat[id].kind === "brooch" : rt === "charm" ? cat[id].kind === "charm" : !!cat[id].sizes), shown = pool.slice(0, rn);
+    const recs = shown.map(id => { const p = cat[id]; return { name: p.name, price: money(p.price), field: p.field, img: p.img, size: p.size, pos: p.pos, href: "LUMI-Pages.dc.html#/product/" + id, viewAria: "View " + p.name, cta: p.sizes ? "PICK SIZE +" : "QUICK ADD +",
       add: e => { const b = e.currentTarget; if (LC.requiresSize(id)) LC.requestSize({ id, anchor: b.getBoundingClientRect(), onDone: z => LC.add(id, { size: z }) }); else LC.add(id); } }; });
     const shipKnown = typeof SH.rate === "number", freeShip = shipKnown && SH.freeOver != null && sub - disc >= SH.freeOver;
     const ship = shipKnown ? (freeShip ? 0 : SH.rate) : 0, total = sub - disc + ship;
     Object.assign(out, {
-      empty: items.length === 0, hasItems: items.length > 0, count: LC.count(), lines, recs, emptyBeads: items.length ? null : this.beads(5, 0),
+      empty: items.length === 0, hasItems: items.length > 0, count: LC.count(), lines, recs, recTabs: [["all", "ALL"], ["brooch", "BROOCHES"], ["charm", "BAG CHARMS"], ["tank", "TANKS"]].map(([k, l]) => ({ label: l, on: rt === k, pressed: rt === k ? "true" : "false", bg: rt === k ? "#3F4633" : "#FDFCF8", ink: rt === k ? "#FDFCF8" : "#3F4633", pick: () => this.setState({ recTab: k, recN: 6 }) })), recHasMore: pool.length > rn, recMoreLabel: "+ " + Math.min(6, pool.length - rn) + " MORE DESIGNS", recMore: () => this.setState({ recN: rn + 6 }), recNone: pool.length === 0, emptyBeads: items.length ? null : this.beads(5, 0),
       subtotal: money(sub), discount: money(Q.couponSave), total: money(sub - disc), hasCoupon: !!cp, noCoupon: !cp, couponCode: cp ? cp.label : "",
       promoRows: Q.rows, promoRowsNoCoupon: Q.rows.filter(r => r.kind !== "coupon"), noPromo: Q.rows.length === 0,
       hasBundles: Q.bundles.length > 0, bundles: Q.bundles.map(b => Object.assign({}, b, { namesText: b.names.join(" + ") })), promoNudge: LC.nudge(),

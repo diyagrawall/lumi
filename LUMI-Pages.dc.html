@@ -79,7 +79,7 @@
         <sc-for list="{{ cItems }}" as="p" hint-placeholder-count="8">
           <article style="display: flex; flex-direction: column;">
             <a href="{{ p.href }}" aria-label="{{ p.name }}" style="position: relative; display: block; aspect-ratio: 4/5; overflow: hidden; background: {{ p.field }};">
-              <span style="position: absolute; inset: 0; background-image: url('assets/lumi-hero-campaign.png'); background-size: {{ p.size }}; background-position: {{ p.pos }}; background-repeat: no-repeat; transition: transform .8s cubic-bezier(.16,.8,.3,1);" style-hover="transform: scale(1.04);"></span>
+              <span style="position: absolute; inset: 0; background-image: url('{{ p.img }}'); background-size: {{ p.size }}; background-position: {{ p.pos }}; background-repeat: no-repeat; transition: transform .8s cubic-bezier(.16,.8,.3,1);" style-hover="transform: scale(1.04);"></span>
               <span style="position: absolute; left: 10px; top: 10px; background: #FDFCF8; padding: 5px 8px; font-size: 10px; font-weight: 700; letter-spacing: .14em;">{{ p.cat }}</span>
             </a>
             <div style="display: flex; justify-content: space-between; gap: 10px; margin-top: 10px;">
@@ -97,9 +97,10 @@
     <section aria-labelledby="p-title">
       <div data-pdp="" style="display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(20px, 4vw, 64px); align-items: start;">
         <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; min-width: 0;">
-          <div role="img" aria-label="{{ pName }}" style="grid-column: 1 / 3; aspect-ratio: 4/5; background-color: {{ pField }}; background-image: url('assets/lumi-hero-campaign.png'); background-size: {{ pSize }}; background-position: {{ pPos }}; background-repeat: no-repeat;"></div>
-          <div role="img" aria-label="{{ pAltLabel }}" style="aspect-ratio: 1; background-color: {{ pField }}; background-image: url('assets/lumi-hero-campaign.png'); background-size: {{ pSize2 }}; background-position: {{ pPos2 }}; background-repeat: no-repeat;"></div>
-          <div style="aspect-ratio: 1; min-width: 0; overflow: hidden;"><image-slot id="{{ pSlotId }}" shape="rect" placeholder="Product photo — flat lay" style="background: #F6F2EA;"></image-slot></div>
+          <div role="img" aria-label="{{ pName }}" style="grid-column: 1 / 3; aspect-ratio: 4/5; background-color: {{ pField }}; background-image: url('{{ pImg }}'); background-size: {{ pSize }}; background-position: {{ pPos }}; background-repeat: no-repeat;"></div>
+          <div role="img" aria-label="{{ pAltLabel }}" style="aspect-ratio: 1; background-color: {{ pField }}; background-image: url('{{ pImg2 }}'); background-size: {{ pSize2 }}; background-position: {{ pPos2 }}; background-repeat: no-repeat;"></div>
+          <sc-if value="{{ pHas3 }}" hint-placeholder-val="{{ false }}"><div role="img" aria-label="{{ pAlt3Label }}" style="aspect-ratio: 1; background-color: {{ pField }}; background-image: url('{{ pImg3 }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div></sc-if>
+          <sc-if value="{{ pNo3 }}" hint-placeholder-val="{{ false }}"><div style="aspect-ratio: 1; min-width: 0; overflow: hidden;"><image-slot id="{{ pSlotId }}" shape="rect" placeholder="Product photo — flat lay" style="background: #F6F2EA;"></image-slot></div></sc-if>
         </div>
         <div style="position: sticky; top: 92px; display: flex; flex-direction: column; gap: 14px;">
           <span style="font-size: 12px; font-weight: 700; letter-spacing: .18em; color: #6B7258;">{{ pCat }}</span>
@@ -125,11 +126,8 @@
             </div>
             <button onClick="{{ pAdd }}" aria-disabled="{{ pAddDis }}" style="flex: 1 1 200px; min-height: 53px; background: {{ pAddBg }}; color: {{ pAddInk }}; border: 0; cursor: {{ pAddCursor }}; font-size: 13px; font-weight: 700; letter-spacing: .14em;">{{ pAddLabel }}</button>
           </div>
-          <dl style="margin: 18px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 10px 18px; font-size: 14px; border-top: 1px solid #E8DDD4; padding-top: 18px;">
-            <dt style="font-weight: 700; letter-spacing: .1em; font-size: 12px;">MATERIALS</dt><dd style="margin: 0; color: #6B7258;">[Add materials]</dd>
-            <dt style="font-weight: 700; letter-spacing: .1em; font-size: 12px;">SIZE GUIDE</dt><dd style="margin: 0; color: #6B7258;">[Add size guide / dimensions]</dd>
-            <dt style="font-weight: 700; letter-spacing: .1em; font-size: 12px;">CARE</dt><dd style="margin: 0; color: #6B7258;">[Add care instructions]</dd>
-            <dt style="font-weight: 700; letter-spacing: .1em; font-size: 12px;">HANDMADE</dt><dd style="margin: 0; color: #6B7258;">Each piece is beaded by hand, so small variations are part of it.</dd>
+          <dl style="margin: 18px 0 0; display: grid; grid-template-columns: minmax(0, 110px) minmax(0, 1fr); gap: 14px 18px; font-size: 14px; line-height: 1.55; border-top: 1px solid #E8DDD4; padding-top: 18px;">
+            <sc-for list="{{ pSpecs }}" as="sp" hint-placeholder-count="4"><dt style="font-weight: 700; letter-spacing: .1em; font-size: 12px; padding-top: 2px;">{{ sp.k }}</dt><dd style="margin: 0; color: #3F4633;">{{ sp.v }}<sc-if value="{{ sp.hasList }}" hint-placeholder-val="{{ false }}"><ul style="margin: 6px 0 0; padding-left: 18px; display: grid; gap: 4px;"><sc-for list="{{ sp.list }}" as="li" hint-placeholder-count="4"><li>{{ li.t }}</li></sc-for></ul></sc-if></dd></sc-for>
           </dl>
           <p style="margin: 6px 0 0; font-size: 14px;"><a href="#/shipping">Shipping &amp; delivery</a> · <a href="#/returns">Returns &amp; refunds</a></p>
         </div>
@@ -138,7 +136,7 @@
       <div data-cgrid="" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px;">
         <sc-for list="{{ related }}" as="p" hint-placeholder-count="3">
           <a href="{{ p.href }}" style="display: flex; flex-direction: column; gap: 8px; text-decoration: none;">
-            <span style="display: block; aspect-ratio: 4/5; background-color: {{ p.field }}; background-image: url('assets/lumi-hero-campaign.png'); background-size: {{ p.size }}; background-position: {{ p.pos }}; background-repeat: no-repeat;"></span>
+            <span style="display: block; aspect-ratio: 4/5; background-color: {{ p.field }}; background-image: url('{{ p.img }}'); background-size: {{ p.size }}; background-position: {{ p.pos }}; background-repeat: no-repeat;"></span>
             <span style="display: flex; justify-content: space-between; gap: 8px; font-size: 13px; font-weight: 700; letter-spacing: .06em;"><span>{{ p.name }}</span><span style="display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 3px 7px;"><s style="font-size: .84em; font-weight: 400; opacity: .72;">{{ p.priceMrp }}</s><span style="font-weight: 400;">{{ p.price }}</span><span style="font-size: .7em; font-weight: 700; letter-spacing: .08em; line-height: 1; padding: 3px 5px; background: #EFCFCB; color: #3F4633; align-self: center;">{{ p.priceOff }}</span></span></span>
           </a>
         </sc-for>
@@ -288,15 +286,11 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 const P = [
-  { slug: "pink-popcorn-tank", c: "tank-tops", cat: "TANK TOP", name: "PINK POPCORN TANK", line: "Not your basic tank.", price: 899, field: "#EFCFCB", size: "278% auto", pos: "53% 10%", size2: "520% auto", pos2: "52% 56%" },
-  { slug: "white-cocktail-tank", c: "tank-tops", cat: "TANK TOP", name: "WHITE COCKTAIL TANK", line: "Just add plans.", price: 899, field: "#E8DDD4", size: "278% auto", pos: "22% 10%", size2: "900% auto", pos2: "26.8% 61%" },
-  { slug: "black-fries-tank", c: "tank-tops", cat: "TANK TOP", name: "BLACK FRIES TANK", line: "For outfits with appetite.", price: 899, field: "#1B1F16", size: "278% auto", pos: "90.6% 10%", size2: "700% auto", pos2: "80.4% 70%" },
-  { slug: "popcorn-brooch", c: "brooches", cat: "BROOCH", name: "POPCORN BROOCH", line: "Small detail. Big energy.", price: 269, field: "#E7E9DE", size: "1000% auto", pos: "51.4% 59%", size2: "1400% auto", pos2: "51.4% 59%" },
-  { slug: "fries-brooch", c: "brooches", cat: "BROOCH", name: "FRIES BROOCH", line: "Side of fries, anyone?", price: 269, field: "#F6F2EA", size: "1200% auto", pos: "78.5% 67%", size2: "1600% auto", pos2: "78.5% 67%" },
-  { slug: "cocktail-brooch", c: "brooches", cat: "BROOCH", name: "COCKTAIL BROOCH", line: "Cheers to your jacket.", price: 269, field: "#F6E4E1", size: "1200% auto", pos: "26.7% 61%", size2: "1600% auto", pos2: "26.7% 61%" },
-  { slug: "heart-charm", c: "bag-charms", cat: "BAG CHARM", name: "HEART CHARM", line: "Your bag, but better.", price: 289, field: "#E7E9DE", size: "1000% auto", pos: "87.5% 70%", size2: "480% auto", pos2: "91% 78%" },
-  { slug: "cherry-charm", c: "bag-charms", cat: "BAG CHARM", name: "CHERRY CHARM", line: "Clip it. Swing it.", price: 289, field: "#F6F2EA", size: "1500% auto", pos: "20.3% 67.5%", size2: "600% auto", pos2: "16.7% 74.5%" }
+  { slug: "pink-popcorn-tank", img: "assets/lumi-hero-campaign.png", img2: "assets/lumi-hero-campaign.png", c: "tank-tops", cat: "TANK TOP", name: "PINK POPCORN TANK", line: "Not your basic tank.", price: 899, field: "#EFCFCB", size: "278% auto", pos: "53% 10%", size2: "520% auto", pos2: "52% 56%" },
+  { slug: "white-cocktail-tank", img: "assets/lumi-hero-campaign.png", img2: "assets/lumi-hero-campaign.png", c: "tank-tops", cat: "TANK TOP", name: "WHITE COCKTAIL TANK", line: "Just add plans.", price: 899, field: "#E8DDD4", size: "278% auto", pos: "22% 10%", size2: "900% auto", pos2: "26.8% 61%" },
+  { slug: "black-fries-tank", img: "assets/lumi-hero-campaign.png", img2: "assets/lumi-hero-campaign.png", c: "tank-tops", cat: "TANK TOP", name: "BLACK FRIES TANK", line: "For outfits with appetite.", price: 899, field: "#1B1F16", size: "278% auto", pos: "90.6% 10%", size2: "700% auto", pos2: "80.4% 70%" },
 ];
+P.push(...((window.LumiCart && window.LumiCart.products) || []));
 const COLL = {
   shop: { t: "ALL PRODUCTS", b: "Tanks, brooches and bag charms — every piece beaded by hand." },
   "tank-tops": { t: "TANK TOPS", b: "Beaded tanks for outfits that need a little extra." },
@@ -338,7 +332,7 @@ class Component extends DCLogic {
     this.setState(s => ({ added: Object.assign({}, s.added, { [p.slug]: true }) }));
     setTimeout(() => this.setState(s => { const a = Object.assign({}, s.added); delete a[p.slug]; return { added: a }; }), 1800);
   }
-  card(p) { const a = !!this.state.added[p.slug]; return { name: p.name, cat: p.cat, price: money(p.price), field: p.field, size: p.size, pos: p.pos, href: "#/product/" + p.slug, btn: a ? "IN THE BAG." : "ADD TO BAG +", btnBg: a ? "#6B7258" : "transparent", btnInk: a ? "#FDFCF8" : "#3F4633", add: e => this.quick(p, e.currentTarget) }; }
+  card(p) { const a = !!this.state.added[p.slug]; return { name: p.name, cat: p.cat, price: money(p.price), field: p.field, img: p.img, size: p.size, pos: p.pos, href: "#/product/" + p.slug, btn: a ? "IN THE BAG." : "ADD TO BAG +", btnBg: a ? "#6B7258" : "transparent", btnInk: a ? "#FDFCF8" : "#3F4633", add: e => this.quick(p, e.currentTarget) }; }
   renderVals() { const v = this.baseVals(); return window.LumiCart && window.LumiCart.decorate ? window.LumiCart.decorate(v) : v; }
   baseVals() {
     const s = this.state, r = s.r === "our-story" ? "about" : s.r;
@@ -367,8 +361,8 @@ class Component extends DCLogic {
       cItems: P.filter(p => r === "shop" || p.c === r).map(p => this.card(p))
     });
     if (prod) { const a = !!s.added[prod.slug], cfg = (window.LumiCart && window.LumiCart.catalog[prod.slug]) || {}, needs = !!cfg.sizes, blocked = needs && !s.size; Object.assign(out, {
-      pName: prod.name, pCat: prod.cat, pLine: prod.line, pPrice: money(prod.price), pField: prod.field, pSize: prod.size, pPos: prod.pos, pSize2: prod.size2, pPos2: prod.pos2,
-      pAltLabel: prod.name + " — detail", pSlotId: "pdp-" + prod.slug, qty: s.qty,
+      pName: prod.name, pCat: prod.cat, pLine: prod.line, pPrice: money(prod.price), pField: prod.field, pImg: prod.img, pImg2: prod.img2, pSize: prod.size, pPos: prod.pos, pSize2: prod.size2, pPos2: prod.pos2,
+      pSpecs: (() => { const SP = {"brooch":{"m":"Hand-beaded detailing, decorative beads, embroidery thread and a secure pin-back fastening. Materials may vary by design.","s":"Each brooch is individually sized according to its design. Please refer to the product dimensions for exact measurements.","c":["Handle gently and avoid pulling the beads or threads.","Keep away from water, perfumes and chemicals.","Store in a dry place, preferably in its original packaging.","Avoid folding or pressing the brooch."]},"charm":{"m":"Hand-beaded detailing, decorative beads, embroidery thread and gold-tone metal keychain hardware. Materials may vary by design.","s":"Each charm has a unique shape and size, with a metal clasp for easy attachment to bags. Please refer to the product dimensions for exact measurements.","c":["Avoid excessive pulling or twisting of the charm.","Keep away from water, perfumes and moisture.","Wipe the metal hardware gently with a soft, dry cloth.","Store separately to prevent tangling or damage to the beadwork."]},"tank":{"m":"Fabric base with hand-beaded detailing, decorative beads and embroidery thread. Fabric composition may vary by style.","s":"Available in the sizes listed on the product page. Please refer to the size chart for garment measurements and fit guidance.","c":["Hand wash gently in cold water, inside out.","Avoid scrubbing, wringing or soaking.","Use mild detergent and do not bleach.","Do not tumble dry or iron directly over the beadwork.","Lay flat to dry and store carefully to protect the embellishments."]}}[/tank$/.test(prod.slug) ? "tank" : prod.cat === "BROOCH" ? "brooch" : "charm"] || {}; return [{ k: "MATERIALS", v: SP.m }, { k: "SIZE GUIDE", v: SP.s }, { k: "CARE", v: "", list: (SP.c || []).map(t => ({ t })) }, { k: "HANDMADE", v: "Each piece is beaded by hand, so small variations are part of it." }].map(r => Object.assign({ hasList: !!r.list, list: [] }, r)); })(), pHas3: !/tank$/.test(prod.slug) && !!prod.img3, pNo3: !(!/tank$/.test(prod.slug) && !!prod.img3), pImg3: prod.img3 || "", pAlt3Label: prod.name + " — back and close-up", pAltLabel: prod.name + " — detail", pSlotId: "pdp-" + prod.slug, qty: s.qty,
       qDec: () => this.setState(st => ({ qty: Math.max(1, st.qty - 1) })), qInc: () => this.setState(st => ({ qty: st.qty + 1 })),
       pHasSizes: !!needs, pSizeNote: needs && s.size ? "— " + s.size + " selected" : "",
       pSizes: (needs ? cfg.sizes : []).map(z => { const so = (cfg.soldOut || []).includes(z), on = s.size === z; return { text: on ? "✓ " + z : z, on, out: so, aria: z + (so ? ", sold out" : ""), border: on ? "#3F4633" : (so ? "#E8DDD4" : "#C5B7AB"), bg: on ? "#3F4633" : "transparent", ink: on ? "#FDFCF8" : (so ? "#A9AE96" : "#3F4633"), cursor: so ? "not-allowed" : "pointer", strike: so ? "line-through" : "none", pick: () => { if (!so) this.setState({ size: z }); } }; }),
