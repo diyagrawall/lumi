@@ -4,15 +4,38 @@
   var IMG = "assets/lumi-hero-campaign.png";
   var TANK_SIZES = ["XS", "S", "M", "L", "XL"];
   var catalog = {
-    "pink-popcorn-tank": { name: "PINK POPCORN TANK", mrp: 1199, kind: "tank", price: 899, sizes: TANK_SIZES, soldOut: [], field: "#EFCFCB", size: "278% auto", pos: "53% 10%" },
-    "white-cocktail-tank": { name: "WHITE COCKTAIL TANK", mrp: 1199, kind: "tank", price: 899, sizes: TANK_SIZES, soldOut: [], field: "#E8DDD4", size: "278% auto", pos: "22% 10%" },
-    "black-fries-tank": { name: "BLACK FRIES TANK", mrp: 1199, kind: "tank", price: 899, sizes: TANK_SIZES, soldOut: [], field: "#1B1F16", size: "278% auto", pos: "90.6% 10%" },
-    "popcorn-brooch": { name: "POPCORN BROOCH", mrp: 329, kind: "acc", price: 269, sizes: null, field: "#E7E9DE", size: "1000% auto", pos: "51.4% 59%" },
-    "fries-brooch": { name: "FRIES BROOCH", mrp: 329, kind: "acc", price: 269, sizes: null, field: "#F6F2EA", size: "1200% auto", pos: "78.5% 67%" },
-    "cocktail-brooch": { name: "COCKTAIL BROOCH", mrp: 329, kind: "acc", price: 269, sizes: null, field: "#F6E4E1", size: "1200% auto", pos: "26.7% 61%" },
-    "heart-charm": { name: "HEART CHARM", mrp: 359, kind: "acc", price: 289, sizes: null, field: "#E7E9DE", size: "1000% auto", pos: "87.5% 70%" },
-    "cherry-charm": { name: "CHERRY CHARM", mrp: 359, kind: "acc", price: 289, sizes: null, field: "#F6F2EA", size: "1500% auto", pos: "20.3% 67.5%" }
+    "pink-popcorn-tank": { name: "PINK POPCORN TANK", mrp: 1199, kind: "tank", price: 899, sizes: TANK_SIZES, soldOut: [], img: IMG, field: "#EFCFCB", size: "278% auto", pos: "53% 10%" },
+    "white-cocktail-tank": { name: "WHITE COCKTAIL TANK", mrp: 1199, kind: "tank", price: 899, sizes: TANK_SIZES, soldOut: [], img: IMG, field: "#E8DDD4", size: "278% auto", pos: "22% 10%" },
+    "black-fries-tank": { name: "BLACK FRIES TANK", mrp: 1199, kind: "tank", price: 899, sizes: TANK_SIZES, soldOut: [], img: IMG, field: "#1B1F16", size: "278% auto", pos: "90.6% 10%" }
   };
+  var ACC = [
+    ["strawberry", "STRAWBERRY", "Sweet on your jacket.", "Berry good bag energy.", "#F6E4E1"],
+    ["apple", "BLUE APPLE", "An apple a day, but blue.", "Hang it. Swing it.", "#E7E9DE"],
+    ["mushroom", "MUSHROOM", "Tiny toadstool, big mood.", "Your bag's lucky charm.", "#F6F2EA"],
+    ["coconut", "COCONUT", "Sip, sip, hooray.", "Vacation, clipped on.", "#E7E9DE"],
+    ["avocado", "AVOCADO", "Avo-cado you a favour.", "Guac your bag.", "#F6F2EA"],
+    ["cola", "COLA BOTTLE", "Fizzy little detail.", "Pop it on your bag.", "#EFCFCB"],
+    ["basketball", "BASKETBALL", "Game on, on your jacket.", "Slam dunk your bag.", "#F6E4E1"],
+    ["palm", "PALM TREE", "Beach mode, always.", "Island time, clipped on.", "#E8DDD4"],
+    ["dolphin", "DOLPHIN", "Make a splash.", "Swim along with you.", "#EFCFCB"],
+    ["owl", "OWL", "Wise choice.", "Night owl approved.", "#F6E4E1"],
+    ["pineapple", "PINEAPPLE", "Stand tall, be sweet.", "Tropical on the go.", "#F6F2EA"],
+    ["sailboat", "SAILBOAT", "Set sail in style.", "Anchors aweigh.", "#EFCFCB"],
+    ["watermelon", "WATERMELON", "One in a melon.", "Juicy on your bag.", "#F6E4E1"],
+    ["butterfly", "BUTTERFLY", "Flutter by.", "A bag with wings.", "#EFCFCB"],
+    ["bow", "BOW", "Tie it all together.", "Pretty in a bow.", "#F6E4E1"],
+    ["camera", "CAMERA", "Say cheese.", "Always ready to snap.", "#EFCFCB"],
+    ["teddy", "TEDDY BEAR", "Bear with us.", "Your beary cute bag buddy.", "#F6E4E1"],
+    ["perfume", "PERFUME BOTTLE", "Notes of you.", "A spritz of personality.", "#EFCFCB"]
+  ];
+  var products = [];
+  ACC.forEach(function (a) {
+    [["brooch", "BROOCH", 329, 269, "brooches", a[2]], ["charm", "CHARM", 359, 289, "bag-charms", a[3]]].forEach(function (t) {
+      var id = a[0] + "-" + t[0], img = "assets/sku/" + id + ".jpg";
+      catalog[id] = { name: a[1] + " " + t[1], mrp: t[2], kind: "acc", price: t[3], sizes: null, field: a[4], size: "cover", pos: "center", img: img, alt: "assets/sku/" + id + "-alt.jpg", alt2: "assets/sku/" + id + "-alt2.jpg", line: t[5], group: t[0] };
+      products.push({ slug: id, c: t[4], cat: t[0] === "brooch" ? "BROOCH" : "BAG CHARM", name: catalog[id].name, line: t[5], price: t[3], field: a[4], size: "cover", pos: "center", img: img, size2: "cover", pos2: "center", img2: catalog[id].alt, img3: catalog[id].alt2 });
+    });
+  });
   var items = [];
   try { items = JSON.parse(localStorage.getItem(KEY) || "[]").filter(function (l) { return catalog[l.id] && l.qty > 0; }); } catch (e) { items = []; }
   var subs = [];
@@ -109,6 +132,8 @@
     soldOutLine: function (l) { var p = catalog[l.id]; return !!(p.sizes && l.size && (p.soldOut || []).indexOf(l.size) >= 0); },
     insert: function (i, l) { if (!l || !catalog[l.id]) return; items.splice(Math.min(i, items.length), 0, { id: l.id, size: l.size || null, qty: l.qty || 1 }); merge(); emit(); },
     catalog: catalog,
+    products: products,
+    acc: ACC.map(function (a) { return { key: a[0], name: a[1], brooch: a[0] + "-brooch", charm: a[0] + "-charm" }; }),
     requiresSize: function (id) { return !!(catalog[id] && catalog[id].sizes); },
     items: function () { return items.map(function (l) { return { id: l.id, size: l.size, qty: l.qty }; }); },
     count: function () { return items.reduce(function (a, l) { return a + l.qty; }, 0); },
@@ -165,6 +190,20 @@
       throw new Error((c && c.userErrors[0] && c.userErrors[0].message) || "Checkout unavailable");
     }).catch(function (e) { busy = false; console.error(e); LC.toast("CHECKOUT ISN'T AVAILABLE RIGHT NOW. " + (e.message || "")); });
   };
+  // Pull product photos from Shopify (brooches & charms). Falls back to local photos if a product isn't found.
+  gql("{products(first:100){nodes{handle title images(first:3){nodes{url}}}}}").then(function (res) {
+    var nodes = (res.data && res.data.products.nodes) || [], hit = 0;
+    nodes.forEach(function (sp) {
+      var n = norm(sp.title), id = Object.keys(catalog).filter(function (k) { return catalog[k].kind === "acc" && (k === sp.handle || norm(catalog[k].name) === n); })[0];
+      var im = sp.images.nodes.map(function (x) { return x.url; });
+      if (!id || !im.length) return;
+      var c = catalog[id], p = products.filter(function (x) { return x.slug === id; })[0];
+      c.img = im[0]; if (im[1]) c.alt = im[1]; if (im[2]) c.alt2 = im[2];
+      if (p) { p.img = c.img; if (im[1]) p.img2 = im[1]; if (im[2]) p.img3 = im[2]; }
+      hit++;
+    });
+    if (hit) window.dispatchEvent(new CustomEvent("lumi:change"));
+  }).catch(function () {});
   function route() { if (/LUMI-Checkout/.test(location.pathname) && /^#\/checkout/.test(location.hash)) window.LumiCart.shopifyCheckout(); }
   window.addEventListener("hashchange", route); window.addEventListener("DOMContentLoaded", route);
 })();
