@@ -189,7 +189,7 @@ class Component extends DCLogic {
     const base = { headOp: inV ? "1" : "0", headT: inV ? "none" : "translateY(16px)" };
     if (!LC || !LC.promos) return Object.assign(base, { tabs: [], mods: [] });
     const cat = LC.catalog, PR = LC.promos, f = n => "₹" + Math.round(n).toLocaleString("en-IN");
-    const TANKS = ["pink-popcorn-tank", "white-cocktail-tank", "black-fries-tank"], ACC = LC.acc.flatMap(a => [a.brooch, a.charm]).filter(id => cat[id]);
+    const TANKS = Object.keys(cat).filter(id => cat[id].kind === "tank"), ACC = LC.acc.flatMap(a => [a.brooch, a.charm]).filter(id => cat[id]);
     const short = id => (cat[id] ? cat[id].name : "").replace(" TANK", "").replace(" BROOCH", " BROOCH").replace(" CHARM", " CHARM");
     const SPEC = [
       { p: PR.tank3, kicker: "BUNDLE 01", title: "3 TANKS", blurb: "Pick any 3 tanks. Mix it up — repeats welcome.", need: { tank: 3, acc: 0 }, groups: [["PICK 3 TANKS", "tank", TANKS]], bg: "#EFCFCB", ink: "#3F4633", sub: "#6B7258", rule: "rgba(63,70,51,.25)", cta: "#3F4633", ctaInk: "#FDFCF8", stack: TANKS, done: "3 TANK BUNDLE IN THE BAG." },

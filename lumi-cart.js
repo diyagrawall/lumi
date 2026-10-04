@@ -1,13 +1,27 @@
 (function () {
   if (window.LumiCart) return;
   var KEY = "lumi-cart-v1";
-  var IMG = "assets/lumi-hero-campaign.png";
+  var IMG = "";
   var TANK_SIZES = ["XS", "S", "M", "L", "XL"];
   var catalog = {
-    "pink-popcorn-tank": { name: "PINK POPCORN TANK", mrp: 1199, kind: "tank", price: 899, sizes: TANK_SIZES, soldOut: [], img: IMG, field: "#EFCFCB", size: "278% auto", pos: "53% 10%" },
-    "white-cocktail-tank": { name: "WHITE COCKTAIL TANK", mrp: 1199, kind: "tank", price: 899, sizes: TANK_SIZES, soldOut: [], img: IMG, field: "#E8DDD4", size: "278% auto", pos: "22% 10%" },
-    "black-fries-tank": { name: "BLACK FRIES TANK", mrp: 1199, kind: "tank", price: 899, sizes: TANK_SIZES, soldOut: [], img: IMG, field: "#1B1F16", size: "278% auto", pos: "90.6% 10%" }
+    "pink-popcorn-tank": { name: "PINK POPCORN TANK", mrp: 1199, kind: "tank", price: 899, sizes: TANK_SIZES, soldOut: [], img: IMG, field: "#EFCFCB", size: "cover", pos: "center 20%" },
+    "white-cocktail-tank": { name: "WHITE COCKTAIL TANK", mrp: 1199, kind: "tank", price: 899, sizes: TANK_SIZES, soldOut: [], img: IMG, field: "#E8DDD4", size: "cover", pos: "center 20%" },
+    "black-fries-tank": { name: "BLACK FRIES TANK", mrp: 1199, kind: "tank", price: 899, sizes: TANK_SIZES, soldOut: [], img: IMG, field: "#1B1F16", size: "cover", pos: "center 20%" }
   };
+  // Six more tank designs. Their photos come from Shopify (matched by product name).
+  var NEWTANKS = [
+    ["pink-flamingo-tank", "PINK FLAMINGO TANK", "Stand out, stand tall.", "#EFCFCB"],
+    ["pink-seashell-tank", "PINK SEASHELL TANK", "Pearls from the shore.", "#EFCFCB"],
+    ["black-dragonfly-tank", "BLACK DRAGONFLY TANK", "Dark base, bright wings.", "#1B1F16"],
+    ["black-beer-tank", "BLACK BEER TANK", "Cheers to the little things.", "#1B1F16"],
+    ["white-jellyfish-tank", "WHITE JELLYFISH TANK", "Drift in, stand out.", "#E8DDD4"],
+    ["white-ace-tank", "WHITE ACE TANK", "An ace up your sleeve.", "#E8DDD4"]
+  ];
+  var tankProducts = [];
+  NEWTANKS.forEach(function (t) {
+    catalog[t[0]] = { name: t[1], mrp: 1199, kind: "tank", price: 899, sizes: TANK_SIZES, soldOut: [], img: "", alt: "", alt2: "", field: t[3], size: "cover", pos: "center 20%", line: t[2], fresh: true };
+    tankProducts.push({ slug: t[0], c: "tank-tops", cat: "TANK TOP", name: t[1], line: t[2], price: 899, field: t[3], size: "cover", pos: "center 20%", img: "", size2: "cover", pos2: "center", img2: "", img3: "" });
+  });
   var ACC = [
     ["strawberry", "STRAWBERRY", "Sweet on your jacket.", "Berry good bag energy.", "#F6E4E1"],
     ["apple", "BLUE APPLE", "An apple a day, but blue.", "Hang it. Swing it.", "#E7E9DE"],
@@ -36,6 +50,7 @@
       products.push({ slug: id, c: t[4], cat: t[0] === "brooch" ? "BROOCH" : "BAG CHARM", name: catalog[id].name, line: t[5], price: t[3], field: a[4], size: "cover", pos: "center", img: "", size2: "cover", pos2: "center", img2: "", img3: "" });
     });
   });
+  tankProducts.forEach(function (p) { products.push(p); });
   var items = [];
   try { items = JSON.parse(localStorage.getItem(KEY) || "[]").filter(function (l) { return catalog[l.id] && l.qty > 0; }); } catch (e) { items = []; }
   var subs = [];
@@ -198,7 +213,15 @@
       nodes.forEach(function (sp) {
         var sq = function (s) { return String(s || "").toLowerCase().replace(/\b(bag|the|beaded)\b/g, "").replace(/[^a-z0-9]+/g, ""); }, n = sq(sp.title), id = Object.keys(catalog).filter(function (k) { return k === sp.handle || sq(catalog[k].name) === n; })[0];
         var im = sp.images.nodes.map(function (x) { return x.url; });
-        if (!id || !im.length || catalog[id].kind !== "acc" || catalog[id].img) return;
+        if (!id || !im.length) return;
+        if (catalog[id].kind === "tank") {
+          var tc = catalog[id], tp = products.filter(function (x) { return x.slug === id; })[0];
+          if (!tp) { tp = { slug: id, c: "tank-tops", cat: "TANK TOP", name: tc.name, line: tc.line || "", price: tc.price, field: tc.field }; products.push(tp); }
+          tc.img = im[0]; tc.alt = im[1] || im[0]; tc.alt2 = im[2] || im[1] || im[0]; tc.size = "cover"; tc.pos = "center 20%";
+          Object.assign(tp, { img: tc.img, img2: tc.alt, img3: tc.alt2, size: "cover", pos: "center 20%", size2: "cover", pos2: "center" });
+          hit++; return;
+        }
+        if (catalog[id].kind !== "acc" || catalog[id].img) return;
         var c = catalog[id], p = products.filter(function (x) { return x.slug === id; })[0];
         c.img = im[0]; c.alt = im[1] || im[0]; c.alt2 = im[2] || im[1] || im[0];
         if (p) { p.img = c.img; p.img2 = c.alt; p.img3 = c.alt2; }

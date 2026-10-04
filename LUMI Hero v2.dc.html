@@ -177,8 +177,8 @@
   </div>
 
   <div data-mtiles="" style="display: none; position: absolute; z-index: 2; left: 12px; top: 34%; flex-direction: column; gap: 10px;">
-    <a href="LUMI-Pages.dc.html#/product/white-cocktail-tank" aria-label="White Cocktail Tank" style="display: block; width: 23vw; max-width: 100px; aspect-ratio: 3 / 4; border: 3px solid #FDFCF8; box-shadow: 0 12px 28px rgba(22,24,18,.35); background-color: #E8DDD4; background-image: url('assets/lumi-hero-campaign.png'); background-repeat: no-repeat; background-size: 430% auto; background-position: 21% 34%; transform: rotate(-3deg);"></a>
-    <a href="LUMI-Pages.dc.html#/product/black-fries-tank" aria-label="Black Fries Tank" style="display: block; width: 23vw; max-width: 100px; aspect-ratio: 3 / 4; margin-left: 10px; border: 3px solid #FDFCF8; box-shadow: 0 12px 28px rgba(22,24,18,.35); background-color: #1B1F16; background-image: url('assets/lumi-hero-campaign.png'); background-repeat: no-repeat; background-size: 430% auto; background-position: 89% 34%; transform: rotate(2.5deg);"></a>
+    <a href="LUMI-Pages.dc.html#/product/white-cocktail-tank" aria-label="White Cocktail Tank" style="display: block; width: 23vw; max-width: 100px; aspect-ratio: 3 / 4; border: 3px solid #FDFCF8; box-shadow: 0 12px 28px rgba(22,24,18,.35); background-color: #E8DDD4;  transform: rotate(-3deg);overflow: hidden;"><img data-lsku="white-cocktail-tank" alt="" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 20%;" /></a>
+    <a href="LUMI-Pages.dc.html#/product/black-fries-tank" aria-label="Black Fries Tank" style="display: block; width: 23vw; max-width: 100px; aspect-ratio: 3 / 4; margin-left: 10px; border: 3px solid #FDFCF8; box-shadow: 0 12px 28px rgba(22,24,18,.35); background-color: #1B1F16;  transform: rotate(2.5deg);overflow: hidden;"><img data-lsku="black-fries-tank" alt="" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 20%;" /></a>
   </div>
   <div data-mgrad="" aria-hidden="true" style="display: none; position: absolute; z-index: 4; left: 0; right: 0; bottom: 0; height: 58%; pointer-events: none; background: linear-gradient(180deg, rgba(30,34,24,0) 0%, rgba(30,34,24,.38) 38%, rgba(30,34,24,.78) 100%);"></div>
   <canvas data-lumi="far" aria-hidden="true" style="position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; pointer-events: none;"></canvas>
@@ -246,22 +246,22 @@
   <div data-cats="" onPointerLeave="{{ catsLeave }}" style="position: relative; z-index: 1; display: flex; gap: clamp(8px, .9vw, 14px); height: clamp(560px, 80vh, 840px);">
 
     <article data-cat="wear" data-open="{{ openWear }}" aria-expanded="{{ ariaOpenWear }}" onPointerEnter="{{ enterWear }}" onFocus="{{ focusWear }}" onClick="{{ tapWear }}" style="position: relative; container-type: inline-size; flex: {{ flexWear }}; min-width: 0; overflow: hidden; background: #EFCFCB; color: #3F4633; opacity: {{ s2PanOp }}; transform: {{ s2PanT }}; transition: flex 1s cubic-bezier(.16,.8,.3,1), opacity .9s .45s ease, transform .9s .45s cubic-bezier(.16,.8,.3,1);">
-      <div data-mcover="" role="img" aria-label="Friends wearing the LUMI beaded tanks" style="display: none; position: absolute; inset: 0; z-index: 1; background-color: #EFCFCB; background-image: linear-gradient(180deg, rgba(22,24,18,.42) 0%, rgba(22,24,18,.08) 40%, rgba(22,24,18,.62) 100%), url('assets/lumi-hero-campaign.png'); background-repeat: no-repeat; background-size: 100% 100%, 300% auto; background-position: 0 0, 53% 28%; transition: opacity .5s ease; pointer-events: none;"></div>
+      <div data-mcover="" role="img" aria-label="Friends wearing the LUMI beaded tanks" style="display: none; position: absolute; inset: 0; z-index: 1; background-color: #EFCFCB; background-image: linear-gradient(180deg, rgba(22,24,18,.42) 0%, rgba(22,24,18,.08) 40%, rgba(22,24,18,.62) 100%); background-repeat: no-repeat; background-size: 100% 100%; background-position: 0 0; transition: opacity .5s ease; pointer-events: none;"></div>
       <div style="position: absolute; z-index: 4; left: 22px; right: 22px; top: 20px;">
         <span style="display: block; font-size: 12px; font-weight: 700; letter-spacing: .16em; line-height: 1.35;">01 · BEADED TANKS</span>
         <h3 style="margin: 8px 0 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(26px, 14cqw, 58px); line-height: .95; letter-spacing: -0.015em; white-space: nowrap;">WEAR IT</h3>
       </div>
       <div data-stage="wear" style="position: absolute; left: 22px; right: 22px; top: 136px; bottom: 150px;">
           <a href="LUMI-Pages.dc.html#/product/white-cocktail-tank" data-prod="ct" data-wf="l" onPointerEnter="{{ pr.ct.on }}" onPointerLeave="{{ pr.ct.off }}" onFocus="{{ pr.ct.on }}" onBlur="{{ pr.ct.off }}" aria-label="The Cocktail Tank, ₹899" style="position: absolute; top: 7%; bottom: 5%; left: {{ wf.l.l }}; width: {{ wf.l.w }}; opacity: {{ wf.l.op }}; transform: {{ wf.l.t }}; z-index: {{ wf.l.z }}; overflow: hidden; background: #E8DDD4; box-shadow: 0 26px 54px rgba(63,70,51,0.22); transition: left 1s cubic-bezier(.16,.8,.3,1), width 1s cubic-bezier(.16,.8,.3,1), opacity .7s ease, transform 1s cubic-bezier(.16,.8,.3,1);">
-            <img src="assets/lumi-hero-campaign.png" alt="" loading="lazy" style="position: absolute; left: 50%; top: 50%; height: 190%; width: auto; max-width: none; transform-origin: 30% 47%; transform: {{ pr.ct.zoom }}; transition: transform 1.2s cubic-bezier(.16,.8,.3,1);" />
+            <img data-lsku="white-cocktail-tank" alt="" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; transform: {{ pr.ct.zoom2 }}; transition: transform 1.2s cubic-bezier(.16,.8,.3,1);" />
             <span style="position: absolute; left: 10px; right: 10px; bottom: 10px; display: flex; flex-direction: column; align-items: flex-start; gap: 3px; background: #FDFCF8; color: #3F4633; padding: 9px 10px; font-size: 11px; line-height: 1.3; font-weight: 700; letter-spacing: .06em; white-space: normal; opacity: {{ pr.ct.cap }}; transform: {{ pr.ct.capT }}; transition: opacity .35s ease, transform .35s ease; pointer-events: none;"><span>THE COCKTAIL TANK</span><span style="font-weight: 500;">₹899 · VIEW →</span></span>
           </a>
           <a href="LUMI-Pages.dc.html#/product/black-fries-tank" data-prod="ft" data-wf="r" onPointerEnter="{{ pr.ft.on }}" onPointerLeave="{{ pr.ft.off }}" onFocus="{{ pr.ft.on }}" onBlur="{{ pr.ft.off }}" aria-label="The Fries Tank, ₹899" style="position: absolute; top: 11%; bottom: 2%; left: {{ wf.r.l }}; width: {{ wf.r.w }}; opacity: {{ wf.r.op }}; transform: {{ wf.r.t }}; z-index: {{ wf.r.z }}; overflow: hidden; background: #E8DDD4; box-shadow: 0 26px 54px rgba(63,70,51,0.22); transition: left 1s cubic-bezier(.16,.8,.3,1), width 1s cubic-bezier(.16,.8,.3,1), opacity .7s ease, transform 1s cubic-bezier(.16,.8,.3,1);">
-            <img src="assets/lumi-hero-campaign.png" alt="" loading="lazy" style="position: absolute; left: 50%; top: 50%; height: 190%; width: auto; max-width: none; transform-origin: 75.4% 49%; transform: {{ pr.ft.zoom }}; transition: transform 1.2s cubic-bezier(.16,.8,.3,1);" />
+            <img data-lsku="black-fries-tank" alt="" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; transform: {{ pr.ft.zoom2 }}; transition: transform 1.2s cubic-bezier(.16,.8,.3,1);" />
             <span style="position: absolute; left: 10px; right: 10px; bottom: 10px; display: flex; flex-direction: column; align-items: flex-start; gap: 3px; background: #FDFCF8; color: #3F4633; padding: 9px 10px; font-size: 11px; line-height: 1.3; font-weight: 700; letter-spacing: .06em; white-space: normal; opacity: {{ pr.ft.cap }}; transform: {{ pr.ft.capT }}; transition: opacity .35s ease, transform .35s ease; pointer-events: none;"><span>THE FRIES TANK</span><span style="font-weight: 500;">₹899 · VIEW →</span></span>
           </a>
           <a href="LUMI-Pages.dc.html#/product/pink-popcorn-tank" data-prod="pt" data-wf="c" onPointerEnter="{{ pr.pt.on }}" onPointerLeave="{{ pr.pt.off }}" onFocus="{{ pr.pt.on }}" onBlur="{{ pr.pt.off }}" aria-label="The Popcorn Tank, ₹899" style="position: absolute; top: 0; bottom: 0; left: {{ wf.c.l }}; width: {{ wf.c.w }}; opacity: {{ wf.c.op }}; transform: {{ wf.c.t }}; z-index: {{ wf.c.z }}; overflow: hidden; background: #E8DDD4; box-shadow: 0 26px 54px rgba(63,70,51,0.22); transition: left 1s cubic-bezier(.16,.8,.3,1), width 1s cubic-bezier(.16,.8,.3,1), opacity .7s ease, transform 1s cubic-bezier(.16,.8,.3,1);">
-            <img src="assets/lumi-hero-campaign.png" alt="" loading="lazy" style="position: absolute; left: 50%; top: 50%; height: 190%; width: auto; max-width: none; transform-origin: 52% 46%; transform: {{ pr.pt.zoom }}; transition: transform 1.2s cubic-bezier(.16,.8,.3,1);" />
+            <img data-lsku="pink-popcorn-tank" alt="" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; transform: {{ pr.pt.zoom2 }}; transition: transform 1.2s cubic-bezier(.16,.8,.3,1);" />
             <span style="position: absolute; left: 10px; right: 10px; bottom: 10px; display: flex; flex-direction: column; align-items: flex-start; gap: 3px; background: #FDFCF8; color: #3F4633; padding: 9px 10px; font-size: 11px; line-height: 1.3; font-weight: 700; letter-spacing: .06em; white-space: normal; opacity: {{ pr.pt.cap }}; transform: {{ pr.pt.capT }}; transition: opacity .35s ease, transform .35s ease; pointer-events: none;"><span>THE POPCORN TANK</span><span style="font-weight: 500;">₹899 · VIEW →</span></span>
           </a>
       </div>
@@ -428,7 +428,7 @@
       <div data-tray="" role="radiogroup" aria-label="Pick a tank" style="display: flex; flex-direction: column; gap: 14px;">
         <sc-for list="{{ s3tanks }}" as="t" hint-placeholder-count="3">
           <button role="radio" aria-checked="{{ t.on }}" aria-label="{{ t.aria }}" data-tk="{{ t.id }}" onClick="{{ t.pick }}" style="position: relative; display: grid; grid-template-columns: clamp(64px, 6.4vw, 96px) 1fr; align-items: center; gap: 12px; text-align: left; background: #FDFCF8; border: 0; padding: 8px 14px 8px 8px; cursor: pointer; transform: {{ t.tilt }}; outline: 2px solid {{ t.ring }}; outline-offset: 3px; box-shadow: 0 14px 30px rgba(63,70,51,0.14); transition: transform .45s cubic-bezier(.34,1.6,.5,1), outline-color .3s ease;" style-hover="transform: rotate(0deg) scale(1.04);">
-            <span data-thumb="" style="display: block; aspect-ratio: 1; background-color: #E8DDD4; background-image: url('assets/lumi-hero-campaign.png'); background-size: 500% auto; background-position: {{ t.pos }}; background-repeat: no-repeat;"></span>
+            <span data-thumb="" style="display: block; aspect-ratio: 1; background-color: #E8DDD4; background-image: url('{{ t.img }}'); background-size: cover; background-position: center 20%; background-repeat: no-repeat;"></span>
             <span style="display: flex; flex-direction: column; gap: 3px; min-width: 0;">
               <span style="font-size: 12px; font-weight: 700; letter-spacing: .1em; color: #3F4633;">{{ t.short }}</span>
               <span style="font-size: 13px; color: #4A5140;">{{ t.sub }}</span>
@@ -446,7 +446,7 @@
 
     <div data-s3stage="" style="position: relative; z-index: 1; width: 100%; max-width: calc(80vh * .8); margin: 0 auto; aspect-ratio: 4/5; background: #E8DDD4; box-shadow: 0 30px 70px rgba(63,70,51,0.22);">
       <sc-for list="{{ s3layers }}" as="L" hint-placeholder-count="3">
-        <div role="img" aria-label="{{ L.alt }}" aria-hidden="{{ L.hidden }}" style="position: absolute; inset: 0; background-image: url('assets/lumi-hero-campaign.png'); background-size: 278% auto; background-position: {{ L.pos }}; background-repeat: no-repeat; z-index: {{ L.z }}; clip-path: inset(0 0 {{ L.clip }} 0); transform: {{ L.scale }}; transition: clip-path .9s cubic-bezier(.65,0,.25,1) {{ L.delay }}, transform 1.4s cubic-bezier(.16,.8,.3,1);"></div>
+        <div role="img" aria-label="{{ L.alt }}" aria-hidden="{{ L.hidden }}" style="position: absolute; inset: 0; background-image: url('{{ L.img }}'); background-size: cover; background-position: center top; background-repeat: no-repeat; z-index: {{ L.z }}; clip-path: inset(0 0 {{ L.clip }} 0); transform: {{ L.scale }}; transition: clip-path .9s cubic-bezier(.65,0,.25,1) {{ L.delay }}, transform 1.4s cubic-bezier(.16,.8,.3,1);"></div>
       </sc-for>
       <span style="position: absolute; z-index: 5; left: 14px; top: 14px; background: #FDFCF8; color: #3F4633; padding: 7px 10px; font-size: 11px; font-weight: 700; letter-spacing: .14em;">WEARING · {{ s3tShort }}{{ s3dragHint }}</span>
       <sc-for list="{{ s3onB }}" as="b" hint-placeholder-count="0">
@@ -1118,9 +1118,11 @@ class Component extends DCLogic {
       const v = x.toFixed(1) + "% auto"; if (b.style.backgroundSize !== v) b.style.backgroundSize = v;
     });
   }
+  tkc(k) { const id = ({ white: "white-cocktail-tank", pink: "pink-popcorn-tank", black: "black-fries-tank" })[k] || k; return (window.LumiCart && window.LumiCart.catalog[id]) || {}; }
+  tkAny(i) { const cat = (window.LumiCart && window.LumiCart.catalog) || {}, ids = Object.keys(cat).filter(id => cat[id].kind === "tank" && cat[id].img); return ids.length ? cat[ids[i % ids.length]].img : ""; }
   componentDidMount() {
     this.shopRe = () => this.forceUpdate(); window.addEventListener("lumi:change", this.shopRe);
-    { const im = new Image(); im.onload = () => { this.s4R = im.naturalWidth / im.naturalHeight; this.s4Fit(); }; im.src = "assets/lumi-hero-campaign.png"; }
+    this.s4R = 1.5; this.s4Fit();
     this.s4Iv = setInterval(() => this.s4Fit(), 250);
     this.cartInit(0); this.tryInit(0); this.s2Init(0); this.s3Init(0); this.s4Init(0); this.s5Init(0); this.s6Init(0); this.s7Init(0); }
   s7Init(n) {
@@ -1139,7 +1141,7 @@ class Component extends DCLogic {
     if (!img || !target || (this.dr && this.dr.reduced)) { done(); return; }
     const r = img.getBoundingClientRect(), T = target.getBoundingClientRect();
     const ghost = document.createElement("div");
-    Object.assign(ghost.style, { position: "fixed", left: "0", top: "0", width: r.width + "px", height: r.height + "px", zIndex: "210", pointerEvents: "none", transformOrigin: "0 0", backgroundImage: "url('" + (p.img || "assets/lumi-hero-campaign.png") + "')", backgroundSize: p.size, backgroundPosition: p.pos, backgroundRepeat: "no-repeat", backgroundColor: p.field });
+    Object.assign(ghost.style, { position: "fixed", left: "0", top: "0", width: r.width + "px", height: r.height + "px", zIndex: "210", pointerEvents: "none", transformOrigin: "0 0", backgroundImage: "url('" + (p.img || "") + "')", backgroundSize: p.size, backgroundPosition: p.pos, backgroundRepeat: "no-repeat", backgroundColor: p.field });
     document.body.appendChild(ghost);
     this.flyEl(ghost, { x: r.left, y: r.top }, { x: T.left + T.width / 2, y: T.top + T.height / 2 }, 800, 1, .06, 60).onfinish = () => ghost.remove();
     ghost.animate([{ opacity: 1 }, { opacity: 1, offset: .6 }, { opacity: 0 }], { duration: 800, fill: "forwards" });
@@ -1165,8 +1167,8 @@ class Component extends DCLogic {
       heart: { c: "charms", cat: "BAG CHARM", name: "TEDDY BEAR CHARM", line: "Your beary cute bag buddy.", price: 299, main: ["cover", "center"], alt: ["cover", "center"], mimg: "assets/sku/teddy-charm.jpg", aimg: ((window.LumiCart && window.LumiCart.catalog["teddy-charm"]) || {}).alt || "" },
       cherry: { c: "charms", cat: "BAG CHARM", name: "PINEAPPLE CHARM", line: "Hang it. Swing it.", price: 299, main: ["cover", "center"], alt: ["cover", "center"] }
     };
-    { const cat = (window.LumiCart && window.LumiCart.catalog) || {}, SID = { pop: "strawberry-brooch", fries: "mushroom-brooch", cock: "owl-brooch", heart: "teddy-charm", cherry: "pineapple-charm" };
-      Object.keys(SID).forEach(k => { const c = cat[SID[k]] || {}; Object.assign(P[k], { mimg: c.img || "", aimg: c.alt || "" }); }); }
+    { const cat = (window.LumiCart && window.LumiCart.catalog) || {}, SID = { pink: "pink-popcorn-tank", white: "white-cocktail-tank", black: "black-fries-tank", pop: "strawberry-brooch", fries: "mushroom-brooch", cock: "owl-brooch", heart: "teddy-charm", cherry: "pineapple-charm" };
+      Object.keys(SID).forEach(k => { const c = cat[SID[k]] || {}; Object.assign(P[k], { mimg: c.img || "", aimg: c.alt || "" }); if (c.kind === "tank") Object.assign(P[k], { main: ["cover", "center 20%"], alt: ["cover", "center"] }); }); }
     const EDITS = {
       all: ["pink", "pop", "white", "heart", "black", "fries", "cock", "cherry"],
       tanks: ["white", "pop", "pink", "heart", "black", "fries", "cock", "cherry"],
@@ -1197,7 +1199,7 @@ class Component extends DCLogic {
           key, slot: "s" + i, feat, small: !feat, cat: p.cat, name: p.name, line: p.line, price: money(p.price),
           col: s.col, row: s.row, z: hot ? "6" : String(s.z), depth: String(s.depth), blurOp: "0", field: s.field, pad: s.pad, border: s.border, radius: s.radius,
           shadow: hot ? "0 26px 50px rgba(63,70,51,.28)" : s.shadow, lift: (s.shift || "") + (hot ? " scale(1.025)" : " scale(1)"), ar: s.round ? "1" : "auto", alignImg: s.round ? "flex-start" : "stretch",
-          img: p.mimg || "assets/lumi-hero-campaign.png", img2: p.aimg || "assets/lumi-hero-campaign.png", size: p.main[0], pos: p.main[1], size2: p.alt[0], pos2: p.alt[1], href: "LUMI-Pages.dc.html#/product/" + ({ pink: "pink-popcorn-tank", white: "white-cocktail-tank", black: "black-fries-tank", pop: "strawberry-brooch", fries: "mushroom-brooch", cock: "butterfly-brooch", heart: "teddy-charm", cherry: "apple-charm" }[key] || "shop"),
+          img: p.mimg || "", img2: p.aimg || "", size: p.main[0], pos: p.main[1], size2: p.alt[0], pos2: p.alt[1], href: "LUMI-Pages.dc.html#/product/" + ({ pink: "pink-popcorn-tank", white: "white-cocktail-tank", black: "black-fries-tank", pop: "strawberry-brooch", fries: "mushroom-brooch", cock: "butterfly-brooch", heart: "teddy-charm", cherry: "apple-charm" }[key] || "shop"),
           aria: p.name + ", " + money(p.price), addAria: "Add " + p.name + " to bag",
           op: !on ? "0" : (match ? "1" : ".3"), filter: match ? "none" : "saturate(.4)",
           enter: on ? "translateY(0px)" : "translateY(28px)", delay: (i * .07).toFixed(2) + "s",
@@ -1227,7 +1229,7 @@ class Component extends DCLogic {
       { name: "HAND", label: "THE MAKING · BEAD BY BEAD", img: "assets/making-hand.png", alt: "Hands stitching a beaded popcorn piece with a needle and thread, surrounded by bowls of beads", size: "cover", pos: "62% 55%", tsize: "cover", tpos: "62% 55%", at: { r: "3%", t: "0%", w: "16%", ar: "4 / 5" } },
       { name: "THREAD", label: "THE THREAD · SPOOL BY SPOOL", alt: "Spools of pink, ivory, gold and red thread on a scalloped dish, with skeins, scissors and a bead tray", img: "assets/making-thread.png", size: "cover", pos: "50% 50%", tsize: "cover", tpos: "50% 50%",
         at: { l: "8%", b: "0%", w: "15%", ar: "4 / 5" } },
-      { name: "FINISH", label: "THE FINISHED PIECE · PINK POPCORN TANK", alt: "The finished pink popcorn LUMI tank, worn", size: "270% auto", pos: "52% 62%", tsize: "420% auto", tpos: "52% 58%",
+      { name: "FINISH", label: "THE FINISHED PIECE · PINK POPCORN TANK", alt: "The finished pink popcorn LUMI tank, worn", img: this.tkc("pink").alt2 || this.tkc("pink").img || "", size: "cover", pos: "center 20%", tsize: "cover", tpos: "center 20%",
         at: { r: "10%", b: "0%", w: "13%", ar: "4 / 5" } }
     ];
     const mk = (c, s) => React.createElement("span", { style: { display: "block", width: s, height: s, borderRadius: "50%", background: "radial-gradient(circle at 34% 30%, #fff 0 11%, " + c + " 46%, rgba(22,24,18,.5) 120%)", boxShadow: "0 4px 10px rgba(22,24,18,.25)" } });
@@ -1237,9 +1239,9 @@ class Component extends DCLogic {
     const pull = [[["20%", "20%"], ["23%", "26%"]], [["76%", "14%"], ["78%", "20%"]], [["24%", "74%"], ["22%", "80%"]], [["84%", "70%"], ["86%", "76%"]]][i];
     return {
       s6label: D[i].label,
-      s6layers: D.map((d, k) => ({ img: d.img || "assets/lumi-hero-campaign.png", op: k === i ? "1" : "0", pe: k === i && d.slot ? "auto" : "none", slot: !!d.slot, photo: !d.slot, alt: d.alt, size: d.size, pos: d.pos })),
+      s6layers: D.map((d, k) => ({ img: d.img || "", op: k === i ? "1" : "0", pe: k === i && d.slot ? "auto" : "none", slot: !!d.slot, photo: !d.slot, alt: d.alt, size: d.size, pos: d.pos })),
       s6thumbs: D.map((d, k) => { const on = k === i, a = d.at; return {
-        img: d.img || "assets/lumi-hero-campaign.png", name: d.name, on, slot: !!d.slot, photo: !d.slot, size: d.tsize, pos: d.tpos, ar: a.ar,
+        img: d.img || "", name: d.name, on, slot: !!d.slot, photo: !d.slot, size: d.tsize, pos: d.tpos, ar: a.ar,
         l: a.l || "auto", r: a.r || "auto", t: a.t || "auto", b: a.b || "auto", w: a.w, z: on ? 3 : 1,
         tf: on ? "translateY(-6px) scale(1.03)" : "translateY(0px) scale(1)", sh: on ? "0 26px 50px rgba(22,24,18,.26)" : "0 14px 30px rgba(22,24,18,.14)",
         fl: on ? "none" : "saturate(.9)", ink: on ? "#3F4633" : "#6B7258", dot: on ? "scale(1)" : "scale(0)",
@@ -1293,7 +1295,7 @@ class Component extends DCLogic {
       irl: T.map((t, i) => {
         const on = h === i, isLook = !!t.look, added = st.irlAdded === i;
         return {
-          crop: !!t.crop, slot: !!t.slot, slotId: t.slot || "", tint: t.tint || "#E8DDD4", img: t.img || "assets/lumi-hero-campaign.png", size: t.size || "cover", pos: t.pos || "50% 50%", alt: t.alt, user: t.user,
+          crop: !!t.crop, slot: !!t.slot, slotId: t.slot || "", tint: t.tint || "#E8DDD4", img: t.img || (t.crop ? this.tkAny(i) : ""), size: "cover", pos: t.crop ? "center 20%" : (t.pos || "50% 50%"), alt: t.alt, user: t.user,
           col: t.col, row: t.row, z: on ? "6" : String(t.z), speed: String(t.speed),
           rot: "rotate(" + (on ? 0 : t.rot) + "deg)", dim: h === null || on ? "1" : ".86",
           scale: on ? "scale(1.035)" : (h === null ? "scale(1)" : "scale(.985)"),
@@ -1371,7 +1373,7 @@ class Component extends DCLogic {
       { id: "mushroom-brooch", cat: "brooches", name: "THE MUSHROOM BROOCH", line: "Tiny toadstool, big mood.", price: 289, fmt: "UP CLOSE", size: "cover", pos: "center", tint: "#1B1F16" },
       { id: "butterfly-brooch", cat: "brooches", name: "THE BUTTERFLY BROOCH", line: "Flutter by.", price: 289, fmt: "UP CLOSE", size: "cover", pos: "center", tint: "#FDFCF8" }
     ];
-    const P4 = P4raw.map(p => { const c = p.cat === "tanks" ? null : (window.LumiCart && window.LumiCart.catalog[p.id]); return c ? Object.assign({}, p, { img: c.img || "" }) : p; });
+    const TM = { "pink-tank": "pink-popcorn-tank", "fries-tank": "black-fries-tank", "cocktail-tank": "white-cocktail-tank" }; const P4 = P4raw.map(p => { const c = (window.LumiCart && window.LumiCart.catalog[TM[p.id] || p.id]); return c ? Object.assign({}, p, { img: c.img || "" }, p.cat === "tanks" ? { size: "cover", pos: "center 20%" } : {}) : p; });
 
     const tab = st.s4tab, list = tab === "all" ? P4 : P4.filter(p => p.cat === tab), i = Math.min(st.s4i, list.length - 1), a = list[i];
     const money = n => "₹" + n.toLocaleString("en-IN");
@@ -1387,13 +1389,13 @@ class Component extends DCLogic {
       s4add: e => { if (this.state.s4added) return; const b = e.currentTarget, id = { "pink-tank": "pink-popcorn-tank", "fries-tank": "black-fries-tank", "cocktail-tank": "white-cocktail-tank", "teddy-charm": "teddy-charm", "apple-charm": "apple-charm", "strawberry-brooch": "strawberry-brooch", "mushroom-brooch": "mushroom-brooch", "butterfly-brooch": "butterfly-brooch" }[a.id]; this.sized(id, b, sz => { if (this.cartAdd(id, sz)) this.s4Add(a); }); },
       s4addLabel: st.s4added ? "IN THE BAG." : "ADD TO BAG +", s4addBg: st.s4added ? "#6B7258" : "#3F4633",
       s4shift: "translateX(calc(-" + i + " * (" + S + " + " + G + ")))",
-      s4items: list.map((p, k) => { const on = k === i; return { name: p.name, price: money(p.price), fmt: p.fmt, img: p.img || "assets/lumi-hero-campaign.png", size: p.size, pos: p.pos, tint: p.tint, on,
+      s4items: list.map((p, k) => { const on = k === i; return { name: p.name, price: money(p.price), fmt: p.fmt, img: p.img || "", size: p.size, pos: p.pos, tint: p.tint, on,
         aria: p.name + ", " + money(p.price) + (on ? "" : " — show this piece"),
         w: on ? "min(34vw, calc(64vh * .8))" : S, filter: on || k === i + 1 ? "none" : "saturate(.9) brightness(.97)", capOp: on ? "0" : "1",
         op: st.s4In ? "1" : "0", enter: st.s4In ? "translateX(0px)" : "translateX(" + (on ? 40 : 120) + "px)", delay: (on ? .35 : .55 + Math.min(k - i, 4) * .08) + "s",
         pick: () => { if (this.s4drag) return; if (k !== i) this.s4Go(k, list); } }; }),
       ...(() => { const M = { "pink-tank": "pink-popcorn-tank", "fries-tank": "black-fries-tank", "cocktail-tank": "white-cocktail-tank", "teddy-charm": "teddy-charm", "apple-charm": "apple-charm", "strawberry-brooch": "strawberry-brooch", "mushroom-brooch": "mushroom-brooch", "butterfly-brooch": "butterfly-brooch" }; const mm = (p, k) => { const id = M[p.id] || "shop", done = (this.state.s4madd || {})[id], feat = k === 0, tank = window.LumiCart && window.LumiCart.requiresSize(id);
-          return { name: p.name, price: money(p.price), fmt: p.fmt, tint: p.tint, img: p.img || "assets/lumi-hero-campaign.png", size: p.size, pos: p.pos, ar: feat ? "4 / 4.6" : "4 / 5", nameSize: feat ? "17px" : "13px",
+          return { name: p.name, price: money(p.price), fmt: p.fmt, tint: p.tint, img: p.img || "", size: p.size, pos: p.pos, ar: feat ? "4 / 4.6" : "4 / 5", nameSize: feat ? "17px" : "13px",
             href: "LUMI-Pages.dc.html#/product/" + id, aria: "View " + p.name, cta: done ? "IN THE BAG ✓" : (tank ? "SELECT SIZE +" : "QUICK ADD +"), bg: done ? "#6B7258" : (feat ? "#3F4633" : "#FDFCF8"), ink: done || feat ? "#FDFCF8" : "#3F4633",
             add: e => { const b = e.currentTarget; this.sized(id, b, sz => { if (this.cartAdd(id, sz)) { this.setState(s => ({ s4madd: Object.assign({}, s.s4madd, { [id]: 1 }) })); clearTimeout(this.s4mt); this.s4mt = setTimeout(() => this.setState({ s4madd: {} }), 2400); } }); } }; };
         return { s4mFeat: list.slice(0, 1).map(mm), s4mRest: list.slice(1).map((p, k) => mm(p, k + 1)) }; })(),
@@ -1537,10 +1539,10 @@ class Component extends DCLogic {
     const tglC = id => e => { const src = e.currentTarget; if (st.s3c.includes(id)) { this.setState(s => ({ s3c: s.s3c.filter(x => x !== id), s3pos: dropPos(s, id) })); return; } const i = this.state.s3c.length; this.s3Fly(src, [tk.hook[0] + i * 7 * (tk.hook[0] > 50 ? -1 : 1), tk.hook[1] + 9], "charm", () => { if (this.sw) this.sw[id] = { a: (Math.random() < .5 ? -1 : 1) * .35, v: 0 }; this.setState(s => ({ s3c: s.s3c.includes(id) ? s.s3c : s.s3c.concat(id) })); }); };
     return {
       s3Bg: tk.bg,
-      s3tanks: ["white", "pink", "black"].map((k, i) => { const t = T3[k], on = st.s3tank === k; return { id: k, short: t.short, sub: t.sub, pos: t.thumb, on, aria: t.name + ", " + money(t.price), tilt: on ? "rotate(0deg)" : ["rotate(-2deg)", "rotate(1.5deg)", "rotate(-1deg)"][i], ring: on ? "#3F4633" : "transparent", dot: on ? "1" : "0",
+      s3tanks: ["white", "pink", "black"].map((k, i) => { const t = T3[k], on = st.s3tank === k; return { img: this.tkc(k).img || "", id: k, short: t.short, sub: t.sub, pos: t.thumb, on, aria: t.name + ", " + money(t.price), tilt: on ? "rotate(0deg)" : ["rotate(-2deg)", "rotate(1.5deg)", "rotate(-1deg)"][i], ring: on ? "#3F4633" : "transparent", dot: on ? "1" : "0",
         pick: e => { if (this.state.s3tank === k) return; this.s3Fly(e.currentTarget, [50, 50], "tank", () => this.setState({ s3tank: k })); } }; }),
       s3tName: tk.name, s3tLine: tk.line, s3tPrice: money(tk.price), s3tShort: tk.short,
-      s3layers: ["white", "pink", "black"].map(k => { const on = st.s3tank === k; return { pos: T3[k].pos, alt: T3[k].alt, hidden: !on, z: on ? "2" : "1", clip: on ? "0%" : "100%", delay: on ? "0s" : ".9s", scale: on ? "scale(1)" : "scale(1.04)" }; }),
+      s3layers: ["white", "pink", "black"].map(k => { const on = st.s3tank === k, tc = this.tkc(k); return { img: tc.alt2 || tc.img || "", pos: T3[k].pos, alt: T3[k].alt, hidden: !on, z: on ? "2" : "1", clip: on ? "0%" : "100%", delay: on ? "0s" : ".9s", scale: on ? "scale(1)" : "scale(1.04)" }; }),
       s3brooches: B3.map(b => { const on = st.s3b.includes(b.id); return { id: b.id, label: b.label, pos: b.pos, img: b.img, on, aria: (on ? "Remove " : "Add ") + "the " + b.name + ", " + money(b.price), ring: on ? "#3F4633" : "transparent", chip: on ? "✓" : "+", chipBg: on ? "#3F4633" : "#FDFCF8", chipInk: on ? "#FDFCF8" : "#3F4633", toggle: tglB(b.id) }; }),
       s3charms: C3.map(c => { const on = st.s3c.includes(c.id); return { id: c.id, label: c.label, pos: c.pos, img: c.img, on, aria: (on ? "Remove " : "Add ") + "the " + c.name + ", " + money(c.price), ring: on ? "#3F4633" : "transparent", chip: on ? "✓" : "+", chipBg: on ? "#3F4633" : "#FDFCF8", chipInk: on ? "#FDFCF8" : "#3F4633", toggle: tglC(c.id) }; }),
       s3onB: st.s3b.map(id => { const b = B3.find(x => x.id === id), s = bSlot(id); return { name: "The " + b.name + " — drag to move", pos: b.pos, img: b.img, x: s[0] + "%", y: s[1] + "%", down: e => this.s3Drag(e, id, "b", zones, hooks) }; }),
@@ -1730,7 +1732,7 @@ class Component extends DCLogic {
   baseVals() {
     const f = this.state.formed, st = this.state;
     const CATS = [
-      { label: "TANK TOPS", tag: "Wear it.", href: "LUMI-Pages.dc.html#/tank-tops", pos: "51.5% 58%", alt: "Pink tank with beaded popcorn patch" },
+      { label: "TANK TOPS", tag: "Wear it.", href: "LUMI-Pages.dc.html#/tank-tops", pos: "center 20%", img: this.tkc("pink").img || "", sz: "cover", alt: "Pink tank with beaded popcorn patch" },
       { label: "BROOCHES", tag: "Pin it.", href: "LUMI-Pages.dc.html#/brooches", pos: "center", img: ((window.LumiCart && window.LumiCart.catalog["strawberry-brooch"]) || {}).img || "", sz: "cover", alt: "Beaded strawberry brooch" },
       { label: "BAG CHARMS", tag: "Charm it.", href: "LUMI-Pages.dc.html#/bag-charms", pos: "center", img: ((window.LumiCart && window.LumiCart.catalog["teddy-charm"]) || {}).img || "", sz: "cover", alt: "Beaded teddy bear bag charm" }
     ];
@@ -1749,7 +1751,7 @@ class Component extends DCLogic {
       shopLeave: e => { if (e.pointerType === "mouse") { clearTimeout(this.closeT); this.closeT = setTimeout(() => this.setState({ shopOpen: false }), 180); } },
       shopToggle: () => open(!this.state.shopOpen),
       shopKey: e => { if (e.key === "Escape") open(false); },
-      previewPos: cur.pos, previewImg: cur.img || "assets/lumi-hero-campaign.png", previewSize: cur.sz || "1000%", previewAlt: cur.alt, previewLabel: cur.label,
+      previewPos: cur.pos, previewImg: cur.img || "", previewSize: cur.sz || "1000%", previewAlt: cur.alt, previewLabel: cur.label,
       cats: CATS.map((c, i) => ({ label: c.label, tag: c.tag, href: c.href,
         tagColor: i === st.cat ? "#A5676A" : "#6B7258",
         arrowOp: i === st.cat ? "1" : "0", arrowT: i === st.cat ? "translateX(0px)" : "translateX(-6px)",

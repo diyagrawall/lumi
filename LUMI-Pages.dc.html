@@ -286,9 +286,9 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 const P = [
-  { slug: "pink-popcorn-tank", img: "assets/lumi-hero-campaign.png", img2: "assets/lumi-hero-campaign.png", c: "tank-tops", cat: "TANK TOP", name: "PINK POPCORN TANK", line: "Not your basic tank.", price: 899, field: "#EFCFCB", size: "278% auto", pos: "53% 10%", size2: "520% auto", pos2: "52% 56%" },
-  { slug: "white-cocktail-tank", img: "assets/lumi-hero-campaign.png", img2: "assets/lumi-hero-campaign.png", c: "tank-tops", cat: "TANK TOP", name: "WHITE COCKTAIL TANK", line: "Just add plans.", price: 899, field: "#E8DDD4", size: "278% auto", pos: "22% 10%", size2: "900% auto", pos2: "26.8% 61%" },
-  { slug: "black-fries-tank", img: "assets/lumi-hero-campaign.png", img2: "assets/lumi-hero-campaign.png", c: "tank-tops", cat: "TANK TOP", name: "BLACK FRIES TANK", line: "For outfits with appetite.", price: 899, field: "#1B1F16", size: "278% auto", pos: "90.6% 10%", size2: "700% auto", pos2: "80.4% 70%" },
+  { slug: "pink-popcorn-tank", img: "", img2: "", c: "tank-tops", cat: "TANK TOP", name: "PINK POPCORN TANK", line: "Not your basic tank.", price: 899, field: "#EFCFCB", size: "cover", pos: "center 20%", size2: "cover", pos2: "center" },
+  { slug: "white-cocktail-tank", img: "", img2: "", c: "tank-tops", cat: "TANK TOP", name: "WHITE COCKTAIL TANK", line: "Just add plans.", price: 899, field: "#E8DDD4", size: "cover", pos: "center 20%", size2: "cover", pos2: "center" },
+  { slug: "black-fries-tank", img: "", img2: "", c: "tank-tops", cat: "TANK TOP", name: "BLACK FRIES TANK", line: "For outfits with appetite.", price: 899, field: "#1B1F16", size: "cover", pos: "center 20%", size2: "cover", pos2: "center" },
 ];
 const syncP = () => { ((window.LumiCart && window.LumiCart.products) || []).forEach(x => { const k = P.findIndex(y => y.slug === x.slug); if (k >= 0) P[k] = x; else P.push(x); }); }; syncP();
 const COLL = {
