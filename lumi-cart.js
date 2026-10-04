@@ -30,10 +30,10 @@
   ];
   var products = [];
   ACC.forEach(function (a) {
-    [["brooch", "BROOCH", 329, 269, "brooches", a[2]], ["charm", "CHARM", 359, 289, "bag-charms", a[3]]].forEach(function (t) {
-      var id = a[0] + "-" + t[0], img = "assets/sku/" + id + ".jpg";
-      catalog[id] = { name: a[1] + " " + t[1], mrp: t[2], kind: "acc", price: t[3], sizes: null, field: a[4], size: "cover", pos: "center", img: img, alt: "assets/sku/" + id + "-alt.jpg", alt2: "assets/sku/" + id + "-alt2.jpg", line: t[5], group: t[0] };
-      products.push({ slug: id, c: t[4], cat: t[0] === "brooch" ? "BROOCH" : "BAG CHARM", name: catalog[id].name, line: t[5], price: t[3], field: a[4], size: "cover", pos: "center", img: img, size2: "cover", pos2: "center", img2: catalog[id].alt, img3: catalog[id].alt2 });
+    [["brooch", "BROOCH", 349, 289, "brooches", a[2]], ["charm", "CHARM", 359, 299, "bag-charms", a[3]]].forEach(function (t) {
+      var id = a[0] + "-" + t[0];
+      catalog[id] = { name: a[1] + " " + t[1], mrp: t[2], kind: "acc", price: t[3], sizes: null, field: a[4], size: "cover", pos: "center", img: "", alt: "", alt2: "", line: t[5], group: t[0] };
+      products.push({ slug: id, c: t[4], cat: t[0] === "brooch" ? "BROOCH" : "BAG CHARM", name: catalog[id].name, line: t[5], price: t[3], field: a[4], size: "cover", pos: "center", img: "", size2: "cover", pos2: "center", img2: "", img3: "" });
     });
   });
   var items = [];
@@ -57,8 +57,8 @@
   // Central promotions config — single source of truth for sale prices, bundles and order discounts.
   var PROMOS = {
     tank3: { key: "tank3", label: "3 TANK BUNDLE", short: "3 TANKS → ₹2,400", line: "PICK 3. PAY ₹2,400.", sub: "Mix and match any 3 tanks.", tanks: 3, acc: 0, price: 2400 },
-    combo: { key: "combo", label: "TANK + 2 EXTRAS", short: "TANK + 2 EXTRAS → ₹1,300", line: "TANK + 2 EXTRAS = ₹1,300", sub: "Pick any tank + any 2 brooches or charms.", tanks: 1, acc: 2, price: 1300 },
-    acc3: { key: "acc3", label: "PICK ANY 3 BUNDLE", short: "ANY 3 EXTRAS → ₹699", line: "PICK ANY 3. PAY ₹699.", sub: "Mix and match brooches & charms.", tanks: 0, acc: 3, price: 699 },
+    combo: { key: "combo", label: "TANK + 2 EXTRAS", short: "TANK + 2 EXTRAS → ₹1,400", line: "TANK + 2 EXTRAS = ₹1,400", sub: "Pick any tank + any 2 brooches or charms.", tanks: 1, acc: 2, price: 1400 },
+    acc3: { key: "acc3", label: "PICK ANY 3 BUNDLE", short: "ANY 3 EXTRAS → ₹749", line: "PICK ANY 3. PAY ₹749.", sub: "Mix and match brooches & charms.", tanks: 0, acc: 3, price: 749 },
     threshold: { label: "10% OFF", short: "10% OFF ₹3,500+", over: 3500, pct: 10 },
     // Stacking rule: an item sits in at most one bundle; the order-level % (threshold or coupon, whichever is larger) applies only to items outside bundles.
     stack: "no-double-discount"
@@ -93,9 +93,9 @@
   function nudge(q) {
     var t = q.tanks, a = q.acc, inB = q.bundles.length;
     if (t % 3 === 2 && a < 2) return "Add 1 more tank — 3 tanks are ₹2,400.";
-    if (t >= 1 && a === 1) return "Add 1 more brooch or charm — tank + 2 extras is ₹1,300.";
-    if (t === 0 && a % 3 === 2) return "Add 1 more extra — any 3 are ₹699.";
-    if (t === 0 && a % 3 === 1 && a > 1) return "Add 2 more extras — any 3 are ₹699.";
+    if (t >= 1 && a === 1) return "Add 1 more brooch or charm — tank + 2 extras is ₹1,400.";
+    if (t === 0 && a % 3 === 2) return "Add 1 more extra — any 3 are ₹749.";
+    if (t === 0 && a % 3 === 1 && a > 1) return "Add 2 more extras — any 3 are ₹749.";
     return "";
   }
   var CKEY = "lumi-coupon-v1", coupon = null;
@@ -190,20 +190,35 @@
       throw new Error((c && c.userErrors[0] && c.userErrors[0].message) || "Checkout unavailable");
     }).catch(function (e) { busy = false; console.error(e); LC.toast("CHECKOUT ISN'T AVAILABLE RIGHT NOW. " + (e.message || "")); });
   };
-  // Pull product photos from Shopify (brooches & charms). Falls back to local photos if a product isn't found.
-  gql("{products(first:100){nodes{handle title images(first:3){nodes{url}}}}}").then(function (res) {
-    var nodes = (res.data && res.data.products.nodes) || [], hit = 0;
-    nodes.forEach(function (sp) {
-      var n = norm(sp.title), id = Object.keys(catalog).filter(function (k) { return catalog[k].kind === "acc" && (k === sp.handle || norm(catalog[k].name) === n); })[0];
-      var im = sp.images.nodes.map(function (x) { return x.url; });
-      if (!id || !im.length) return;
-      var c = catalog[id], p = products.filter(function (x) { return x.slug === id; })[0];
-      c.img = im[0]; if (im[1]) c.alt = im[1]; if (im[2]) c.alt2 = im[2];
-      if (p) { p.img = c.img; if (im[1]) p.img2 = im[1]; if (im[2]) p.img3 = im[2]; }
-      hit++;
+  // Product photos come from Shopify (matched by handle or title). Everything else stays in this file.
+  var PQ = "{products(first:100){nodes{handle title images(first:3){nodes{url}}}}}";
+  function loadShopify() {
+    gql(PQ).then(function (res) {
+      var nodes = (res.data && res.data.products.nodes) || [], hit = 0;
+      nodes.forEach(function (sp) {
+        var sq = function (s) { return String(s || "").toLowerCase().replace(/\b(bag|the|beaded)\b/g, "").replace(/[^a-z0-9]+/g, ""); }, n = sq(sp.title), id = Object.keys(catalog).filter(function (k) { return k === sp.handle || sq(catalog[k].name) === n; })[0];
+        var im = sp.images.nodes.map(function (x) { return x.url; });
+        if (!id || !im.length || catalog[id].kind !== "acc" || catalog[id].img) return;
+        var c = catalog[id], p = products.filter(function (x) { return x.slug === id; })[0];
+        c.img = im[0]; c.alt = im[1] || im[0]; c.alt2 = im[2] || im[1] || im[0];
+        if (p) { p.img = c.img; p.img2 = c.alt; p.img3 = c.alt2; }
+        hit++;
+      });
+      window.LumiCart.loaded = true; if (hit) window.dispatchEvent(new CustomEvent("lumi:change")); fillImgs();
+    }).catch(function () {});
+  }
+  // Homepage thumbnails marked data-lsku get their photo from the Shopify product with that handle.
+  function fillImgs() {
+    Array.prototype.forEach.call(document.querySelectorAll("img[data-lsku]"), function (im) {
+      var c = catalog[im.getAttribute("data-lsku")], on = !!(c && c.img);
+      if (on && im.getAttribute("src") !== c.img) im.setAttribute("src", c.img);
+      im.style.visibility = on ? "visible" : "hidden";
     });
-    if (hit) window.dispatchEvent(new CustomEvent("lumi:change"));
-  }).catch(function () {});
+  }
+  window.LumiCart.fillImgs = fillImgs;
+  window.addEventListener("lumi:change", fillImgs);
+  if (typeof MutationObserver !== "undefined") new MutationObserver(function () { fillImgs(); }).observe(document.documentElement, { childList: true, subtree: true });
+  loadShopify();
   function route() { if (/LUMI-Checkout/.test(location.pathname) && /^#\/checkout/.test(location.hash)) window.LumiCart.shopifyCheckout(); }
   window.addEventListener("hashchange", route); window.addEventListener("DOMContentLoaded", route);
 })();

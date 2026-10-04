@@ -290,7 +290,7 @@ const P = [
   { slug: "white-cocktail-tank", img: "assets/lumi-hero-campaign.png", img2: "assets/lumi-hero-campaign.png", c: "tank-tops", cat: "TANK TOP", name: "WHITE COCKTAIL TANK", line: "Just add plans.", price: 899, field: "#E8DDD4", size: "278% auto", pos: "22% 10%", size2: "900% auto", pos2: "26.8% 61%" },
   { slug: "black-fries-tank", img: "assets/lumi-hero-campaign.png", img2: "assets/lumi-hero-campaign.png", c: "tank-tops", cat: "TANK TOP", name: "BLACK FRIES TANK", line: "For outfits with appetite.", price: 899, field: "#1B1F16", size: "278% auto", pos: "90.6% 10%", size2: "700% auto", pos2: "80.4% 70%" },
 ];
-P.push(...((window.LumiCart && window.LumiCart.products) || []));
+const syncP = () => { ((window.LumiCart && window.LumiCart.products) || []).forEach(x => { const k = P.findIndex(y => y.slug === x.slug); if (k >= 0) P[k] = x; else P.push(x); }); }; syncP();
 const COLL = {
   shop: { t: "ALL PRODUCTS", b: "Tanks, brooches and bag charms — every piece beaded by hand." },
   "tank-tops": { t: "TANK TOPS", b: "Beaded tanks for outfits that need a little extra." },
@@ -317,7 +317,7 @@ class Component extends DCLogic {
   state = { r: route(), bagN: 0, qty: 1, size: null, added: {}, faq: {}, sentContact: false, sentReport: false, tracked: "" };
   componentDidMount() {
     if (!location.hash || location.hash === "#" || location.hash === "#/") { location.replace("LUMI%20Hero%20v2.dc.html"); return; }
-    const tryCart = n => { const LC = window.LumiCart; if (!LC) { if (n < 60) this.ct = setTimeout(() => tryCart(n + 1), 100); return; } const sync = () => this.setState({ bagN: LC.count() }); this.unsub = LC.subscribe(sync); sync(); };
+    const tryCart = n => { const LC = window.LumiCart; if (!LC) { if (n < 60) this.ct = setTimeout(() => tryCart(n + 1), 100); return; } const sync = () => { syncP(); this.setState({ bagN: LC.count() }); }; this.unsub = LC.subscribe(sync); sync(); };
     tryCart(0);
     this.onHash = () => { this.setState({ prevR: this.state.r, r: route(), qty: 1, size: null, sentContact: false, sentReport: false, tracked: "" }); window.scrollTo(0, 0); };
     window.addEventListener("hashchange", this.onHash);
