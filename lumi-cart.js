@@ -212,6 +212,10 @@
       var nodes = (res.data && res.data.products.nodes) || [], hit = 0;
       nodes.forEach(function (sp) {
         var sq = function (s) { return String(s || "").toLowerCase().replace(/\b(bag|the|beaded)\b/g, "").replace(/[^a-z0-9]+/g, ""); }, n = sq(sp.title), id = Object.keys(catalog).filter(function (k) { return k === sp.handle || sq(catalog[k].name) === n; })[0];
+        if (!id && /\b(tank|top|tee)\b/i.test(sp.title)) {
+          var KEY = { popcorn: "pink-popcorn-tank", cocktail: "white-cocktail-tank", martini: "white-cocktail-tank", fries: "black-fries-tank", flamingo: "pink-flamingo-tank", seashell: "pink-seashell-tank", shell: "pink-seashell-tank", dragonfly: "black-dragonfly-tank", beer: "black-beer-tank", jellyfish: "white-jellyfish-tank", ace: "white-ace-tank" };
+          Object.keys(KEY).some(function (w) { if (new RegExp("\\b" + w + "\\b", "i").test(sp.title)) { id = KEY[w]; return true; } });
+        }
         var im = sp.images.nodes.map(function (x) { return x.url; });
         if (!id || !im.length) return;
         if (catalog[id].kind === "tank") {
@@ -227,7 +231,7 @@
         if (p) { p.img = c.img; p.img2 = c.alt; p.img3 = c.alt2; }
         hit++;
       });
-      window.LumiCart.loaded = true; if (hit) window.dispatchEvent(new CustomEvent("lumi:change")); fillImgs();
+      window.LumiCart.loaded = true; if (hit) emit(); fillImgs();
     }).catch(function () {});
   }
   // Homepage thumbnails marked data-lsku get their photo from the Shopify product with that handle.
