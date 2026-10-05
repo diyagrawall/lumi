@@ -51,7 +51,7 @@
       <div style="flex: 1; overflow-y: auto; padding: 0 22px;">
         <sc-for list="{{ lines }}" as="l" hint-placeholder-count="0">
           <div style="display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 14px; padding: 18px 0; border-bottom: 1px solid #E8DDD4;">
-            <span aria-hidden="true" style="display: block; aspect-ratio: 4/5; background-color: {{ l.field }}; background-image: url('assets/lumi-hero-campaign.png'); background-size: {{ l.size }}; background-position: {{ l.pos }}; background-repeat: no-repeat;"></span>
+            <span aria-hidden="true" style="display: block; aspect-ratio: 4/5; background-color: {{ l.field }}; background-image: url('{{ l.img }}'); background-size: {{ l.size }}; background-position: {{ l.pos }}; background-repeat: no-repeat;"></span>
             <div style="min-width: 0;">
               <div style="display: flex; justify-content: space-between; gap: 10px;">
                 <span style="font-size: 13px; font-weight: 700; letter-spacing: .05em;">{{ l.name }}</span>
@@ -126,7 +126,7 @@ class Component extends DCLogic {
     if (!LC) return Object.assign(out, { lines: [], empty: true, subtotal: "₹0", countLabel: "0 pieces", blocked: false, checkoutDis: true, checkoutBg: "#A9AE96", checkoutCursor: "not-allowed", checkout: () => {} });
     const items = LC.items(), cat = LC.catalog;
     out.lines = items.map((l, i) => { const p = cat[l.id], sized = !!p.sizes, miss = sized && !l.size; return {
-      name: p.name, field: p.field, size: p.size, pos: p.pos, qty: l.qty, total: money(p.price * l.qty), sized, missing: miss,
+      name: p.name, field: p.field, img: LC.imgFor(l.id, l.size), size: p.size, pos: p.pos, qty: l.qty, total: money(p.price * l.qty), sized, missing: miss,
       sizeVal: l.size || "", sizeAria: "Size for " + p.name, sizeBorder: miss ? "#8E4F4C" : "#C5B7AB", sizeBg: miss ? "#FBF1EF" : "#FDFCF8",
       opts: (miss ? [{ v: "", t: "Select size", dis: true }] : []).concat((p.sizes || []).map(z => { const out2 = (p.soldOut || []).includes(z); return { v: z, t: z + (out2 ? " — sold out" : ""), dis: out2 }; })),
       setSize: e => LC.setSize(i, e.target.value), inc: () => LC.setQty(i, l.qty + 1), dec: () => LC.setQty(i, l.qty - 1), remove: () => LC.remove(i) }; });

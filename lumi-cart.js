@@ -2,7 +2,7 @@
   if (window.LumiCart) return;
   var KEY = "lumi-cart-v1";
   var IMG = "";
-  var TANK_SIZES = ["XS", "S", "M", "L", "XL"];
+  var TANK_SIZES = ["XS", "S", "M", "L"];
   var catalog = {
     "pink-popcorn-tank": { name: "PINK POPCORN TANK", mrp: 1199, kind: "tank", price: 899, sizes: TANK_SIZES, soldOut: [], img: IMG, field: "#EFCFCB", size: "cover", pos: "center 20%" },
     "white-cocktail-tank": { name: "WHITE COCKTAIL TANK", mrp: 1199, kind: "tank", price: 899, sizes: TANK_SIZES, soldOut: [], img: IMG, field: "#E8DDD4", size: "cover", pos: "center 20%" },
@@ -149,6 +149,7 @@
     catalog: catalog,
     products: products,
     acc: ACC.map(function (a) { return { key: a[0], name: a[1], brooch: a[0] + "-brooch", charm: a[0] + "-charm" }; }),
+    imgFor: function (id, size) { var p = catalog[id]; return (p && p.sizeImg && size && p.sizeImg[size]) || (p && p.img) || ""; },
     requiresSize: function (id) { return !!(catalog[id] && catalog[id].sizes); },
     items: function () { return items.map(function (l) { return { id: l.id, size: l.size, qty: l.qty }; }); },
     count: function () { return items.reduce(function (a, l) { return a + l.qty; }, 0); },
@@ -188,25 +189,27 @@
     if (busy || !LC.count()) return;
     if (LC.missingSize()) { LC.toast("PICK A SIZE FOR EVERY TANK FIRST."); return; }
     busy = true; LC.toast("TAKING YOU TO CHECKOUT…");
-    gql("{products(first:100){nodes{handle title variants(first:50){nodes{id availableForSale selectedOptions{name value}}}}}}").then(function (res) {
+    gql("{products(first:100){nodes{handle title variants(first:50){nodes{id title availableForSale selectedOptions{name value}}}}}}").then(function (res) {
       var prods = (res.data && res.data.products.nodes) || [], lines = [], missing = [];
       LC.items().forEach(function (l) {
         var p = catalog[l.id], n = norm(p.name);
-        var sp = prods.filter(function (x) { return x.handle === l.id; })[0] || prods.filter(function (x) { return norm(x.title) === n; })[0] || prods.filter(function (x) { return norm(x.title).indexOf(n) >= 0 || n.indexOf(norm(x.title)) >= 0; })[0];
-        var v = sp && (p.sizes ? sp.variants.nodes.filter(function (x) { return x.selectedOptions.some(function (o) { return String(o.value).toUpperCase() === String(l.size).toUpperCase(); }); })[0] : sp.variants.nodes[0]);
-        if (v) lines.push({ merchandiseId: v.id, quantity: l.qty }); else missing.push(p.name + (l.size ? " " + l.size : ""));
+        var sp = prods.filter(function (x) { return x.handle === l.id; })[0] || prods.filter(function (x) { return norm(x.title) === n; })[0] || prods.filter(function (x) { return norm(x.title).indexOf(n) >= 0 || n.indexOf(norm(x.title)) >= 0; })[0]
+          || (p.kind === "tank" ? prods.filter(function (x) { var w = l.id.split("-")[1], w2 = w === "cocktail" ? "martini" : w; return /\b(tank|top|tee)\b/i.test(x.title) && (new RegExp("\\b" + w + "\\b", "i").test(x.title) || new RegExp("\\b" + w2 + "\\b", "i").test(x.title)); })[0] : null);
+        var v = sp && (p.sizes ? sp.variants.nodes.filter(function (x) { var SZ = { XS: ["XS", "EXTRA SMALL", "X-SMALL", "XSMALL"], S: ["S", "SMALL"], M: ["M", "MEDIUM"], L: ["L", "LARGE"], XL: ["XL", "EXTRA LARGE", "X-LARGE", "XLARGE"] }[String(l.size).toUpperCase()] || [String(l.size).toUpperCase()]; return x.selectedOptions.some(function (o) { return SZ.indexOf(String(o.value).trim().toUpperCase()) >= 0; }) || SZ.indexOf(String(x.title || "").trim().toUpperCase()) >= 0; })[0] : sp.variants.nodes[0]);
+        if (v) lines.push({ merchandiseId: v.id, quantity: l.qty }); else missing.push(p.name + (l.size ? " " + l.size : "") + (sp ? " (size not set up in Shopify)" : " (product not found in Shopify)"));
       });
       if (missing.length) throw new Error("Not found in Shopify: " + missing.join(", "));
-      var code = LC.coupon() && LC.coupon().label;
+      var code = null;
       return gql("mutation($i:CartInput!){cartCreate(input:$i){cart{checkoutUrl}userErrors{message}}}", { i: { lines: lines, discountCodes: code ? [code] : [] } });
     }).then(function (res) {
       var c = res.data && res.data.cartCreate;
       if (c && c.cart) { location.href = c.cart.checkoutUrl; return; }
+      if (res.errors && res.errors[0]) throw new Error(res.errors[0].message);
       throw new Error((c && c.userErrors[0] && c.userErrors[0].message) || "Checkout unavailable");
     }).catch(function (e) { busy = false; console.error(e); LC.toast("CHECKOUT ISN'T AVAILABLE RIGHT NOW. " + (e.message || "")); });
   };
   // Product photos come from Shopify (matched by handle or title). Everything else stays in this file.
-  var PQ = "{products(first:100){nodes{handle title images(first:3){nodes{url}}}}}";
+  var PQ = "{products(first:100){nodes{handle title images(first:3){nodes{url}} variants(first:50){nodes{selectedOptions{name value} image{url}}}}}}";
   function loadShopify() {
     gql(PQ).then(function (res) {
       var nodes = (res.data && res.data.products.nodes) || [], hit = 0;
@@ -221,6 +224,7 @@
         if (catalog[id].kind === "tank") {
           var tc = catalog[id], tp = products.filter(function (x) { return x.slug === id; })[0];
           if (!tp) { tp = { slug: id, c: "tank-tops", cat: "TANK TOP", name: tc.name, line: tc.line || "", price: tc.price, field: tc.field }; products.push(tp); }
+          tc.sizeImg = {}; (sp.variants ? sp.variants.nodes : []).forEach(function (v) { if (!v.image) return; v.selectedOptions.forEach(function (o) { var z = String(o.value).trim().toUpperCase(), M = { "EXTRA SMALL": "XS", "SMALL": "S", "MEDIUM": "M", "LARGE": "L" }; z = M[z] || z; if (TANK_SIZES.indexOf(z) >= 0 && !tc.sizeImg[z]) tc.sizeImg[z] = v.image.url; }); });
           tc.img = im[0]; tc.alt = im[1] || im[0]; tc.alt2 = im[2] || im[1] || im[0]; tc.size = "cover"; tc.pos = "center 20%";
           Object.assign(tp, { img: tc.img, img2: tc.alt, img3: tc.alt2, size: "cover", pos: "center 20%", size2: "cover", pos2: "center" });
           hit++; return;

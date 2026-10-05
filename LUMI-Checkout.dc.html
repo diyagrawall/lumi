@@ -433,7 +433,7 @@ class Component extends DCLogic {
     const soldOut = l => { const p = cat[l.id]; return !!(p.sizes && l.size && (p.soldOut || []).includes(l.size)); };
     const blocked = LC.missingSize() || items.some(soldOut);
     const lines = items.map((l, i) => { const p = cat[l.id], miss = !!p.sizes && !l.size, so = soldOut(l); return {
-      name: p.name, field: p.field, img: p.img, size: p.size, pos: p.pos, href: "LUMI-Pages.dc.html#/product/" + l.id, viewAria: "View " + p.name,
+      name: p.name, field: p.field, img: LC.imgFor(l.id, l.size), size: p.size, pos: p.pos, href: "LUMI-Pages.dc.html#/product/" + l.id, viewAria: "View " + p.name,
       total: money(p.price * l.qty), unit: money(p.price), qty: l.qty, qtyAria: "Quantity for " + p.name, sized: !!p.sizes,
       sizeVal: l.size || "", sizeAria: "Size for " + p.name, sizeBorder: miss || so ? "#8E4F4C" : "#C5B7AB", sizeBg: miss || so ? "#FBF1EF" : "#FDFCF8",
       warn: miss ? "Select a size to continue." : (so ? "Looks like this size just sold out. Pick another size or remove it." : ""),
