@@ -458,7 +458,7 @@ class Component extends DCLogic {
       applyCode: e => { e.preventDefault(); if (!s.code.trim()) return; const ok = LC.applyCoupon(s.code); this.setState(ok ? { code: "", codeMsg: "Discount applied.", codeOk: true } : { codeMsg: "That code didn't work. Check the code and try again.", codeOk: false }); },
       removeCode: () => { LC.removeCoupon(); this.setState({ codeMsg: "", codeOk: false }); },
       blocked, ctaBg: blocked ? "#A9AE96" : "#3F4633", ctaCursor: blocked ? "not-allowed" : "pointer", checkoutHref: "#/checkout",
-      goCheckout: e => { if (blocked) e.preventDefault(); },
+      goCheckout: e => { e.preventDefault(); if (!blocked && LC.count()) LC.shopifyCheckout(); },
       shipText: ship === 0 ? "Free" : money(ship), shipWeight: ship === 0 ? "700" : "400", shipInk: ship === 0 ? "#6B7258" : "#3F4633", ckTotal: money(total),
       freeMsg: freeShip ? "✓ You've got free shipping." : "Add items worth " + money(SH.freeOver - (sub - disc)) + " more to get free shipping.",
       freePct: Math.min(100, Math.round((sub - disc) / SH.freeOver * 100)) + "%",

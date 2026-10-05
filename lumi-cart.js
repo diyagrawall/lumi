@@ -250,6 +250,6 @@
   window.addEventListener("lumi:change", fillImgs);
   if (typeof MutationObserver !== "undefined") new MutationObserver(function () { fillImgs(); }).observe(document.documentElement, { childList: true, subtree: true });
   loadShopify();
-  function route() { if (/LUMI-Checkout/.test(location.pathname) && /^#\/checkout/.test(location.hash)) window.LumiCart.shopifyCheckout(); }
+  function route() { if (/checkout/i.test(location.pathname) && /^#\/checkout/.test(location.hash)) window.LumiCart.shopifyCheckout(); }
   window.addEventListener("hashchange", route); window.addEventListener("DOMContentLoaded", route);
 })();
